@@ -14,7 +14,7 @@ import setCategoryData from 'src/redux/actions/category-actions';
 import SideMenu from 'src/modules/nav-bar/side-menu';
 import CategoriesMenu from 'src/modules/nav-bar/categories-menu';
 
-const categoriesURL = 'categories/?include=hashtag&sort=-order';
+const categoriesURL = 'expos?sort=-order&page[size]=5';
 const logoFile = '/assets/logo.jpg';
 
 const NavBar = (): React.ReactElement => {

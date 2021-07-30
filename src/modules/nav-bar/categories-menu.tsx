@@ -17,13 +17,21 @@ const CategoriesMenu = ( props: any ): React.ReactElement => {
           return (
             <li key={index}>
               <Link
-                to={`/${item.attributes.slug}`}>
-                {item.attributes.title}
+                to={`/${item.attributes.slug}`}
+                className='grey-text text-darken-3'>
+                {item.attributes.name}
               </Link>
             </li>
           );
         }) : null
       }
+      <li>
+        <Link
+          to='/acerca'
+          className='grey-text text-darken-3'>
+          Acerca
+        </Link>
+      </li>
     </>
   );
 };
