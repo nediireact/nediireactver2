@@ -10,8 +10,9 @@ import store, { persistor } from 'src/redux/store';
 import Home from 'src/pages/home/home';
 import About from 'src/pages/about/about';
 import ActivateUser from 'src/pages/activate-user/activate-user';
-import CategoryDetail from 'src/pages/category-detail/category-detail';
 import EnvironmentVariables from 'src/constants/EnvironmentVariables';
+import CreateAccount from 'src/pages/create-account/create-account';
+import ExpoDetail from 'src/pages/expo-detail/expo-detail';
 
 const env = EnvironmentVariables.getInstance();
 const isMobileApp = env.isMobileApp;
@@ -30,9 +31,14 @@ const Routes = (): React.ReactElement => {
             <PersistGate loading={null} persistor={persistor}><About /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/:category">
+        <Route path='/create-account'>
           <Provider store={store}>
-            <CategoryDetail />
+            <PersistGate loading={null} persistor={persistor}><CreateAccount /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path="/expos/:expoId">
+          <Provider store={store}>
+            <ExpoDetail />
           </Provider>
         </Route>
         <Route path='/'>

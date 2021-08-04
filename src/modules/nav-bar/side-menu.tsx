@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoriesMenu from 'src/modules/nav-bar/categories-menu';
+import CategoriesMenu from 'src/modules/nav-bar/menu-items';
 
 const SideMenu = ( props: any ): React.ReactElement => {
   return (
@@ -8,9 +8,7 @@ const SideMenu = ( props: any ): React.ReactElement => {
       id='mobile-demo'
       ref={props.sideNavRef}
       onClick={props.closeSideNav}>
-      <CategoriesMenu
-        items={props.categories.data}
-        logo={props.logo}/>
+      <CategoriesMenu logo={props.logo} />
     </ul>
   );
 };
