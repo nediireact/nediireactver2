@@ -10,6 +10,8 @@ pipeline {
         REACT_APP_API_URL = sh(script: "echo ${API_URL}", , returnStdout: true).trim()
         REACT_APP_BRANCH_NAME = sh(script: "echo ${branchName}", , returnStdout: true).trim()
         ENV = sh(script: "echo ${ENV}", , returnStdout: true).trim()
+        BUILD_MOBILE_APP = sh(script: "echo ${BUILD_MOBILE_APP}", , returnStdout: true).trim()
+        REACT_APP_FACEBOOK_APP_ID = sh(script: "echo ${facebookAppID}", , returnStdout: true).trim()
     }
     stages {
         stage("Check App folders") {
@@ -50,6 +52,9 @@ pipeline {
             }
         }
         stage("Build Mobile App") {
+            when {
+                expression { BUILD_MOBILE_APP == "yes" }
+            }
             environment {
                 REACT_APP_PRODUCTION = ""
                 REACT_APP_IS_MOBILE_APP = "true"
@@ -59,6 +64,9 @@ pipeline {
             }
         }
         stage("Builid Android App") {
+            when {
+                expression { BUILD_MOBILE_APP == "yes" }
+            }
             steps {
                 sh "rm -rf app"
                 sh "cordova create app"

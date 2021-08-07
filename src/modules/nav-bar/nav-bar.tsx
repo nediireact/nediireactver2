@@ -1,25 +1,16 @@
 import React, {
-  useRef,
-  useEffect
+  useRef
 } from 'react';
 import { Link } from 'react-router-dom';
 import * as M from 'materialize-css';
-import {
-  useSelector,
-  useDispatch
-} from 'react-redux';
+import { useSelector } from 'react-redux';
 import 'src/modules/nav-bar/nav-bar.scss';
-import fetchData from 'src/modules/utils/fetch-data';
-import setCategoryData from 'src/redux/actions/category-actions';
 import SideMenu from 'src/modules/nav-bar/side-menu';
-import CategoriesMenu from 'src/modules/nav-bar/categories-menu';
+import CategoriesMenu from 'src/modules/nav-bar/menu-items';
 
-const categoriesURL = 'expos?sort=-order&page[size]=5';
 const logoFile = '/assets/logo.jpg';
 
 const NavBar = (): React.ReactElement => {
-  const dispatch = useDispatch();
-  const categories = useSelector((state: any) => state.categories);
   const system = useSelector((state: any) => state.system);
   const prefix = system.platform.prefix;
   const logoURL = `${prefix}${logoFile}`;
@@ -29,19 +20,6 @@ const NavBar = (): React.ReactElement => {
     const sideNav = M.Sidenav.getInstance(sideNavRef.current);
     sideNav.close();
   };
-
-  useEffect(() => {
-    M.Sidenav.init(sideNavRef.current, {
-      edge: 'left'
-    });
-    fetchData(categoriesURL)
-      .then((d: any) => {
-        if ( d ) dispatch(setCategoryData(d));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [fetchData]);
 
   return (
     <>
@@ -61,7 +39,7 @@ const NavBar = (): React.ReactElement => {
               <i className='material-icons'>menu</i>
             </a>
             <ul id='nav-mobile' className='right hide-on-med-and-down'>
-              <CategoriesMenu items={categories.data}/>
+              <CategoriesMenu />
             </ul>
           </div>
         </nav>
@@ -69,7 +47,6 @@ const NavBar = (): React.ReactElement => {
       <SideMenu
         sideNavRef={sideNavRef}
         closeSideNav={closeSideNav}
-        categories={categories}
         logo={logoURL} />
     </>
   );

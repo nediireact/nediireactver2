@@ -4,7 +4,8 @@ const {
   REACT_APP_API_URL,
   REACT_APP_IS_MOBILE_APP,
   REACT_APP_BRANCH_NAME,
-  REACT_APP_PRODUCTION
+  REACT_APP_PRODUCTION,
+  REACT_APP_FACEBOOK_APP_ID
 } = process.env;
 
 class EnvironmentVariables {
@@ -14,6 +15,7 @@ class EnvironmentVariables {
   _isMobileApp: boolean;
   _branchName: string;
   _version: string;
+  _facebookAppID: string;
 
   constructor() {
     this._apiBaseUrl = REACT_APP_API_URL ?
@@ -22,6 +24,7 @@ class EnvironmentVariables {
     this._production = REACT_APP_PRODUCTION ? true : false;
     this._branchName = REACT_APP_BRANCH_NAME ? REACT_APP_BRANCH_NAME : 'local-branch';
     this._version = packageJSON ? packageJSON.version : '0.0.0';
+    this._facebookAppID = REACT_APP_FACEBOOK_APP_ID ? REACT_APP_FACEBOOK_APP_ID : '-';
   }
 
   static getInstance(): EnvironmentVariables {
@@ -49,6 +52,10 @@ class EnvironmentVariables {
 
   get version(): string {
     return this._version;
+  }
+
+  get facebookAppID(): string {
+    return this._facebookAppID;
   }
 }
 
