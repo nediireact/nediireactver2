@@ -8,6 +8,7 @@ import EmailFrom from 'src/modules/register-user/email-from';
 import Title from 'src/modules/title/title';
 import Modal from 'src/modules/modal/modal';
 import { ArrayErrorsToHTMLList } from 'src/modules/utils/date-parser';
+import { useHistory } from 'react-router-dom';
 
 const modelInterface = {
   open: () => null,
@@ -29,17 +30,22 @@ const newUserPayload = {
 };
 
 const EmailRegistration = ( porps: any ): React.ReactElement => {
+  const history = useHistory();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConf, setPasswordConf] = useState('');
-  const [userImage, setUserImage] = useState('');
   const formRef: any = useRef(null);
   const [modal, setModal] = useState(modelInterface);
   const [modalSuccess, setModalSuccess] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalMessage, setModaMessage] = useState('');
+
+  const onCloseEnd = () => {
+    modal.close();
+    if ( modalSuccess ) return history.replace('/login');
+  };
 
   const registerUser = (e: FormEvent) => {
     e.preventDefault();
@@ -49,8 +55,7 @@ const EmailRegistration = ( porps: any ): React.ReactElement => {
     newUserPayload.data.attributes.email = email;
     newUserPayload.data.attributes.username = email;
     newUserPayload.data.attributes.password = password;
-    if ( userImage ) newUserPayload.data.attributes.img_picture = userImage.replace(/^data:image\/(png|jpg);base64,/, '');
-    RegisterUserAPICall(newUserPayload, true)
+    RegisterUserAPICall(newUserPayload)
       .then(() => {
         formRef.current.reset();
         porps.setIsLoading(false);
@@ -58,7 +63,9 @@ const EmailRegistration = ( porps: any ): React.ReactElement => {
         setModalTitle('Cuenta creada');
         setModaMessage(`<b>${firstName}</b>, su cuenta de Nedii ha sido creada exitosamente.<br/><br/>
           Le hemos enviado un correo electronico a <b>${email}</b> para poder confirmar su identidad.<br/><br/>
-          Por favor complete el registro siguiendo el enlace de activacion enviado a su correo, gracias.`);
+          Por favor complete el registro siguiendo el enlace de activacion enviado a su correo.<br/><br/>
+          A continuacion, usted sera redirigido a la pantalla de login, gracias.`);
+        setEmail(''); setPassword(''); setFirstName('');
         modal.open();
       })
       .catch((error: any) => {
@@ -71,7 +78,6 @@ const EmailRegistration = ( porps: any ): React.ReactElement => {
           return modal.open();
         }
         const errorMessages = ArrayErrorsToHTMLList(error.response.data.errors);
-        console.log('>>>>>>>>> errorMessages', errorMessages);
         setModaMessage(`<b>${firstName}</b>, ha sucedido un error creando su cuenta de Nedii.<br/><br/>Errores:<ol>${errorMessages}</ol>
           Si esta seguro de que los datos son correctos, por favor contacte al equipo tecnico de Nedii mencionando el codigo: <b>"${error.response.statusText} - ${error.response.status}"</b>.`);
         modal.open();
@@ -81,14 +87,13 @@ const EmailRegistration = ( porps: any ): React.ReactElement => {
   return (
     <>
       <div className='col s12'><Title text='Registro con correo' /></div>
-      <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} />
+      <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} onCloseEnd={onCloseEnd} />
       <EmailFrom formRef={formRef}
         firstName={firstName} setFirstName={setFirstName}
         lastName={lastName} setLastName={setLastName}
         email={email} setEmail={setEmail}
         password={password} setPassword={setPassword}
         passwordConf={passwordConf} setPasswordConf={setPasswordConf}
-        userImage={userImage} setUserImage={setUserImage}
         registerUser={registerUser} isLoading={porps.isLoading} />
     </>
   );

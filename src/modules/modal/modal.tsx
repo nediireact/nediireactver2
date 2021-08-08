@@ -7,22 +7,24 @@ import Title from 'src/modules/title/title';
 import 'src/modules/modal/modal.scss';
 
 const Modal = ( props: any ): React.ReactElement => {
-  const modalRef: any = useRef(null);
+  const modalRef: any = useRef('M.Modal');
 
   useEffect(() => {
-    M.Modal.init(modalRef);
-    props.setModal(M.Modal.getInstance(modalRef.current));
-  });
+    const instance = M.Modal.init(modalRef.current, {
+      opacity: 0.5
+    });
+    props.setModal(instance);
+  }, [M]);
 
   return (
     <>
-      <div className='modal Modal' ref={modalRef}>
+      <div className='modal modal-fixed-footer Modal' ref={modalRef}>
         <div className='modal-content'>
           <Title text={props.title} color={ props.success ? '#00acc1' : '#e53935' }/>
           <div dangerouslySetInnerHTML={{__html: props.message}}></div>
         </div>
         <div className='modal-footer'>
-          <a href='#!' className='modal-close waves-effect waves cyan white-text btn'>Aceptar</a>
+          <a onClick={props.onCloseEnd} className='modal-close waves-effect waves cyan white-text btn'>Aceptar</a>
         </div>
       </div>
     </>
