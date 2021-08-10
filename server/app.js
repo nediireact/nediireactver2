@@ -45,13 +45,14 @@ const commonIndex = (req, res) => {
 };
 
 app.get('/', commonIndex);
-app.get('/expos', commonIndex);
 app.get('/about', commonIndex);
 app.get('/create-account', commonIndex);
 app.get('/login', commonIndex);
 app.get('/my-account', commonIndex);
 app.get('/activate/:token', commonIndex);
+app.get('/expos', commonIndex);
 app.get('/expos/:expoId', commonIndex);
+app.get('/groups/:groupId', commonIndex);
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}!`);

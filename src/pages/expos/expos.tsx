@@ -1,20 +1,18 @@
 import React from 'react';
 import SystemCheck from 'src/modules/system-check/system-check';
 import NavBar from 'src/modules/nav-bar/nav-bar';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import Footer from 'src/modules/footer/footer';
+import Expo from 'src/modules/expo/expo';
 
-const Home = (): React.ReactElement => {
+const Expos = (): React.ReactElement => {
   return (
     <>
       <NavBar />
-      <HorizontalSpace size='large' />
-      Home
-      <HorizontalSpace size='large' />
+      <Expo />
       <Footer />
       <SystemCheck />
     </>
   );
 };
 
-export default Home;
+export default Expos;

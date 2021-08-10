@@ -24,13 +24,6 @@ const MenuItems = ( props: any ): React.ReactElement => {
           Expos
         </Link>
       </li>
-      <li>
-        <Link
-          to='/about'
-          className='grey-text text-darken-3'>
-          Acerca
-        </Link>
-      </li>
       {
         userData && userData.user ?
         <>
