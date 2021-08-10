@@ -46,6 +46,7 @@ const ExpoDetailItem = (): React.ReactElement => {
   return (
     <div>
       <ParallaxHeaderImage
+        size='large'
         image={expo.attributes.img_picture}
         title={expo.attributes.title}
         email={expo.attributes.email} />

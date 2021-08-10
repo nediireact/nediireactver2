@@ -6,12 +6,16 @@ const ParallaxHeaderImage = (props: any): React.ReactElement => {
   return (
     <div>
       <div
-        className='ParallaxHeaderImage'
+        className={`ParallaxHeaderImage${props.size ? `--${props.size}` : ''}`}
         style={{backgroundImage: `url(${props.image})`}}>
-        <div className='ParallaxHeaderImage__info'>
+        <div
+          className='ParallaxHeaderImage__info'
+          style={{
+            backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, ${props.gradientOpacity ? props.gradientOpacity : '0.65'}), rgba(0, 0, 0, 0))`
+          }}>
           <div className='container'>
             <Title
-              text='Expo colorado'
+              text={props.title}
               align='left'
               fullWidth={true}
               shadow={true} />
