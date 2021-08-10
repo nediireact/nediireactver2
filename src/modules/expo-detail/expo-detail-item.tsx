@@ -8,10 +8,9 @@ import {
 } from 'react-router-dom';
 import fetchData from 'src/modules/utils/fetch-data';
 import 'src/modules/expo-detail/expo-detail.scss';
-import ExpoHeaderPicture from 'src/modules/expo-detail/expo-header-picture';
-import ExpoHead from 'src/modules/expo-detail/expo-detail-head';
 import ExpoDetailContent from 'src/modules/expo-detail/expo-detail-content';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
 
 const apiItem = {
   attributes: {
@@ -46,14 +45,14 @@ const ExpoDetailItem = (): React.ReactElement => {
 
   return (
     <div>
-      <ExpoHeaderPicture
-        image={expo.attributes.img_picture}/>
-      <HorizontalSpace size='medium' />
-      <ExpoHead
+      <ParallaxHeaderImage
+        image={expo.attributes.img_picture}
         title={expo.attributes.title}
-        email={expo.attributes.email}/>
+        email={expo.attributes.email} />
+      <HorizontalSpace size='small' />
       <ExpoDetailContent
         description={expo.attributes.description}/>
+      <HorizontalSpace size='medium' />
     </div>
   );
 };
