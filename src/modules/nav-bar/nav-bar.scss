@@ -1,4 +1,7 @@
 @import 'src/constants/Constants.scss';
+@import 'materialize-css';
+
+$icon-size: 28px;
 
 .Logo {
   display: block;
@@ -18,5 +21,57 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+  }
+}
+
+.Menu {
+  &__item-with-icon {
+    i {
+      margin-right: 10px !important;
+
+      width: $icon-size;
+      height: $icon-size !important;
+      border-radius: $icon-size;
+      text-align: center;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      @extend .cyan-text;
+    }
+    
+    &--profile  i {
+      margin-top: 10px !important;
+    }
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .Menu {
+    &__item-with-icon {
+      a, li {
+        line-height: initial !important;
+      }
+    }
+    &__item-with-icon {
+      i {
+        margin-right: auto !important;
+        line-height: $icon-size !important;
+        margin: 0 auto;
+      }
+      
+      a {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        display: block;
+        height: 100%;
+      }
+    
+      &--profile  i {
+        margin-top: auto !important;
+      }
+    }
+    &__item-with-icon span {
+      font-size: 0.85em;
+    }
   }
 }

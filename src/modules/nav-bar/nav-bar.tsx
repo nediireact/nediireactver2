@@ -6,11 +6,14 @@ import * as M from 'materialize-css';
 import { useSelector } from 'react-redux';
 import 'src/modules/nav-bar/nav-bar.scss';
 import SideMenu from 'src/modules/nav-bar/side-menu';
-import CategoriesMenu from 'src/modules/nav-bar/menu-items';
+import MenuItems from 'src/modules/nav-bar/menu-items';
+import { SetUserData } from 'src/redux/actions/user-actions';
+import { useDispatch } from 'react-redux';
 
 const logoFile = '/assets/logo.jpg';
 
 const NavBar = (): React.ReactElement => {
+  const dispatch = useDispatch();
   const system = useSelector((state: any) => state.system);
   const prefix = system.platform.prefix;
   const logoURL = `${prefix}${logoFile}`;
@@ -19,6 +22,11 @@ const NavBar = (): React.ReactElement => {
   const closeSideNav = () => {
     const sideNav = M.Sidenav.getInstance(sideNavRef.current);
     sideNav.close();
+  };
+
+  const logout = (e: any) => {
+    e.preventDefault();
+    dispatch(SetUserData({user: null}));
   };
 
   return (
@@ -38,8 +46,8 @@ const NavBar = (): React.ReactElement => {
               className='sidenav-trigger cyan-text'>
               <i className='material-icons'>menu</i>
             </a>
-            <ul id='nav-mobile' className='right hide-on-med-and-down'>
-              <CategoriesMenu />
+            <ul id='nav-mobile' className='right hide-on-med-and-down Menu'>
+              <MenuItems logout={logout} />
             </ul>
           </div>
         </nav>
@@ -47,6 +55,7 @@ const NavBar = (): React.ReactElement => {
       <SideMenu
         sideNavRef={sideNavRef}
         closeSideNav={closeSideNav}
+        logout={logout}
         logo={logoURL} />
     </>
   );

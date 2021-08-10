@@ -6,9 +6,9 @@ import {
 
 const loginPayload = {
   data: {
-      email: '',
-      password: '',
-      type: 'login'
+    email: '',
+    password: '',
+    type: 'login'
   }
 };
 
@@ -17,20 +17,22 @@ const UpdateUserProfileAPICall = ( data: any ): Promise<any> => {
     const userProfileData = {
       data: {
         type: 'UserProfile',
-        id: data.data.id,
+        id: data.data.profile.id,
         attributes: {
           img_picture: data.data.attributes.img_picture
         }
       }
     };
-    console.log('>> UserProfileAPICall', userProfileData);
-    APIPatch('user-profile/', userProfileData, true, data.login.data.meta.access) // fix url
+    const url = `user-profile/${data.data.profile.id}/`;
+    APIPatch(url, userProfileData, true, data.data.login.meta.access)
       .then((response: any) => {
-        console.log('user-profile/', response);
-        res(response);
+        return res({
+          user: data.data.login,
+          userProfile: response.data
+        });
       })
       .catch((error: any) => {
-        rej(error);
+        return rej(error);
       });
   });
 };
@@ -38,17 +40,16 @@ const UpdateUserProfileAPICall = ( data: any ): Promise<any> => {
 const GetUserProfileAPICall = ( data: any ): Promise<any> => {
   return new Promise((res, rej) => {
     const url = `user-profile/?filter[user]=${data.data.id}`;
-    console.log('>> GetUserAPICall', url);
-    APIGet(url, true, data.login.data.meta.access)
+    APIGet(url, true, data.data.login.meta.access)
       .then((response: any) => {
-        console.log('users/my-id', response);
         if ( data.data.attributes.img_picture ) {
-          data.data.login = response.data;
           data.data.profile = response.data[0];
-          console.log('Going to UpdateUserProfileAPICall', data);
           return res(UpdateUserProfileAPICall(data));
         }
-        res(response);
+        return res(response);
+      })
+      .then((response: any) => {
+        return res(response);
       })
       .catch((error: any) => {
         rej(error);
@@ -62,14 +63,15 @@ const LoginUserAPICall = ( data: any ): Promise<any> => {
     loginPayload.data.password = data.data.attributes.password;
     APIPost('login/', loginPayload)
       .then((response: any) => {
-        console.log('login/', response);
         if ( data.data.attributes.img_picture ) {
           data.data.id = response.data.id;
           data.data.login = response.data;
-          console.log('Going to GetUserProfileAPICall', data);
           return res(GetUserProfileAPICall(data));
         }
-        res(response);
+        return res(response);
+      })
+      .then((response: any) => {
+        return res(response);
       })
       .catch((error: any) => {
         rej(error);
@@ -81,13 +83,14 @@ const RegisterUserAPICall = ( data: any, login = false ): Promise<any> => {
   return new Promise((res, rej) => {
     APIPost('users/', data)
       .then((response: any) => {
-        console.log('users/', response);
         if ( login ) return LoginUserAPICall(data);
-        res(response);
+        return res(response);
+      })
+      .then((response: any) => {
+        return res(response);
       })
       .catch((error: any) => {
-        console.log('RegisterUserAPICall?', error);
-        rej(error);
+        return rej(error);
       });
   });
 };

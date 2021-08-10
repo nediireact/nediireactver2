@@ -12,6 +12,7 @@ import About from 'src/pages/about/about';
 import ActivateUser from 'src/pages/activate-user/activate-user';
 import EnvironmentVariables from 'src/constants/EnvironmentVariables';
 import CreateAccount from 'src/pages/create-account/create-account';
+import LoginUser from 'src/pages/login/login';
 import ExpoDetail from 'src/pages/expo-detail/expo-detail';
 
 const env = EnvironmentVariables.getInstance();
@@ -34,6 +35,11 @@ const Routes = (): React.ReactElement => {
         <Route path='/create-account'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><CreateAccount /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/login'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><LoginUser /></PersistGate>
           </Provider>
         </Route>
         <Route path="/expos/:expoId">

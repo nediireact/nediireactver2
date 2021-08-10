@@ -1,6 +1,5 @@
 import React, {
-  useState,
-  useRef
+  useState
 } from 'react';
 import EnvironmentVariables from 'src/constants/EnvironmentVariables';
 import FacebookLogin from 'react-facebook-login'; // https://www.npmjs.com/package/react-facebook-login
@@ -9,6 +8,9 @@ import { APIGet } from 'src/api/communicator';
 import Title from 'src/modules/title/title';
 import Modal from 'src/modules/modal/modal';
 import { ArrayErrorsToHTMLList } from 'src/modules/utils/date-parser';
+import { SetUserData } from 'src/redux/actions/user-actions';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const env = EnvironmentVariables.getInstance();
 const facebookAppID = env.facebookAppID;
@@ -31,19 +33,23 @@ const newUserPayload = {
 };
 
 const FacebookRegistration = ( porps: any ): React.ReactElement => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [modal, setModal] = useState(modelInterface);
   const [modalSuccess, setModalSuccess] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalMessage, setModaMessage] = useState('');
-  const [facebookImageURL, setFacebookImageURL] = useState('');
-  const facebookImageRef = useRef(null);
+
+  const onCloseEnd = () => {
+    modal.close();
+    if ( modalSuccess ) return history.replace('/');
+  };
 
   const FacebookCB = (response: any) => {
     porps.setIsLoading(true);
     const accessToken = response.accessToken;
     const userID = response.userID;
-    if ( !userID || !accessToken ) return porps.setIsLoading(false);
-    console.log('>>>>>>>> FacebookCB', response);
+    if ( !userID || !accessToken || !response.email ) return porps.setIsLoading(false);
     const name = response.name ? response.name.split(' ') : [];
     newUserPayload.data.attributes.first_name = name.length && name[0] ? name[0] : '';
     newUserPayload.data.attributes.last_name = name.length && name[1] ? name[1] : '';
@@ -51,20 +57,22 @@ const FacebookRegistration = ( porps: any ): React.ReactElement => {
     newUserPayload.data.attributes.username = `SN-${response.email}`;
     newUserPayload.data.attributes.password = userID;
     const url = `https://graph.facebook.com/v11.0/${userID}/picture?type=large&redirect=false&access_token=${accessToken}`;
-    // return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
     APIGet( url, false )
       .then((picture: any) => {
-        setFacebookImageURL(picture.data.url);
-        const img: any = facebookImageRef.current;
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx: any = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0);
-        newUserPayload.data.attributes.img_picture = canvas.toDataURL('image/png') || '';
-        RegisterUserAPICall(newUserPayload, true)
+        const img: any = new Image();
+        img.crossOrigin = 'anonymous';
+        img.src = picture.data.url;
+        setTimeout(() => {
+          const canvas = window.document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx: any = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          const facebookImage = canvas.toDataURL('image/png');
+          newUserPayload.data.attributes.img_picture = facebookImage;
+          RegisterUserAPICall(newUserPayload, true)
           .then((response: any) => {
-            console.log('>>>>>>>> RegisterUserAPICall response', response);
+            dispatch(SetUserData(response));
             porps.setIsLoading(false);
             setModalSuccess(true);
             setModalTitle('Cuenta creada');
@@ -86,9 +94,10 @@ const FacebookRegistration = ( porps: any ): React.ReactElement => {
               Si esta seguro de que los datos son correctos, por favor contacte al equipo tecnico de Nedii mencionando el codigo: <b>"${error.response.statusText} - ${error.response.status}"</b>.`);
             modal.open();
           });
+        }, 1700);
       })
       .catch((error) => {
-        console.log('>>>>>>>>> Picture error', error);
+        console.log(error);
         porps.setIsLoading(false);
       });
   };
@@ -96,12 +105,11 @@ const FacebookRegistration = ( porps: any ): React.ReactElement => {
   return (
     <>
       <div className='col s12'><Title text='Registro con redes sociales' /></div>
-      <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} />
+      <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} onCloseEnd={onCloseEnd} />
       <div className='RegisterUser__social-login col s12 row'>
-        <img src={facebookImageURL} width='10' height='10' ref={facebookImageRef} className='hide' />
         <FacebookLogin appId={facebookAppID} autoLoad={false} callback={FacebookCB}
           fields='name,email,picture' scope='public_profile,email'
-          icon='fa-facebook' textButton='Login' />
+          icon='fa-facebook' textButton='Registro' />
       </div>
     </>
   );

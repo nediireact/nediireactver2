@@ -4,6 +4,7 @@ import React, {
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import EmailRegistration from 'src/modules/register-user/email-registration';
 import FacebookRegistration from 'src/modules/register-user/facebook-registration';
+import 'src/modules/register-user/register-user.scss';
 
 const RegisterUser = (): React.ReactElement => {
   const [isLoading, setIsLoading] = useState(false);
