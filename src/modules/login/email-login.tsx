@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import LoginUserAPICall from 'src/modules/login/login-user-api-calls';
 import EmailLoginFrom from 'src/modules/login/email-login-from';
-import Title from 'src/modules/title/title';
+import SubTitle from 'src/modules/sub-title/sub-title';
 import Modal from 'src/modules/modal/modal';
 import { ArrayErrorsToHTMLList } from 'src/modules/utils/date-parser';
 import { SetUserData } from 'src/redux/actions/user-actions';
@@ -72,7 +72,7 @@ const EmailLogin = ( porps: any ): React.ReactElement => {
 
   return (
     <>
-      <div className='col s12'><Title text='Login con correo' /></div>
+      <div className='col s12'><SubTitle text='Login con correo' /></div>
       <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} onCloseEnd={onCloseEnd} />
       <EmailLoginFrom formRef={formRef}
         email={email} setEmail={setEmail}

@@ -16,7 +16,9 @@ const ExpoItem = (props: any): React.ReactElement => {
             Expo Virtual
             <i className='material-icons left'>laptop_windows</i>
           </div>
-          <div className='ExpoItem__title grey-text text-darken-4'>{props.ExpoI.attributes.title}</div>
+          <div className='grey-text text-darken-4 truncate ExpoItem__title'>
+            {props.ExpoI.attributes.title}
+          </div>
           <div className='ExpoItem__text'>Ir a la expo</div>
         </div>
       </div>

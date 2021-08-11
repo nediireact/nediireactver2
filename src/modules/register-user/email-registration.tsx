@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import RegisterUserAPICall from 'src/modules/register-user/register-user-api-calls';
 import EmailFrom from 'src/modules/register-user/email-from';
-import Title from 'src/modules/title/title';
+import SubTitle from 'src/modules/sub-title/sub-title';
 import Modal from 'src/modules/modal/modal';
 import { ArrayErrorsToHTMLList } from 'src/modules/utils/date-parser';
 import { useHistory } from 'react-router-dom';
@@ -86,7 +86,7 @@ const EmailRegistration = ( porps: any ): React.ReactElement => {
 
   return (
     <>
-      <div className='col s12'><Title text='Registro con correo' /></div>
+      <div className='col s12'><SubTitle text='Registro con correo' /></div>
       <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} onCloseEnd={onCloseEnd} />
       <EmailFrom formRef={formRef}
         firstName={firstName} setFirstName={setFirstName}
