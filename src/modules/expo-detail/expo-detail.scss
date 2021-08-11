@@ -1,7 +1,6 @@
-@import 'materialize-css';
-
-.ExpoDetailContent {
-  &__text {
-    @extend .grey-text, .text-darken-2;
+.QRCode {
+  canvas {
+    display: block;
+    margin: 0 auto;
   }
 }

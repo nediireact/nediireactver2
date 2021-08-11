@@ -13,6 +13,7 @@ import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
 import SubTitle from 'src/modules/sub-title/sub-title';
 import Groups from 'src/modules/group/group';
+import QRCode from 'qrcode.react'; // https://www.npmjs.com/package/qrcode.react
 
 const expoData = {
   attributes: {
@@ -20,7 +21,8 @@ const expoData = {
     title: '',
     description: '',
     real: '',
-    email: ''
+    email: '',
+    slug: ''
   },
   relationships: {
     groups: {
@@ -29,10 +31,29 @@ const expoData = {
   }
 };
 
+const QRodeComponent = (): React.ReactElement => {
+  const [canonicalURL, setCanonicalURL] = useState('');
+
+  useEffect(() => {
+    setCanonicalURL(window.location.href);
+  }, [fetchData]);
+
+  return (
+    <div className='container QRCode'>
+      <SubTitle text='QR code de esta expo' />
+      <QRCode
+        value={canonicalURL}
+        size={200}
+        bgColor='#FFFFFF'
+        fgColor='#000000' />
+    </div>
+  );
+};
+
 const ExpoDetail = (): React.ReactElement => {
   const history = useHistory();
   const params: any = useParams();
-  const [expo, setExpo]: any = useState(expoData);
+  const [expo, setExpo] = useState(expoData);
 
   useEffect(() => {
     fetchData(`expos?filter[slug]=${params.expoId}&include=groups`)
@@ -65,6 +86,9 @@ const ExpoDetail = (): React.ReactElement => {
       { expo.relationships.groups.data.length ? <SubTitle text='Pabellones en esta expo' /> : null }
       <HorizontalSpace size='small' />
       <Groups data={expo.relationships.groups} />
+      <HorizontalSpace size='small' />
+      <QRodeComponent />
+      <HorizontalSpace size='small' />
     </div>
   );
 };
