@@ -4,7 +4,7 @@ import React, {
 import EnvironmentVariables from 'src/constants/EnvironmentVariables';
 import FacebookLogin from 'react-facebook-login'; // https://www.npmjs.com/package/react-facebook-login
 import LoginUserAPICall from 'src/modules/login/login-user-api-calls';
-import Title from 'src/modules/title/title';
+import SubTitle from 'src/modules/sub-title/sub-title';
 import Modal from 'src/modules/modal/modal';
 import { ArrayErrorsToHTMLList } from 'src/modules/utils/date-parser';
 import { SetUserData } from 'src/redux/actions/user-actions';
@@ -69,7 +69,7 @@ const FacebookLoginComponent = ( porps: any ): React.ReactElement => {
 
   return (
     <>
-      <div className='col s12'><Title text='Login con redes sociales' /></div>
+      <div className='col s12'><SubTitle text='Login con redes sociales' /></div>
       <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} onCloseEnd={onCloseEnd} />
       <div className='RegisterUser__social-login col s12 row'>
         <FacebookLogin appId={facebookAppID} autoLoad={false} callback={FacebookCB}

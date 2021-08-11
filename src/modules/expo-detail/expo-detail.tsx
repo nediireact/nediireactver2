@@ -11,30 +11,38 @@ import 'src/modules/expo-detail/expo-detail.scss';
 import ExpoDetailContent from 'src/modules/expo-detail/expo-detail-content';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
+import SubTitle from 'src/modules/sub-title/sub-title';
+import Groups from 'src/modules/group/group';
 
-const apiItem = {
+const expoData = {
   attributes: {
     img_picture: '',
     title: '',
     description: '',
     real: '',
     email: ''
+  },
+  relationships: {
+    groups: {
+      data: []
+    }
   }
 };
 
-const ExpoDetailItem = (): React.ReactElement => {
+const ExpoDetail = (): React.ReactElement => {
   const history = useHistory();
   const params: any = useParams();
-  const [expo, setExpo]: any = useState(apiItem);
+  const [expo, setExpo]: any = useState(expoData);
 
   useEffect(() => {
-    fetchData(`expos?filter[slug]=${params.expoId}`)
+    fetchData(`expos?filter[slug]=${params.expoId}&include=groups`)
       .then((response: any) => {
         if (response.data.length === 0) {
           console.log('Error, expo no existe');
         } else {
           const expoData = response.data[0];
           if (!expoData) return history.replace('/');
+          console.log('expoData', expoData);
           setExpo(expoData);
         }
       })
@@ -54,8 +62,11 @@ const ExpoDetailItem = (): React.ReactElement => {
       <ExpoDetailContent
         description={expo.attributes.description}/>
       <HorizontalSpace size='medium' />
+      { expo.relationships.groups.data.length ? <SubTitle text='Pabellones en esta expo' /> : null }
+      <HorizontalSpace size='small' />
+      <Groups data={expo.relationships.groups} />
     </div>
   );
 };
 
-export default ExpoDetailItem;
+export default ExpoDetail;
