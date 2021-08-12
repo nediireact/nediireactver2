@@ -45,6 +45,7 @@ const commonIndex = (req, res) => {
 };
 
 app.get('/', commonIndex);
+app.get('/changelog', commonIndex);
 app.get('/about', commonIndex);
 app.get('/create-account', commonIndex);
 app.get('/login', commonIndex);

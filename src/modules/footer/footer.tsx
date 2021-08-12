@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import * as M from 'materialize-css';
 import EnvironmentVariables from 'src/constants/EnvironmentVariables';
+import { Link } from 'react-router-dom';
 import 'src/modules/footer/footer.scss';
 
 const env = EnvironmentVariables.getInstance();
@@ -14,15 +15,13 @@ const Footer = (): React.ReactElement => {
     <footer className='page-footer cyan darken-2 Footer'>
       <div className='footer-copyright Footer__copyright'>
         <div className='container Footer__info'>
-          <div
-            className='Footer__version'
-            onClick={() => {
+          <div className='Footer__version'>
+            <span onClick={() => {
               M.toast({
                 html: `(${system.platform.os} - ${env.branchName})`,
                 classes: 'rounded'
               });
-            }}>
-            <span>V {env.version}&nbsp;</span>
+            }}>V {env.version}&nbsp;</span>
             { !isMobileApp ?
               <a
                 href='/static/app.apk'
@@ -31,6 +30,12 @@ const Footer = (): React.ReactElement => {
                 <i className='material-icons'>android</i>
               </a> : null
             }
+            &nbsp;-&nbsp;
+            <Link
+              to='/changelog'
+              className='white-text Footer__app'>
+              <i className='material-icons'>access_time</i>
+            </Link>
           </div>
           <span className='white-text'>With ♥ by&nbsp;
             <a href='https://github.com/GMR027'
