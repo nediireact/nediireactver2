@@ -11,6 +11,7 @@ import Home from 'src/pages/home/home';
 import About from 'src/pages/about/about';
 import ActivateUser from 'src/pages/activate-user/activate-user';
 import EnvironmentVariables from 'src/constants/EnvironmentVariables';
+import ChangeLogPage from 'src/pages/changelog/changelog';
 import CreateAccount from 'src/pages/create-account/create-account';
 import LoginUser from 'src/pages/login/login';
 import Expos from 'src/pages/expos/expos';
@@ -51,6 +52,11 @@ const Routes = (): React.ReactElement => {
         <Route path='/expos'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><Expos /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/changelog'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><ChangeLogPage /></PersistGate>
           </Provider>
         </Route>
         <Route path='/'>

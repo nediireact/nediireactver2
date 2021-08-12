@@ -10,7 +10,7 @@ import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-head
 import 'src/modules/expo/expo.scss';
 
 const headerPictureFile = '/assets/expos.jpg';
-const apiItem = {
+const expoData = {
   data: [{
     id: 0,
     attributes: {
@@ -23,7 +23,7 @@ const apiItem = {
 };
 
 const Expo = (): React.ReactElement => {
-  const [items, setitems]: any = useState(apiItem);
+  const [items, setitems]: any = useState(expoData);
   const system = useSelector((state: any) => state.system);
   const prefix = system.platform.prefix;
   const headerPictureURL = `${prefix}${headerPictureFile}`;
@@ -45,11 +45,11 @@ const Expo = (): React.ReactElement => {
       <div className='container'>
         <div className='row'>
           {
-            items.data.map((ExpoI: any, index: number) => {
+            items.data.map((item: any, index: number) => {
               return (
                 <ExpoItem
                   key={index}
-                  ExpoI={ExpoI}/>
+                  item={item}/>
               );
             })
           }

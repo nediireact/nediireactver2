@@ -7,7 +7,7 @@ import Title from 'src/modules/title/title';
 import 'src/modules/modal/modal.scss';
 
 const Modal = ( props: any ): React.ReactElement => {
-  const modalRef: any = useRef('M.Modal');
+  const modalRef: any = useRef(null);
 
   useEffect(() => {
     const instance = M.Modal.init(modalRef.current, {
