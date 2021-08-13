@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const GroupItem = (props: any): React.ReactElement => {
   const color = props.item.attributes.color;
   return (
-    <Link to={`/groups/${props.item.attributes.slug}`}>
+    <Link to={`/expos/${props.expoId}/${props.item.attributes.slug}`}>
       <div className='GroupItem col s12 m6 l4'>
         <div className='GroupItem__card'>
           <div

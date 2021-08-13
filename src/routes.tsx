@@ -16,6 +16,7 @@ import CreateAccount from 'src/pages/create-account/create-account';
 import LoginUser from 'src/pages/login/login';
 import Expos from 'src/pages/expos/expos';
 import ExpoDetail from 'src/pages/expo-detail/expo-detail';
+import GroupDetail from 'src/pages/group-detail/group-detail';
 
 const env = EnvironmentVariables.getInstance();
 const isMobileApp = env.isMobileApp;
@@ -24,6 +25,21 @@ const Routes = (): React.ReactElement => {
   return (
     <Router forceRefresh={!isMobileApp}>
       <Switch>
+        <Route path="/expos/:expoId/:groupId">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><GroupDetail /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path="/expos/:expoId">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><ExpoDetail /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/expos'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><Expos /></PersistGate>
+          </Provider>
+        </Route>
         <Route path="/activate/:token">
           <Provider store={store}>
             <ActivateUser />
@@ -42,16 +58,6 @@ const Routes = (): React.ReactElement => {
         <Route path='/login'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><LoginUser /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path="/expos/:expoId">
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><ExpoDetail /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/expos'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><Expos /></PersistGate>
           </Provider>
         </Route>
         <Route path='/changelog'>

@@ -12,7 +12,6 @@ import ExpoDetailContent from 'src/modules/expo-detail/expo-detail-content';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
 import SubTitle from 'src/modules/sub-title/sub-title';
-import Groups from 'src/modules/group/group';
 import QRCode from 'qrcode.react'; // https://www.npmjs.com/package/qrcode.react
 
 const expoData = {
@@ -22,16 +21,14 @@ const expoData = {
     description: '',
     real: '',
     email: '',
-    slug: ''
+    slug: '',
+    color: ''
   },
   relationships: {
-    groups: {
-      data: []
-    }
   }
 };
 
-const QRodeComponent = (): React.ReactElement => {
+const QRodeComponent = ( props: any ): React.ReactElement => {
   const [canonicalURL, setCanonicalURL] = useState('');
 
   useEffect(() => {
@@ -40,35 +37,42 @@ const QRodeComponent = (): React.ReactElement => {
 
   return (
     <div className='container QRCode'>
-      <SubTitle text='QR code de esta expo' />
+      <SubTitle text='QR code de este pabellon' />
       <QRCode
         value={canonicalURL}
         size={200}
         bgColor='#FFFFFF'
-        fgColor='#000000' />
+        fgColor={props.color} />
     </div>
   );
 };
 
-const ExpoDetailComponent = (): React.ReactElement => {
+const GroupDetailComponent = (): React.ReactElement => {
   const history = useHistory();
   const params: any = useParams();
-  const [expo, setExpo] = useState(expoData);
+  const [group, setGroup] = useState(expoData);
 
   useEffect(() => {
-    fetchData(`expos?filter[slug]=${params.expoId}&include=groups`)
+    fetchData(`groups?filter[slug]=${params.groupId}`)
       .then((response: any) => {
         if (response.data.length === 0) {
-          console.log('Error, expo no existe');
+          console.log('Error, grupo no existe');
         } else {
           const expoData = response.data[0];
           if (!expoData) return history.replace('/');
           console.log('expoData', expoData);
-          setExpo(expoData);
+          setGroup(expoData);
         }
       })
       .catch((error) => {
         console.log('Hubo un error', error);
+      });
+    fetchData(`stands/?filter[expo__slug]=${params.expoId}&filter[group__slug]=${params.groupId}`)
+      .then((response: any) => {
+        console.log('Stands:', response);
+      })
+      .catch((error) => {
+        console.log('Hubo un error cargando los stands', error);
       });
   }, [fetchData]);
 
@@ -76,21 +80,17 @@ const ExpoDetailComponent = (): React.ReactElement => {
     <div>
       <ParallaxHeaderImage
         size='large'
-        image={expo.attributes.img_picture}
-        title={expo.attributes.title}
-        email={expo.attributes.email} />
+        image={group.attributes.img_picture}
+        title={group.attributes.title}
+        email={group.attributes.email} />
       <HorizontalSpace size='small' />
       <ExpoDetailContent
-        description={expo.attributes.description}/>
+        description={group.attributes.description}/>
       <HorizontalSpace size='medium' />
-      { expo.relationships.groups.data.length ? <SubTitle text='Pabellones en esta expo' /> : null }
-      <HorizontalSpace size='small' />
-      <Groups data={expo.relationships.groups} expoId={params.expoId} />
-      <HorizontalSpace size='small' />
-      <QRodeComponent />
+      <QRodeComponent color={group.attributes.color}/>
       <HorizontalSpace size='small' />
     </div>
   );
 };
 
-export default ExpoDetailComponent;
+export default GroupDetailComponent;

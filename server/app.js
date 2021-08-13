@@ -53,7 +53,7 @@ app.get('/my-account', commonIndex);
 app.get('/activate/:token', commonIndex);
 app.get('/expos', commonIndex);
 app.get('/expos/:expoId', commonIndex);
-app.get('/groups/:groupId', commonIndex);
+app.get('/expos/:expoId/:groupId', commonIndex);
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}!`);
