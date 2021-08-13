@@ -12,7 +12,8 @@ const Group = ( props: any ): React.ReactElement => {
             return (
               <GroupItem
                 key={index}
-                item={i}/>
+                item={i}
+                expoId={props.expoId} />
             );
           })
         }
