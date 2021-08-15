@@ -4,10 +4,10 @@ import React, {
 } from 'react';
 import { useSelector } from 'react-redux';
 import fetchData from 'src/modules/utils/fetch-data';
-import ExpoItem from 'src/modules/expo/expo-item';
+import ExpoItem from 'src/modules/expo-grid/expo-item';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
-import 'src/modules/expo/expo.scss';
+import 'src/modules/expo-grid/expo-grid.scss';
 
 const headerPictureFile = '/assets/expos.jpg';
 const expoData = {
@@ -22,7 +22,7 @@ const expoData = {
   }]
 };
 
-const Expo = (): React.ReactElement => {
+const ExpoGrid = (): React.ReactElement => {
   const [items, setitems]: any = useState(expoData);
   const system = useSelector((state: any) => state.system);
   const prefix = system.platform.prefix;
@@ -59,4 +59,4 @@ const Expo = (): React.ReactElement => {
   );
 };
 
-export default Expo;
+export default ExpoGrid;

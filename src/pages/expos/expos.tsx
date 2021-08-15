@@ -2,13 +2,13 @@ import React from 'react';
 import SystemCheck from 'src/modules/system-check/system-check';
 import NavBar from 'src/modules/nav-bar/nav-bar';
 import Footer from 'src/modules/footer/footer';
-import Expo from 'src/modules/expo/expo';
+import ExpoGrid from 'src/modules/expo-grid/expo-grid';
 
 const Expos = (): React.ReactElement => {
   return (
     <>
       <NavBar />
-      <Expo />
+      <ExpoGrid />
       <Footer />
       <SystemCheck />
     </>

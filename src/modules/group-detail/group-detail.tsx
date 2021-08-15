@@ -8,11 +8,12 @@ import {
 } from 'react-router-dom';
 import fetchData from 'src/modules/utils/fetch-data';
 import 'src/modules/expo-detail/expo-detail.scss';
-import ExpoDetailContent from 'src/modules/expo-detail/expo-detail-content';
+import GroupDetailContent from 'src/modules/group-detail/group-detail-content';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
 import SubTitle from 'src/modules/sub-title/sub-title';
 import QRCode from 'qrcode.react'; // https://www.npmjs.com/package/qrcode.react
+import StandGrid from 'src/modules/stand-grid/stand-grid';
 
 const expoData = {
   attributes: {
@@ -26,6 +27,10 @@ const expoData = {
   },
   relationships: {
   }
+};
+
+const standsData = {
+  data: []
 };
 
 const QRodeComponent = ( props: any ): React.ReactElement => {
@@ -51,6 +56,7 @@ const GroupDetailComponent = (): React.ReactElement => {
   const history = useHistory();
   const params: any = useParams();
   const [group, setGroup] = useState(expoData);
+  const [stands, setStands] = useState(standsData);
 
   useEffect(() => {
     fetchData(`groups?filter[slug]=${params.groupId}`)
@@ -60,16 +66,16 @@ const GroupDetailComponent = (): React.ReactElement => {
         } else {
           const expoData = response.data[0];
           if (!expoData) return history.replace('/');
-          console.log('expoData', expoData);
           setGroup(expoData);
         }
       })
       .catch((error) => {
         console.log('Hubo un error', error);
       });
-    fetchData(`stands/?filter[expo__slug]=${params.expoId}&filter[group__slug]=${params.groupId}`)
+    fetchData(`stands/?filter[expo__slug]=${params.expoId}&filter[group__slug]=${params.groupId}&include=ratings`)
       .then((response: any) => {
-        console.log('Stands:', response);
+        setStands(response);
+        console.log('Stands:', stands, response);
       })
       .catch((error) => {
         console.log('Hubo un error cargando los stands', error);
@@ -84,10 +90,13 @@ const GroupDetailComponent = (): React.ReactElement => {
         title={group.attributes.title}
         email={group.attributes.email} />
       <HorizontalSpace size='small' />
-      <ExpoDetailContent
-        description={group.attributes.description}/>
+      <GroupDetailContent description={group.attributes.description} />
       <HorizontalSpace size='medium' />
-      <QRodeComponent color={group.attributes.color}/>
+      { stands.data.length ? <SubTitle text='Stands de este pabellon' /> : null }
+      <HorizontalSpace size='small' />
+      <StandGrid data={stands} />
+      <HorizontalSpace size='small' />
+      <QRodeComponent color={group.attributes.color} />
       <HorizontalSpace size='small' />
     </div>
   );
