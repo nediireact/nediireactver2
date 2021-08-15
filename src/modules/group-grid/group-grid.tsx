@@ -1,9 +1,8 @@
 import React from 'react';
-import GroupItem from 'src/modules/group/group-item';
-import 'src/modules/group/group.scss';
+import GroupItem from 'src/modules/group-grid/group-item';
+import 'src/modules/group-grid/group-grid.scss';
 
-const Group = ( props: any ): React.ReactElement => {
-
+const GroupGrid = ( props: any ): React.ReactElement => {
   return (
     <div className='container'>
       <div className='row'>
@@ -22,4 +21,4 @@ const Group = ( props: any ): React.ReactElement => {
   );
 };
 
-export default Group;
+export default GroupGrid;

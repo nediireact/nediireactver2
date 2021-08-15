@@ -12,7 +12,7 @@ import ExpoDetailContent from 'src/modules/expo-detail/expo-detail-content';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
 import SubTitle from 'src/modules/sub-title/sub-title';
-import Groups from 'src/modules/group/group';
+import GroupGrid from 'src/modules/group-grid/group-grid';
 import QRCode from 'qrcode.react'; // https://www.npmjs.com/package/qrcode.react
 
 const expoData = {
@@ -80,12 +80,11 @@ const ExpoDetailComponent = (): React.ReactElement => {
         title={expo.attributes.title}
         email={expo.attributes.email} />
       <HorizontalSpace size='small' />
-      <ExpoDetailContent
-        description={expo.attributes.description}/>
+      <ExpoDetailContent description={expo.attributes.description} />
       <HorizontalSpace size='medium' />
       { expo.relationships.groups.data.length ? <SubTitle text='Pabellones en esta expo' /> : null }
       <HorizontalSpace size='small' />
-      <Groups data={expo.relationships.groups} expoId={params.expoId} />
+      <GroupGrid data={expo.relationships.groups} expoId={params.expoId} />
       <HorizontalSpace size='small' />
       <QRodeComponent />
       <HorizontalSpace size='small' />
