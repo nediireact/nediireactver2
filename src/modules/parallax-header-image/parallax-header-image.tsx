@@ -23,14 +23,14 @@ const ParallaxHeaderImage = (props: any): React.ReactElement => {
               align='left'
               fullWidth={true}
               shadow={true} />
-              { props.email ?
-                <a
-                  className='ParallaxHeaderImage__email white-text'
-                  href={`mailto:${props.email}`}
-                  rel='noreferrer'
-                  target='_blank'
-                  >Contacto: {props.email}</a> : null
-              }
+            { props.email ?
+              <a
+                className='ParallaxHeaderImage__email white-text'
+                href={`mailto:${props.email}`}
+                rel='noreferrer'
+                target='_blank'
+                >Contacto: {props.email}</a> : null
+            }
           </div>
         </div>
       </div>
