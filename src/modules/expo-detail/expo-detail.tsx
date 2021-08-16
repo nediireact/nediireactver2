@@ -15,12 +15,13 @@ import SubTitle from 'src/modules/sub-title/sub-title';
 import GroupGrid from 'src/modules/group-grid/group-grid';
 import QRCode from 'qrcode.react'; // https://www.npmjs.com/package/qrcode.react
 
+
 const expoData = {
   attributes: {
     img_picture: '',
     title: '',
     description: '',
-    real: '',
+    real: true,
     email: '',
     slug: ''
   },
@@ -78,7 +79,8 @@ const ExpoDetailComponent = (): React.ReactElement => {
         size='large'
         image={expo.attributes.img_picture}
         title={expo.attributes.title}
-        email={expo.attributes.email} />
+        email={expo.attributes.email}
+        indicator={!expo.attributes.real}/>
       <HorizontalSpace size='small' />
       <ExpoDetailContent description={expo.attributes.description} />
       <HorizontalSpace size='medium' />
