@@ -17,6 +17,7 @@ import LoginUser from 'src/pages/login/login';
 import Expos from 'src/pages/expos/expos';
 import ExpoDetail from 'src/pages/expo-detail/expo-detail';
 import GroupDetail from 'src/pages/group-detail/group-detail';
+import StandDetail from 'src/pages/stand-detail/stand-detail';
 
 const env = EnvironmentVariables.getInstance();
 const isMobileApp = env.isMobileApp;
@@ -25,6 +26,11 @@ const Routes = (): React.ReactElement => {
   return (
     <Router forceRefresh={!isMobileApp}>
       <Switch>
+        <Route path="/stand/:standId">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><StandDetail /></PersistGate>
+          </Provider>
+        </Route>
         <Route path="/expos/:expoId/:groupId">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><GroupDetail /></PersistGate>
