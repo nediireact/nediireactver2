@@ -1,6 +1,28 @@
-.QRCode {
-  canvas {
-    display: block;
-    margin: 0 auto;
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.Stand {
+  &__aside {
+    padding: 15px !important;
+    border-radius: 5px;
+  }
+
+  &__phones {
+    font-size: $regular-text;
+  }
+
+  &__phones-item {
+    width: 100%;
+    margin-top: 5px;
+    background-color: white;
+    border-radius: 3px;
+    padding: 4px;
+  }
+
+  .QRCode {
+    canvas {
+      display: block;
+      margin: 0 auto;
+    }
   }
 }

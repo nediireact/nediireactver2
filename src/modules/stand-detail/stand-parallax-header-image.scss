@@ -1,0 +1,132 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+$logo-desktop-hight: 140px;
+
+.StandParallaxHeaderImageCommon {
+  width: 100%;
+  height: 20vh;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center 55px;
+  background-size: auto calc(25vh + 100px);
+}
+
+.StandParallaxHeaderImage {
+  &--x-small {
+    height: 30vh;
+    background-size: auto calc(35vh + 100px);
+    @extend .StandParallaxHeaderImageCommon;
+  }
+  &--small {
+    height: 40vh;
+    background-size: auto calc(45vh + 100px);
+    @extend .StandParallaxHeaderImageCommon;
+  }
+  &--medium {
+    height: 50vh;
+    background-size: auto calc(55vh + 100px);
+    @extend .StandParallaxHeaderImageCommon;
+  }
+  &--large {
+    height: 60vh;
+    background-size: auto calc(65vh + 100px);
+    @extend .StandParallaxHeaderImageCommon;
+  }
+  &--x-large {
+    height: 65vh;
+    background-size: auto calc(70vh + 100px);
+    @extend .StandParallaxHeaderImageCommon;
+  }
+
+  &__info {
+    height: 100%;
+  }
+
+  &__content-wrapper {
+    height: 100%;
+    padding: 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @extend .white-text;
+  }
+
+  &__dummy-space {
+    width: 100%;
+    flex-grow: 2;
+  }
+
+  &__stand-identity-wrapper {
+    width: 100%;
+  }
+  
+  &__restaurant-indicator {
+    width: 100%;
+    
+    i {
+      width: 50px;
+      height: 50px;
+      line-height: 45px;
+      font-size: 2.7em;
+      margin-top: 20px;
+      border: 2px solid white;
+      border-radius: 3px;
+    }
+  }
+
+  &__logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  &__slogan {
+    font-size: $medium-text;
+  }
+}
+
+@media screen and (min-width: 390px) {
+  .StandParallaxHeaderImage {
+    &--x-small,
+    &--small,
+    &--medium,
+    &--large,
+    &--x-large {
+      background-size: cover;
+      background-position: center;
+    }
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .StandParallaxHeaderImage {
+    &__logo {
+      width: $logo-desktop-hight;
+      height: $logo-desktop-hight;
+      position: relative;
+      float: left;
+      margin: 0 15px 0 0;
+    }
+
+    &__title-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: $logo-desktop-hight;
+    }
+  
+    .Title {
+      width: calc(100% - 155px);
+    }
+  
+    &__slogan {
+      width: calc(100% - 155px);
+    }
+  }
+}
