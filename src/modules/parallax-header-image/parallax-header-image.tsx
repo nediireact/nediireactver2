@@ -16,8 +16,27 @@ const ParallaxHeaderImage = (props: any): React.ReactElement => {
           }}>
           <div className='container'>
             {
+              props.restaurant ?
+              <div className='Restaurant red'>
+                <div className='Restaurant__icon'>
+                  <i className='material-icons center white-text'>{props.restaurantIcon}</i>
+                </div>
+              </div> : null
+            }
+            {
               props.indicator ? <Indicator/> : null
             }
+            <div>
+              {
+                props.logo ?
+                <div className='LogoStand white'>
+                  <div
+                    className='LogoStand__img'
+                    style={{backgroundImage: `url(${props.logo})`}}>
+                  </div>
+                </div> : null
+              }
+            </div>
             <Title
               text={props.title}
               align='left'
