@@ -1,6 +1,7 @@
 import React from 'react';
 import 'src/modules/stand-detail/stand-parallax-header-image.scss';
 import Title from 'src/modules/title/title';
+import StandRatings from 'src/modules/stand-detail/stand-ratings';
 
 const StandParallaxHeaderImage = (props: any): React.ReactElement => {
   return (
@@ -32,6 +33,7 @@ const StandParallaxHeaderImage = (props: any): React.ReactElement => {
                 align='left'
                 fullWidth={true}
                 shadow={true} />
+              <StandRatings ratings={props.ratings} />
               {
                 props.slogan ?
                 <div className='StandParallaxHeaderImage__slogan truncate'>{props.slogan}</div> : null

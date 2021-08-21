@@ -26,11 +26,14 @@ const standData = {
   relationships: {
     phones: {
       data: [{
-      id: 0,
-      attributes: {
-        phone: ''
-      }
-    }]
+        id: 0,
+        attributes: {
+          phone: ''
+        }
+      }]
+    },
+    ratings: {
+      data: []
     }
   }
 };
@@ -41,14 +44,14 @@ const StandDetailComponent = (): React.ReactElement => {
   const [stand, setStand] = useState(standData);
 
   useEffect(() => {
-    fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones`)
+    fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones,ratings`)
       .then((response: any) => {
         if (response.data.length === 0) {
           console.log('Error, stand no existe');
         } else {
           const standData = response.data[0];
           if (!standData) return history.replace('/');
-          console.log('standData', standData, stand);
+          console.log('standData', standData);
           setStand(standData);
         }
       })
@@ -65,7 +68,8 @@ const StandDetailComponent = (): React.ReactElement => {
         title={stand.attributes.name}
         logo={stand.attributes.img_logo}
         restaurant={stand.attributes.restaurant}
-        slogan={stand.attributes.slogan} />
+        slogan={stand.attributes.slogan}
+        ratings={stand.relationships.ratings.data} />
       <HorizontalSpace size='small' />
       <StandContent stand={stand}/>
       <HorizontalSpace size='small' />

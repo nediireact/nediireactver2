@@ -87,7 +87,7 @@ const EmailRegistration = ( porps: any ): React.ReactElement => {
   return (
     <>
       <div className='col s12'><SubTitle text='Registro con correo' /></div>
-      <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} onCloseEnd={onCloseEnd} />
+      <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} onCloseEnd={onCloseEnd} fixedFooter={true} />
       <EmailFrom formRef={formRef}
         firstName={firstName} setFirstName={setFirstName}
         lastName={lastName} setLastName={setLastName}
