@@ -37,6 +37,24 @@ const standData = {
     },
     pictures: {
       data: []
+    },
+    owner: {
+      data: {
+        attributes: {
+          first_name: '',
+          last_name: '',
+          profile: {
+            img_picture: '',
+            owner_address: '',
+            owner_email: '',
+            owner_office_phone: '',
+            owner_phone: '',
+            owner_position: '',
+            owner_position_description: '',
+            owner_whatsapp: ''
+          }
+        }
+      }
     }
   }
 };
