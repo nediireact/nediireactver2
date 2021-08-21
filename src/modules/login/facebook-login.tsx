@@ -70,7 +70,7 @@ const FacebookLoginComponent = ( porps: any ): React.ReactElement => {
   return (
     <>
       <div className='col s12'><SubTitle text='Login con redes sociales' /></div>
-      <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} onCloseEnd={onCloseEnd} />
+      <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} onCloseEnd={onCloseEnd} fixedFooter={true} />
       <div className='RegisterUser__social-login col s12 row'>
         <FacebookLogin appId={facebookAppID} autoLoad={false} callback={FacebookCB}
           fields='name,email,picture' scope='public_profile,email'

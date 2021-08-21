@@ -18,10 +18,12 @@ const Modal = ( props: any ): React.ReactElement => {
 
   return (
     <>
-      <div className='modal modal-fixed-footer Modal' ref={modalRef}>
+      <div className={`modal ${props.fixedFooter ? 'modal-fixed-footer' : ''} Modal`} ref={modalRef}>
         <div className='modal-content'>
           <Title text={props.title} color={ props.success ? '#00acc1' : '#e53935' }/>
-          <div dangerouslySetInnerHTML={{__html: props.message}}></div>
+          <div
+            className='black-text'
+            dangerouslySetInnerHTML={{__html: props.message}}></div>
         </div>
         <div className='modal-footer'>
           <a onClick={props.onCloseEnd} className='modal-close waves-effect waves cyan white-text btn'>Aceptar</a>

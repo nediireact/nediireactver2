@@ -65,11 +65,11 @@ $logo-desktop-hight: 140px;
     width: 100%;
     
     i {
-      width: 50px;
-      height: 50px;
-      line-height: 45px;
-      font-size: 2.7em;
-      margin-top: 20px;
+      width: 40px;
+      height: 40px;
+      line-height: 35px;
+      font-size: 2em;
+      margin-top: 10px;
       border: 2px solid white;
       border-radius: 3px;
     }
@@ -112,6 +112,18 @@ $logo-desktop-hight: 140px;
       position: relative;
       float: left;
       margin: 0 15px 0 0;
+    }
+  
+    &__restaurant-indicator {
+      width: 100%;
+      
+      i {
+        width: 50px;
+        height: 50px;
+        line-height: 45px;
+        font-size: 2.7em;
+        margin-top: 20px;
+      }
     }
 
     &__title-wrapper {

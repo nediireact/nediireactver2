@@ -73,7 +73,7 @@ const EmailLogin = ( porps: any ): React.ReactElement => {
   return (
     <>
       <div className='col s12'><SubTitle text='Login con correo' /></div>
-      <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} onCloseEnd={onCloseEnd} />
+      <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} onCloseEnd={onCloseEnd} fixedFooter={true} />
       <EmailLoginFrom formRef={formRef}
         email={email} setEmail={setEmail}
         password={password} setPassword={setPassword}
