@@ -12,24 +12,31 @@ const StandOwnerInfo = (props: any): React.ReactElement => {
       <div className='StandOwnerInfo__owner-Position'>{props.owner.profile.owner_position}</div>
       <div dangerouslySetInnerHTML={{__html: props.owner.profile.owner_position_description}}>
       </div>
-      <a
-        className='StandOwnerInfo__owner-contact white'
-        href={`tel:${props.owner.profile.owner_office_phone}}`}>
-        <i className='material-icons'>call</i>
-        <span>{props.owner.profile.owner_office_phone}</span>
-      </a>
-      <a href={`https://wa.me/${props.owner.profile.owner_whatsapp}}`}
-        className='StandOwnerInfo__owner-contact white'>
-        <i className='material-icons green-text'>whatsapp</i>
-        <span>{props.owner.profile.owner_whatsapp}</span>
-      </a>
+      <div className='row StandOwnerInfo__owner-numbers'>
+        <div className='col s12 xl6'>
+          <a
+            href={`tel:${props.owner.profile.owner_office_phone}}`}
+            className='StandOwnerInfo__owner-phones white'>
+            <i className='material-icons'>call</i>
+            <span className='grey-text text-darken-4'>{props.owner.profile.owner_office_phone}</span>
+          </a>
+        </div>
+        <div className='col s12 xl6'>
+          <a
+            href={`https://wa.me/${props.owner.profile.owner_whatsapp}}`}
+            className='StandOwnerInfo__owner-phones white'>
+            <i className='material-icons green-text'>whatsapp</i>
+            <span className='grey-text text-darken-4'>{props.owner.profile.owner_whatsapp}</span>
+          </a>
+        </div>
+      </div>
       <a
         className='StandOwnerInfo__owner-contact truncate white'
         href={`mailto:${props.owner.profile.owner_emai}`}
         target='_blank'
         rel='noreferrer'>
         <i className='material-icons'>mail_outline</i>
-        <span>{props.owner.profile.owner_email}</span>
+        <span className='grey-text text-darken-4'>{props.owner.profile.owner_email}</span>
       </a>
       <a
         className='StandOwnerInfo__owner-contact white'
@@ -37,7 +44,7 @@ const StandOwnerInfo = (props: any): React.ReactElement => {
         target='_blank'
         rel='noreferrer'>
         <i className='material-icons'>location_on</i>
-        <span>{props.owner.profile.owner_address}</span>
+        <span className='grey-text text-darken-4'>{props.owner.profile.owner_address}</span>
       </a>
     </div>
   );

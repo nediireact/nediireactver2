@@ -49,7 +49,8 @@ const ExpoGrid = (): React.ReactElement => {
               return (
                 <ExpoItem
                   key={index}
-                  item={item}/>
+                  item={item}
+                  col='col s12 m6 l4' />
               );
             })
           }

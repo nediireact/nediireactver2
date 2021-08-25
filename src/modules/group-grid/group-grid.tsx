@@ -12,7 +12,8 @@ const GroupGrid = ( props: any ): React.ReactElement => {
               <GroupItem
                 key={index}
                 item={i}
-                expoId={props.expoId} />
+                expoId={props.expoId}
+                col='col s12 m6 l4' />
             );
           })
         }
