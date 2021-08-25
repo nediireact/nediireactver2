@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom';
 import fetchData from 'src/modules/utils/fetch-data';
 import 'src/modules/stand-detail/stand-detail.scss';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import StandParallaxHeaderImage from 'src/modules/stand-detail/stand-parallax-header-image';
 import StandContent from 'src/modules/stand-detail/stand-content';
 
@@ -114,9 +113,7 @@ const StandDetailComponent = (): React.ReactElement => {
         restaurant={stand.attributes.restaurant}
         slogan={stand.attributes.slogan}
         ratings={stand.relationships.ratings.data} />
-      <HorizontalSpace size='small' />
       <StandContent stand={stand}/>
-      <HorizontalSpace size='small' />
     </div>
   );
 };
