@@ -45,45 +45,39 @@ const StandPictures = (props: any): React.ReactElement => {
   };
 
   return (
-    <div
-      className='StandPictures'>
-      <div
-        className='StandPictures__background hide-on-med-and-down'
-        style={{backgroundImage: `url(${props.backgroundImage})`}}></div>
-      <div className='container'>
-        <Swiper
-          className='Swiper z-depth-3'
-          autoplay={true}
-          effect='slide'
-          spaceBetween={0}
-          slidesPerView={1}
-          loop={true}
-          onSwiper={onSwiper}
-          pagination={{
-            el: '.swiper-pagination', type: 'bullets', clickable: true
-          }}
-        >
-          {
-            props.images.map((item: any, index: any ) => {
-              if ( !item.attributes ) return null;
-              return (
-                <SwiperSlide
-                  className='Swiper__slide'
-                  key={index}
-                  virtualIndex={index}>
-                  <div
-                    className='Swiper__content'
-                    style={{
-                      backgroundImage: `url(${item.attributes.img_picture})`
-                    }}>
-                  </div>
-                </SwiperSlide>
-              );
-            })
-          }
-          <SlideAddons swiper={swiperReference} />
-        </Swiper>
-      </div>
+    <div className='StandPictures'>
+      <Swiper
+        className='Swiper'
+        autoplay={true}
+        effect='slide'
+        spaceBetween={0}
+        slidesPerView={1}
+        loop={true}
+        onSwiper={onSwiper}
+        pagination={{
+          el: '.swiper-pagination', type: 'bullets', clickable: true
+        }}
+      >
+        {
+          props.images.map((item: any, index: any ) => {
+            if ( !item.attributes ) return null;
+            return (
+              <SwiperSlide
+                className='Swiper__slide'
+                key={index}
+                virtualIndex={index}>
+                <div
+                  className='Swiper__content'
+                  style={{
+                    backgroundImage: `url(${item.attributes.img_picture})`
+                  }}>
+                </div>
+              </SwiperSlide>
+            );
+          })
+        }
+        <SlideAddons swiper={swiperReference} />
+      </Swiper>
     </div>
   );
 };

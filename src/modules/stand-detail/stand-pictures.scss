@@ -2,17 +2,7 @@
 
 .StandPictures {
   position: relative;
-
-  &__background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+  margin-top: 20px;
 }
 
 .StandPictures .Swiper {
@@ -23,7 +13,7 @@
     display: block;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     height: 50vh;
     @extend .white-text;
   }
@@ -58,7 +48,7 @@
 @media screen and (min-width: 601px) {
   .StandPictures .Swiper {
     &__navigation-button {
-      top: calc(50% - 50px);
+      top: calc(50% - 25px);
       width: 50px;
       height: 50px;
       outline: none;
@@ -77,11 +67,6 @@
 @media screen and (min-width: 993px) {
   .StandPictures {
     height: calc(60vh + 80px);
-    padding-top: 40px;
-    
-    &__background {
-      filter: blur(2px);
-    }
   }
 
   .StandPictures .Swiper {  

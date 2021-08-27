@@ -9,7 +9,7 @@ const StandPhones = (props: any): React.ReactElement => {
         {
         props.phones.data.map((element: any, index: number) => {
           return (
-            <div className='col s12 xl6 Stand__phones-item'
+            <div className='col s12 xl6'
               key={index}>
                   <a
                   href={`tel:${element.attributes.phone}`}

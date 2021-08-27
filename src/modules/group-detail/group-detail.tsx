@@ -33,12 +33,12 @@ const standsData = {
   data: []
 };
 
-const QRodeComponent = ( props: any ): React.ReactElement => {
+const QRCodeComponent = ( props: any ): React.ReactElement => {
   const [canonicalURL, setCanonicalURL] = useState('');
 
   useEffect(() => {
     setCanonicalURL(window.location.href);
-  }, [fetchData]);
+  });
 
   return (
     <div className='container QRCode'>
@@ -96,7 +96,7 @@ const GroupDetailComponent = (): React.ReactElement => {
       <HorizontalSpace size='small' />
       <StandGrid data={stands} />
       <HorizontalSpace size='small' />
-      <QRodeComponent color={group.attributes.color} />
+      <QRCodeComponent color={group.attributes.color} />
       <HorizontalSpace size='small' />
     </div>
   );
