@@ -2,31 +2,45 @@
 @import 'src/constants/Constants.scss';
 
 .Stand {
-
+  
   &__phones-title {
     text-align: center;
     font-size: $subtitle-font-size;
     width: 100%;
+    margin-bottom: 5px;
   }
 
   &__phones {
-    padding: 15px;
-    font-size: $regular-text;
     border-radius: 10px;
   }
 
-  &__phones-item {
-    width: 100%;
-    margin-top: 10px;
+  &__phones-container {
     padding: 15px;
+  }
+
+  &__phones-number {
+    display: block;
+    font-size: 1em;
+    text-align: center;
+    padding: .5em 0;
     border-radius: 5px;
+    margin-bottom: 10px;
     transition: all 0.5s;
     @extend .z-depth-1;
   }
 
-  &__phones-item:hover {
+  &__phones-number:hover {
     @extend .z-depth-3;
   }
+
+  i {
+    font-size: 1em;
+    margin: 0 5px;
+  }
+}
+
+
+
 
   .QRCode {
     canvas {
@@ -34,7 +48,7 @@
       margin: 0 auto;
     }
   }
-}
+
 
 .StandOwnerInfo{
   padding: 15px;
@@ -61,6 +75,22 @@
   &__owner-position {
     text-align: center;
   }
+
+  &__owner-phones {
+    display: block;
+    font-size: 1em;
+    text-align: center;
+    padding: .5em 0;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: all 0.5s;
+    @extend .z-depth-1;
+  }
+
+  &__owner-phones:hover {
+    @extend .z-depth-3;
+  }
+
 
   &__owner-contact {
     display: flex;

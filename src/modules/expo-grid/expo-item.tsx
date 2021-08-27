@@ -6,7 +6,7 @@ const ExpoItem = (props: any): React.ReactElement => {
   return (
     <Link
       to={`/expos/${props.item.attributes.slug}`}>
-      <div className='ExpoItem col s12 m6 l4'>
+      <div className={`ExpoItem ${props.col}`}>
         <div className='ExpoItem__card'>
           <div
             className='ExpoItem__img'

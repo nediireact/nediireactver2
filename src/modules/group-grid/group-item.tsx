@@ -5,7 +5,7 @@ const GroupItem = (props: any): React.ReactElement => {
   const color = props.item.attributes.color;
   return (
     <Link to={`/expos/${props.expoId}/${props.item.attributes.slug}`}>
-      <div className='GroupItem col s12 m6 l4'>
+      <div className={`GroupItem ${props.col}`}>
         <div className='GroupItem__card'>
           <div
             className='GroupItem__img'
