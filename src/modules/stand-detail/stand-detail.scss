@@ -28,7 +28,7 @@
 
   &__phones {
     border-radius: 10px;
-    padding: 20px 15px 15px;
+    padding: 20px 10px 20px;
     @extend .z-depth-1;
   }
 
@@ -39,28 +39,8 @@
     margin-bottom: 5px;
   }
 
-  &__phones-container {
-    margin-bottom: 0 !important;
-  }
-
-  &__phones-number {
-    display: block;
-    font-size: 1em;
-    text-align: center;
-    padding: .5em 0;
-    border-radius: 5px;
-    margin-top: 10px;
-    transition: all 0.5s;
-    @extend .z-depth-1;
-
-    i {
-      font-size: 1em;
-      margin: 0 5px;
-    }
-  }
-
-  &__phones-number:hover {
-    @extend .z-depth-3;
+  &__phones-row {
+    margin: 0 !important;
   }
 
   .QRCode {
@@ -74,7 +54,7 @@
 }
 
 .StandOwnerInfo {
-  padding: 20px 15px 15px;
+  padding: 20px 15px 1px;
   border-radius: 10px;
   @extend .z-depth-1;
 
@@ -99,58 +79,6 @@
   &__owner-position {
     text-align: center;
     font-style: italic;
-  }
-
-  &__owner-phones {
-    display: block;
-    font-size: 1em;
-    text-align: center;
-    padding: .5em 0;
-    border-radius: 5px;
-    margin-top: 10px;
-    transition: all 0.5s;
-    @extend .z-depth-1;
-    
-    i {
-      font-size: 1em;
-      margin: 0 5px;
-    }
-  }
-
-  &__owner-phones:hover {
-    @extend .z-depth-3;
-  }
-
-  &__owner-numbers {
-    margin-bottom: 0 !important;
-  }
-
-  &__owner-contact {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 4;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: 10px;
-    padding: 15px;
-    border-radius: 5px;
-    transition: all 0.5s;
-
-    i, span {
-      line-height: 20px;
-    }
-
-    i {
-      margin-right: 5px;
-      font-size: 1em;
-    }
-  
-    @extend .z-depth-1;
-  }
-
-  &__owner-contact:hover {
-    @extend .z-depth-3;
   }
 }
 

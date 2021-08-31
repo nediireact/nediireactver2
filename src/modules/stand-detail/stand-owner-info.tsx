@@ -1,5 +1,6 @@
 import React from 'react';
 import 'src/modules/stand-detail/stand-detail.scss';
+import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
 
 const StandOwnerInfo = (props: any): React.ReactElement => {
   return (
@@ -10,42 +11,45 @@ const StandOwnerInfo = (props: any): React.ReactElement => {
       </div>
       <div className='StandOwnerInfo__owner-name'>{props.owner.first_name} {props.owner.last_name}</div>
       <div className='StandOwnerInfo__owner-position'>{props.owner.profile.owner_position}</div>
-      <div dangerouslySetInnerHTML={{__html: props.owner.profile.owner_position_description}}>
+      <div dangerouslySetInnerHTML={{__html: props.owner.profile.owner_position_description}}></div>
+      <div className='row'>
+      <TextWithIcon
+        color_item='white'
+        use='tel:'
+        link={props.owner.profile.owner_office_phone}
+        size='col s12 xl6'
+        color_icon='grey-text text-darken-4'
+        icon='call'
+        text_color='grey-text text-darken-4'
+        text={props.owner.profile.owner_office_phone}/>
+      <TextWithIcon
+        color_item='white'
+        use='https://wa.me/'
+        link={props.owner.profile.owner_whatsapp}
+        size='col s12 xl6'
+        color_icon='green-text'
+        icon='whatsapp'
+        text_color='grey-text text-darken-4'
+        text={props.owner.profile.owner_whatsapp}/>
+      <TextWithIcon
+        color_item='white'
+        use='mailto:'
+        link={props.owner.profile.owner_email}
+        size='col s12'
+        color_icon='red-text'
+        icon='mail_outline'
+        text_color='grey-text text-darken-4'
+        text={props.owner.profile.owner_email}
+        truncate='truncate'/>
+      <TextWithIcon
+        color_item='white'
+        use='https://www.google.com/maps?q='
+        link={props.owner.profile.owner_address}
+        size='col s12'
+        icon='location_on'
+        text_color='grey-text text-darken-4'
+        text={props.owner.profile.owner_address}/>
       </div>
-      <div className='row StandOwnerInfo__owner-numbers'>
-        <div className='col s12 xl6'>
-          <a
-            href={`tel:${props.owner.profile.owner_office_phone}`}
-            className='StandOwnerInfo__owner-phones white'>
-            <i className='material-icons'>call</i>
-            <span className='grey-text text-darken-4'>{props.owner.profile.owner_office_phone}</span>
-          </a>
-        </div>
-        <div className='col s12 xl6'>
-          <a
-            href={`https://wa.me/${props.owner.profile.owner_whatsapp}`}
-            className='StandOwnerInfo__owner-phones white'>
-            <i className='material-icons green-text'>whatsapp</i>
-            <span className='grey-text text-darken-4'>{props.owner.profile.owner_whatsapp}</span>
-          </a>
-        </div>
-      </div>
-      <a
-        className='StandOwnerInfo__owner-contact truncate white'
-        href={`mailto:${props.owner.profile.owner_email}`}
-        target='_blank'
-        rel='noreferrer'>
-        <i className='material-icons'>mail_outline</i>
-        <span className='grey-text text-darken-4'>{props.owner.profile.owner_email}</span>
-      </a>
-      <a
-        className='StandOwnerInfo__owner-contact white'
-        href={`https://www.google.com/maps?q=${props.owner.profile.owner_address}`}
-        target='_blank'
-        rel='noreferrer'>
-        <i className='material-icons'>location_on</i>
-        <span className='grey-text text-darken-4'>{props.owner.profile.owner_address}</span>
-      </a>
     </div>
   );
 };
