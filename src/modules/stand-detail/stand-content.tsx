@@ -12,6 +12,7 @@ import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import GroupItem from 'src/modules/group-grid/group-item';
 import * as M from 'materialize-css';
 import QRCodeComponent from 'src/modules/stand-detail/stand-qr';
+import StandGridItems from 'src/modules/stand-detail/news/stand-grid-item';
 
 const StandContent = (props: any): React.ReactElement => {
   const tabsComponentRef: any = useRef(null);
@@ -56,7 +57,11 @@ const StandContent = (props: any): React.ReactElement => {
         <div id='test3' className='col s12'>Servicios</div>
         <div id='test4' className='col s12'>Autos</div>
         <div id='test5' className='col s12'>Comidas</div>
-        <div id='test6' className='col s12'>Noticias</div>
+        <div id='test6' className='col s12'>
+          <StandGridItems
+            stand={props.stand.relationships.stand_news}
+            size='col s12 m4' />
+        </div>
         <div id='test7' className='col s12'>Reservaciones</div>
       </div>
     </div>
