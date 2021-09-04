@@ -77,6 +77,17 @@ const standData = {
           color: ''
         }
       }
+    },
+    stand_news: {
+      data: [{
+        id: 0,
+        attributes: {
+          created: '',
+          description: '',
+          img_picture: '',
+          title: ''
+        }
+      }]
     }
   }
 };
@@ -87,7 +98,7 @@ const StandDetailComponent = (): React.ReactElement => {
   const [stand, setStand] = useState(standData);
 
   useEffect(() => {
-    fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones,ratings,pictures,expo,group`)
+    fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones,ratings,pictures,expo,group,stand_news`)
       .then((response: any) => {
         if (response.data.length === 0) {
           console.log('Error, stand no existe');
