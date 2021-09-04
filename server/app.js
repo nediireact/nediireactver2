@@ -55,6 +55,7 @@ app.get('/expos', commonIndex);
 app.get('/expos/:expoId', commonIndex);
 app.get('/expos/:expoId/:groupId', commonIndex);
 app.get('/stand/:standId', commonIndex);
+app.get('/stand/:standId/news/:standNewsId', commonIndex);
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}!`);

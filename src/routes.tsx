@@ -18,6 +18,7 @@ import Expos from 'src/pages/expos/expos';
 import ExpoDetail from 'src/pages/expo-detail/expo-detail';
 import GroupDetail from 'src/pages/group-detail/group-detail';
 import StandDetail from 'src/pages/stand-detail/stand-detail';
+import StandNewsDetail from 'src/pages/stand-news-detail/stand-news-detail';
 
 const env = EnvironmentVariables.getInstance();
 const isMobileApp = env.isMobileApp;
@@ -26,6 +27,11 @@ const Routes = (): React.ReactElement => {
   return (
     <Router forceRefresh={!isMobileApp}>
       <Switch>
+        <Route path="/stand/:standId/news/:standNewsId">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><StandNewsDetail /></PersistGate>
+          </Provider>
+        </Route>
         <Route path="/stand/:standId">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandDetail /></PersistGate>
