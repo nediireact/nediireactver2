@@ -16,7 +16,7 @@ const StandPhones = (props: any): React.ReactElement => {
               color_item='white'
               use='tel:'
               link={element.attributes.phone}
-              size='col s12 l6'
+              size='col s12 xl6'
               color_icon='grey-text text-darken-4'
               icon='call'
               text_color='grey-text text-darken-4'

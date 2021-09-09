@@ -2,7 +2,7 @@
 
 .StandPictures {
   position: relative;
-  margin-top: 20px;
+  margin: 25px 0;
 }
 
 .StandPictures .Swiper {
@@ -13,7 +13,7 @@
     display: block;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     height: 50vh;
     @extend .white-text;
   }
@@ -65,10 +65,6 @@
 }
 
 @media screen and (min-width: 993px) {
-  .StandPictures {
-    height: calc(60vh + 80px);
-  }
-
   .StandPictures .Swiper {  
     &__content {
       height: 60vh;
