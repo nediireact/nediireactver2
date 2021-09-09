@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const StandNewsItem = (props: any): React.ReactElement => {
   return (
     <Link
-      to=''
+      to={`/stand/${props.stand_slug}/news/${props.slug_news}`}
       className={`StandNewsItem ${props.size}`}>
       <div
         className={`StandNewsItem__card ${props.colorcard}`}
@@ -20,7 +20,7 @@ const StandNewsItem = (props: any): React.ReactElement => {
           className={`StandNewsItem__title 
             ${props.truncate}
             ${props.align}
-            ${props.title_color}`}>{props.title}
+            ${props.titleColor}`}>{props.title}
         </div>
       </div>
     </Link>

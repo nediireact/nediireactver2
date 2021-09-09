@@ -85,7 +85,8 @@ const standData = {
           created: '',
           description: '',
           img_picture: '',
-          title: ''
+          title: '',
+          slug: ''
         }
       }]
     }

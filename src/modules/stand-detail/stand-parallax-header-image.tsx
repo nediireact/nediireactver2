@@ -33,10 +33,13 @@ const StandParallaxHeaderImage = (props: any): React.ReactElement => {
                 align='left'
                 fullWidth={true}
                 shadow={true} />
-              <StandRatings ratings={props.ratings} />
+              {
+                props.ratings && props.ratings.length ?
+                  <StandRatings ratings={props.ratings} /> : null
+              }
               {
                 props.slogan ?
-                <div className='StandParallaxHeaderImage__slogan truncate'>{props.slogan}</div> : null
+                  <div className='StandParallaxHeaderImage__slogan truncate'>{props.slogan}</div> : null
               }
               </div>
             </div>
