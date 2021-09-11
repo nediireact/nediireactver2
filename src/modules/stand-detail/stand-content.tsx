@@ -13,6 +13,7 @@ import GroupItem from 'src/modules/group-grid/group-item';
 import * as M from 'materialize-css';
 import QRCodeComponent from 'src/modules/stand-detail/stand-qr';
 import StandGridNews from 'src/modules/stand-detail/news/stand-grid-news';
+import StandMeals from 'src/modules/stand-detail/meals/stand-meals-grid';
 
 const StandContent = (props: any): React.ReactElement => {
   const tabsComponentRef: any = useRef(null);
@@ -37,9 +38,7 @@ const StandContent = (props: any): React.ReactElement => {
         <div id='test1' className='col s12 row'>
           <div className='col s12 m8 Stand__main-container'>
             <CommonLargeText text={props.stand.attributes.description} />
-            <StandPictures
-              backgroundImage={props.stand.attributes.img_cover}
-              images={props.stand.relationships.pictures.data} />
+            <StandPictures images={props.stand.relationships.pictures.data} />
             <QRCodeComponent title={`QR code de ${props.stand.attributes.name}`}/>
           </div>
           <div className='col s12 m4 Stand__aside'>
@@ -56,7 +55,14 @@ const StandContent = (props: any): React.ReactElement => {
         <div id='test2' className='col s12'>Productos</div>
         <div id='test3' className='col s12'>Servicios</div>
         <div id='test4' className='col s12'>Autos</div>
-        <div id='test5' className='col s12'>Comidas</div>
+        <div id='test5' className='col s12 row'>
+        {
+          props.stand && props.stand.id ?
+            <StandMeals
+              standId={props.stand.id}
+              standSlug={props.stand.attributes.slug} /> : null
+        }
+        </div>
         <div id='test6' className='col s12'>
           <StandGridNews
             news={props.stand.relationships.stand_news}

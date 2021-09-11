@@ -45,7 +45,7 @@ const StandPictures = (props: any): React.ReactElement => {
   };
 
   return (
-    <div className='StandPictures'>
+    <div className='StandPictures z-depth-2'>
       <Swiper
         className='Swiper'
         autoplay={true}

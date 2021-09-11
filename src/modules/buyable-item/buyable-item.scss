@@ -1,0 +1,53 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.BuyableItem {
+  margin-bottom: 20px;
+
+  &__card {
+    padding-bottom: 10px;
+    transition: all 0.5s;
+    @extend .z-depth-1;
+  }
+
+  &__card:hover {
+    @extend .z-depth-3;
+  }
+
+  &__image {
+    width: 100%;
+    height: 250px;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 10px;
+  }
+
+  &__discount {
+    position: relative;
+    float: right;
+    padding: 5px 10px;
+    margin-top: 10px;
+  }
+  
+
+  &__price,
+  &__title {
+    padding: 0 10px 5px;
+  }
+
+  &__price {
+    font-size: 1.3em;
+  }
+
+  &__title {
+    font-size: $regular-text;
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .BuyableItem {
+    &__price {
+      font-size: 1.6em;
+    }
+  }
+}
