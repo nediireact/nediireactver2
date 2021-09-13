@@ -5,31 +5,45 @@ import React, {
 import fetchData from 'src/modules/utils/fetch-data';
 import BuyableItem from 'src/modules/buyable-item/buyable-item';
 import 'src/modules/stand-detail/meals/stand-meals-grid.scss';
-
-const standMeals: any[] = [];
+import 'nouislider/dist/nouislider.css';
+import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import ClassificationComponent from 'src/modules/stand-detail/meals/stand-meal-classification-filter';
+import AddOnsComponent from 'src/modules/stand-detail/meals/stand-meal-add-on-filter';
+// import PriceComponent from 'src/modules/stand-detail/meals/stand-meal-price-filter';
 
 const StandMeals = (props: any): React.ReactElement => {
-  const [meals, setMeals] = useState(standMeals);
-  const [classifications, setClassifications] = useState([]);
+  const [meals, setMeals] = useState([]);
   const baseURL = `meals/?filter[stand]=${props.standId}&include=classification,meal_addons`;
-  const [url, setURL] = useState(baseURL);
-  const activeClassifications: string[] = [];
+  const [classifications, setClassifications] = useState([]);
+  const [activeClassifications, setActiveClassifications]: any[] = useState([]);
+  const [addOns, setAddOns] = useState([]);
+  const [activeAddOn, setActiveAddOn] = useState(null);
+  // const [maxPrice, setMaxPrice] = useState(0);
 
-  const refreshData = (e: any) => {
-    const value: string = e.target.value;
-    const add: boolean = e.target.checked ? true : false;
-    if ( add ) {
-      activeClassifications.push(value);
-    } else {
-      const index = activeClassifications.indexOf(value);
-      activeClassifications.slice(index, 1);
+  const updateItems = ( updates: any ) => {
+    let addOn = activeAddOn;
+    if ( updates.addOn || updates.addOn === 0 ) {
+      addOn = updates.addOn;
+      if ( updates.addOn === 0 ) {
+        updates.addOn = null;
+        addOn = null;
+      }
+      setActiveAddOn(addOn);
     }
-    console.log('>>>>>>> activeClassifications', activeClassifications, activeClassifications.join(','));
-    fetchData(`${baseURL}&filter[classification]=1`)
+    if ( updates.classifications ) setActiveClassifications(updates.classifications);
+    const classifications = updates.classifications ? updates.classifications : activeClassifications;
+    const classificationFilter = classifications.length ? `&filter[classification__in]=${classifications.join(',')}` : '';
+    const addOnFilter = addOn ? `&filter[meal_addons]=${addOn}` : '';
+    const url = `${baseURL}${classificationFilter}${addOnFilter}`;
+    console.log(
+      'URL:', url,
+      'classifications', classifications,
+      'addOn', addOn
+    );
+    fetchData(url)
       .then((response: any) => {
-        console.log('meals', standMeals, response, meals);
-        setMeals(response.data);
-        setClassifications(response.included.filter((i: any) => i.type === 'MealClassification'));
+        const meals = response.data;
+        setMeals(meals);
       })
       .catch((error) => {
         console.log('Hubo un error', error);
@@ -37,35 +51,44 @@ const StandMeals = (props: any): React.ReactElement => {
   };
 
   useEffect(() => {
-    setURL(baseURL);
-    fetchData(url)
+    fetchData(baseURL)
       .then((response: any) => {
-        console.log('meals', standMeals, response, meals);
-        setMeals(response.data);
-        setClassifications(response.included.filter((i: any) => i.type === 'MealClassification'));
+        const meals = response.data;
+        // let max = 0;
+        for (let i = 0; i < meals.length; i++) {
+          const element = meals[i];
+          const final_price = element.attributes.final_price;
+          console.log('final_price:', i, final_price);
+          // max += Number(final_price);
+        }
+        // max += 10;
+        // setMaxPrice(max);
+        setMeals(meals);
       })
-      .catch((error) => {
-        console.log('Hubo un error', error);
-      });
+      .catch((error) => console.log('Hubo un error', error));
+    fetchData('meal-classifications/')
+      .then((response: any) => setClassifications(response.data))
+      .catch((error) => console.log('Hubo un error', error));
+    fetchData('meal-addons/')
+      .then((response: any) => setAddOns(response.data))
+      .catch((error) => console.log('Hubo un error', error));
   }, [fetchData]);
 
   return (
     <>
-    <div className='col s12 m4 StandFilters'>
-      <span className='StandFilters__title'>Clasificaciones</span>
-      {
-        classifications && classifications.length ?
-          classifications.map((i: any, index: number) => {
-            return (
-              <label
-                className='StandFilters__classification'
-                key={index}>
-                <input type='checkbox' value={i.id} onChange={refreshData}/>
-                <span>{i.attributes.title}</span>
-              </label>
-            );
-          }) : null
-      }
+    <div className='col s12 m4'>
+      <div className='StandFilters'>
+        <ClassificationComponent
+          classifications={classifications}
+          activeClassifications={activeClassifications}
+          updateItems={updateItems} />
+        {/* <HorizontalSpace size='small' />
+        <PriceComponent items={meals} maxPrice={maxPrice} setMaxPrice={setMaxPrice} /> */}
+        <HorizontalSpace size='small' />
+        <AddOnsComponent
+          addOns={addOns}
+          updateItems={updateItems} />
+      </div>
     </div>
     {
       meals && meals.length ?
@@ -73,13 +96,10 @@ const StandMeals = (props: any): React.ReactElement => {
         {
           meals.map((i: any, index: number) => {
             return (
-              <BuyableItem
-                key={index}
-                size='col s12 m4'
+              <BuyableItem key={index} size='col s12 m4' truncate={true}
                 colorCard='white'
                 item={i.attributes}
-                standSlug={props.standSlug}
-                truncate={true} />
+                standSlug={props.standSlug} />
             );
           })
         }
