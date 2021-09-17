@@ -89,6 +89,12 @@ const standData = {
           slug: ''
         }
       }]
+    },
+    stand_booking_questions: {
+      data: []
+    },
+    survey_questions: {
+      data: []
     }
   }
 };
@@ -99,7 +105,7 @@ const StandDetailComponent = (): React.ReactElement => {
   const [stand, setStand] = useState(standData);
 
   useEffect(() => {
-    fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones,ratings,pictures,expo,group,stand_news`)
+    fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones,ratings,pictures,expo,group,stand_news,stand_booking_questions,stand_booking_questions.options,survey_questions`)
       .then((response: any) => {
         if (response.data.length === 0) {
           console.log('Error, stand no existe');
