@@ -14,6 +14,8 @@ import * as M from 'materialize-css';
 import QRCodeComponent from 'src/modules/stand-detail/stand-qr';
 import StandGridNews from 'src/modules/stand-detail/news/stand-grid-news';
 import StandMeals from 'src/modules/stand-detail/meals/stand-meals-grid';
+import StandBookingQuestions from 'src/modules/stand-detail/booking-questions/stand-booking-questions';
+import StandSurveyQuestion from 'src/modules/stand-detail/stand-components/stand-survey-questions';
 
 const StandContent = (props: any): React.ReactElement => {
   const tabsComponentRef: any = useRef(null);
@@ -34,6 +36,7 @@ const StandContent = (props: any): React.ReactElement => {
           <li className='tab col s3'><a href='#test5'>Comidas</a></li>
           <li className='tab col s3'><a href='#test6'>Noticias</a></li>
           <li className='tab col s3'><a href='#test7'>Reservaciones</a></li>
+          <li className='tab col s3'><a href='#test8'>Encuestas</a></li>
         </ul>
         <div id='test1' className='col s12 row'>
           <div className='col s12 m8 Stand__main-container'>
@@ -69,7 +72,12 @@ const StandContent = (props: any): React.ReactElement => {
             stand_slug={props.stand.attributes.slug}
             size='col s12 m4' />
         </div>
-        <div id='test7' className='col s12'>Reservaciones</div>
+        <div id='test7' className='col s12'>
+          <StandBookingQuestions questions={props.stand.relationships.stand_booking_questions}/>
+        </div>
+        <div id='test8' className='col s12'>
+          <StandSurveyQuestion survey={props.stand.relationships.survey_questions}/>
+        </div>
       </div>
     </div>
   );

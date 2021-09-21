@@ -12,7 +12,6 @@ const StandPhones = (props: any): React.ReactElement => {
             return (
             <TextWithIcon
               key={index}
-              element={element}
               color_item='white'
               use='tel:'
               link={element.attributes.phone}

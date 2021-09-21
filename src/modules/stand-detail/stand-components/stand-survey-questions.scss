@@ -1,0 +1,12 @@
+@import 'materialize-css';
+
+.StandSurveyQuestion {
+
+  &__question {
+    margin-top: 20px;
+  }
+
+  &__button {
+    padding: 2em;
+  }
+}
