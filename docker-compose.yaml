@@ -9,7 +9,7 @@ services:
       - REACT_APP_FACEBOOK_APP_ID=${REACT_APP_FACEBOOK_APP_ID}
       - REACT_APP_PRODUCTION=${REACT_APP_PRODUCTION}
     volumes:
-      - /nedii-web-app/staging/static:/static
-      - /nedii-web-app/staging/assets:/assets
+      - /nedii-web-app/${ENVT}/static:/static
+      - /nedii-web-app/${ENVT}/assets:/assets
     ports:
       - 4035:3000
