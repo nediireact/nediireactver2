@@ -109,15 +109,16 @@ const StandDetailComponent = (): React.ReactElement => {
       .then((response: any) => {
         if (response.data.length === 0) {
           console.log('Error, stand no existe');
-        } else {
-          const standData = response.data[0];
-          if (!standData) return history.replace('/');
-          console.log('standData', standData);
-          setStand(standData);
+          return history.replace('/');
         }
+        const standData = response.data[0];
+        if (!standData) return history.replace('/');
+        console.log('standData', standData);
+        setStand(standData);
       })
       .catch((error) => {
         console.log('Hubo un error', error);
+        return history.replace('/');
       });
   }, [fetchData]);
 

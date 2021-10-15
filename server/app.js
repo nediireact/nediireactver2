@@ -1,21 +1,15 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 require('dotenv').config();
-const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
 // const fetchData = require('./fetch-data');
 
-
-const port = process.env.NODEJS_PORT;
+const port = 3000;
 const app = express();
-const pwd = __dirname.split(path.sep);
-pwd.pop();
-const statics = `${pwd.join(path.sep)}/build/static`;
-const assets = `${pwd.join(path.sep)}/build/assets`;
 
-app.use('/static', express.static(statics));
-app.use('/assets', express.static(assets));
+app.use('/static', express.static('/static'));
+app.use('/assets', express.static('/assets'));
 
 const hbs = exphbs.create({
   helpers: {

@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  nedii-web-app:
+    image: longmont.iguzman.com.mx:5000/nedii-web-app:latest
+    restart: unless-stopped
+    environment:
+      - REACT_APP_API_URL=${REACT_APP_API_URL}
+      - REACT_APP_BRANCH_NAME=${REACT_APP_BRANCH_NAME}
+      - REACT_APP_FACEBOOK_APP_ID=${REACT_APP_FACEBOOK_APP_ID}
+      - REACT_APP_PRODUCTION=${REACT_APP_PRODUCTION}
+    volumes:
+      - /nedii-web-app/staging/static:/static
+      - /nedii-web-app/staging/assets:/assets
+    ports:
+      - 4035:3000
