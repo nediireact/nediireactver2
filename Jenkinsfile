@@ -52,6 +52,7 @@ pipeline {
         }
         stage("Restart instance") {
             steps {
+                sh "sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER sshpass -p $SERVER_PASSWORD sudo docker-compose --env-file /config/$APP_FOLDER/$ENVT/env -f /config/$APP_FOLDER/$ENVT/docker-compose.yaml pull"
                 sh "sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER sshpass -p $SERVER_PASSWORD sudo docker-compose -f /config/$APP_FOLDER/$ENVT/docker-compose.yaml down"
                 sh "sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER sshpass -p $SERVER_PASSWORD sudo docker-compose --env-file /config/$APP_FOLDER/$ENVT/env -f /config/$APP_FOLDER/$ENVT/docker-compose.yaml up -d"
             }
