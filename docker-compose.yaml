@@ -12,4 +12,4 @@ services:
       - /nedii-web-app/${ENVT}/static:/static
       - /nedii-web-app/${ENVT}/assets:/assets
     ports:
-      - 4035:3000
+      - "${PUBLIC_PORT}:3000"
