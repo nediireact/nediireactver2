@@ -5,6 +5,7 @@ pipeline {
     }
     environment {
         APP_FOLDER = "nedii-web-app"
+        COMPOSE_PROJECT_NAME = "$APP_FOLDER"
         REACT_APP_API_URL = sh(script: "echo ${API_URL}", , returnStdout: true).trim()
         REACT_APP_BRANCH_NAME = sh(script: "echo ${branchName}", , returnStdout: true).trim()
         REACT_APP_FACEBOOK_APP_ID = sh(script: "echo ${facebookAppID}", , returnStdout: true).trim()
@@ -53,7 +54,7 @@ pipeline {
         stage("Restart instance") {
             steps {
                 sh "sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER sshpass -p $SERVER_PASSWORD sudo docker-compose --env-file /config/$APP_FOLDER/$ENVT/env -f /config/$APP_FOLDER/$ENVT/docker-compose.yaml pull"
-                sh "sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER sshpass -p $SERVER_PASSWORD sudo docker-compose --env-file /config/$APP_FOLDER/$ENVT/env -f /config/$APP_FOLDER/$ENVT/docker-compose.yaml down"
+                sh "sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER sshpass -p $SERVER_PASSWORD sudo docker-compose --env-file /config/$APP_FOLDER/$ENVT/env -f /config/$APP_FOLDER/$ENVT/docker-compose.yaml down --remove-orphans -f"
                 sh "sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER sshpass -p $SERVER_PASSWORD sudo docker-compose --env-file /config/$APP_FOLDER/$ENVT/env -f /config/$APP_FOLDER/$ENVT/docker-compose.yaml up -d"
             }
         }
