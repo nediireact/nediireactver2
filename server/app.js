@@ -38,7 +38,9 @@ const commonIndex = (req, res) => {
   });
 };
 
-app.get('/', commonIndex);
+app.get('/terminos-y-condiciones', commonIndex);
+app.get('/politica-de-privacidad', commonIndex);
+app.get('/uso-de-datos-de-usuario', commonIndex);
 app.get('/changelog', commonIndex);
 app.get('/about', commonIndex);
 app.get('/create-account', commonIndex);
@@ -51,6 +53,7 @@ app.get('/expos/:expoId/:groupId', commonIndex);
 app.get('/stand/:standId', commonIndex);
 app.get('/stand/:standId/news/:standNewsId', commonIndex);
 app.get('/stand/:standId/meals/:mealId', commonIndex);
+app.get('/', commonIndex);
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}!`);

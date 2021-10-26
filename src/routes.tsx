@@ -20,6 +20,11 @@ import GroupDetail from 'src/pages/group-detail/group-detail';
 import StandDetail from 'src/pages/stand-detail/stand-detail';
 import StandNewsDetail from 'src/pages/stand-news-detail/stand-news-detail';
 import StandMealDetail from 'src/pages/stand-meal-detail/stand-meal-detail';
+import {
+  TermsAndConditions,
+  PrivacyPolicy,
+  UserData
+} from 'src/pages/terms-and-conditions/terms-and-conditions';
 
 const env = EnvironmentVariables.getInstance();
 const isMobileApp = env.isMobileApp;
@@ -81,6 +86,21 @@ const Routes = (): React.ReactElement => {
         <Route path='/changelog'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><ChangeLogPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/terminos-y-condiciones'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><TermsAndConditions /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/politica-de-privacidad'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><PrivacyPolicy /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/uso-de-datos-de-usuario'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserData /></PersistGate>
           </Provider>
         </Route>
         <Route path='/'>
