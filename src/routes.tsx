@@ -33,7 +33,12 @@ const Routes = (): React.ReactElement => {
   return (
     <Router forceRefresh={!isMobileApp}>
       <Switch>
-        <Route path="/stand/:standId/meals/:mealId">
+        <Route path="/stand/:standId/producto/:mealId">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><StandMealDetail /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path="/stand/:standId/platillo/:mealId">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandMealDetail /></PersistGate>
           </Provider>

@@ -98,6 +98,7 @@ const StandMeals = (props: any): React.ReactElement => {
             return (
               <BuyableItem key={index} size='col s12 m4' truncate={true}
                 colorCard='white'
+                type='platillo'
                 item={i.attributes}
                 standSlug={props.standSlug} />
             );

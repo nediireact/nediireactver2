@@ -52,7 +52,8 @@ app.get('/expos/:expoId', commonIndex);
 app.get('/expos/:expoId/:groupId', commonIndex);
 app.get('/stand/:standId', commonIndex);
 app.get('/stand/:standId/news/:standNewsId', commonIndex);
-app.get('/stand/:standId/meals/:mealId', commonIndex);
+app.get('/stand/:standId/platillo/:mealId', commonIndex);
+app.get('/stand/:standId/producto/:mealId', commonIndex);
 app.get('/', commonIndex);
 
 app.listen(port, () => {

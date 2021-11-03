@@ -16,6 +16,7 @@ import StandGridNews from 'src/modules/stand-detail/news/stand-grid-news';
 import StandMeals from 'src/modules/stand-detail/meals/stand-meals-grid';
 import StandBookingQuestions from 'src/modules/stand-detail/booking-questions/stand-booking-questions';
 import StandSurveyQuestion from 'src/modules/stand-detail/stand-components/stand-survey-questions';
+import StandProducts from 'src/modules/products/products';
 
 const StandContent = (props: any): React.ReactElement => {
   const tabsComponentRef: any = useRef(null);
@@ -49,13 +50,23 @@ const StandContent = (props: any): React.ReactElement => {
               title='Contacto'
               phones={props.stand.relationships.phones} />
             <HorizontalSpace size='small' />
-            <StandOwnerInfo owner={props.stand.relationships.owner.data.attributes} />
+            {
+              props.stand.relationships.owner.data.attributes ?
+                <StandOwnerInfo owner={props.stand.relationships.owner.data.attributes} /> : null
+            }
             <HorizontalSpace size='small' />
             <ExpoItem item={props.stand.relationships.expo.data}/>
             <GroupItem item={props.stand.relationships.group.data}/>
           </div>
         </div>
-        <div id='test2' className='col s12'>Productos</div>
+        <div id='test2' className='col s12 row'>
+        {
+          props.stand && props.stand.id ?
+            <StandProducts
+              standId={props.stand.id}
+              standSlug={props.stand.attributes.slug} /> : null
+        }
+        </div>
         <div id='test3' className='col s12'>Servicios</div>
         <div id='test4' className='col s12'>Autos</div>
         <div id='test5' className='col s12 row'>
