@@ -20,6 +20,10 @@ import StandProducts from 'src/modules/products/products';
 
 const StandContent = (props: any): React.ReactElement => {
   const tabsComponentRef: any = useRef(null);
+  const news = props.stand.relationships.stand_news;
+  const numProducts = props.stand.meta.products;
+  const numMeals = props.stand.meta.meals;
+
   useEffect(() => {
     M.Tabs.init(tabsComponentRef, {
       swipeable: true
@@ -31,11 +35,11 @@ const StandContent = (props: any): React.ReactElement => {
       <div className='container'>
         <ul className='tabs Stand__tabs' ref={tabsComponentRef}>
           <li className='tab col s3'><a href='#test1' className='active'>Inicio</a></li>
-          <li className='tab col s3'><a href='#test2'>Productos</a></li>
-          <li className='tab col s3'><a href='#test3'>Servicios</a></li>
-          <li className='tab col s3'><a href='#test4'>Autos</a></li>
-          <li className='tab col s3'><a href='#test5'>Comidas</a></li>
-          <li className='tab col s3'><a href='#test6'>Noticias</a></li>
+          { numProducts ? <li className='tab col s3'><a href='#products'>Productos ({numProducts})</a></li> : null }
+          {/* { numServices ? <li className='tab col s3'><a href='#test3'>Servicios</a></li> : null } */}
+          {/* <li className='tab col s3'><a href='#test4'>Autos</a></li> */}
+          { numMeals ? <li className='tab col s3'><a href='#meals'>Menu ({numMeals})</a></li> : null }
+          { news.length ? <li className='tab col s3'><a href='#news'>Noticias</a></li> : null }
           <li className='tab col s3'><a href='#test7'>Reservaciones</a></li>
           <li className='tab col s3'><a href='#test8'>Encuestas</a></li>
         </ul>
@@ -59,7 +63,7 @@ const StandContent = (props: any): React.ReactElement => {
             <GroupItem item={props.stand.relationships.group.data}/>
           </div>
         </div>
-        <div id='test2' className='col s12 row'>
+        <div id='products' className='col s12 row'>
         {
           props.stand && props.stand.id ?
             <StandProducts
@@ -67,9 +71,9 @@ const StandContent = (props: any): React.ReactElement => {
               standSlug={props.stand.attributes.slug} /> : null
         }
         </div>
-        <div id='test3' className='col s12'>Servicios</div>
-        <div id='test4' className='col s12'>Autos</div>
-        <div id='test5' className='col s12 row'>
+        {/* <div id='test3' className='col s12'>Servicios</div>
+        <div id='test4' className='col s12'>Autos</div> */}
+        <div id='meals' className='col s12 row'>
         {
           props.stand && props.stand.id ?
             <StandMeals
@@ -77,9 +81,9 @@ const StandContent = (props: any): React.ReactElement => {
               standSlug={props.stand.attributes.slug} /> : null
         }
         </div>
-        <div id='test6' className='col s12'>
+        <div id='news' className='col s12'>
           <StandGridNews
-            news={props.stand.relationships.stand_news}
+            news={news}
             stand_slug={props.stand.attributes.slug}
             size='col s12 m4' />
         </div>

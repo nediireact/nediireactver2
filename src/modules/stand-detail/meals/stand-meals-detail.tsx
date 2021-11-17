@@ -64,7 +64,6 @@ const StandMealsDetail = (): React.ReactElement => {
       } else {
         const mealsData = response.data[0];
         if (!mealsData) return history.replace('/');
-        console.log('mealsData', mealsData);
         setmeals(mealsData);
       }
     })

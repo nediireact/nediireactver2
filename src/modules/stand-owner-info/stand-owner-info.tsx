@@ -1,5 +1,5 @@
 import React from 'react';
-import 'src/modules/stand-detail/stand-detail.scss';
+// import 'src/modules/stand-detail/stand-detail.scss';
 import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
 
 const StandOwnerInfo = (props: any): React.ReactElement => {

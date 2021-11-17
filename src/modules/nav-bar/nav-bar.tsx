@@ -12,12 +12,13 @@ import { useDispatch } from 'react-redux';
 
 const logoFile = '/assets/logo.jpg';
 
-const NavBar = (): React.ReactElement => {
+const NavBar = (props: any): React.ReactElement => {
   const dispatch = useDispatch();
   const system = useSelector((state: any) => state.system);
   const prefix = system.platform.prefix;
   const logoURL = `${prefix}${logoFile}`;
   const sideNavRef: any = useRef(null);
+  const sectionMenu = props.sectionMenu || [];
 
   const closeSideNav = () => {
     const sideNav = M.Sidenav.getInstance(sideNavRef.current);
@@ -34,20 +35,18 @@ const NavBar = (): React.ReactElement => {
       <div className='navbar-fixed'>
         <nav className='white black-text'>
           <div className='nav-wrapper container'>
-            <Link
-              to='/'
-              className='brand-logo Logo'
+            <Link to='/' className='brand-logo Logo'
               style={{
                 backgroundImage: `url(${logoURL})`
               }}>
             </Link>
-            <a href='#'
-              data-target='mobile-demo'
-              className='sidenav-trigger cyan-text'>
+            <a href='#' data-target='mobile-demo' className='sidenav-trigger cyan-text'>
               <i className='material-icons'>menu</i>
             </a>
             <ul id='nav-mobile' className='right hide-on-med-and-down Menu'>
-              <MenuItems logout={logout} />
+              <MenuItems
+                logout={logout}
+                sectionMenu={sectionMenu} />
             </ul>
           </div>
         </nav>

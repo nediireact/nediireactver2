@@ -20,7 +20,7 @@ const StandRatings = (props: any): React.ReactElement => {
     modal.close();
   };
 
-  const ratings: any[] = props.ratings;
+  const ratings: any[] = props.ratings || [];
   let score = 0;
   if ( ratings.length > 1 ) {
     for (let i = 0; i < ratings.length; i++) {
