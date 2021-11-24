@@ -7,7 +7,6 @@ import {
   useParams
 } from 'react-router-dom';
 import fetchData from 'src/modules/utils/fetch-data';
-// import 'src/modules/stand-detail/stand-detail.scss';
 import StandHeader from 'src/modules/stand-header/stand-header';
 import CommonLargeText from 'src/modules/stand-detail/stand-common-large-text';
 import standData from 'src/modules/stand/stand-data';
