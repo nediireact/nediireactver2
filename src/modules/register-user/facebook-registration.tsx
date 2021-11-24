@@ -71,29 +71,29 @@ const FacebookRegistration = ( porps: any ): React.ReactElement => {
           const facebookImage = canvas.toDataURL('image/png');
           newUserPayload.data.attributes.img_picture = facebookImage;
           RegisterUserAPICall(newUserPayload, true)
-          .then((response: any) => {
-            dispatch(SetUserData(response));
-            porps.setIsLoading(false);
-            setModalSuccess(true);
-            setModalTitle('Cuenta creada');
-            setModaMessage(`<b>${newUserPayload.data.attributes.first_name}</b>, su cuenta de Nedii ha sido creada exitosamente.<br/><br/>
-              Usted sera loggeado automaticamente.`);
-            modal.open();
-          })
-          .catch((error: any) => {
-            porps.setIsLoading(false);
-            setModalSuccess(false);
-            setModalTitle('Error');
-            if ( !error.response ) {
-              setModaMessage(`<b>${newUserPayload.data.attributes.first_name}</b>, ha sucedido un error creando su cuenta de Nedii.<br/><br/>Errores:<ol><li>Error enviando informacion al servidor</li></ol>
-              Por favor contacte al equipo tecnico de Nedii mencionando el codigo: <b>"Error de conexion con el servidor"</b>.`);
-              return modal.open();
-            }
-            const errorMessages = ArrayErrorsToHTMLList(error.response.data.errors);
-            setModaMessage(`<b>${newUserPayload.data.attributes.first_name}</b>, ha sucedido un error creando su cuenta de Nedii.<br/><br/>Errores:<ol>${errorMessages}</ol>
-              Si esta seguro de que los datos son correctos, por favor contacte al equipo tecnico de Nedii mencionando el codigo: <b>"${error.response.statusText} - ${error.response.status}"</b>.`);
-            modal.open();
-          });
+            .then((response: any) => {
+              dispatch(SetUserData(response));
+              porps.setIsLoading(false);
+              setModalSuccess(true);
+              setModalTitle('Cuenta creada');
+              setModaMessage(`<b>${newUserPayload.data.attributes.first_name}</b>, su cuenta de Nedii ha sido creada exitosamente.<br/><br/>
+                Usted sera loggeado automaticamente.`);
+              modal.open();
+            })
+            .catch((error: any) => {
+              porps.setIsLoading(false);
+              setModalSuccess(false);
+              setModalTitle('Error');
+              if ( !error.response ) {
+                setModaMessage(`<b>${newUserPayload.data.attributes.first_name}</b>, ha sucedido un error creando su cuenta de Nedii.<br/><br/>Errores:<ol><li>Error enviando informacion al servidor</li></ol>
+                Por favor contacte al equipo tecnico de Nedii mencionando el codigo: <b>"Error de conexion con el servidor"</b>.`);
+                return modal.open();
+              }
+              const errorMessages = ArrayErrorsToHTMLList(error.response.data.errors);
+              setModaMessage(`<b>${newUserPayload.data.attributes.first_name}</b>, ha sucedido un error creando su cuenta de Nedii.<br/><br/>Errores:<ol>${errorMessages}</ol>
+                Si esta seguro de que los datos son correctos, por favor contacte al equipo tecnico de Nedii mencionando el codigo: <b>"${error.response.statusText} - ${error.response.status}"</b>.`);
+              modal.open();
+            });
         }, 1700);
       })
       .catch((error) => {

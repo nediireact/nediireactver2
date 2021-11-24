@@ -24,12 +24,7 @@ const standData = {
   },
   relationships: {
     phones: {
-      data: [{
-        id: 0,
-        attributes: {
-          phone: ''
-        }
-      }]
+      data: []
     },
     ratings: {
       data: []
@@ -96,10 +91,14 @@ const standData = {
     survey_questions: {
       data: []
     }
+  },
+  meta: {
+    meals: 0,
+    products: 0
   }
 };
 
-const StandDetailComponent = (): React.ReactElement => {
+const StandDetailComponent = (props: any): React.ReactElement => {
   const history = useHistory();
   const params: any = useParams();
   const [stand, setStand] = useState(standData);
@@ -114,6 +113,20 @@ const StandDetailComponent = (): React.ReactElement => {
         const standData = response.data[0];
         if (!standData) return history.replace('/');
         console.log('standData', standData);
+        const menu: any[] = [];
+        if ( standData.meta.meals ) {
+          menu.push({
+            to: `/stand/${standData.attributes.slug}/platillos`,
+            text: 'Platillos'
+          });
+        }
+        if ( standData.meta.products ) {
+          menu.push({
+            to: `/stand/${standData.attributes.slug}/productos`,
+            text: 'Productos'
+          });
+        }
+        props.setSectionMenu(menu);
         setStand(standData);
       })
       .catch((error) => {
@@ -132,7 +145,7 @@ const StandDetailComponent = (): React.ReactElement => {
         restaurant={stand.attributes.restaurant}
         slogan={stand.attributes.slogan}
         ratings={stand.relationships.ratings.data} />
-      <StandContent stand={stand}/>
+      <StandContent stand={stand} />
     </div>
   );
 };

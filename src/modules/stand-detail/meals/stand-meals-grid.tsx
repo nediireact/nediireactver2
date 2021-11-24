@@ -54,15 +54,15 @@ const StandMeals = (props: any): React.ReactElement => {
     fetchData(baseURL)
       .then((response: any) => {
         const meals = response.data;
-        // let max = 0;
-        for (let i = 0; i < meals.length; i++) {
-          const element = meals[i];
-          const final_price = element.attributes.final_price;
-          console.log('final_price:', i, final_price);
-          // max += Number(final_price);
-        }
-        // max += 10;
-        // setMaxPrice(max);
+        // // let max = 0;
+        // for (let i = 0; i < meals.length; i++) {
+        //   const element = meals[i];
+        //   const final_price = element.attributes.final_price;
+        //   console.log('final_price:', i, final_price);
+        //   // max += Number(final_price);
+        // }
+        // // max += 10;
+        // // setMaxPrice(max);
         setMeals(meals);
       })
       .catch((error) => console.log('Hubo un error', error));
@@ -98,6 +98,7 @@ const StandMeals = (props: any): React.ReactElement => {
             return (
               <BuyableItem key={index} size='col s12 m4' truncate={true}
                 colorCard='white'
+                type='platillo'
                 item={i.attributes}
                 standSlug={props.standSlug} />
             );

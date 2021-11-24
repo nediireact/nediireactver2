@@ -1,5 +1,5 @@
 import React from 'react';
-import 'src/modules/stand-detail/stand-detail.scss';
+// import 'src/modules/stand-detail/stand-detail.scss';
 import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
 
 const StandPhones = (props: any): React.ReactElement => {
@@ -8,7 +8,7 @@ const StandPhones = (props: any): React.ReactElement => {
       <div className='Stand__phones-title'>{props.title}</div>
       <div className='Stand__phones-row row'>
         {
-          props.phones.data.map((element: any, index: number) => {
+          props.phones.map((element: any, index: number) => {
             return (
             <TextWithIcon
               key={index}

@@ -2,6 +2,25 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+const SectionMenu = (props: any): React.ReactElement => {
+  const data = props.data;
+  if ( !data || !Array.isArray(data) ) return <></>;
+  return (
+    <>{
+      data.map((i: any, index: number) => {
+        if ( !i.to || !i.text ) return null;
+        return (
+          <li key={index}>
+            <Link to={i.to} className='grey-text text-darken-3'>
+              {i.text}
+            </Link>
+          </li>
+        );
+      })
+    }</>
+  );
+};
+
 const MenuItems = ( props: any ): React.ReactElement => {
   const userData = useSelector((state: any) => state.user);
   const user = userData && userData.user && userData.user.attributes ?
@@ -17,13 +36,14 @@ const MenuItems = ( props: any ): React.ReactElement => {
           backgroundImage: `url(${props.logo})`
         }}></em>
       </li>
-      <li>
-        <Link
-          to='/expos'
-          className='grey-text text-darken-3'>
+      {
+        props.sectionMenu ? <SectionMenu data={props.sectionMenu} /> : null
+      }
+      {/* <li>
+        <Link to='/expos' className='grey-text text-darken-3'>
           Expos
         </Link>
-      </li>
+      </li> */}
       {
         userData && userData.user ?
         <>

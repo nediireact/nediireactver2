@@ -21,8 +21,12 @@ const modelInterface = {
 const loginPayload = {
   data: {
     type: 'login',
+    first_name: '',
+    last_name: '',
+    username: '',
     email: '',
-    password: ''
+    password: '',
+    img_picture: ''
   }
 };
 
@@ -43,7 +47,11 @@ const FacebookLoginComponent = ( porps: any ): React.ReactElement => {
     const accessToken = response.accessToken;
     const userID = response.userID;
     if ( !userID || !accessToken || !response.email ) return porps.setIsLoading(false);
+    const name = response.name ? response.name.split(' ') : [];
+    loginPayload.data.first_name = name.length && name[0] ? name[0] : '';
+    loginPayload.data.last_name = name.length && name[1] ? name[1] : '';
     loginPayload.data.email = response.email;
+    loginPayload.data.username = `SN-${response.email}`;
     loginPayload.data.password = userID;
     LoginUserAPICall(loginPayload)
       .then((response) => {

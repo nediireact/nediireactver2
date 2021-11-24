@@ -21,6 +21,16 @@ $icons-size: 2.3em;
 $white: white;
 $fruit-salad: #4CAF50;
 
+$regular-border-radius: 8px;
+
 .lemon-black {
   background-color: #000103;
+}
+
+.GenericCard {
+  padding: 10px;
+  width: 100%;
+  border-radius: $regular-border-radius;
+  transition: all 0.5s;
+  @extend .z-depth-1;
 }
