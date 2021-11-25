@@ -6,13 +6,10 @@
   flex-direction: row;
   justify-content: center;
   border-radius: 5px;
-  padding: 10px;
+  padding: 10px !important;
   transition: all 0.5s;
+  width: 100%;
   @extend .z-depth-1;
-
-  // &__item:hover {
-  //   @extend .z-depth-3;
-  // }
 
   i {
     font-size: 1.5em;
@@ -21,5 +18,10 @@
 
   span {
     font-size: 1em;
+    word-break: normal;
   }
+}
+
+.TextWithIcon:hover {
+  @extend .z-depth-3;
 }
