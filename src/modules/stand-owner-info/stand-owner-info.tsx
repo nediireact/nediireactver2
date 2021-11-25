@@ -34,47 +34,40 @@ const StandOwnerInfo = (props: any): React.ReactElement => {
           <div className='row StandOwnerInfo__contact-data'>
           {
             profile.owner_office_phone ?
-              <TextWithIcon
-                link={`tel:${profile.owner_office_phone}`}
-                className='col s12 xl6 red'
-                color_icon='green-text' icon='call'
-                text={props.owner.profile.owner_office_phone} /> : null
+              <div className='col s12 xl6'>
+                <TextWithIcon
+                  link={`tel:+521${profile.owner_office_phone}`}
+                  color_icon='green-text' icon='call'
+                  text={props.owner.profile.owner_office_phone} />
+              </div> : null
           }
           {
             profile.owner_whatsapp ?
-              <TextWithIcon
-                color_item='white'
-                use='https://wa.me/'
-                link={profile.owner_whatsapp}
-                size='col s12 xl6'
-                color_icon='green-text'
-                icon='whatsapp'
-                text_color='grey-text text-darken-4'
-                text={props.owner.profile.owner_whatsapp}/> : null
+              <div className='col s12 xl6'>
+                <TextWithIcon
+                  link={`https://wa.me/+521${profile.owner_whatsapp}`}
+                  color_icon='green-text' icon='whatsapp'
+                  text={props.owner.profile.owner_whatsapp}/>
+              </div> : null
           }
           {
             profile.owner_email ?
-              <TextWithIcon
-                color_item='white'
-                use='mailto:'
-                link={profile.owner_email}
-                size='col s12'
-                color_icon='red-text'
-                icon='mail_outline'
-                text_color='grey-text text-darken-4'
-                text={profile.owner_email}
-                truncate='truncate'/> : null
+              <div className='col s12'>
+                <TextWithIcon
+                  link={`mailto:${profile.owner_email}`}
+                  color_icon='red-text' icon='mail_outline'
+                  text={profile.owner_email}
+                  truncate={true} />
+              </div> : null
           }
           {
             profile.owner_address ?
-              <TextWithIcon
-                color_item='white'
-                use='https://www.google.com/maps?q='
-                link={profile.owner_address}
-                size='col s12'
-                icon='location_on'
-                text_color='grey-text text-darken-4'
-                text={profile.owner_address}/> : null
+              <div className='col s12'>
+                <TextWithIcon
+                  link={`https://www.google.com/maps?q=${profile.owner_address}`}
+                  icon='location_on' color_icon='red-text'
+                  text={profile.owner_address}/>
+              </div> : null
           }
           </div>
         : null

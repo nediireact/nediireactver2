@@ -14,7 +14,7 @@ import standData from 'src/modules/stand/stand-data';
 import StandPictures from 'src/modules/stand-detail/stand-pictures';
 import QRCodeComponent from 'src/modules/stand-detail/stand-qr';
 
-import StandPhones from 'src/modules/stand-detail/stand-phones';
+import StandContactInfo from 'src/modules/stand-contact-info/stand-contact-info';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import StandOwnerInfo from 'src/modules/stand-owner-info/stand-owner-info';
 import ExpoItem from 'src/modules/expo-grid/expo-item';
@@ -26,7 +26,7 @@ const StandComponent = (props: any): React.ReactElement => {
   const [stand, setStand] = useState(standData);
 
   useEffect(() => {
-    fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones,ratings,pictures,expo,group,stand_news,stand_booking_questions,stand_booking_questions.options,survey_questions`)
+    fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones,ratings,pictures,expo,group,stand_news,stand_booking_questions,stand_booking_questions.options,survey_questions,city,city.state,city.state.country`)
       .then((response: any) => {
         if (response.data.length === 0) {
           return history.replace('/');
@@ -71,8 +71,11 @@ const StandComponent = (props: any): React.ReactElement => {
         <div className='col s12 m4'>
           {
             stand.relationships.phones.data.length ?
-              <StandPhones
+              <StandContactInfo
                 title='Contacto'
+                address={stand.attributes.address}
+                city={stand.relationships.city.data}
+                zip_code={stand.attributes.zip_code}
                 phones={stand.relationships.phones.data} /> : null
           }
           <HorizontalSpace size='small' />

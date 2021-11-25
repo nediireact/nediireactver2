@@ -1,15 +1,20 @@
 export const standData = {
   attributes: {
-    name: '',
-    slug: '',
-    img_cover: '',
-    img_logo: '',
-    contact_email: '',
-    restaurant: '',
-    description: '',
-    slogan: ''
+    name: null,
+    slug: null,
+    img_cover: null,
+    img_logo: null,
+    contact_email: null,
+    restaurant: null,
+    description: null,
+    slogan: null,
+    address: null,
+    zip_code: null
   },
   relationships: {
+    city: {
+      data: {}
+    },
     phones: {
       data: []
     },
@@ -22,17 +27,17 @@ export const standData = {
     owner: {
       data: {
         attributes: {
-          first_name: '',
-          last_name: '',
+          first_name: null,
+          last_name: null,
           profile: {
-            img_picture: '',
-            owner_address: '',
-            owner_email: '',
-            owner_office_phone: '',
-            owner_phone: '',
-            owner_position: '',
-            owner_position_description: '',
-            owner_whatsapp: ''
+            img_picture: null,
+            owner_address: null,
+            owner_email: null,
+            owner_office_phone: null,
+            owner_phone: null,
+            owner_position: null,
+            owner_position_description: null,
+            owner_whatsapp: null
           }
         }
       }
