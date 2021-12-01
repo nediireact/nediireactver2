@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import StrongText from 'src/modules/strong-text/strong-text';
+import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 
 const StandItem = (props: any): React.ReactElement => {
   const logo = props.item.attributes.img_logo;
@@ -14,12 +16,13 @@ const StandItem = (props: any): React.ReactElement => {
               className='StandItem__logo'
               style={{backgroundImage: `url(${logo})`}}></div>
           </div>
-          <div className='grey-text text-darken-4 truncate StandItem__title truncate'>
-            {props.item.attributes.name}
-          </div>
-          <span className='StandItem__slogan truncate grey-text text-darken-2'>
+          <HorizontalSpace size='medium'/>
+          <StrongText text={props.item.attributes.name}/>
+          { props.item.attributes.slogan ?
+            <span className='StandItem__slogan truncate grey-text text-darken-2'>
             {props.item.attributes.slogan}
-          </span>
+            </span> : null
+          }
         </div>
       </div>
     </Link>
