@@ -50,10 +50,10 @@ app.get('/activate/:token', commonIndex);
 app.get('/expos', commonIndex);
 app.get('/expos/:expoId', commonIndex);
 app.get('/expos/:expoId/:groupId', commonIndex);
-app.get('/stand/:standId', commonIndex);
-app.get('/stand/:standId/news/:standNewsId', commonIndex);
-app.get('/stand/:standId/platillo/:mealId', commonIndex);
-app.get('/stand/:standId/producto/:mealId', commonIndex);
+app.get('/empresa/:standId', commonIndex);
+app.get('/empresa/:standId/news/:standNewsId', commonIndex);
+app.get('/empresa/:standId/platillo/:mealId', commonIndex);
+app.get('/empresa/:standId/producto/:mealId', commonIndex);
 app.get('/', commonIndex);
 
 app.listen(port, () => {
