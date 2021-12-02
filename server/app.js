@@ -51,6 +51,8 @@ app.get('/expos', commonIndex);
 app.get('/expos/:expoId', commonIndex);
 app.get('/expos/:expoId/:groupId', commonIndex);
 app.get('/empresa/:standId', commonIndex);
+app.get('/empresa/:standId/menu', commonIndex);
+app.get('/empresa/:standId/productos', commonIndex);
 app.get('/empresa/:standId/news/:standNewsId', commonIndex);
 app.get('/empresa/:standId/platillo/:mealId', commonIndex);
 app.get('/empresa/:standId/producto/:mealId', commonIndex);
