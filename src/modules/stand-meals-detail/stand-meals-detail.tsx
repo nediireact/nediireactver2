@@ -10,11 +10,11 @@ import mealsData from 'src/modules/stand-meals-detail/meals-data';
 import HorizontalSpace from '../horizontal-space/horizontal-space';
 import StandPictures from '../stand-detail/stand-pictures';
 import CommonLargeText from '../stand-detail/stand-common-large-text';
-import SubTitle from 'src/modules/sub-title/sub-title';
-import TextWhitIconInfo from 'src/modules/text-with-icon/text-with-icon';
+import TextWhitIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
 import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
 import StandMealsAddons from 'src/modules/stand-meals-detail/stand-meals-addons';
 import 'src/modules/stand-meals-detail/stand-meals-detail.scss';
+import StrongText from 'src/modules/strong-text/strong-text';
 
 const StandMealsDetail = (): React.ReactElement => {
   const history = useHistory();
@@ -70,7 +70,7 @@ const StandMealsDetail = (): React.ReactElement => {
             {meal.attributes.discount > 0 ? <div className='StandDetailProduct__discount grey-text'>${meal.attributes.price}</div> : null}
             <span className='StandDetailProduct__price'>${meal.attributes.discount > 0 ? meal.attributes.final_price : meal.attributes.price}</span>
             {meal.attributes.discount > 0 ? <span className='StandDetailProduct__discountOff green-text'>{meal.attributes.discount}%Off</span> : null}
-            <SubTitle text='Tiempo de platillo'/>
+            <StrongText text='Tiempo de platillo'/>
             <TextWhitIconInfo
               apiInfo={meal.attributes.is_breakfast}
               text='Desayuno'
@@ -86,7 +86,7 @@ const StandMealsDetail = (): React.ReactElement => {
               text='Cena'
               colorIcon='indigo-text'
               icon='brightness_2' />
-            <SubTitle text='Adicionales' />
+            <StrongText text='Adicionales'/>
             <StandMealsAddons mealsAddons={meal.relationships.meal_addons}/>
             <div className='StandDetailProduct__shop row'>
             <TextWithIcon
