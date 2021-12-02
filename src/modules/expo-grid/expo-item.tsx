@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import StrongText from 'src/modules/strong-text/strong-text';
+import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 
 const ExpoItem = (props: any): React.ReactElement => {
   const isReal = props.item.attributes.real;
@@ -16,9 +18,8 @@ const ExpoItem = (props: any): React.ReactElement => {
             Expo Virtual
             <i className='material-icons left'>laptop_windows</i>
           </div>
-          <div className='grey-text text-darken-4 truncate ExpoItem__title'>
-            {props.item.attributes.title}
-          </div>
+          <HorizontalSpace size='x-small'/>
+          <StrongText text={props.item.attributes.title}/>
           <div className='ExpoItem__text'>Ir a la expo</div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import { Link } from 'react-router-dom';
+import StrongText from 'src/modules/strong-text/strong-text';
 
 const GroupItem = (props: any): React.ReactElement => {
   const color = props.item.attributes.color;
@@ -24,9 +25,7 @@ const GroupItem = (props: any): React.ReactElement => {
           {
             icon ? <HorizontalSpace size='medium' /> : <HorizontalSpace size='x-small' />
           }
-          <div className='grey-text text-darken-4 truncate GroupItem__title'>
-            {props.item.attributes.title}
-          </div>
+          <StrongText text={props.item.attributes.title}/>
         </div>
       </div>
     </Link>
