@@ -18,6 +18,8 @@ import Expos from 'src/pages/expos/expos';
 import ExpoDetail from 'src/pages/expo-detail/expo-detail';
 import GroupDetail from 'src/pages/group-detail/group-detail';
 import StandDetail from 'src/pages/stand-detail/stand-detail';
+import StandMeals from 'src/pages/stand-meals/stand-meals';
+import StandProducts from 'src/pages/stand-products/stand-products';
 import StandNewsDetail from 'src/pages/stand-news-detail/stand-news-detail';
 import StandMealDetail from 'src/pages/stand-meal-detail/stand-meal-detail';
 import {
@@ -33,22 +35,32 @@ const Routes = (): React.ReactElement => {
   return (
     <Router forceRefresh={!isMobileApp}>
       <Switch>
-        <Route path="/stand/:standId/producto/:mealId">
+        <Route path="/empresa/:standId/producto/:mealId">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandMealDetail /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/stand/:standId/platillo/:mealId">
+        <Route path="/empresa/:standId/menu/:mealId">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandMealDetail /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/stand/:standId/news/:standNewsId">
+        <Route path="/empresa/:standId/news/:standNewsId">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandNewsDetail /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/stand/:standId">
+        <Route path="/empresa/:standId/productos">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><StandProducts /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path="/empresa/:standId/menu">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><StandMeals /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path="/empresa/:standId">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandDetail /></PersistGate>
           </Provider>

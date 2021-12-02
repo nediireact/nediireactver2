@@ -2,6 +2,7 @@ import React from 'react';
 import Title from 'src/modules/title/title';
 import StandRatings from 'src/modules/stand-detail/stand-ratings';
 import 'src/modules/stand-header/stand-header.scss';
+import { Link } from 'react-router-dom';
 
 const StandHeader = (props: any): React.ReactElement => {
   const stand: any = props.stand || {};
@@ -25,12 +26,15 @@ const StandHeader = (props: any): React.ReactElement => {
             }
             <div className='StandHeader__dummy-space'></div>
             <div className='StandHeader__stand-identity-wrapper'>
-              <div
+              <Link
+                to={`/empresa/${stand.slug}`}
                 className='StandHeader__logo white'
                 style={{backgroundImage: `url(${stand.img_logo})`}}>
-              </div>
+              </Link>
               <div className='StandHeader__title-wrapper'>
               <Title
+                link={`/empresa/${stand.slug}`}
+                color='white'
                 text={stand.name}
                 align='left'
                 fullWidth={true}

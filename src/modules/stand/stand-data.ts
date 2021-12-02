@@ -1,4 +1,5 @@
 export const standData = {
+  id: null,
   attributes: {
     name: null,
     slug: null,
@@ -45,23 +46,23 @@ export const standData = {
     expo: {
       data: {
         attributes: {
-          img_picture: '',
-          title: '',
-          description: '',
-          real: ''
+          img_picture: null,
+          title: null,
+          description: null,
+          real: null
         }
       }
     },
     group: {
       data: {
         attributes: {
-          img_picture: '',
-          title: '',
-          description: '',
-          real: '',
-          email: '',
-          slug: '',
-          color: ''
+          img_picture: null,
+          title: null,
+          description: null,
+          real: null,
+          email: null,
+          slug: null,
+          color: null
         }
       }
     },
@@ -69,11 +70,11 @@ export const standData = {
       data: [{
         id: 0,
         attributes: {
-          created: '',
-          description: '',
-          img_picture: '',
-          title: '',
-          slug: ''
+          created: null,
+          description: null,
+          img_picture: null,
+          title: null,
+          slug: null
         }
       }]
     },

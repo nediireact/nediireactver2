@@ -9,13 +9,31 @@ const SectionMenu = (props: any): React.ReactElement => {
     <>{
       data.map((i: any, index: number) => {
         if ( !i.to || !i.text ) return null;
-        return (
-          <li key={index}>
+        if ( i.icon ) {
+          return <li key={index} className={`Menu__item-with-icon ${
+                i.leftLine ? ' Menu__item-left-line' : null
+              } ${
+                i.rightLine ? ' Menu__item-right-line' : null
+              }`}>
+              <Link
+                to={i.to}
+                className={`grey-text text-darken-3 Menu__item-with-icon${
+                  i.icon ? '--profile' : ''
+                }`}>
+                <i className='material-icons'>{i.icon}</i>
+                <span>{i.text}</span>
+              </Link>
+            </li>;
+        }
+        return <li key={index} className={`Menu__item ${
+              i.leftLine ? ' Menu__item-left-line' : null
+            } ${
+              i.rightLine ? ' Menu__item-right-line' : null
+            }`}>
             <Link to={i.to} className='grey-text text-darken-3'>
               {i.text}
             </Link>
-          </li>
-        );
+          </li>;
       })
     }</>
   );
@@ -47,7 +65,7 @@ const MenuItems = ( props: any ): React.ReactElement => {
       {
         userData && userData.user ?
         <>
-          <li className='Menu__item-with-icon'>
+          <li className='Menu__item-with-icon Menu__item-left-line'>
             <Link
               to='/my-account'
               className={`grey-text text-darken-3 Menu__item-with-icon${profile.img_picture ? '--profile' : '' }`}>
@@ -68,7 +86,7 @@ const MenuItems = ( props: any ): React.ReactElement => {
           </li>
         </> :
         <>
-          <li className='Menu__item-with-icon'>
+          <li className='Menu__item-with-icon Menu__item-left-line'>
             <Link
               to='/login'
               className='grey-text text-darken-3 Menu__item-with-icon'>
