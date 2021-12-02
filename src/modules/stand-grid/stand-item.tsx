@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const StandItem = (props: any): React.ReactElement => {
   const logo = props.item.attributes.img_logo;
   return (
-    <Link to={`/stand/${props.item.attributes.slug}`}>
+    <Link to={`/empresa/${props.item.attributes.slug}`}>
       <div className='StandItem col s12 m6 l4'>
         <div className='StandItem__card'>
           <div

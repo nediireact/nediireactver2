@@ -7,7 +7,7 @@ const BuyableItem = (props: any): React.ReactElement => {
 
   return (
     <Link
-      to={`/stand/${props.standSlug}/${props.type}/${item.slug}`}
+      to={`/empresa/${props.standSlug}/${props.type}/${item.slug}`}
       className={`BuyableItem ${props.size}`}>
       <div
         className={`BuyableItem__card ${props.colorCard ? props.colorCard : 'white'}`}

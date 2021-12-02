@@ -4,14 +4,13 @@ import React, {
 } from 'react';
 import fetchData from 'src/modules/utils/fetch-data';
 import BuyableItem from 'src/modules/buyable-item/buyable-item';
-import 'src/modules/stand-detail/meals/stand-meals-grid.scss';
+import 'src/modules/stand-meals-grid/stand-meals-grid.scss';
 import 'nouislider/dist/nouislider.css';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import ClassificationComponent from 'src/modules/stand-detail/meals/stand-meal-classification-filter';
-import AddOnsComponent from 'src/modules/stand-detail/meals/stand-meal-add-on-filter';
-// import PriceComponent from 'src/modules/stand-detail/meals/stand-meal-price-filter';
+import ClassificationComponent from 'src/modules/stand-meals-detail/stand-meal-classification-filter';
+import AddOnsComponent from 'src/modules/stand-meals-detail/stand-meal-add-on-filter';
 
-const StandMeals = (props: any): React.ReactElement => {
+const StandMealsGrid = (props: any): React.ReactElement => {
   const [meals, setMeals] = useState([]);
   const baseURL = `meals/?filter[stand]=${props.standId}&include=classification,meal_addons`;
   const [classifications, setClassifications] = useState([]);
@@ -100,7 +99,7 @@ const StandMeals = (props: any): React.ReactElement => {
               return (
                 <BuyableItem key={index} size='col s12 m4' truncate={true}
                   colorCard='white'
-                  type='platillo'
+                  type='menu'
                   item={i.attributes}
                   standSlug={props.standSlug} />
               );
@@ -112,4 +111,4 @@ const StandMeals = (props: any): React.ReactElement => {
   );
 };
 
-export default StandMeals;
+export default StandMealsGrid;

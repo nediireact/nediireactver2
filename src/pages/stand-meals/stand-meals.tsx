@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, {
+  useState
+} from 'react';
 import SystemCheck from 'src/modules/system-check/system-check';
 import NavBar from 'src/modules/nav-bar/nav-bar';
 import Footer from 'src/modules/footer/footer';
 import StandDataLoader from 'src/modules/stand/stand-data-loader';
 import standData from 'src/modules/stand/stand-data';
-import StandComponent from 'src/modules/stand/stand';
+import StandMealsGrid from 'src/modules/stand-meals-grid/stand-meals-grid';
 
-const StandDetail = (): React.ReactElement => {
+const StandMeals = (): React.ReactElement => {
   const [stand, setStand] = useState(standData);
   const [sectionMenu, setSectionMenu] = useState([]);
 
@@ -14,13 +16,19 @@ const StandDetail = (): React.ReactElement => {
     <>
       <NavBar sectionMenu={sectionMenu} />
       <StandDataLoader
+        stand={stand}
         setStand={setStand}
         setSectionMenu={setSectionMenu} />
-      <StandComponent stand={stand} />
+      {
+        stand && stand.id ?
+          <StandMealsGrid
+            standId={stand.id}
+            standSlug={stand.attributes.slug} /> : null
+      }
       <Footer />
       <SystemCheck />
     </>
   );
 };
 
-export default StandDetail;
+export default StandMeals;
