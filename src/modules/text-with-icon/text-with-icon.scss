@@ -25,3 +25,13 @@
 .TextWithIcon:hover {
   @extend .z-depth-3;
 }
+
+.TextWithIconinfo {
+  margin-top: 3px;
+  font-size: $medium-text;
+
+  i {
+    font-size: $regular-text;
+    margin-right: 7px;
+  }
+}
