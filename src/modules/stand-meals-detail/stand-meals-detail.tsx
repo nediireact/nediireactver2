@@ -15,6 +15,10 @@ import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
 import StandMealsAddons from 'src/modules/stand-meals-detail/stand-meals-addons';
 import 'src/modules/stand-meals-detail/stand-meals-detail.scss';
 import StrongText from 'src/modules/strong-text/strong-text';
+import SimpleAttribute from 'src/modules/simple-attribute/simple-attribute';
+import Title from 'src/modules/title/title';
+import MultipleStyleText from 'src/modules/multiple-style-text/multiple-style-text';
+import MultipleStyleTextSpan from 'src/modules/multiple-style-text/multiple-style-text-span';
 
 const StandMealsDetail = (): React.ReactElement => {
   const history = useHistory();
@@ -45,12 +49,9 @@ const StandMealsDetail = (): React.ReactElement => {
               <div>
                 <HorizontalSpace size='small'/>
               </div>
-              <div className='center-align grey-text'>Ventas: {meal.attributes.times_selled}</div>
-              <div className='center-align cyan-text'>
-                <span className='grey-text text-darken-4'>Categoría: </span>
-                {meal.relationships.classification.data.attributes.title}
-              </div>
-              <div className='StandDetailProduct__title center-align'>{meal.attributes.title}</div>
+              <SimpleAttribute text='Ventas: ' attribute={meal.attributes.times_selled} size='small' color1='grey-text' color2='cyan-text'/>
+              <SimpleAttribute text='Categoría: ' attribute={meal.relationships.classification.data.attributes.title} size='small' color1='grey-text' color2='cyan-text'/>
+              <Title text={meal.attributes.title} fullWidth={true}/>
             </div>
           <StandPictures images={meal.relationships.meal_pictures.data}/>
           <div className='Description-movil hide-on-small-only'>
@@ -60,16 +61,13 @@ const StandMealsDetail = (): React.ReactElement => {
         <div className='StandDetailProduct col s12 m4'>
           <div className='StandDetailProduct__card'>
             <div className='hide-on-small-only'>
-              <div className='center-align grey-text'>Ventas: {meal.attributes.times_selled}</div>
-              <div className='center-align cyan-text'>
-                <span className='grey-text text-darken-4'>Categoría:  </span>
-                {meal.relationships.classification.data.attributes.title}
-              </div>
-              <div className='StandDetailProduct__title center-align'>{meal.attributes.title}</div>
+              <SimpleAttribute text='Ventas: ' attribute={meal.attributes.times_selled} size='small' color1='grey-text' color2='cyan-text' margin='marginTopSmall'/>
+              <SimpleAttribute text='Categoría: ' attribute={meal.relationships.classification.data.attributes.title} size='small' color1='grey-text' color2='cyan-text'/>
+              <Title text={meal.attributes.title} fullWidth={true}/>
             </div>
-            {meal.attributes.discount > 0 ? <div className='StandDetailProduct__discount grey-text'>${meal.attributes.price}</div> : null}
-            <span className='StandDetailProduct__price'>${meal.attributes.discount > 0 ? meal.attributes.final_price : meal.attributes.price}</span>
-            {meal.attributes.discount > 0 ? <span className='StandDetailProduct__discountOff green-text'>{meal.attributes.discount}%Off</span> : null}
+            {meal.attributes.discount > 0 ? <MultipleStyleText text={`$${meal.attributes.price}`} style='discount'/> : null}
+            <MultipleStyleTextSpan text={`$ ${meal.attributes.discount > 0 ? meal.attributes.final_price : meal.attributes.price}`}style='price'/>
+            {meal.attributes.discount > 0 ? <MultipleStyleTextSpan text={`${meal.attributes.discount} %OFF`} style='disconuntoff'/> : null}
             <StrongText text='Tiempo de platillo'/>
             <TextWhitIconInfo
               apiInfo={meal.attributes.is_breakfast}
