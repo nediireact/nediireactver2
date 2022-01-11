@@ -19,7 +19,7 @@ const ExpoItem = (props: any): React.ReactElement => {
             <i className='material-icons left'>laptop_windows</i>
           </div>
           <HorizontalSpace size='x-small'/>
-          <StrongText text={props.item.attributes.title}/>
+          <StrongText text={props.item.attributes.name}/>
           <div className='ExpoItem__text'>Ir a la expo</div>
         </div>
       </div>

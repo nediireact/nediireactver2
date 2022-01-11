@@ -17,7 +17,7 @@ const StandGridNews = (props: any): React.ReactElement => {
               image={element.attributes.img_picture}
               imageRadius='10px 10px 0 0'
               titleColor='grey-text text-darken-4'
-              title={element.attributes.title}
+              name={element.attributes.name}
               slug_news={element.attributes.slug}
               stand_slug={props.stand_slug}
               align='center-align'

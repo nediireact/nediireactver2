@@ -5,3 +5,4 @@ export const FILE_PREFIX = {
   ANDROID: 'file:///android_asset/www'
 };
 export const CATEGORY_DATA = 'CATEGORY_DATA';
+export const STAND_DATA = 'STAND_DATA';

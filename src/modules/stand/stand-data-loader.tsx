@@ -1,18 +1,16 @@
-import React, {
-  useEffect,
-  useState
-} from 'react';
+import React, { useEffect } from 'react';
 import {
   useHistory,
   useParams
 } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import fetchData from 'src/modules/utils/fetch-data';
-import standData from 'src/modules/stand/stand-data';
 import StandHeader from 'src/modules/stand-header/stand-header';
 import StandRouteNav from 'src/modules/stand-route-nav/stand-route-nav';
+import setStandData from 'src/redux/actions/set-stand-data';
 
 const StandDataLoader = (props: any): React.ReactElement => {
-  const [stand, setStand] = useState(standData);
+  const stand = useSelector((state: any) => state.stand);
   const history = useHistory();
   const params: any = useParams();
 
@@ -23,7 +21,7 @@ const StandDataLoader = (props: any): React.ReactElement => {
           return history.replace('/');
         }
         const standData = response.data[0];
-        console.log('standData', standData);
+        // console.log('standData', standData);
         const menu: any[] = [];
         menu.push({
           to: `/empresa/${standData.attributes.slug}`,
@@ -66,8 +64,7 @@ const StandDataLoader = (props: any): React.ReactElement => {
           });
         }
         props.setSectionMenu(menu);
-        setStand(standData);
-        props.setStand(standData);
+        props.setStand(setStandData(standData));
       })
       .catch((error) => {
         console.log('Hubo un error', error);

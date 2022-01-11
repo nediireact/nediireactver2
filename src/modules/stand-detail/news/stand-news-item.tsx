@@ -16,11 +16,8 @@ const StandNewsItem = (props: any): React.ReactElement => {
           style={{backgroundImage: `url(${props.image})`,
           borderRadius: `${props.imageRadius}` }}>
         </div>
-        <div
-          className={`StandNewsItem__title 
-            ${props.truncate}
-            ${props.align}
-            ${props.titleColor}`}>{props.title}
+        <div className={'StandNewsItem__name'}>
+          {props.name}
         </div>
       </div>
     </Link>

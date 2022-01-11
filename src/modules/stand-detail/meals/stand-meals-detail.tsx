@@ -10,7 +10,7 @@ import StandDetailProduct from 'src/modules/stand-detail/meals/stand-detail-prod
 
 const mealsData = {
   attributes: {
-    title: '',
+    name: '',
     price: '',
     discount: '',
     final_price: '',
@@ -34,7 +34,7 @@ const mealsData = {
     classification: {
       data: {
         attributes: {
-          title: ''
+          name: ''
         }
       }
     },
@@ -42,7 +42,7 @@ const mealsData = {
       data: [{
         id: 0,
         attributes: {
-          title: '',
+          name: '',
           price: ''
         }
       }]
@@ -83,8 +83,8 @@ const StandMealsDetail = (): React.ReactElement => {
       <StandDetailProduct
         images={meals.relationships.meal_pictures.data}
         selled={meals.attributes.times_selled}
-        classification={meals.relationships.classification.data.attributes.title}
-        title={meals.attributes.title}
+        classification={meals.relationships.classification.data.attributes.name}
+        name={meals.attributes.name}
         discount={meals.attributes.discount}
         finaPrice={meals.attributes.final_price}
         price={meals.attributes.price}

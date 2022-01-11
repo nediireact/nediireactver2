@@ -10,11 +10,12 @@ import CheckFilter from 'src/modules/check-filter/check-filter';
 
 const urlValues: any = {};
 
-const StandMealsGrid = (props: any): React.ReactElement => {
+const StandServicesGrid = (props: any): React.ReactElement => {
   const [meals, setMeals] = useState([]);
-  const baseURL = `meals/?filter[stand]=${props.stand.id}&include=classification,meal_addons`;
+  const baseURL = `services/?filter[stand]=${props.stand.id}&include=classification`;
   const [classifications, setClassifications] = useState([]);
   const [addOns, setAddOns] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const updateItems = ( updates: any ) => {
     let url = baseURL;
@@ -25,33 +26,46 @@ const StandMealsGrid = (props: any): React.ReactElement => {
         if ( value ) url += value;
       }
     }
+    setIsLoading(true);
     fetchData(url)
       .then((response: any) => {
         const meals = response.data;
         setMeals(meals);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log('Hubo un error', error);
+        setIsLoading(false);
       });
   };
 
   useEffect(() => {
+    setIsLoading(true);
     fetchData(baseURL)
       .then((response: any) => {
         const meals = response.data;
         setMeals(meals);
+        setIsLoading(false);
       })
       .catch((error) => console.log('Hubo un error', error));
-    fetchData(`meal-classifications/?filter[stand]=${props.stand.id}`)
+    fetchData(`services-classifications/?filter[stand]=${props.stand.id}`)
       .then((response: any) => setClassifications(response.data))
       .catch((error) => console.log('Hubo un error', error));
-    fetchData(`meal-addons/?filter[stand]=${props.stand.id}`)
+    fetchData(`services-features/?filter[stand]=${props.stand.id}`)
       .then((response: any) => setAddOns(response.data))
       .catch((error) => console.log('Hubo un error', error));
   }, [fetchData]);
 
   return (
     <div className='container row'>
+      {
+        isLoading ?
+          <>
+            <div className='progress'>
+              <div className='indeterminate'></div>
+            </div>
+          </> : null
+      }
       <HorizontalSpace size='small' />
       <div className='col s12 m4'>
         <div className='GenericCard'>
@@ -63,13 +77,13 @@ const StandMealsGrid = (props: any): React.ReactElement => {
             updateItems={updateItems} />
           <HorizontalSpace size='small' />
           <PriceRangeFilter
-            maxPrice={props.stand.attributes.meals_max_price + 100}
+            maxPrice={props.stand.attributes.products_max_price + 100}
             updateItems={updateItems} />
           <HorizontalSpace size='small' />
           <CheckFilter
-            name='Ingredientes adicionales'
+            name='Caracteristicas adicionales'
             items={[...addOns]}
-            filter='meal_addons'
+            filter='features'
             updateItems={updateItems} />
         </div>
       </div>
@@ -80,7 +94,7 @@ const StandMealsGrid = (props: any): React.ReactElement => {
             meals.map((i: any, index: number) => {
               return (
                 <BuyableItem key={index}
-                  type='menu'
+                  type='producto'
                   item={i.attributes}
                   standSlug={props.stand.attributes.slug} />
               );
@@ -92,4 +106,4 @@ const StandMealsGrid = (props: any): React.ReactElement => {
   );
 };
 
-export default StandMealsGrid;
+export default StandServicesGrid;

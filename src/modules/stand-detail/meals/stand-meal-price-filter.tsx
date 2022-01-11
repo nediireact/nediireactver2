@@ -42,7 +42,7 @@ const PriceComponent = (props: any): React.ReactElement => {
 
   return (
     <>
-      <span className='StandFilters__title'>Rango de precio</span>
+      <span className='StandFilters__name'>Rango de precio</span>
       <span>0 - {maxPrice}</span>
       <div className='StandFilters__price' ref={sliderRef}></div>
     </>

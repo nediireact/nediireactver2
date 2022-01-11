@@ -18,7 +18,7 @@ import StandGrid from 'src/modules/stand-grid/stand-grid';
 const expoData = {
   attributes: {
     img_picture: '',
-    title: '',
+    name: '',
     description: '',
     real: '',
     email: '',
@@ -87,7 +87,7 @@ const GroupDetailComponent = (): React.ReactElement => {
       <ParallaxHeaderImage
         size='large'
         image={group.attributes.img_picture}
-        title={group.attributes.title}
+        title={group.attributes.name}
         email={group.attributes.email} />
       <HorizontalSpace size='small' />
       <GroupDetailContent description={group.attributes.description} />

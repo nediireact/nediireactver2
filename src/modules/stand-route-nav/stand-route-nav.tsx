@@ -17,7 +17,6 @@ interface ParsedURLType {
 
 const formatString = ( str: string ): string => {
   const cleanStr = str.replaceAll('-', ' ');
-  console.log(cleanStr);
   const array = cleanStr.split('');
   array[0] = array[0].toUpperCase();
   return array.join('');

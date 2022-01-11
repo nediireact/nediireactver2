@@ -1,11 +1,12 @@
 import React from 'react';
-// import 'src/modules/stand-detail/stand-detail.scss';
 import 'src/modules/stand-owner-info/stand-owner-info.scss';
 import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
 
 const StandOwnerInfo = (props: any): React.ReactElement => {
   const owner: any = props.owner;
   const profile: any = owner.profile || {};
+
+  if ( !profile.img_picture ) return <></>;
 
   return (
     <div className='StandOwnerInfo GenericCard'>

@@ -1,6 +1,6 @@
 const data = {
   attributes: {
-    title: '',
+    name: '',
     price: '',
     discount: '',
     final_price: '',
@@ -24,7 +24,7 @@ const data = {
     classification: {
       data: {
         attributes: {
-          title: ''
+          name: ''
         }
       }
     },
@@ -32,7 +32,7 @@ const data = {
       data: [{
         id: 0,
         attributes: {
-          title: '',
+          name: '',
           price: ''
         }
       }]

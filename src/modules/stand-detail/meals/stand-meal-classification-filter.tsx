@@ -16,14 +16,14 @@ const ClassificationComponent = (props: any): React.ReactElement => {
 
   return (
     <>
-    <span className='StandFilters__title'>Clasificaciones</span>
+    <span className='StandFilters__name'>Clasificaciones</span>
     {
       props.classifications && props.classifications.length ?
         props.classifications.map((i: any, index: number) => {
           return (
             <label key={index} className='StandFilters__classification'>
               <input type='checkbox' value={i.id} onChange={updateClassificationFilter} />
-              <span>{i.attributes.title}</span>
+              <span>{i.attributes.name}</span>
             </label>
           );
         }) : null
