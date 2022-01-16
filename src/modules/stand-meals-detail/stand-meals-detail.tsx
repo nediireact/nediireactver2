@@ -50,8 +50,8 @@ const StandMealsDetail = (): React.ReactElement => {
                 <HorizontalSpace size='small'/>
               </div>
               <SimpleAttribute text='Ventas: ' attribute={meal.attributes.times_selled} size='small' color1='grey-text' color2='cyan-text'/>
-              <SimpleAttribute text='Categoría: ' attribute={meal.relationships.classification.data.attributes.title} size='small' color1='grey-text' color2='cyan-text'/>
-              <Title text={meal.attributes.title} fullWidth={true}/>
+              <SimpleAttribute text='Categoría: ' attribute={meal.relationships.classification.data.attributes.name} size='small' color1='grey-text' color2='cyan-text'/>
+              <Title text={meal.attributes.name} fullWidth={true}/>
             </div>
           <StandPictures images={meal.relationships.meal_pictures.data}/>
           <div className='Description-movil hide-on-small-only'>
@@ -62,8 +62,8 @@ const StandMealsDetail = (): React.ReactElement => {
           <div className='StandDetailProduct__card'>
             <div className='hide-on-small-only'>
               <SimpleAttribute text='Ventas: ' attribute={meal.attributes.times_selled} size='small' color1='grey-text' color2='cyan-text' margin='marginTopSmall'/>
-              <SimpleAttribute text='Categoría: ' attribute={meal.relationships.classification.data.attributes.title} size='small' color1='grey-text' color2='cyan-text'/>
-              <Title text={meal.attributes.title} fullWidth={true}/>
+              <SimpleAttribute text='Categoría: ' attribute={meal.relationships.classification.data.attributes.name} size='small' color1='grey-text' color2='cyan-text'/>
+              <Title text={meal.attributes.name} fullWidth={true}/>
             </div>
             {meal.attributes.discount > 0 ? <MultipleStyleText text={`$${meal.attributes.price}`} style='discount'/> : null}
             <MultipleStyleTextSpan text={`$ ${meal.attributes.discount > 0 ? meal.attributes.final_price : meal.attributes.price}`}style='price'/>

@@ -1,45 +1,47 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import 'src/modules/buyable-item/buyable-item.scss';
+import getMoneyFormat from 'src/modules/utils/money-formats';
 
 const BuyableItem = (props: any): React.ReactElement => {
   const item = props.item;
 
   return (
-    <Link
-      to={`/empresa/${props.standSlug}/${props.type}/${item.slug}`}
-      className={`BuyableItem ${props.size}`}>
-      <div
-        className={`BuyableItem__card ${props.colorCard ? props.colorCard : 'white'}`}
-        style={{
-          borderRadius: props.borderRadius,
-          border: `solid ${props.borderSize}`
-        }} >
-        <div
-          className='BuyableItem__image'
-          style={{
-            backgroundImage: `url(${item.img_picture})`,
-            borderRadius: `${props.imageRadius}`
-          }}>
+    <div className='BuyableItem col s12 m4'>
+      <Link to={`/empresa/${props.standSlug}/${props.type}/${item.slug}`} className='GenericCard'>
+        <div className='BuyableItem__image-container'>
+          <div className='BuyableItem__image'
+            style={{backgroundImage: `url(${item.img_picture})`}}>
+          </div>
           {
             item.discount ?
-              <span className='BuyableItem__discount right-align red darken-1 white-text z-depth-1'>
+              <span className='BuyableItem__discount-label right-align red darken-1 white-text z-depth-1'>
                 {`${item.discount}% de descuento`}
               </span> : null
           }
+          {
+            item.short_description ?
+              <span className='BuyableItem__short-description grey-text text-darken-4'>
+                {item.short_description}
+              </span> : null
+          }
         </div>
-        <span className='BuyableItem__price grey-text text-darken-4'>
-          ${item.final_price}
-        </span>
-        <span
-          className={`BuyableItem__title 
-            ${props.truncate ? 'truncate' : ''}
-            ${props.align ? props.align : ''}
-            ${props.colorTitle ? props.colorTitle : 'grey-text text-darken-3'}`}>
-            {item.title}
-        </span>
-      </div>
-    </Link>
+        <div className='BuyableItem__info'>
+          <span className='BuyableItem__name grey-text text-darken-4 truncate'>
+            {item.name}
+          </span>
+          <span className='BuyableItem__price grey-text text-darken-4'>
+            {getMoneyFormat(item.final_price)}
+          </span>
+          {
+            item.discount ?
+              <span className='BuyableItem__discount green-text text-darken-3'>
+                {getMoneyFormat(item.price)}
+              </span> : null
+          }
+        </div>
+      </Link>
+    </div>
   );
 };
 

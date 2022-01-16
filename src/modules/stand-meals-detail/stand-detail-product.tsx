@@ -31,7 +31,7 @@ const StandDetailProduct = (props: any): React.ReactElement => {
               <div className='center-align cyan-text'>
                 <span className='grey-text text-darken-4'>Categoría:  </span>{props.classification}
               </div>
-              <div className='StandDetailProduct__title center-align'>{props.title}</div>
+              <div className='StandDetailProduct__name center-align'>{props.name}</div>
             </div>
           <StandPictures images={props.images}/>
           <div className='Description-movil hide-on-small-only'>
@@ -45,7 +45,7 @@ const StandDetailProduct = (props: any): React.ReactElement => {
               <div className='center-align cyan-text'>
                 <span className='grey-text text-darken-4'>Categoría:  </span>{props.classification}
               </div>
-              <div className='StandDetailProduct__title center-align'>{props.title}</div>
+              <div className='StandDetailProduct__name center-align'>{props.name}</div>
             </div>
             {props.discount > 0 ? <div className='StandDetailProduct__discount grey-text'>${props.price }</div> : null}
             <span className='StandDetailProduct__price'>${props.discount > 0 ? props.finaPrice : props.price}</span>

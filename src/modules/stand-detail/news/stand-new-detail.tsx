@@ -14,7 +14,7 @@ const newsData = {
     created: '',
     description: '',
     img_picture: '',
-    title: '',
+    name: '',
     slug: ''
   },
   relationships: {
@@ -67,7 +67,7 @@ const StandNewDetail = (): React.ReactElement => {
       <HorizontalSpace size='medium' />
       <StandNewsDetailContent
         image={news.attributes.img_picture}
-        title={news.attributes.title}
+        name={news.attributes.name}
         created={news.attributes.created}
         description={news.attributes.description} />
     </>

@@ -7,7 +7,7 @@ const AddOnsComponent = (props: any): React.ReactElement => {
 
   return (
     <>
-    <span className='StandFilters__title'>Ingredientes adicionales</span>
+    <span className='StandFilters__name'>Ingredientes adicionales</span>
     <label key={0} className='StandFilters__classification'>
       <input name='group1' type='radio' value={0} onChange={updateAddOnFilter} />
       <span>Ninguno</span>
@@ -18,7 +18,7 @@ const AddOnsComponent = (props: any): React.ReactElement => {
           return (
             <label key={index} className='StandFilters__classification'>
               <input name='group1' type='radio' value={i.id} onChange={updateAddOnFilter} />
-              <span>{i.attributes.title}</span>
+              <span>{i.attributes.name}</span>
             </label>
           );
         }) : null

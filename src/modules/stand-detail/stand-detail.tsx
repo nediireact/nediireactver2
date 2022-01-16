@@ -54,7 +54,7 @@ const standData = {
       data: {
         attributes: {
           img_picture: '',
-          title: '',
+          name: '',
           description: '',
           real: ''
         }
@@ -64,7 +64,7 @@ const standData = {
       data: {
         attributes: {
           img_picture: '',
-          title: '',
+          name: '',
           description: '',
           real: '',
           email: '',
@@ -80,7 +80,7 @@ const standData = {
           created: '',
           description: '',
           img_picture: '',
-          title: '',
+          name: '',
           slug: ''
         }
       }]

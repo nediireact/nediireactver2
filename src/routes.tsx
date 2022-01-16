@@ -22,6 +22,7 @@ import StandMeals from 'src/pages/stand-meals/stand-meals';
 import StandProducts from 'src/pages/stand-products/stand-products';
 import StandNewsDetail from 'src/pages/stand-news-detail/stand-news-detail';
 import StandMealDetail from 'src/pages/stand-meal-detail/stand-meal-detail';
+import StandServices from 'src/pages/stand-services/stand-services';
 import {
   TermsAndConditions,
   PrivacyPolicy,
@@ -33,7 +34,7 @@ const isMobileApp = env.isMobileApp;
 
 const Routes = (): React.ReactElement => {
   return (
-    <Router forceRefresh={!isMobileApp}>
+    <Router forceRefresh={isMobileApp}>
       <Switch>
         <Route path="/empresa/:standId/producto/:mealId">
           <Provider store={store}>
@@ -53,6 +54,11 @@ const Routes = (): React.ReactElement => {
         <Route path="/empresa/:standId/productos">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandProducts /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path="/empresa/:standId/servicios">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><StandServices /></PersistGate>
           </Provider>
         </Route>
         <Route path="/empresa/:standId/menu">

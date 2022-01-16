@@ -11,7 +11,6 @@ const StandContactInfo = (props: any): React.ReactElement => {
   let fullAddress: string = address;
   if ( city ) {
     fullAddress += `, ${city.attributes.name}`;
-    console.log('>>>>>> state', city.relationships.state);
     if ( city.relationships && city.relationships.state &&
         city.relationships.state.data && city.relationships.state.data.attributes ) {
       const state = city.relationships.state.data;
@@ -23,7 +22,7 @@ const StandContactInfo = (props: any): React.ReactElement => {
       }
     }
   }
-  fullAddress += `, ${zip_code}`;
+  if ( zip_code ) fullAddress += `, ${zip_code}.`;
 
   return (
     <div className='StandContactInfo GenericCard'>

@@ -1,0 +1,16 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.CheckFilter {
+  &__name {
+    display: block;
+    width: 100%;
+    font-size: $subtitle-title-cards;
+    margin-bottom: 10px;
+  }
+
+  label {
+    display: block;
+    width: 100%;
+  }
+}

@@ -19,7 +19,7 @@ import QRCode from 'qrcode.react'; // https://www.npmjs.com/package/qrcode.react
 const expoData = {
   attributes: {
     img_picture: '',
-    title: '',
+    name: '',
     description: '',
     real: true,
     email: '',
@@ -78,7 +78,7 @@ const ExpoDetailComponent = (): React.ReactElement => {
       <ParallaxHeaderImage
         size='large'
         image={expo.attributes.img_picture}
-        title={expo.attributes.title}
+        title={expo.attributes.name}
         email={expo.attributes.email}
         indicator={!expo.attributes.real}/>
       <HorizontalSpace size='small' />

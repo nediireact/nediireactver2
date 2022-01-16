@@ -29,6 +29,8 @@ $regular-border-radius: 8px;
 }
 
 .GenericCard {
+  display: block;
+  overflow: hidden;
   padding: 10px;
   width: 100%;
   border-radius: $regular-border-radius;

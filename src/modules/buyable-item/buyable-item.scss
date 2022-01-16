@@ -4,43 +4,73 @@
 .BuyableItem {
   margin-bottom: 20px;
 
-  &__card {
+  .GenericCard {
+    border-radius: 0;
+    padding: 0;
     padding-bottom: 10px;
-    transition: all 0.5s;
-    @extend .z-depth-1;
   }
 
-  &__card:hover {
-    @extend .z-depth-3;
+  &__image-container {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    margin-bottom: 10px;
+    overflow: hidden;
   }
 
   &__image {
     width: 100%;
-    height: 250px;
+    height: 100%;
     background-position: center;
     background-size: cover;
-    margin-bottom: 10px;
+    background-repeat: no-repeat;
+    transition: all 0.2s;
   }
 
-  &__discount {
-    position: relative;
-    float: right;
+  .GenericCard:hover &__image {
+    transform: scale(1.1);
+  }
+
+  &__short-description {
+    opacity: 0;
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    width: 100%;
+    background-color: rgba($color: #FFFFFF, $alpha: 0.8);
+    padding: 10px;
+    transition: all 0.2s;
+  }
+
+  .GenericCard:hover &__short-description {
+    opacity: 1;
+    bottom: 0;
+  }
+
+  &__discount-label {
+    position: absolute;
+    top: 10px;
+    right: 0;
     padding: 5px 10px;
-    margin-top: 10px;
   }
   
+  &__info {
+    padding: 0 10px;
+  }
 
-  &__price,
-  &__title {
-    padding: 0 10px 5px;
+  &__name {
+    display: block;
+    font-size: $regular-text;
+    width: 100%;
   }
 
   &__price {
     font-size: 1.3em;
   }
 
-  &__title {
-    font-size: $regular-text;
+  &__discount {
+    margin-left: 8px;
+    text-decoration: line-through;
   }
 }
 

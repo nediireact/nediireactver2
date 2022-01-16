@@ -25,7 +25,7 @@ const GroupItem = (props: any): React.ReactElement => {
           {
             icon ? <HorizontalSpace size='medium' /> : <HorizontalSpace size='x-small' />
           }
-          <StrongText text={props.item.attributes.title}/>
+          <StrongText text={props.item.attributes.name}/>
         </div>
       </div>
     </Link>

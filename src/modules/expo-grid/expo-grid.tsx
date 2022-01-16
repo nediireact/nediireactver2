@@ -15,7 +15,7 @@ const expoData = {
     id: 0,
     attributes: {
       img_picture: '',
-      title: '',
+      name: '',
       description: '',
       real: ''
     }

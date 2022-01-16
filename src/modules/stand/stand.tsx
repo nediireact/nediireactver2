@@ -23,19 +23,29 @@ const StandComponent = (props: any): React.ReactElement => {
       </div>
       <div className='col s12 m4'>
         {
-          stand.relationships.phones.data.length ?
-            <StandContactInfo
-              title='Contacto'
-              address={stand.attributes.address}
-              city={stand.relationships.city.data}
-              zip_code={stand.attributes.zip_code}
-              phones={stand.relationships.phones.data} /> : null
+          stand.relationships.phones.data.length || stand.attributes.address ?
+            <>
+              <StandContactInfo
+                title='Contacto'
+                address={stand.attributes.address}
+                city={stand.relationships.city.data}
+                zip_code={stand.attributes.zip_code}
+                phones={stand.relationships.phones.data} />
+              <HorizontalSpace size='small' />
+            </> : null
         }
-        <HorizontalSpace size='small' />
-        <StandOwnerInfo owner={stand.relationships.owner.data.attributes} />
-        <HorizontalSpace size='small' />
-        <ExpoItem item={stand.relationships.expo.data}/>
-        <GroupItem item={stand.relationships.group.data}/>
+        {
+          stand.relationships.owner.data.attributes &&
+          stand.relationships.owner.data.attributes.profile ?
+            <>
+              <StandOwnerInfo owner={stand.relationships.owner.data.attributes} />
+              <HorizontalSpace size='small' />
+            </> : null
+        }
+        <ExpoItem item={stand.relationships.expo.data} />
+        <GroupItem
+          item={stand.relationships.group.data}
+          expoId={stand.relationships.expo.data.attributes.slug} />
       </div>
     </div>
   );

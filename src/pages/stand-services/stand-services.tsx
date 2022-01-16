@@ -9,23 +9,21 @@ import SystemCheck from 'src/modules/system-check/system-check';
 import NavBar from 'src/modules/nav-bar/nav-bar';
 import Footer from 'src/modules/footer/footer';
 import StandDataLoader from 'src/modules/stand/stand-data-loader';
-import StandMealsGrid from 'src/modules/stand-meals-grid/stand-meals-grid';
+import StandServicesGrid from 'src/modules/stand-services-grid/stand-services-grid';
 
-const StandMeals = (): React.ReactElement => {
+const StandServices = (): React.ReactElement => {
   const dispatch = useDispatch();
   const stand = useSelector((state: any) => state.stand);
   const [sectionMenu, setSectionMenu] = useState([]);
 
   return (
     <>
-      <NavBar sectionMenu={sectionMenu} />
+      <NavBar sectionMenu={sectionMenu} stand={stand} />
       <StandDataLoader
-        stand={stand}
         setStand={dispatch}
         setSectionMenu={setSectionMenu} />
       {
-        stand && stand.id ?
-          <StandMealsGrid stand={stand} /> : null
+        stand && stand.id ? <StandServicesGrid stand={stand} /> : null
       }
       <Footer />
       <SystemCheck />
@@ -33,4 +31,4 @@ const StandMeals = (): React.ReactElement => {
   );
 };
 
-export default StandMeals;
+export default StandServices;
