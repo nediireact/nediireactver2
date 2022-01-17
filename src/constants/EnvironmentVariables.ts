@@ -1,4 +1,4 @@
-import packageJSON from 'src/assets/package.json';
+import packageJSON from 'src/assets/version.json';
 
 const {
   REACT_APP_API_URL,
