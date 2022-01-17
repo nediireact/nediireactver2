@@ -25,7 +25,10 @@ const PriceRangeFilter = (props: any): React.ReactElement => {
     if ( values.max ) {
       priceRangeFilter += `&filter[final_price__lte]=${values.max}`;
     }
-    return props.updateItems({ priceRange: priceRangeFilter });
+    return props.updateItems({
+      type: 'final_price',
+      value: priceRangeFilter
+    });
   };
 
   return (
