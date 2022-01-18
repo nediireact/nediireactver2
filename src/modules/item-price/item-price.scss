@@ -1,0 +1,21 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.TextItemPrice {
+  &--discount {
+    text-decoration: line-through;
+    @extend .grey-text;
+  }
+
+  &--price {
+    font-size: $title-font-size;
+  }
+
+  &--TextItemPrice {
+    font-size: $regular-text;
+    line-height: 40px;
+    margin-left: 5px;
+    position: absolute;
+    @extend .green-text;
+  }
+}
