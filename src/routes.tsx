@@ -23,6 +23,8 @@ import StandProducts from 'src/pages/stand-products/stand-products';
 import StandNewsDetail from 'src/pages/stand-news-detail/stand-news-detail';
 import StandMealDetail from 'src/pages/stand-meal-detail/stand-meal-detail';
 import StandServices from 'src/pages/stand-services/stand-services';
+import StandVehicles from 'src/pages/stand-vehicles/stand-vehicles';
+import StandRealEstate from 'src/pages/stand-real-estate/stand-real-estate';
 import {
   TermsAndConditions,
   PrivacyPolicy,
@@ -49,6 +51,16 @@ const Routes = (): React.ReactElement => {
         <Route path="/empresa/:standId/news/:standNewsId">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandNewsDetail /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path="/empresa/:standId/inmuebles">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><StandRealEstate /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path="/empresa/:standId/vehiculos">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><StandVehicles /></PersistGate>
           </Provider>
         </Route>
         <Route path="/empresa/:standId/productos">

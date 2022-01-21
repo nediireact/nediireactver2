@@ -56,6 +56,12 @@ app.get('/empresa/:standId/productos', commonIndex);
 app.get('/empresa/:standId/news/:standNewsId', commonIndex);
 app.get('/empresa/:standId/menu/:mealId', commonIndex);
 app.get('/empresa/:standId/producto/:mealId', commonIndex);
+app.get('/empresa/:standId/servicios', commonIndex);
+app.get('/empresa/:standId/servicios/:serviceId', commonIndex);
+app.get('/empresa/:standId/vehicles', commonIndex);
+app.get('/empresa/:standId/vehicles/:vehicleId', commonIndex);
+app.get('/empresa/:standId/inmuebles', commonIndex);
+app.get('/empresa/:standId/inmuebles/:realEstateId', commonIndex);
 app.get('/', commonIndex);
 
 app.listen(port, () => {
