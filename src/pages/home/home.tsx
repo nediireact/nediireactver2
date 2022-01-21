@@ -10,6 +10,7 @@ const Home = (): React.ReactElement => {
       <NavBar />
       <HorizontalSpace size='large' />
       Home
+      <HorizontalSpace size='large' />
       <Footer />
       <SystemCheck />
     </>

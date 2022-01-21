@@ -1,67 +1,52 @@
 import React, {
-  useRef,
-  useEffect
+  useRef
 } from 'react';
 import { Link } from 'react-router-dom';
 import * as M from 'materialize-css';
-import {
-  useSelector,
-  useDispatch
-} from 'react-redux';
+import { useSelector } from 'react-redux';
 import 'src/modules/nav-bar/nav-bar.scss';
-import fetchData from 'src/modules/utils/fetch-data';
-import setCategoryData from 'src/redux/actions/category-actions';
 import SideMenu from 'src/modules/nav-bar/side-menu';
-import CategoriesMenu from 'src/modules/nav-bar/categories-menu';
+import MenuItems from 'src/modules/nav-bar/menu-items';
+import { SetUserData } from 'src/redux/actions/user-actions';
+import { useDispatch } from 'react-redux';
 
-const categoriesURL = 'categories/?include=hashtag&sort=-order';
 const logoFile = '/assets/logo.jpg';
 
-const NavBar = (): React.ReactElement => {
+const NavBar = (props: any): React.ReactElement => {
   const dispatch = useDispatch();
-  const categories = useSelector((state: any) => state.categories);
   const system = useSelector((state: any) => state.system);
   const prefix = system.platform.prefix;
   const logoURL = `${prefix}${logoFile}`;
   const sideNavRef: any = useRef(null);
+  const sectionMenu = props.sectionMenu || [];
 
   const closeSideNav = () => {
     const sideNav = M.Sidenav.getInstance(sideNavRef.current);
     sideNav.close();
   };
 
-  useEffect(() => {
-    M.Sidenav.init(sideNavRef.current, {
-      edge: 'left'
-    });
-    fetchData(categoriesURL)
-      .then((d: any) => {
-        if ( d ) dispatch(setCategoryData(d));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [fetchData]);
+  const logout = (e: any) => {
+    e.preventDefault();
+    dispatch(SetUserData({user: null}));
+  };
 
   return (
     <>
       <div className='navbar-fixed'>
         <nav className='white black-text'>
           <div className='nav-wrapper container'>
-            <Link
-              to='/'
-              className='brand-logo Logo'
+            <Link to='/' className='brand-logo Logo'
               style={{
                 backgroundImage: `url(${logoURL})`
               }}>
             </Link>
-            <a href='#'
-              data-target='mobile-demo'
-              className='sidenav-trigger cyan-text'>
+            <a href='#' data-target='mobile-demo' className='sidenav-trigger cyan-text'>
               <i className='material-icons'>menu</i>
             </a>
-            <ul id='nav-mobile' className='right hide-on-med-and-down'>
-              <CategoriesMenu items={categories.data}/>
+            <ul id='nav-mobile' className='right hide-on-med-and-down Menu'>
+              <MenuItems
+                logout={logout}
+                sectionMenu={sectionMenu} />
             </ul>
           </div>
         </nav>
@@ -69,7 +54,7 @@ const NavBar = (): React.ReactElement => {
       <SideMenu
         sideNavRef={sideNavRef}
         closeSideNav={closeSideNav}
-        categories={categories}
+        logout={logout}
         logo={logoURL} />
     </>
   );

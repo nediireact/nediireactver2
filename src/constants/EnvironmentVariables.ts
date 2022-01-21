@@ -1,10 +1,11 @@
-import packageJSON from 'src/assets/package.json';
+import packageJSON from 'src/assets/version.json';
 
 const {
   REACT_APP_API_URL,
   REACT_APP_IS_MOBILE_APP,
   REACT_APP_BRANCH_NAME,
-  REACT_APP_PRODUCTION
+  REACT_APP_FACEBOOK_APP_ID,
+  REACT_APP_ENVT
 } = process.env;
 
 class EnvironmentVariables {
@@ -14,14 +15,16 @@ class EnvironmentVariables {
   _isMobileApp: boolean;
   _branchName: string;
   _version: string;
+  _facebookAppID: string;
 
   constructor() {
     this._apiBaseUrl = REACT_APP_API_URL ?
       REACT_APP_API_URL : 'https://api.staging.nedii.com/v1/';
     this._isMobileApp = REACT_APP_IS_MOBILE_APP ? true : false;
-    this._production = REACT_APP_PRODUCTION ? true : false;
     this._branchName = REACT_APP_BRANCH_NAME ? REACT_APP_BRANCH_NAME : 'local-branch';
+    this._production = REACT_APP_ENVT === 'master' ? true : false;
     this._version = packageJSON ? packageJSON.version : '0.0.0';
+    this._facebookAppID = REACT_APP_FACEBOOK_APP_ID ? REACT_APP_FACEBOOK_APP_ID : '-';
   }
 
   static getInstance(): EnvironmentVariables {
@@ -49,6 +52,10 @@ class EnvironmentVariables {
 
   get version(): string {
     return this._version;
+  }
+
+  get facebookAppID(): string {
+    return this._facebookAppID;
   }
 }
 

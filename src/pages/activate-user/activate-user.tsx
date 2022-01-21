@@ -18,8 +18,11 @@ const ActivateUser = (): React.ReactElement => {
 
   useEffect(() => {
     ActivateUserCall( token )
-      .then((d: any) => {
-        setStatus(d);
+      .then((data: any) => {
+        setStatus({
+          success: data.success,
+          message: 'Cuenta activada exitosamente'
+        });
       })
       .catch(() => {
         setStatus({

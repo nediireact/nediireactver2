@@ -1,0 +1,14 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.StrongText {
+  &__text {
+    display: block;
+    font-size: $medium-text;
+    font-weight: $bold-font-weight;
+    line-height: $medium-text;
+    text-align: center;
+    width: 100%;
+    @extend .grey-text, .text-darken-4;
+  }
+}

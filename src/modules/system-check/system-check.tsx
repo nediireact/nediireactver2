@@ -54,7 +54,7 @@ const SystemCheck = (): React.ReactElement => {
     } else {
       redirect();
     }
-  });
+  }, [M]);
 
   return (<></>);
 };

@@ -1,0 +1,38 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.StandFilters {
+  padding: 15px 20px !important;
+  @extend .z-depth-1;
+
+  &__name,
+  &__classification {
+    display: block;
+    width: 100%;
+  }
+  
+  &__name {
+    font-size: $subtitle-title-cards;
+    margin-bottom: 10px;
+  }
+  
+  &__classification {
+    span {
+      @extend .grey-text, .text-darken-4;
+    }
+  }
+
+  &__price {
+    margin-top: 15px;
+    height: 10px !important;
+
+    .noUi-handle {
+      height: 20px !important;
+    }
+
+    .noUi-handle:before,
+    .noUi-handle:after {
+      height: 7px;
+    }
+  }
+}

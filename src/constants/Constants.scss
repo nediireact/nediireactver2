@@ -1,15 +1,19 @@
 @import 'materialize-css';
 
+$supertitle-size: 3em;
 $title-font-size: 2.3em;
-$title-font-weight: 400;
-$subtitle-font-size: 1.3em;
-$subtitle-title-font-weight: 400;
+$title-font-size-mobile: 1.8em;
+$subtitle-font-size: 1.4em;
+$subtitle-title-cards: 1.2em;
 $regular-text: 1em;
 $medium-text: 1.15em;
 $small-text: 0.8em;
 
+$subtitle-title-font-weight: 400;
+$title-font-weight: 400;
 $slim-font-weight: 200;
 $medium-font-weight: 600;
+$bold-font-weight: 500;
 
 $items-number: 1.5em;
 $icons-size: 2.3em;
@@ -18,6 +22,18 @@ $icons-size: 2.3em;
 $white: white;
 $fruit-salad: #4CAF50;
 
+$regular-border-radius: 8px;
+
 .lemon-black {
   background-color: #000103;
+}
+
+.GenericCard {
+  display: block;
+  overflow: hidden;
+  padding: 10px;
+  width: 100%;
+  border-radius: $regular-border-radius;
+  transition: all 0.5s;
+  @extend .z-depth-1;
 }

@@ -3,12 +3,12 @@ import {
 } from 'redux';
 import { UserReducer } from 'src/redux/reducers/user-reducer';
 import SystemReducer from 'src/redux/reducers/system-reducer';
-import CategoryReducer from 'src/redux/reducers/category-reducer';
+import StandReducer from 'src/redux/reducers/stand-reducer';
 
 const reducers = {
   user: UserReducer,
   system: SystemReducer,
-  categories: CategoryReducer
+  stand: StandReducer
 };
 
 export default combineReducers(reducers);
