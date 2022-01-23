@@ -25,6 +25,9 @@ import StandMealDetail from 'src/pages/stand-meal-detail/stand-meal-detail';
 import StandServices from 'src/pages/stand-services/stand-services';
 import StandVehicles from 'src/pages/stand-vehicles/stand-vehicles';
 import StandRealEstate from 'src/pages/stand-real-estate/stand-real-estate';
+import StanProductDetailPage from 'src/pages/stand-product-detail/stand-product-detail';
+import StandServiceDetailPage from 'src/pages/stand-service-detail/stand-service-detail';
+import StandVehicleDetailPage from 'src/pages/stand-vehicle-detail/stand-vehicle-detail';
 import {
   TermsAndConditions,
   PrivacyPolicy,
@@ -38,6 +41,21 @@ const Routes = (): React.ReactElement => {
   return (
     <Router forceRefresh={isMobileApp}>
       <Switch>
+        <Route path="/empresa/:standId/vehiculo/:vehicleId">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><StandVehicleDetailPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path="/empresa/:standId/servicio/:serviceId">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><StandServiceDetailPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path="/empresa/:standId/producto/:productId">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><StanProductDetailPage /></PersistGate>
+          </Provider>
+        </Route>
         <Route path="/empresa/:standId/producto/:mealId">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandMealDetail /></PersistGate>
