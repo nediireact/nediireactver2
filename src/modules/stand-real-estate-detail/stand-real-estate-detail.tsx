@@ -8,20 +8,20 @@ import {
 import GenericItemDetail from 'src/modules/generic-item-detail/generic-item-detail';
 import fetchData from 'src/modules/utils/fetch-data';
 
-const StandVehicleDetail = (): React.ReactElement => {
+const StandRealEstateDetail = (): React.ReactElement => {
   const history = useHistory();
   const params: any = useParams();
-  const [vehicle, setVehicle]: any = useState({});
+  const [item, setItem]: any = useState({});
 
   useEffect(() => {
-    fetchData(`vehicles?filter[slug]=${params.vehicleId}&include=classification,features,stand,features,vehicle_pictures,model,model.make,related`)
+    fetchData(`real-estates?filter[slug]=${params.realEstateId}&include=classification,real_estate_pictures`)
     .then((response: any) => {
       if (response.data.length === 0) {
         console.log('Error de servicio');
       } else {
-        const vehicleData = response.data[0];
-        if (!vehicleData) return history.replace('/');
-        setVehicle(vehicleData);
+        const serviceData = response.data[0];
+        if (!serviceData) return history.replace('/');
+        setItem(serviceData);
       }
     })
     .catch((error) => {
@@ -32,10 +32,10 @@ const StandVehicleDetail = (): React.ReactElement => {
   return (
     <>
       {
-        vehicle && vehicle.id ?
-          <GenericItemDetail item={vehicle}/> : null
+        item && item.id ?
+          <GenericItemDetail item={item}/> : null
       }
     </>
   );
 };
- export default StandVehicleDetail;
+ export default StandRealEstateDetail;

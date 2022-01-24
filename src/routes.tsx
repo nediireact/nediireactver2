@@ -28,6 +28,7 @@ import StandRealEstate from 'src/pages/stand-real-estate/stand-real-estate';
 import StanProductDetailPage from 'src/pages/stand-product-detail/stand-product-detail';
 import StandServiceDetailPage from 'src/pages/stand-service-detail/stand-service-detail';
 import StandVehicleDetailPage from 'src/pages/stand-vehicle-detail/stand-vehicle-detail';
+import StandRealEstateDetailPage from 'src/pages/stand-real-estate-detail/stand-real-estate-detail';
 import {
   TermsAndConditions,
   PrivacyPolicy,
@@ -41,24 +42,24 @@ const Routes = (): React.ReactElement => {
   return (
     <Router forceRefresh={isMobileApp}>
       <Switch>
-        <Route path="/empresa/:standId/vehiculo/:vehicleId">
+        <Route path="/empresa/:standId/inmuebles/:realEstateId">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><StandRealEstateDetailPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path="/empresa/:standId/vehiculos/:vehicleId">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandVehicleDetailPage /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/empresa/:standId/servicio/:serviceId">
+        <Route path="/empresa/:standId/servicios/:serviceId">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandServiceDetailPage /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/empresa/:standId/producto/:productId">
+        <Route path="/empresa/:standId/productos/:productId">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StanProductDetailPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path="/empresa/:standId/producto/:mealId">
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><StandMealDetail /></PersistGate>
           </Provider>
         </Route>
         <Route path="/empresa/:standId/menu/:mealId">

@@ -6,15 +6,13 @@ import {
   useHistory,
   useParams } from 'react-router';
 import fetchData from 'src/modules/utils/fetch-data';
-import mealsData from 'src/modules/stand-meals-detail/meals-data';
 import 'src/modules/stand-meals-detail/stand-meals-detail.scss';
-
 import GenericItemDetail from 'src/modules/generic-item-detail/generic-item-detail';
 
 const StandMealsDetail = (): React.ReactElement => {
   const history = useHistory();
   const params: any = useParams();
-  const [meal, setMeal]: any = useState(mealsData);
+  const [meal, setMeal]: any = useState({});
 
   useEffect(() => {
     fetchData(`meals?filter[slug]=${params.mealId}&include=meal_pictures,meal_addons,classification,stand`)
@@ -33,9 +31,12 @@ const StandMealsDetail = (): React.ReactElement => {
     });
   }, [fetchData]);
   return (
-      <div>
-        <GenericItemDetail item={meal}/>
-      </div>
+    <>
+    {
+      meal && meal.id ?
+        <GenericItemDetail item={meal}/> : null
+    }
+    </>
   );
 };
 
