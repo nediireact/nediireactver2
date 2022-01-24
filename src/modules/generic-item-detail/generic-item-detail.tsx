@@ -22,7 +22,22 @@ const GenericItemDetail = (props: any): React.ReactElement => {
             category={props.item.relationships.classification.data.attributes.name}
             name={props.item.attributes.name}/>
         </div>
-        <StandPictures images={props.item.relationships.meal_pictures.data}/>
+        {
+           props.item && props.item.type === 'Meal' ?
+           <StandPictures images={props.item.relationships.meal_pictures.data}/> : null
+        }
+        {
+           props.item && props.item.type === 'Product' ?
+           <StandPictures images={props.item.relationships.product_pictures.data}/> : null
+        }
+        {
+           props.item && props.item.type === 'Service' ?
+           <StandPictures images={props.item.relationships.service_pictures.data}/> : null
+        }
+        {
+           props.item && props.item.type === 'Vehicle' ?
+           <StandPictures images={props.item.relationships.vehicle_pictures.data}/> : null
+        }
         <div className='Description-movil hide-on-small-only'>
           <CommonLargeText text={props.item.attributes.description}/>
         </div>
