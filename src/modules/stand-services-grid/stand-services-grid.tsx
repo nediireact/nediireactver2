@@ -94,7 +94,7 @@ const StandServicesGrid = (props: any): React.ReactElement => {
             meals.map((i: any, index: number) => {
               return (
                 <BuyableItem key={index}
-                  type='servicio'
+                  type='servicios'
                   item={i.attributes}
                   standSlug={props.stand.attributes.slug} />
               );

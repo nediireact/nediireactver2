@@ -2,6 +2,10 @@
 @import 'src/constants/Constants.scss';
 
 .TextItemPrice {
+  span {
+    display: block;
+  }
+
   &--discount {
     text-decoration: line-through;
     @extend .grey-text;
@@ -11,7 +15,7 @@
     font-size: $title-font-size;
   }
 
-  &--TextItemPrice {
+  &--discount-off {
     font-size: $regular-text;
     line-height: 40px;
     margin-left: 5px;
