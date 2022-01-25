@@ -16,7 +16,9 @@ const NavBar = (props: any): React.ReactElement => {
   const dispatch = useDispatch();
   const system = useSelector((state: any) => state.system);
   const prefix = system.platform.prefix;
-  const logoURL = `${prefix}${logoFile}`;
+  const logoURL = system && system.configurations &&
+    system.configurations.id ?
+    system.configurations.attributes.img_logo : `${prefix}${logoFile}`;
   const sideNavRef: any = useRef(null);
   const sectionMenu = props.sectionMenu || [];
 

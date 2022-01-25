@@ -20,12 +20,13 @@ $icons-size: 2.3em;
 
 // Colors
 $white: white;
+$black: black;
 $fruit-salad: #4CAF50;
 
 $regular-border-radius: 8px;
 
 .lemon-black {
-  background-color: #000103;
+  background-color: $black;
 }
 
 .GenericCard {

@@ -18,7 +18,7 @@ const StandMealsDetail = (): React.ReactElement => {
     fetchData(`meals?filter[slug]=${params.mealId}&include=meal_pictures,meal_addons,classification,stand`)
     .then((response: any) => {
       console.log(response);
-      if ( response.data.length === 0 ) {
+      if ( !response.data.length ) {
         console.log('Error de platillo');
       } else {
         const mealsData = response.data[0];

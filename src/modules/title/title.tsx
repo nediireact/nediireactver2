@@ -2,7 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import 'src/modules/title/title.scss';
 
-const Title = (props: any): React.ReactElement => {
+type TitleInterface = {
+  text: string;
+  fullWidth?: boolean;
+  link?: string;
+  color?: string;
+  align?: String;
+  shadow?: boolean;
+}
+
+const Title = (props: TitleInterface): React.ReactElement => {
   return (
     <div className={`Title ${ props.fullWidth ? '' : 'row'}`}>
       {
@@ -15,7 +24,8 @@ const Title = (props: any): React.ReactElement => {
             className={`${ props.fullWidth ? '' : 'col s12 m8 l10'} Title__text`}
             style={{
               color: props.color,
-              textAlign: props.align ? props.align : 'center',
+              textAlign: props.align === 'right' ? 'right' :
+                props.align === 'left' ? 'left' : 'center',
               textShadow: props.shadow ? '0px 0px 2px rgba(0, 0, 0, 0.6)' : ''
             }}>
             {props.text}
@@ -23,7 +33,8 @@ const Title = (props: any): React.ReactElement => {
             className={`${ props.fullWidth ? '' : 'col s12 m8 l10'} Title__text`}
             style={{
               color: props.color,
-              textAlign: props.align ? props.align : 'center',
+              textAlign: props.align === 'right' ? 'right' :
+                props.align === 'left' ? 'left' : 'center',
               textShadow: props.shadow ? '0px 0px 2px rgba(0, 0, 0, 0.6)' : ''
             }}>
             {props.text}

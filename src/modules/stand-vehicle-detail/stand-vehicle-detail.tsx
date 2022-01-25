@@ -16,7 +16,7 @@ const StandVehicleDetail = (): React.ReactElement => {
   useEffect(() => {
     fetchData(`vehicles?filter[slug]=${params.vehicleId}&include=classification,features,stand,features,vehicle_pictures,model,model.make,related`)
     .then((response: any) => {
-      if (response.data.length === 0) {
+      if ( !response.data.length ) {
         console.log('Error de servicio');
       } else {
         const vehicleData = response.data[0];

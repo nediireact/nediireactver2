@@ -16,7 +16,7 @@ const StandServicesDetail = (): React.ReactElement => {
   useEffect(() => {
     fetchData(`services?filter[slug]=${params.serviceId}&include=classification,features,stand,service_pictures,related`)
     .then((response: any) => {
-      if (response.data.length === 0) {
+      if ( !response.data.length ) {
         console.log('Error de servicio');
       } else {
         const serviceData = response.data[0];

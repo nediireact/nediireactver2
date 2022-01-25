@@ -17,6 +17,11 @@ const StandDataLoader = (props: any): React.ReactElement => {
   const setMenu = (stand: any) => {
     const menu: any[] = [];
     menu.push({
+      to: '/expos',
+      text: 'Expos',
+      rightLine: true
+    });
+    menu.push({
       to: `/empresa/${stand.attributes.slug}`,
       text: 'Inicio',
       rightLine: true
@@ -60,10 +65,12 @@ const StandDataLoader = (props: any): React.ReactElement => {
   };
 
   useEffect(() => {
+    if ( stand && stand && stand[params.standId] && stand[params.standId].attributes ) {
+      setMenu(stand[params.standId]);
+    }
     fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones,ratings,pictures,expo,group,stand_news,stand_booking_questions,stand_booking_questions.options,survey_questions,city,city.state,city.state.country`)
       .then((response: any) => {
-        console.log('>>>>>> response', response.data);
-        if (response.data.length === 0) {
+        if ( !response.data.length ) {
           return history.replace('/');
         }
         const standData = response.data[0];
@@ -74,17 +81,16 @@ const StandDataLoader = (props: any): React.ReactElement => {
         console.log('Hubo un error', error);
         return history.replace('/');
       });
-    if ( stand && stand.attributes ) setMenu(stand);
   }, [fetchData]);
 
   return (
     <>
     {
-      stand.attributes ? <>
+      stand && stand && stand[params.standId] && stand[params.standId].attributes ? <>
         <StandHeader
-          stand={stand.attributes}
+          stand={stand[params.standId].attributes}
           size='medium'
-          ratings={stand.relationships.ratings.data} />
+          ratings={stand[params.standId].relationships.ratings.data} />
         <StandRouteNav />
       </> : null
     }

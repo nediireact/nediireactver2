@@ -6,6 +6,10 @@ import {
   useHistory,
   useParams
 } from 'react-router-dom';
+import {
+  useSelector,
+  useDispatch
+} from 'react-redux';
 import fetchData from 'src/modules/utils/fetch-data';
 import 'src/modules/expo-detail/expo-detail.scss';
 import ExpoDetailContent from 'src/modules/expo-detail/expo-detail-content';
@@ -14,23 +18,7 @@ import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-head
 import SubTitle from 'src/modules/sub-title/sub-title';
 import GroupGrid from 'src/modules/group-grid/group-grid';
 import QRCode from 'qrcode.react'; // https://www.npmjs.com/package/qrcode.react
-
-
-const expoData = {
-  attributes: {
-    img_picture: '',
-    name: '',
-    description: '',
-    real: true,
-    email: '',
-    slug: ''
-  },
-  relationships: {
-    groups: {
-      data: []
-    }
-  }
-};
+import SetExpoData from 'src/redux/actions/set-expo-data';
 
 const QRodeComponent = (): React.ReactElement => {
   const [canonicalURL, setCanonicalURL] = useState('');
@@ -52,9 +40,10 @@ const QRodeComponent = (): React.ReactElement => {
 };
 
 const ExpoDetailComponent = (): React.ReactElement => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const params: any = useParams();
-  const [expo, setExpo] = useState(expoData);
+  const expo = useSelector((state: any) => state.expo);
 
   useEffect(() => {
     fetchData(`expos?filter[slug]=${params.expoId}&include=groups`)
@@ -64,8 +53,7 @@ const ExpoDetailComponent = (): React.ReactElement => {
         } else {
           const expoData = response.data[0];
           if (!expoData) return history.replace('/');
-          console.log('expoData', expoData);
-          setExpo(expoData);
+          dispatch(SetExpoData(expoData));
         }
       })
       .catch((error) => {
@@ -74,23 +62,30 @@ const ExpoDetailComponent = (): React.ReactElement => {
   }, [fetchData]);
 
   return (
-    <div>
-      <ParallaxHeaderImage
-        size='large'
-        image={expo.attributes.img_picture}
-        title={expo.attributes.name}
-        email={expo.attributes.email}
-        indicator={!expo.attributes.real}/>
-      <HorizontalSpace size='small' />
-      <ExpoDetailContent description={expo.attributes.description} />
-      <HorizontalSpace size='medium' />
-      { expo.relationships.groups.data.length ? <SubTitle text='Pabellones en esta expo' /> : null }
-      <HorizontalSpace size='small' />
-      <GroupGrid data={expo.relationships.groups} expoId={params.expoId} />
-      <HorizontalSpace size='small' />
-      <QRodeComponent />
-      <HorizontalSpace size='small' />
-    </div>
+    <>
+    {
+      expo && expo[params.expoId] && expo[params.expoId].id ?
+        <>
+        <ParallaxHeaderImage
+          size='medium'
+          image={expo[params.expoId].attributes.img_picture}
+          title={expo[params.expoId].attributes.name}
+          email={expo[params.expoId].attributes.email}
+          indicator={!expo[params.expoId].attributes.real}/>
+        <HorizontalSpace size='small' />
+        <ExpoDetailContent description={expo[params.expoId].attributes.description} />
+        <HorizontalSpace size='medium' />
+        { expo[params.expoId].relationships.groups.data.length ? <SubTitle text='Pabellones en esta expo' /> : null }
+        <HorizontalSpace size='small' />
+        <GroupGrid
+          data={expo[params.expoId].relationships.groups.data}
+          expoId={params.expoId} />
+        <HorizontalSpace size='small' />
+        <QRodeComponent />
+        <HorizontalSpace size='small' />
+        </> : null
+    }
+    </>
   );
 };
 
