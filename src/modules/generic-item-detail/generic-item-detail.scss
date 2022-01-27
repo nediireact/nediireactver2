@@ -1,5 +1,18 @@
 @import 'materialize-css';
+@import 'src/constants/Constants.scss';
 
-.GenericCard {
-  padding: 12px !important;
+.GenericItemDetail {
+  .GenericCard {
+    padding: 12px !important;
+  }
+}
+
+.GenericItemDetailFeatures {
+  margin: 4px 0;
+  font-size: $regular-text;
+
+  i {
+    font-size: $regular-text;
+    margin-right: 4px;
+  }
 }
