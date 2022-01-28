@@ -1,9 +1,7 @@
 import React from 'react';
 import CommonLargeText from 'src/modules/stand-detail/stand-common-large-text';
-
-import StandPictures from 'src/modules/stand-detail/stand-pictures';
+import StandDetailGallery from 'src/modules/stand-detail-gallery/stand-detail-gallery';
 import QRCodeComponent from 'src/modules/stand-detail/stand-qr';
-
 import StandContactInfo from 'src/modules/stand-contact-info/stand-contact-info';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import StandOwnerInfo from 'src/modules/stand-owner-info/stand-owner-info';
@@ -18,7 +16,7 @@ const StandComponent = (props: any): React.ReactElement => {
       <HorizontalSpace size='small' />
       <div className='col s12 m8'>
         <CommonLargeText text={stand.attributes.description} />
-        <StandPictures images={stand.relationships.pictures.data} />
+        <StandDetailGallery images={stand.relationships.pictures.data} />
         <QRCodeComponent title={`QR code de ${stand.attributes.name}`}/>
       </div>
       <div className='col s12 m4'>

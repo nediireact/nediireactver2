@@ -77,7 +77,7 @@ const StandServicesGrid = (props: any): React.ReactElement => {
             updateItems={updateItems} />
           <HorizontalSpace size='small' />
           <PriceRangeFilter
-            maxPrice={props.stand.attributes.products_max_price + 100}
+            maxPrice={props.stand.attributes.services_max_price + 100}
             updateItems={updateItems} />
           <HorizontalSpace size='small' />
           <CheckFilter

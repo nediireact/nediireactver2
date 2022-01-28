@@ -16,7 +16,7 @@ const StandRealEstateDetail = (): React.ReactElement => {
   useEffect(() => {
     fetchData(`real-estates?filter[slug]=${params.realEstateId}&include=classification,real_estate_pictures`)
     .then((response: any) => {
-      if (response.data.length === 0) {
+      if ( !response.data.length ) {
         console.log('Error de servicio');
       } else {
         const serviceData = response.data[0];

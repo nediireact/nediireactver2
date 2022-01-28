@@ -75,7 +75,6 @@ const GroupDetailComponent = (): React.ReactElement => {
     fetchData(`stands/?filter[expo__slug]=${params.expoId}&filter[group__slug]=${params.groupId}&include=ratings`)
       .then((response: any) => {
         setStands(response);
-        console.log('Stands:', stands, response);
       })
       .catch((error) => {
         console.log('Hubo un error cargando los stands', error);
@@ -85,7 +84,7 @@ const GroupDetailComponent = (): React.ReactElement => {
   return (
     <div>
       <ParallaxHeaderImage
-        size='large'
+        size='medium'
         image={group.attributes.img_picture}
         title={group.attributes.name}
         email={group.attributes.email} />

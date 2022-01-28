@@ -22,7 +22,8 @@ const persistConfig = {
   whitelist: [
     'system',
     'user',
-    'stand'
+    'stand',
+    'expo'
   ]
 };
 

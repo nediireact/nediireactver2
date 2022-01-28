@@ -17,7 +17,7 @@ const StandProductDetail = (): React.ReactElement => {
   useEffect(() => {
     fetchData(`products?filter[slug]=${params.productId}&include=product_pictures,stand,classification,delivery_type`)
     .then((response: any) => {
-      if (response.data.length === 0) {
+      if ( !response.data.length ) {
         console.log('Error de producto');
       } else {
         const productsData = response.data[0];

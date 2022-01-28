@@ -1,3 +1,4 @@
+export const SET_SYSTEM_CONFIGURATIONS = 'SET_SYSTEM_CONFIGURATIONS';
 export const SWITCH_DARK_MODE = 'SWITCH_DARK_MODE';
 export const SET_MOBILE_PLATOFORM = 'SET_MOBILE_PLATOFORM';
 export const USER = 'USER';
@@ -6,3 +7,5 @@ export const FILE_PREFIX = {
 };
 export const CATEGORY_DATA = 'CATEGORY_DATA';
 export const STAND_DATA = 'STAND_DATA';
+export const EXPO_DATA = 'EXPO_DATA';
+export const GROUP_DATA = 'GROUP_DATA';
