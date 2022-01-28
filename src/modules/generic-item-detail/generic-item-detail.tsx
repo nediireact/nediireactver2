@@ -9,6 +9,7 @@ import StandMealsAddons from 'src/modules/stand-meals-detail/stand-meals-addons'
 import StrongText from 'src/modules/strong-text/strong-text';
 import ItemShoping from 'src/modules/item-shoping/item-shoping';
 import 'src/modules/generic-item-detail/generic-item-detail.scss';
+import GenericItemDetailFeatures from 'src/modules/generic-item-detail/generic-item-detail-features';
 
 const GenericItemDetail = (props: any): React.ReactElement => {
   const name = props.item.type === 'Vehicle' ?
@@ -18,7 +19,7 @@ const GenericItemDetail = (props: any): React.ReactElement => {
     props.item.attributes.name;
 
   return (
-    <div className='container row'>
+    <div className='container row GenericItemDetail'>
       <div className="col s12 m8">
         <div className='hide-on-med-and-up'>
           <HorizontalSpace size='small' />
@@ -65,7 +66,10 @@ const GenericItemDetail = (props: any): React.ReactElement => {
           {
             props.item && props.item.type === 'Meal' && (
               props.item.attributes.is_breakfast || props.item.attributes.is_meal || props.item.attributes.is_dinner
-            ) ? <FoodTime /> : null
+            ) ? <FoodTime
+                  is_breakfast={props.item.attributes.is_breakfast}
+                  is_meal={props.item.attributes.is_meal}
+                  is_dinner={props.item.attributes.is_dinner} /> : null
           }
           {
             props.item && props.item.type === 'Meal' ?
@@ -73,6 +77,11 @@ const GenericItemDetail = (props: any): React.ReactElement => {
               <StrongText text='Adicionales' />
               <StandMealsAddons mealsAddons={props.item.relationships.meal_addons} />
             </> : null
+          }
+          {
+            props.item && (
+              props.item.type === 'Product' || props.item.type === 'Vehicle' || props.item.type === 'RealEstate' || props.item.type === 'Service') ?
+              <GenericItemDetailFeatures features={props.item.relationships.features} /> : null
           }
           <ItemShoping/>
         </div>
