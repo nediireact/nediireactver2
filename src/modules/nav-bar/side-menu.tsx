@@ -8,7 +8,10 @@ const SideMenu = ( props: any ): React.ReactElement => {
       id='mobile-demo'
       ref={props.sideNavRef}
       onClick={props.closeSideNav}>
-      <MenuItems logo={props.logo} logout={props.logout} />
+      <MenuItems
+        sectionMenu={props.sectionMenu}
+        logo={props.logo}
+        logout={props.logout} />
     </ul>
   );
 };
