@@ -57,6 +57,7 @@ const NavBar = (props: any): React.ReactElement => {
         sideNavRef={sideNavRef}
         closeSideNav={closeSideNav}
         logout={logout}
+        sectionMenu={sectionMenu}
         logo={logoURL} />
     </>
   );

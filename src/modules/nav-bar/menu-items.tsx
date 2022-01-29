@@ -11,24 +11,22 @@ const SectionMenu = (props: any): React.ReactElement => {
         if ( !i.to || !i.text ) return null;
         if ( i.icon ) {
           return <li key={index} className={`Menu__item-with-icon ${
-                i.leftLine ? ' Menu__item-left-line' : null
+                i.leftLine ? ' Menu__item-left-line' : ''
               } ${
-                i.rightLine ? ' Menu__item-right-line' : null
+                i.rightLine ? ' Menu__item-right-line' : ''
               }`}>
               <Link
                 to={i.to}
-                className={`grey-text text-darken-3 Menu__item-with-icon${
-                  i.icon ? '--profile' : ''
-                }`}>
+                className='grey-text text-darken-3'>
                 <i className='material-icons'>{i.icon}</i>
                 <span>{i.text}</span>
               </Link>
             </li>;
         }
-        return <li key={index} className={`Menu__item ${
-              i.leftLine ? ' Menu__item-left-line' : null
+        return <li key={index} className={`${
+              i.leftLine ? ' Menu__item-left-line' : ''
             } ${
-              i.rightLine ? ' Menu__item-right-line' : null
+              i.rightLine ? ' Menu__item-right-line' : ''
             }`}>
             <Link to={i.to} className='grey-text text-darken-3'>
               {i.text}
@@ -57,11 +55,6 @@ const MenuItems = ( props: any ): React.ReactElement => {
       {
         props.sectionMenu ? <SectionMenu data={props.sectionMenu} /> : null
       }
-      {/* <li>
-        <Link to='/expos' className='grey-text text-darken-3'>
-          Expos
-        </Link>
-      </li> */}
       {
         userData && userData.user ?
         <>

@@ -27,10 +27,9 @@ $icon-size: 28px;
 .Menu {
   &__item-with-icon {
     i {
-      margin-right: 10px !important;
-
-      width: $icon-size;
+      width: $icon-size !important;
       height: $icon-size !important;
+      margin-right: 10px !important;
       border-radius: $icon-size;
       text-align: center;
       background-position: center;
@@ -38,9 +37,11 @@ $icon-size: 28px;
       background-repeat: no-repeat;
       @extend .cyan-text;
     }
-    
-    &--profile  i {
-      margin-top: 10px !important;
+
+    a {
+      display: flex !important;
+      flex-direction: row !important;
+      height: auto !important;
     }
   }
 
@@ -56,11 +57,6 @@ $icon-size: 28px;
 @media screen and (min-width: 993px) {
   .Menu {
     &__item-with-icon {
-      a, li {
-        line-height: initial !important;
-      }
-    }
-    &__item-with-icon {
       i {
         margin-right: auto !important;
         line-height: $icon-size !important;
@@ -68,18 +64,17 @@ $icon-size: 28px;
       }
       
       a {
+        display: inline-block !important;
+        line-height: initial !important;
         padding-top: 8px;
         padding-bottom: 8px;
         display: block;
         height: 100%;
       }
-    
-      &--profile  i {
-        margin-top: auto !important;
+
+      span {
+        font-size: 0.85em;
       }
-    }
-    &__item-with-icon span {
-      font-size: 0.85em;
     }
   }
 }
