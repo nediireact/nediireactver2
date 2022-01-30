@@ -75,7 +75,10 @@ const ExpoDetailComponent = (): React.ReactElement => {
         <HorizontalSpace size='small' />
         <ExpoDetailContent description={expo[params.expoId].attributes.description} />
         <HorizontalSpace size='medium' />
-        { expo[params.expoId].relationships.groups.data.length ? <SubTitle text='Pabellones en esta expo' /> : null }
+        {
+          expo[params.expoId].relationships.groups.data.length ?
+            <SubTitle text='Pabellones en esta expo' /> : null
+        }
         <HorizontalSpace size='small' />
         <GroupGrid
           data={expo[params.expoId].relationships.groups.data}

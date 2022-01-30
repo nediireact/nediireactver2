@@ -6,8 +6,12 @@ import StrongText from 'src/modules/strong-text/strong-text';
 const GroupItem = (props: any): React.ReactElement => {
   const color = props.item.attributes.color;
   const icon = props.item.attributes.icon;
+  const href = props.expoId ?
+    `/expos/${props.expoId}/${props.item.attributes.slug}` :
+    `/categorias/${props.item.attributes.slug}`;
+
   return (
-    <Link to={`/expos/${props.expoId}/${props.item.attributes.slug}`}>
+    <Link to={href}>
       <div className={`GroupItem ${props.col}`}>
         <div className='GroupItem__card'>
           <div
