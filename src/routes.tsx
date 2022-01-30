@@ -102,6 +102,11 @@ const Routes = (): React.ReactElement => {
             <PersistGate loading={null} persistor={persistor}><StandDetail /></PersistGate>
           </Provider>
         </Route>
+        <Route path="/categorias/:groupId">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><GroupDetail /></PersistGate>
+          </Provider>
+        </Route>
         <Route path="/expos/:expoId/:groupId">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><GroupDetail /></PersistGate>
