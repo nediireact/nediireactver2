@@ -26,6 +26,10 @@ $icon-size: 28px;
 
 .Menu {
   &__item-with-icon {
+    li {
+      line-height: initial !important;
+    }
+
     i {
       width: $icon-size !important;
       height: $icon-size !important;
@@ -47,6 +51,7 @@ $icon-size: 28px;
 
   &__item-left-line {
     border-left: solid 1px rgba($color:gray, $alpha: 0.3);
+    line-height: initial !important;
   }
 
   &__item-right-line {
