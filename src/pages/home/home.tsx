@@ -9,6 +9,7 @@ import Footer from 'src/modules/footer/footer';
 import HomeTopSlider from 'src/modules/home-top-slider/home-top-slider';
 import SystemConfigurationLoader from 'src/modules/system-configuration-loader/system-configuration-loader';
 import HomeCategorySlider from 'src/modules/home-category-slider/home-category-slider';
+import HomeProductAndServices from 'src/modules/home-products-and-services/home-products-and-services';
 
 const Home = (): React.ReactElement => {
   const [sectionMenu, setSectionMenu]: any = useState([]);
@@ -19,6 +20,7 @@ const Home = (): React.ReactElement => {
       <DefaultNavButtons setSectionMenu={setSectionMenu} />
       <HomeTopSlider />
       <HomeCategorySlider />
+      <HomeProductAndServices />
       <HorizontalSpace size='large' />
       <Footer />
       <SystemConfigurationLoader home={true} />

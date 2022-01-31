@@ -51,17 +51,17 @@ app.get('/expos', commonIndex);
 app.get('/expos/:expoId', commonIndex);
 app.get('/expos/:expoId/:groupId', commonIndex);
 app.get('/empresa/:standId', commonIndex);
-app.get('/empresa/:standId/menu', commonIndex);
 app.get('/empresa/:standId/productos', commonIndex);
-app.get('/empresa/:standId/producto/:productId', commonIndex);
+app.get('/empresa/:standId/productos/:productId', commonIndex);
 app.get('/empresa/:standId/news/:standNewsId', commonIndex);
+app.get('/empresa/:standId/menu', commonIndex);
 app.get('/empresa/:standId/menu/:mealId', commonIndex);
 app.get('/empresa/:standId/servicios', commonIndex);
-app.get('/empresa/:standId/servicio/:serviceId', commonIndex);
+app.get('/empresa/:standId/servicios/:serviceId', commonIndex);
 app.get('/empresa/:standId/vehiculos', commonIndex);
-app.get('/empresa/:standId/vehiculo/:vehicleId', commonIndex);
+app.get('/empresa/:standId/vehiculos/:vehicleId', commonIndex);
 app.get('/empresa/:standId/inmuebles', commonIndex);
-app.get('/empresa/:standId/inmueble/:realEstateId', commonIndex);
+app.get('/empresa/:standId/inmuebles/:realEstateId', commonIndex);
 app.get('/', commonIndex);
 
 app.listen(port, () => {

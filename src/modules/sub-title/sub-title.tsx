@@ -9,7 +9,7 @@ const SubTitle = (props: any): React.ReactElement => {
       }
       <div className={`${ props.fullWidth ? '' : 'col s12 m8 l10'} SubTitle__text`}
         style={{
-          color: props.color,
+          color: props.color ? props.color : '#424242',
           textAlign: props.align ? props.align : 'center',
           textShadow: props.shadow ? '0px 0px 2px rgba(0, 0, 0, 0.6)' : ''
         }}>

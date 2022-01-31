@@ -7,7 +7,7 @@ import BuyableItem from 'src/modules/buyable-item/buyable-item';
 
 const StandProducts = (props: any): React.ReactElement => {
   const [products, setProducts] = useState([]);
-  const baseURL = `products/?filter[stand]=${props.standId}`;
+  const baseURL = `products/?filter[stand]=${props.standId}&include=stand&fields[Stand]=name,slug`;
 
   useEffect(() => {
     fetchData(baseURL)
@@ -23,11 +23,9 @@ const StandProducts = (props: any): React.ReactElement => {
     {
       products.map((i: any, index: number) => {
         return (
-          <BuyableItem key={index} size='col s12 m4' truncate={true}
-            colorCard='white'
-            type='producto'
-            item={i.attributes}
-            standSlug={props.standSlug} />
+          <BuyableItem
+            key={index}
+            item={i} />
         );
       })
     }

@@ -12,7 +12,7 @@ const urlValues: any = {};
 
 const StandServicesGrid = (props: any): React.ReactElement => {
   const [meals, setMeals] = useState([]);
-  const baseURL = `services/?filter[stand]=${props.stand.id}&include=classification`;
+  const baseURL = `services/?filter[stand]=${props.stand.id}&include=classification,stand&fields[Stand]=name,slug`;
   const [classifications, setClassifications] = useState([]);
   const [addOns, setAddOns] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -93,10 +93,9 @@ const StandServicesGrid = (props: any): React.ReactElement => {
           {
             meals.map((i: any, index: number) => {
               return (
-                <BuyableItem key={index}
-                  type='servicios'
-                  item={i.attributes}
-                  standSlug={props.stand.attributes.slug} />
+                <BuyableItem
+                  key={index}
+                  item={i} />
               );
             })
           }
