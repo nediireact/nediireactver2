@@ -17,13 +17,18 @@ const StandDataLoader = (props: any): React.ReactElement => {
   const setMenu = (stand: any) => {
     const menu: any[] = [];
     menu.push({
+      to: '/',
+      text: 'Inicio',
+      rightLine: true
+    });
+    menu.push({
       to: '/expos',
       text: 'Expos',
       rightLine: true
     });
     menu.push({
       to: `/empresa/${stand.attributes.slug}`,
-      text: 'Inicio',
+      text: stand.attributes.name,
       rightLine: true
     });
     if ( stand.meta.meals ) {

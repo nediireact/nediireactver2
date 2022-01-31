@@ -29,6 +29,7 @@ import StanProductDetailPage from 'src/pages/stand-product-detail/stand-product-
 import StandServiceDetailPage from 'src/pages/stand-service-detail/stand-service-detail';
 import StandVehicleDetailPage from 'src/pages/stand-vehicle-detail/stand-vehicle-detail';
 import StandRealEstateDetailPage from 'src/pages/stand-real-estate-detail/stand-real-estate-detail';
+import CategoriesGridPage from 'src/pages/categories-grid/categories-grid';
 import {
   TermsAndConditions,
   PrivacyPolicy,
@@ -105,6 +106,11 @@ const Routes = (): React.ReactElement => {
         <Route path="/categorias/:groupId">
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><GroupDetail /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path="/categorias">
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><CategoriesGridPage /></PersistGate>
           </Provider>
         </Route>
         <Route path="/expos/:expoId/:groupId">

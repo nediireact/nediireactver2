@@ -67,13 +67,22 @@ const HomeCategorySlider = (): React.ReactElement => {
         <HorizontalSpace size='medium' />
         <SubTitle text='Categorías' />
         <Swiper
-          className='Swiper'
-          autoplay={true}
-          effect='slide'
-          spaceBetween={20}
-          slidesPerView={3}
-          loop={true}
-          onSwiper={onSwiper}
+          className='Swiper' autoplay={true} effect='slide'
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 0
+            },
+            601: {
+              slidesPerView: 2,
+              spaceBetween: 10
+            },
+            993: {
+              slidesPerView: 3,
+              spaceBetween: 20
+            }
+          }}
+          loop={true} onSwiper={onSwiper}
           pagination={{
             el: '.swiper-pagination', type: 'bullets', clickable: true
           }}
@@ -86,9 +95,7 @@ const HomeCategorySlider = (): React.ReactElement => {
                   className='Swiper__slide'
                   key={index}
                   virtualIndex={index}>
-                  <GroupItem
-                    key={index}
-                    item={item} />
+                  <GroupItem key={index} item={item} />
                 </SwiperSlide>
               );
             })
