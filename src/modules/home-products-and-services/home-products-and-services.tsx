@@ -20,7 +20,6 @@ const HomeProductAndServices = (): React.ReactElement => {
     <HorizontalSpace size='medium' />
     <div className='HomeProductAndServices blue-grey white-text'>
       <div className='container'>
-        <HorizontalSpace size='x-small' />
         <div className='row'>
           <GenericMiniSlider
             title='Lo mas vendidos'

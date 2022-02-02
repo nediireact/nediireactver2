@@ -53,7 +53,6 @@ const HomeCategorySlider = (): React.ReactElement => {
       });
   }, [fetchData]);
 
-
   const onSwiper = ( swiper: any ) => {
     setSwiperReference(swiper);
   };

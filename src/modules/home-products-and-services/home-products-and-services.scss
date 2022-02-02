@@ -1,8 +1,9 @@
 @import 'materialize-css';
 
 .HomeProductAndServices {
-  background-image:#99ffda;background-image:  
-  radial-gradient(at 54% 52%, hsla(118,95%,74%,1) 0, transparent 50%),  
-  radial-gradient(at 0% 100%, hsla(170,88%,79%,1) 0, transparent 41%),  
-  radial-gradient(at 98% 0%, hsla(261,71%,69%,1) 0, transparent 51%);
+  @extend .grey, .lighten-3;
+
+  .SubTitle {
+    margin-top: 30px;
+  }
 }
