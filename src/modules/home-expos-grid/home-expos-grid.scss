@@ -1,0 +1,52 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.HomeExpoGrid {
+  &__item {
+    position: relative;
+    height: 180px;
+    padding: 0 !important;
+    overflow: hidden;
+  }
+  
+  &__image {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: all 0.2s;
+  }
+
+  &__name {
+    position: absolute;
+    top: calc(50% - 10px);
+    left: 30px;
+    width: calc(100% - 60px);
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    font-size: 1.2em;
+    border: 1px solid $white;
+    @extend .white-text;
+  }
+
+  &__item:hover &__image {
+    filter: blur(2px);
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .HomeExpoGrid {
+    &__item {
+      height: 220px;
+    }
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .HomeExpoGrid {
+    &__item {
+      height: 280px;
+    }
+  }
+}

@@ -12,8 +12,8 @@ import fetchData from 'src/modules/utils/fetch-data';
 import SubTitle from 'src/modules/sub-title/sub-title';
 import BuyableItem from 'src/modules/buyable-item/buyable-item';
 
-const sliderNextButtonFile = '/assets/slider-button-next.svg';
-const sliderPrevButtonFile = '/assets/slider-button-prev.svg';
+const sliderNextButtonFile = '/assets/slider-button-2-next.svg';
+const sliderPrevButtonFile = '/assets/slider-button-2-prev.svg';
 
 const SlideAddons = ( props: any ): React.ReactElement => {
   const system: any = useSelector((state: any) => state.system);
@@ -86,13 +86,13 @@ const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElemen
     <>
     {
       items && items.length ?
-        <div className='GenericMiniSlider col s12 m3 l4'>
+        <div className='GenericMiniSlider col s12 m6 l4'>
           <SubTitle
             text={props.title}
             color='white'
             shadow={true} />
           <Swiper
-            className='Swiper' autoplay={true} effect='coverflow'
+            className='Swiper' autoplay={false} effect='coverflow'
             slidesPerView={1} spaceBetween={20}
             loop={true} onSwiper={onSwiper}
             pagination={{
