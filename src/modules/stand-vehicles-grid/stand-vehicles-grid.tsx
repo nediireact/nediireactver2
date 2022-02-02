@@ -12,7 +12,7 @@ const urlValues: any = {};
 
 const StandVehiclesGrid = (props: any): React.ReactElement => {
   const [meals, setMeals] = useState([]);
-  const baseURL = `vehicles/?filter[stand]=${props.stand.id}&include=classification,model,model.make`;
+  const baseURL = `vehicles/?filter[stand]=${props.stand.id}&include=classification,model,model.make,stand&fields[Stand]=name,slug`;
   const [classifications, setClassifications] = useState([]);
   const [addOns, setAddOns] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -92,15 +92,10 @@ const StandVehiclesGrid = (props: any): React.ReactElement => {
           <>
           {
             meals.map((i: any, index: number) => {
-              const name = `${i.attributes.year}
-                ${i.relationships.model.data.relationships.make.data.attributes.name}
-                ${i.relationships.model.data.attributes.name}`;
-              i.attributes.name = name;
               return (
-                <BuyableItem key={index}
-                  type='vehiculos'
-                  item={i.attributes}
-                  standSlug={props.stand.attributes.slug} />
+                <BuyableItem
+                  key={index}
+                  item={i} />
               );
             })
           }

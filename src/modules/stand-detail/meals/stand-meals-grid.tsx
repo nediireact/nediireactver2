@@ -1,3 +1,5 @@
+// DEPRECATED
+
 import React, {
   useEffect,
   useState
@@ -98,11 +100,9 @@ const StandMeals = (props: any): React.ReactElement => {
           {
             meals.map((i: any, index: number) => {
               return (
-                <BuyableItem key={index} size='col s12 m4' truncate={true}
-                  colorCard='white'
-                  type='platillo'
-                  item={i.attributes}
-                  standSlug={props.standSlug} />
+                <BuyableItem
+                  key={index}
+                  item={i} />
               );
             })
           }

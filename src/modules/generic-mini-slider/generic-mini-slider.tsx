@@ -7,11 +7,10 @@ import {
   SwiperSlide
 } from 'swiper/react';
 import { useSelector } from 'react-redux';
-import 'src/modules/home-category-slider/home-category-slider.scss';
+import 'src/modules/generic-mini-slider/generic-mini-slider.scss';
 import fetchData from 'src/modules/utils/fetch-data';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import GroupItem from 'src/modules/group-grid/group-item';
 import SubTitle from 'src/modules/sub-title/sub-title';
+import BuyableItem from 'src/modules/buyable-item/buyable-item';
 
 const sliderNextButtonFile = '/assets/slider-button-next.svg';
 const sliderPrevButtonFile = '/assets/slider-button-prev.svg';
@@ -42,14 +41,39 @@ const SlideAddons = ( props: any ): React.ReactElement => {
   );
 };
 
-const HomeCategorySlider = (): React.ReactElement => {
+interface GenericMiniSliderInterface {
+  urls: Array<any>;
+  stand?: any;
+  title: string;
+}
+
+const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElement => {
   const [swiperReference, setSwiperReference]: any = useState(null);
   const [items, setitems]: any = useState([]);
 
   useEffect(() => {
-    fetchData('groups')
-      .then((response: any) =>{
-        setitems(response);
+    const urls: any[] = [];
+    props.urls.forEach((i: string) => {
+      urls.push(new Promise((res) => {
+        fetchData(i)
+        .then((response: any) =>{
+          res(response);
+        });
+      }));
+    });
+
+    Promise.all(urls)
+      .then((data: any) => {
+        const results: Array<any> = [];
+        data.forEach((i: any) => {
+          i.data.forEach((j: any) => {
+            results.push(j);
+          });
+        });
+        setitems(results);
+      })
+      .catch((err: any) => {
+        console.log('error:', err);
       });
   }, [fetchData]);
 
@@ -59,42 +83,33 @@ const HomeCategorySlider = (): React.ReactElement => {
   };
 
   return (
-    <div className='container'>
+    <>
     {
-      items && items.data && items.data.length ?
-        <div className='HomeCategorySlider'>
-          <HorizontalSpace size='medium' />
-          <SubTitle text='Categorías' />
+      items && items.length ?
+        <div className='GenericMiniSlider col s12 m3 l4'>
+          <SubTitle
+            text={props.title}
+            color='white'
+            shadow={true} />
           <Swiper
-            className='Swiper' autoplay={true} effect='slide'
-            breakpoints={{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 15
-              },
-              601: {
-                slidesPerView: 2,
-                spaceBetween: 20
-              },
-              993: {
-                slidesPerView: 3,
-                spaceBetween: 25
-              }
-            }}
+            className='Swiper' autoplay={true} effect='coverflow'
+            slidesPerView={1} spaceBetween={20}
             loop={true} onSwiper={onSwiper}
             pagination={{
               el: '.swiper-pagination', type: 'bullets', clickable: true
-            }}
-          >
+            }}>
             {
-              items.data.map((item: any, index: any ) => {
+              items.map((item: any, index: any ) => {
                 if ( !item.attributes ) return null;
                 return (
                   <SwiperSlide
                     className='Swiper__slide'
                     key={index}
                     virtualIndex={index}>
-                    <GroupItem key={index} item={item} />
+                    <BuyableItem
+                      key={index}
+                      item={item}
+                      fullWidth={true} />
                   </SwiperSlide>
                 );
               })
@@ -103,8 +118,8 @@ const HomeCategorySlider = (): React.ReactElement => {
           </Swiper>
         </div> : null
     }
-    </div>
+    </>
   );
 };
 
-export default HomeCategorySlider;
+export default GenericMiniSlider;
