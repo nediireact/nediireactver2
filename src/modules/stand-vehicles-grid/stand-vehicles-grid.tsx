@@ -12,7 +12,8 @@ const urlValues: any = {};
 
 const StandVehiclesGrid = (props: any): React.ReactElement => {
   const [meals, setMeals] = useState([]);
-  const baseURL = `vehicles/?filter[stand]=${props.stand.id}&include=classification,model,model.make,stand&fields[Stand]=name,slug`;
+  const fields = 'name,img_picture,slug,stand,price,final_price,discount,short_description,model,year&fields[Make]=name';
+  const baseURL = `vehicles/?filter[stand]=${props.stand.id}&include=classification,model,model.make,stand&fields[Stand]=name,slug&fields[Vehicle]=${fields}`;
   const [classifications, setClassifications] = useState([]);
   const [addOns, setAddOns] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

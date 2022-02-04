@@ -54,9 +54,10 @@ const GroupDetailComponent = (): React.ReactElement => {
       .catch((error) => {
         console.log('Hubo un error', error);
       });
+    const commonStandFields = '&fields[Stand]=name,slug,img_logo,img_cover,ratings&fields[StandRating]=rating';
     const standsURL = params.expoId ?
-      `stands/?filter[expo__slug]=${params.expoId}&filter[group__slug]=${params.groupId}&include=ratings` :
-      `stands/?filter[group__slug]=${params.groupId}&include=ratings`;
+      `stands/?filter[expo__slug]=${params.expoId}&filter[group__slug]=${params.groupId}&include=ratings${commonStandFields}` :
+      `stands/?filter[group__slug]=${params.groupId}&include=ratings${commonStandFields}`;
     fetchData(standsURL)
       .then((response: any) => {
         setStands(response);

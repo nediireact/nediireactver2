@@ -6,6 +6,11 @@ const DefaultNavButtons = (props: any): React.ReactElement => {
   useEffect(() => {
     const menu: any[] = [];
     menu.push({
+      to: '/',
+      text: 'Inicio',
+      rightLine: true
+    });
+    menu.push({
       to: '/expos',
       text: 'Expos',
       rightLine: true

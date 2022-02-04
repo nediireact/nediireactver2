@@ -21,16 +21,16 @@ const StandDataLoader = (props: any): React.ReactElement => {
       text: 'Inicio',
       rightLine: true
     });
-    menu.push({
-      to: '/expos',
-      text: 'Expos',
-      rightLine: true
-    });
-    menu.push({
-      to: `/empresa/${stand.attributes.slug}`,
-      text: stand.attributes.name,
-      rightLine: true
-    });
+    // menu.push({
+    //   to: '/expos',
+    //   text: 'Expos',
+    //   rightLine: true
+    // });
+    // menu.push({
+    //   to: `/empresa/${stand.attributes.slug}`,
+    //   text: stand.attributes.name,
+    //   rightLine: true
+    // });
     if ( stand.meta.meals ) {
       menu.push({
         to: `/empresa/${stand.attributes.slug}/menu`,

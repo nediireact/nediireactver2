@@ -4,11 +4,12 @@ import GenericMiniSlider from 'src/modules/generic-mini-slider/generic-mini-slid
 import 'src/modules/home-products-and-services/home-products-and-services.scss';
 
 const HomeProductAndServices = (): React.ReactElement => {
-  const productsURL = 'products/?include=stand';
-  const servicesURL = 'services/?include=stand';
-  const vehiclesURL = 'vehicles/?include=stand,model,model.make';
-  const mealsURL = 'meals/?include=stand';
-  const realEstateURL = 'real-estates/?include=stand';
+  const commonFields = 'name,img_picture,slug,stand,price,final_price,discount,created,times_selled,short_description';
+  const productsURL = `products/?include=stand&fields[Product]=${commonFields}`;
+  const servicesURL = `services/?include=stand&fields[Service]=${commonFields}`;
+  const vehiclesURL = `vehicles/?include=stand,model,model.make&fields[Vehicle]=${commonFields},model,year&fields[Make]=name`;
+  const mealsURL = `meals/?include=stand&fields[Meal]=${commonFields}`;
+  const realEstateURL = `real-estates/?include=stand&fields[RealEstate]=${commonFields}`;
 
   const standURL = '&fields[Stand]=name,slug&page[number]=1&page[size]=1';
   const bestSeller = '&sort=-times_selled';

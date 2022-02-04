@@ -30,6 +30,7 @@ import StandServiceDetailPage from 'src/pages/stand-service-detail/stand-service
 import StandVehicleDetailPage from 'src/pages/stand-vehicle-detail/stand-vehicle-detail';
 import StandRealEstateDetailPage from 'src/pages/stand-real-estate-detail/stand-real-estate-detail';
 import CategoriesGridPage from 'src/pages/categories-grid/categories-grid';
+import SearchResultsPage from 'src/pages/search-results/search-results';
 import {
   TermsAndConditions,
   PrivacyPolicy,
@@ -126,6 +127,11 @@ const Routes = (): React.ReactElement => {
         <Route path='/expos'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><Expos /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/buscador'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><SearchResultsPage /></PersistGate>
           </Provider>
         </Route>
         <Route path="/activate/:token">

@@ -12,7 +12,8 @@ const urlValues: any = {};
 
 const StandRealEstateGrid = (props: any): React.ReactElement => {
   const [meals, setMeals] = useState([]);
-  const baseURL = `real-estates/?filter[stand]=${props.stand.id}&include=classification,stand&fields[Stand]=name,slug`;
+  const fields = 'name,img_picture,slug,stand,price,final_price,discount,short_description';
+  const baseURL = `real-estates/?filter[stand]=${props.stand.id}&include=classification,stand&fields[Stand]=name,slug&fields[RealEstate]=${fields}`;
   const [classifications, setClassifications] = useState([]);
   const [addOns, setAddOns] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

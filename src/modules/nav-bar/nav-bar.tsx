@@ -9,6 +9,7 @@ import SideMenu from 'src/modules/nav-bar/side-menu';
 import MenuItems from 'src/modules/nav-bar/menu-items';
 import { SetUserData } from 'src/redux/actions/user-actions';
 import { useDispatch } from 'react-redux';
+import NavSearchBox from 'src/modules/nav-search-box/nav-search-box';
 
 const logoFile = '/assets/logo.jpg';
 
@@ -34,18 +35,23 @@ const NavBar = (props: any): React.ReactElement => {
 
   return (
     <>
-      <div className='navbar-fixed'>
+      <div className='NavBar navbar-fixed'>
         <nav className='white black-text'>
           <div className='nav-wrapper container'>
-            <Link to='/' className='brand-logo Logo'
+            <Link to='/' className='brand-logo left Logo'
               style={{
                 backgroundImage: `url(${logoURL})`
               }}>
             </Link>
-            <a href='#' data-target='mobile-demo' className='sidenav-trigger cyan-text'>
+            <NavSearchBox updateQuery={props.updateQuery} />
+            <a href='#'
+              data-target='mobile-demo'
+              className='sidenav-trigger cyan-text right'>
               <i className='material-icons'>menu</i>
             </a>
-            <ul id='nav-mobile' className='right hide-on-med-and-down Menu'>
+            <ul
+              id='nav-mobile'
+              className='right hide-on-med-and-down Menu'>
               <MenuItems
                 logout={logout}
                 sectionMenu={sectionMenu} />
