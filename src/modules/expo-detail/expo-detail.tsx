@@ -46,7 +46,7 @@ const ExpoDetailComponent = (): React.ReactElement => {
   const expo = useSelector((state: any) => state.expo);
 
   useEffect(() => {
-    fetchData(`expos?filter[slug]=${params.expoId}&include=groups`)
+    fetchData(`expos?filter[slug]=${params.expoId}&include=groups&fields[Group]=name,img_picture,slug`)
       .then((response: any) => {
         if (response.data.length === 0) {
           console.log('Error, expo no existe');

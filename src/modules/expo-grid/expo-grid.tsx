@@ -18,7 +18,7 @@ const ExpoGrid = (): React.ReactElement => {
   const headerPictureURL = `${prefix}${headerPictureFile}`;
 
   useEffect(() => {
-    fetchData('expos')
+    fetchData('expos?fields[Expo]=name,img_picture,slug,real')
       .then((response: any) =>{
         setitems(response);
       });

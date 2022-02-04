@@ -52,9 +52,9 @@ const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElemen
   const [items, setitems]: any = useState([]);
 
   useEffect(() => {
-    const urls: any[] = [];
+    const promises: any[] = [];
     props.urls.forEach((i: string) => {
-      urls.push(new Promise((res) => {
+      promises.push(new Promise((res) => {
         fetchData(i)
         .then((response: any) =>{
           res(response);
@@ -62,7 +62,7 @@ const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElemen
       }));
     });
 
-    Promise.all(urls)
+    Promise.all(promises)
       .then((data: any) => {
         const results: Array<any> = [];
         data.forEach((i: any) => {

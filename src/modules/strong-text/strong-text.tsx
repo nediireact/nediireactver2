@@ -7,7 +7,7 @@ const StrongText = (props: any): React.ReactElement => {
       {
         props.fullWidth ? null : <em className='col m2 l1 hide-on-small-only'></em>
       }
-      <div className={`${ props.fullWidth ? '' : 'col s12 m8 l10'} StrongText__text`}
+      <div className={`${ props.fullWidth ? '' : 'col s12 m8 l10'} StrongText__text truncate`}
         style={{
           color: props.color,
           textAlign: props.align ? props.align : 'center',

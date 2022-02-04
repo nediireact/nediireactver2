@@ -47,7 +47,7 @@ const HomeCategorySlider = (): React.ReactElement => {
   const [items, setitems]: any = useState([]);
 
   useEffect(() => {
-    fetchData('groups')
+    fetchData('groups/?fields[Group]=name,img_picture,slug')
       .then((response: any) =>{
         setitems(response);
       });
