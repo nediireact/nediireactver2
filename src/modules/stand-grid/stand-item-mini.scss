@@ -1,11 +1,10 @@
 @import 'materialize-css';
 @import 'src/constants/Constants.scss';
 
-.HomeStandsGrid {
-  &__item {
-    display: block;
-    padding: 7px;
-  }
+.StandItemMini {
+  display: block;
+  position: relative;
+  padding: 7px;
   
   &__image {
     position: relative;
@@ -25,12 +24,34 @@
     padding: 4px 10px;
     @extend .black-text;
   }
+
+  &__restaurant {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border: 2px solid white;
+    border-radius: 3px;
+    z-index: 2;
+    right: 5px;
+    top: 5px;
+    text-align: center;
+  }
 }
 
 @media screen and (min-width: 601px) {
-  .HomeStandsGrid {
+  .StandItemMini {
+    .Ratings {
+      margin-top: 10px !important;
+    }
+
+    &__name {
+      font-weight: bold;
+    }
+
     &__image {
       height: 110px;
+
       &--restaurants {
         height: 200px;
       }
@@ -39,9 +60,10 @@
 }
 
 @media screen and (min-width: 993px) {
-  .HomeStandsGrid {
+  .StandItemMini {
     &__image {
       height: 130px;
+
       &--restaurants {
         height: 230px;
       }

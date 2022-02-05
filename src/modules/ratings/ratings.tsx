@@ -31,7 +31,10 @@ const Ratings = (props: any): React.ReactElement => {
       className='tooltipped Ratings'
       data-position='bottom'
       data-tooltip={props.tooltip}
-      ref={starComponentRef}>
+      ref={starComponentRef}
+      style={{
+        margin: props.centered ? '0 auto' : ''
+      }}>
       {
         stars.map((i: any) => {
           return (

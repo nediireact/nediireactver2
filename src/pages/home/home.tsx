@@ -22,10 +22,9 @@ const Home = (): React.ReactElement => {
       <DefaultNavButtons setSectionMenu={setSectionMenu} />
       <HomeTopSlider />
       <HomeCategorySlider />
+      <HomeProductAndServices />
       <HomeExpoGrid />
       <HomeStandsGrid />
-      <HomeProductAndServices />
-      <HomeStandsGrid onlyRestaurants={true} />
       <HorizontalSpace size='large' />
       <Footer />
       <SystemConfigurationLoader home={true} />

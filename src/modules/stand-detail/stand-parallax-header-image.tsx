@@ -1,3 +1,5 @@
+// DEPRECATED
+
 import React from 'react';
 import 'src/modules/stand-detail/stand-parallax-header-image.scss';
 import Title from 'src/modules/title/title';
@@ -18,7 +20,7 @@ const StandParallaxHeaderImage = (props: any): React.ReactElement => {
             {
               props.restaurant ?
               <div className='StandParallaxHeaderImage__restaurant-indicator'>
-                <i className='material-icons center white-text right red'>local_dining</i>
+                <i className='material-icons center white-text right red'>restaurant</i>
               </div> : null
             }
             <div className='StandParallaxHeaderImage__dummy-space'></div>

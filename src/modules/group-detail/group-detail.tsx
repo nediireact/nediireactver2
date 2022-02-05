@@ -7,7 +7,6 @@ import {
   useParams
 } from 'react-router-dom';
 import fetchData from 'src/modules/utils/fetch-data';
-import 'src/modules/expo-detail/expo-detail.scss';
 import GroupDetailContent from 'src/modules/group-detail/group-detail-content';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
@@ -54,13 +53,14 @@ const GroupDetailComponent = (): React.ReactElement => {
       .catch((error) => {
         console.log('Hubo un error', error);
       });
-    const commonStandFields = '&fields[Stand]=name,slug,img_logo,img_cover,ratings&fields[StandRating]=rating';
+    const commonStandFields = '&fields[Stand]=name,slug,img_logo,img_cover,ratings,slogan,restaurant&fields[StandRating]=rating';
     const standsURL = params.expoId ?
       `stands/?filter[expo__slug]=${params.expoId}&filter[group__slug]=${params.groupId}&include=ratings${commonStandFields}` :
       `stands/?filter[group__slug]=${params.groupId}&include=ratings${commonStandFields}`;
     fetchData(standsURL)
       .then((response: any) => {
         setStands(response);
+        console.log(response);
       })
       .catch((error) => {
         console.log('Hubo un error cargando los stands', error);

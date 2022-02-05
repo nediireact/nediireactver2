@@ -7,7 +7,7 @@ const HomeProductAndServices = (): React.ReactElement => {
   const commonFields = 'name,img_picture,slug,stand,price,final_price,discount,created,times_selled,short_description';
   const productsURL = `products/?include=stand&fields[Product]=${commonFields}`;
   const servicesURL = `services/?include=stand&fields[Service]=${commonFields}`;
-  const vehiclesURL = `vehicles/?include=stand,model,model.make&fields[Vehicle]=${commonFields},model,year&fields[Make]=name`;
+  const vehiclesURL = `vehicles/?include=stand,model,model.make&fields[Vehicle]=${commonFields},model,year&fields[VehicleMake]=name&fields[VehicleModel]=name,make`;
   const mealsURL = `meals/?include=stand&fields[Meal]=${commonFields}`;
   const realEstateURL = `real-estates/?include=stand&fields[RealEstate]=${commonFields}`;
 

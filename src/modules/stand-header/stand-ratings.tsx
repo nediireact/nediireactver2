@@ -1,18 +1,14 @@
-// DEPRECATED
-
 import React, {
   useState
 } from 'react';
 import Ratings from 'src/modules/ratings/ratings';
 import Modal from 'src/modules/modal/modal';
 
-const modelInterface = {
-  open: () => null,
-  close: () => null
-};
-
-
-const StandRatings = (props: any): React.ReactElement => {
+const StandRatings = (): React.ReactElement => {
+  const modelInterface = {
+    open: () => null,
+    close: () => null
+  };
   const [modal, setModal] = useState(modelInterface);
   const [modalSuccess, setModalSuccess] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
@@ -21,17 +17,6 @@ const StandRatings = (props: any): React.ReactElement => {
   const onCloseEnd = () => {
     modal.close();
   };
-
-  const ratings: any[] = props.ratings || [];
-  let score = 0;
-  if ( ratings.length > 1 ) {
-    for (let i = 0; i < ratings.length; i++) {
-      score += ratings[i].attributes.rating;
-    }
-    score = score / ratings.length;
-  } else if ( ratings.length === 1 ) {
-    score = ratings[0].attributes.rating;
-  }
 
   const starCB = (e: any) => {
     setModalSuccess(true);
@@ -49,10 +34,10 @@ const StandRatings = (props: any): React.ReactElement => {
         message={modalMessage}
         onCloseEnd={onCloseEnd} />
       <Ratings
-        score={score}
+        score={2}
         size='xxx-large'
         onClick={starCB}
-        tooltip={`${ratings.length} reseña${ratings.length === 1 ? '' : 's'}`} />
+        tooltip={`${666} reseña${false ? '' : 's'}`} />
     </>
   );
 };

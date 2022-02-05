@@ -5,17 +5,11 @@
   width: 100%;
   margin-bottom: 20px;
 
-  &__card {
-    padding: 10px 10px 20px;
-    display: block;
-    width: 100%;
-    border-radius: 8px;
-    @extend .z-depth-1;
-    transition: all 0.5s;
+  .GenericCard {
     position: relative;
   }
 
-  &__card:hover {
+  .GenericCard:hover {
     @extend .z-depth-3;
   }
 

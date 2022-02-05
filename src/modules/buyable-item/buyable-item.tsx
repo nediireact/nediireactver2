@@ -34,15 +34,18 @@ const BuyableItem = (props: any): React.ReactElement => {
           }
         </div>
         <div className='BuyableItem__info'>
+          <span className='orange-text text-accent-4'>
+            Vendido por {item.relationships.stand.data.attributes.name}
+          </span>
           <span className='BuyableItem__name grey-text text-darken-4 truncate'>
             {name}
           </span>
-          <span className='BuyableItem__price grey-text text-darken-4'>
+          <span className='BuyableItem__price green-text text-darken-3'>
             {getMoneyFormat(item.attributes.final_price)}
           </span>
           {
             item.attributes.discount ?
-              <span className='BuyableItem__discount green-text text-darken-3'>
+              <span className='BuyableItem__discount red-text text-lighten-2'>
                 {getMoneyFormat(item.attributes.price)}
               </span> : null
           }

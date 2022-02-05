@@ -5,15 +5,11 @@
   width: 100%;
   margin-bottom: 20px;
 
-  &__card {
-    padding: 10px;
-    width: 100%;
-    border-radius: 8px;
-    transition: all 0.5s;
-    @extend .z-depth-1;
+  .GenericCard {
+    position: relative;
   }
 
-  &__card:hover {
+  .GenericCard:hover {
     @extend .z-depth-3;
   }
 
@@ -54,11 +50,36 @@
 
   &__slogan {
     display: block;
+    width: 100%;
     padding: 0 0 15px;
+    text-align: center;
+  }
+
+  &__restaurant {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border: 2px solid white;
+    border-radius: 3px;
+    z-index: 2;
+    right: 8px;
+    top: 8px;
     text-align: center;
   }
 
   .StrongText {
     margin: 0 auto 10px !important;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .StandItem {
+    &__restaurant {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 34px !important;
+    }
   }
 }
