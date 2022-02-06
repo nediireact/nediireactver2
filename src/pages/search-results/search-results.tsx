@@ -20,7 +20,7 @@ const useQuery = () => {
 
 const SearchResultsPage = (): React.ReactElement => {
   const [sectionMenu, setSectionMenu]: any = useState([]);
-  const [items, setitems]: any = useState([]);
+  const [items, setitems]: any = useState({});
   const params: any = useQuery();
 
   const updateQuery = ( queryParameter?: string ) => {
@@ -33,7 +33,7 @@ const SearchResultsPage = (): React.ReactElement => {
       `services/?include=${commonURL}&fields[Service]=${commonFields}`,
       `meals/?include=${commonURL}&fields[Meal]=${commonFields}`,
       `real-estates/?include=${commonURL}&fields[RealEstate]=${commonFields}`,
-      `vehicles/?include=model,model.make,${commonURL}&fields[Vehicle]=${commonFields},model,year&fields[Make]=name`,
+      `vehicles/?include=model,model.make,${commonURL}&fields[Vehicle]=${commonFields},model,year&fields[VehicleMake]=name&fields[VehicleModel]=name,make`,
       `expos?fields[Expo]=name,img_picture,slug,real&filter[search]=${query}`,
       `groups/?fields[Group]=name,img_picture,slug&filter[search]=${query}`,
       `stands/?&fields[Stand]=name,slug,img_logo,img_cover,ratings&fields[StandRating]=rating&filter[search]=${query}`
@@ -50,11 +50,29 @@ const SearchResultsPage = (): React.ReactElement => {
 
     Promise.all(promises)
       .then((data: any) => {
-        const results: Array<any> = [];
+        const results: any = {
+          expos: [],
+          groups: [],
+          stands: [],
+          items: [],
+          count: 0
+        };
         data.forEach((i: any) => {
-          i.data.forEach((j: any) => {
-            results.push(j);
-          });
+          if ( i.data && i.data.length ) {
+            results.count += i.data.length;
+            const type = i.data[0].type;
+            if ( type === 'Expo' ) {
+              results.expos = i.data;
+            } else if ( type === 'Group' ) {
+              results.groups = i.data;
+            } else if ( type === 'Stand' ) {
+              results.stands = i.data;
+            } else {
+              i.data.forEach((j: any) => {
+                results.items.push(j);
+              });
+            }
+          }
         });
         setitems(results);
       })
@@ -71,7 +89,7 @@ const SearchResultsPage = (): React.ReactElement => {
     <>
       <NavBar sectionMenu={sectionMenu} updateQuery={updateQuery} />
       <DefaultNavButtons setSectionMenu={setSectionMenu} />
-      <SearchResults items={items} />
+      <SearchResults results={items} />
       <Footer />
       <SystemConfigurationLoader home={true} />
       <SystemCheck />

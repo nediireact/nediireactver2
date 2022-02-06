@@ -1,6 +1,6 @@
 import React from 'react';
 import Title from 'src/modules/title/title';
-import StandRatings from 'src/modules/stand-detail/stand-ratings';
+import StandRatings from 'src/modules/stand-header/stand-ratings';
 import 'src/modules/stand-header/stand-header.scss';
 import { Link } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ const StandHeader = (props: any): React.ReactElement => {
             {
               stand.restaurant ?
               <div className='StandHeader__restaurant-indicator'>
-                <i className='material-icons center white-text right red'>local_dining</i>
+                <i className='material-icons center white-text right red'>restaurant</i>
               </div> : null
             }
             <div className='StandHeader__dummy-space'></div>
@@ -39,7 +39,7 @@ const StandHeader = (props: any): React.ReactElement => {
                 align='left'
                 fullWidth={true}
                 shadow={true} />
-              <StandRatings ratings={props.ratings} />
+              <StandRatings />
               {
                 stand.slogan ?
                   <div className='StandHeader__slogan truncate'>{stand.slogan}</div> : null

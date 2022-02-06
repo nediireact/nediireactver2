@@ -6,16 +6,7 @@
   margin-bottom: 20px;
   box-sizing: border-box;
 
-  &__card {
-    padding: 10px;
-    width: 100%;
-    border-radius: 8px;
-    transition: all 0.5s;
-    @extend .z-depth-1;
-  }
-  
-  &__card:hover {
-    transition: all 0.5s;
+  .GenericCard:hover {
     @extend .z-depth-3;
   }
 

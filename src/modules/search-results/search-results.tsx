@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import BuyableItem from 'src/modules/buyable-item/buyable-item';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
+import SubTitle from 'src/modules/sub-title/sub-title';
 import ExpoItem from 'src/modules/expo-grid/expo-item';
 import GroupItem from 'src/modules/group-grid/group-item';
 import StandItem from 'src/modules/stand-grid/stand-item';
@@ -21,7 +22,7 @@ const SearchResults = (props: any): React.ReactElement => {
   const headerPictureURL = `${prefix}${headerPictureFile}`;
   const params: any = useQuery();
   const query: string = params.get('q');
-  const title = `${props.items.length} resultado${props.items.length > 1 ? 's' : ''} para "${query}".`;
+  const title = `${props.results.count ? props.results.count : 0} resultado${props.results.count > 1 ? 's' : ''} para "${query}".`;
 
   return (
     <>
@@ -30,21 +31,59 @@ const SearchResults = (props: any): React.ReactElement => {
         gradientOpacity='0.2'
         size='x-small'
         title={title} />
-    <HorizontalSpace size='small' />
-    <div className='container row'>
+    <div className='container'>
+      <HorizontalSpace size='small' />
       {
-        props.items && props.items.length ?
-          props.items.map((item: any, index: any ) => {
-            if ( !item.attributes ) return null;
-            if ( item.type === 'Expo' ) {
+        props.results && props.results.items && props.results.items.length ?
+          <div className='row'>
+          <HorizontalSpace size='small' />
+          <SubTitle
+            text={`${props.results.items.length} elemento${props.results.count > 1 ? 's' : ''}`}
+            align='left'
+            fullWidth={true} />
+          <HorizontalSpace size='small' />
+          {
+            props.results.items.map((item: any, index: any ) => {
               return (
-                <ExpoItem
+                <BuyableItem
                   key={index}
-                  item={item}
-                  col='col s12 m6 l4' />
+                  item={item} />
               );
-            }
-            if ( item.type === 'Group' ) {
+            })
+          }
+          </div> : null
+      }
+      {
+        props.results && props.results.stands && props.results.stands.length ?
+          <div className='row'>
+          <HorizontalSpace size='small' />
+          <SubTitle
+            text={`${props.results.stands.length} empresas`}
+            align='left'
+            fullWidth={true} />
+          <HorizontalSpace size='small' />
+          {
+            props.results.stands.map((item: any, index: any ) => {
+              return (
+                <StandItem
+                  key={index}
+                  item={item} />
+              );
+            })
+          }
+          </div> : null
+      }
+      {
+        props.results && props.results.groups && props.results.groups.length ?
+          <div className='row'>
+          <HorizontalSpace size='small' />
+          <SubTitle
+            text={`${props.results.groups.length} categorías`}
+            align='left'
+            fullWidth={true} />
+          <HorizontalSpace size='small' />
+          {
+            props.results.groups.map((item: any, index: any ) => {
               return (
                 <GroupItem
                   key={index}
@@ -52,23 +91,33 @@ const SearchResults = (props: any): React.ReactElement => {
                   expoId={props.expoId}
                   col='col s12 m6 l4' />
               );
-            }
-            if ( item.type === 'Stand' ) {
+            })
+          }
+          </div> : null
+      }
+      {
+        props.results && props.results.expos && props.results.expos.length ?
+          <div className='row'>
+          <HorizontalSpace size='small' />
+          <SubTitle
+            text={`${props.results.expos.length} expos`}
+            align='left'
+            fullWidth={true} />
+          <HorizontalSpace size='small' />
+          {
+            props.results.expos.map((item: any, index: any ) => {
               return (
-                <StandItem
+                <ExpoItem
                   key={index}
-                  item={item} />
+                  item={item}
+                  col='col s12 m6 l4' />
               );
-            }
-            return (
-              <BuyableItem
-                key={index}
-                item={item} />
-            );
-          }) : null
+            })
+          }
+          </div> : null
       }
     </div>
-    <HorizontalSpace size='small' />
+    <HorizontalSpace size='medium' />
     </>
   );
 };

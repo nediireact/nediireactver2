@@ -92,7 +92,7 @@ const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElemen
             color='white'
             shadow={true} />
           <Swiper
-            className='Swiper' autoplay={false} effect='coverflow'
+            className='Swiper' autoplay={true} effect='coverflow'
             slidesPerView={1} spaceBetween={20}
             loop={true} onSwiper={onSwiper}
             pagination={{
