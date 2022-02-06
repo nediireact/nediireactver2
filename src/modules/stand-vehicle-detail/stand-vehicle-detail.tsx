@@ -22,6 +22,7 @@ const StandVehicleDetail = (): React.ReactElement => {
         const vehicleData = response.data[0];
         if (!vehicleData) return history.replace('/');
         setVehicle(vehicleData);
+        console.log('Datos', vehicleData);
       }
     })
     .catch((error) => {

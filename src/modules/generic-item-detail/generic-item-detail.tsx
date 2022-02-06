@@ -10,6 +10,11 @@ import StrongText from 'src/modules/strong-text/strong-text';
 import ItemShoping from 'src/modules/item-shoping/item-shoping';
 import 'src/modules/generic-item-detail/generic-item-detail.scss';
 import GenericItemDetailFeatures from 'src/modules/generic-item-detail/generic-item-detail-features';
+import VehicleAttributes from 'src/modules/vehicle-attributes/vehicle-attributes';
+import ServicesAttributes from 'src/modules/services-attributes/services-attributes';
+import ProductAttributes from 'src/modules/product-attributes/product-attributes';
+import TextWhitIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
+import RealStateAttributes from 'src/modules/real-estate-attributes/real-estate-attributes';
 
 const GenericItemDetail = (props: any): React.ReactElement => {
   const name = props.item.type === 'Vehicle' ?
@@ -30,23 +35,23 @@ const GenericItemDetail = (props: any): React.ReactElement => {
         </div>
         {
            props.item && props.item.type === 'Meal' ?
-           <StandDetailGallery images={props.item.relationships.meal_pictures.data}/> : null
+            <StandDetailGallery images={props.item.relationships.meal_pictures.data} /> : null
         }
         {
            props.item && props.item.type === 'Product' ?
-           <StandDetailGallery images={props.item.relationships.product_pictures.data}/> : null
+            <StandDetailGallery images={props.item.relationships.product_pictures.data} /> : null
         }
         {
            props.item && props.item.type === 'Service' ?
-           <StandDetailGallery images={props.item.relationships.service_pictures.data}/> : null
+            <StandDetailGallery images={props.item.relationships.service_pictures.data} /> : null
         }
         {
            props.item && props.item.type === 'Vehicle' ?
-           <StandDetailGallery images={props.item.relationships.vehicle_pictures.data}/> : null
+            <StandDetailGallery images={props.item.relationships.vehicle_pictures.data} /> : null
         }
         {
            props.item && props.item.type === 'RealEstate' ?
-           <StandDetailGallery images={props.item.relationships.real_estate_pictures.data}/> : null
+            <StandDetailGallery images={props.item.relationships.real_estate_pictures.data} /> : null
         }
         <div className='Description-movil hide-on-small-only'>
           <CommonLargeText text={props.item.attributes.description} />
@@ -64,6 +69,33 @@ const GenericItemDetail = (props: any): React.ReactElement => {
             price={props.item.attributes.price}
             final_price={props.item.attributes.final_price} />
           {
+            props.item && props.item.type === 'Product' ?
+              <>
+                {
+                  props.item.attributes.unlimited_stock ?
+                    <TextWhitIconInfo
+                      colorIcon='green-text'
+                      icon='sentiment_very_satisfied'
+                      text='En stock: siempre' /> :
+                    <TextWhitIconInfo
+                      colorIcon='green-text'
+                      icon='sentiment_very_satisfied'
+                      text={`En stock: ${props.item.attributes.stock}`} />
+                }
+                {
+                  props.item.attributes.shipping_cost && props.item.attributes.shipping_cost > 0 ?
+                    <TextWhitIconInfo
+                      colorIcon='green-text'
+                      icon='local_shipping'
+                      text={`Costo de envío: ${props.item.attributes.shipping_cost}`} /> :
+                    <TextWhitIconInfo
+                      colorIcon='green-text'
+                      icon='local_shipping'
+                      text='Costo de envío: Gratis' />
+                }
+              </> : null
+          }
+          {
             props.item && props.item.type === 'Meal' && (
               props.item.attributes.is_breakfast || props.item.attributes.is_meal || props.item.attributes.is_dinner
             ) ? <FoodTime
@@ -80,9 +112,26 @@ const GenericItemDetail = (props: any): React.ReactElement => {
           }
           {
             props.item && (
-              props.item.type === 'Product' || props.item.type === 'Vehicle' || props.item.type === 'RealEstate' || props.item.type === 'Service') ?
+            props.item.type === 'Product' || props.item.type === 'Vehicle' || props.item.type === 'RealEstate' || props.item.type === 'Service') ?
               <GenericItemDetailFeatures features={props.item.relationships.features} /> : null
           }
+          {
+            props.item && props.item.type === 'Vehicle' ?
+              <VehicleAttributes item={props.item} /> : null
+          }
+          {
+            props.item && props.item.type === 'Service' ?
+              <ServicesAttributes item={props.item} /> : null
+          }
+          {
+            props.item && props.item.type === 'Product' ?
+              <ProductAttributes item={props.item} /> : null
+          }
+          {
+            props.item && props.item.type === 'RealEstate' ?
+              <RealStateAttributes item={props.item} /> : null
+          }
+          <HorizontalSpace size='x-small' />
           <ItemShoping/>
         </div>
       </div>
