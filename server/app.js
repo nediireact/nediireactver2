@@ -49,6 +49,8 @@ app.get('/my-account', commonIndex);
 app.get('/activate/:token', commonIndex);
 app.get('/expos', commonIndex);
 app.get('/buscador', commonIndex);
+app.get('/categorias', commonIndex);
+app.get('/categorias/:groupId', commonIndex);
 app.get('/expos/:expoId', commonIndex);
 app.get('/expos/:expoId/:groupId', commonIndex);
 app.get('/empresa/:standId', commonIndex);

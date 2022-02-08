@@ -77,7 +77,7 @@ const ChangeLog = (): React.ReactElement => {
   const [items, setitems]: any = useState([]);
 
   useEffect(() => {
-    fetchData('sprints/?include=tasks,tasks.user')
+    fetchData('sprints/?include=tasks,tasks.user&page[size]=100')
       .then((response: any) =>{
         setitems(response);
       });
