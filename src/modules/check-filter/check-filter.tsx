@@ -43,17 +43,42 @@ const CheckFilter = (props: FilterInterface): React.ReactElement => {
   return (
     <div className='CheckFilter'>
       <span className='CheckFilter__name'>{props.name}</span>
+      <div className='row CheckFilter__wrapper'>
       {
         props.items && props.items.length ?
         props.items.map((i: any, index: number) => {
           return (
-            <label key={index} className='grey-text text-darken-4'>
-              <input type='checkbox' value={i.id} onChange={updateAddOnFilter} />
-              <span>{i.attributes.name}</span>
+            <>
+            <label key={index} className='CheckFilter__item hide-on-med-and-down'>
+              <input
+                type='checkbox'
+                value={i.id}
+                onChange={updateAddOnFilter} />
+              <span className='grey-text text-darken-4'>
+                {i.attributes.name}
+              </span>
             </label>
+            <div className='hide-on-large-only col s4 CheckFilter__item CheckFilter__item--mini'>
+              <div className='CheckFilter__item-wrapper'>
+                <div className='CheckFilter__checkbox'>
+                  <label className='center'>
+                    <input
+                      type='checkbox'
+                      value={i.id}
+                      onChange={updateAddOnFilter} />
+                    <span></span>
+                  </label>
+                </div>
+                <div className='grey-text text-darken-4 CheckFilter__text'>
+                  {i.attributes.name}
+                </div>
+              </div>
+            </div>
+            </>
           );
         }) : null
       }
+      </div>
     </div>
   );
 };

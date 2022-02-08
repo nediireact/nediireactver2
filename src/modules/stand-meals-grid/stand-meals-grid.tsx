@@ -62,17 +62,18 @@ const StandMealsGrid = (props: any): React.ReactElement => {
             filter='classification'
             join={true}
             updateItems={updateItems} />
-          <HorizontalSpace size='small' />
+          <HorizontalSpace size='x-small' />
           <PriceRangeFilter
             maxPrice={props.stand.attributes.meals_max_price + 100}
             updateItems={updateItems} />
-          <HorizontalSpace size='small' />
+          <HorizontalSpace size='x-small' />
           <CheckFilter
             name='Ingredientes adicionales'
             items={[...addOns]}
             filter='meal_addons'
             updateItems={updateItems} />
         </div>
+        <HorizontalSpace size='small' />
       </div>
       {
         meals && meals.length ?

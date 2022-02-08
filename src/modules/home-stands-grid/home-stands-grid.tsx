@@ -6,6 +6,7 @@ import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import fetchData from 'src/modules/utils/fetch-data';
 import SubTitle from 'src/modules/sub-title/sub-title';
 import StandItemMini from 'src/modules/stand-grid/stand-item-mini';
+import 'src/modules/home-stands-grid/home-stands-grid.scss';
 
 interface HomeStandsGridInterface {
   onlyRestaurants?: boolean;

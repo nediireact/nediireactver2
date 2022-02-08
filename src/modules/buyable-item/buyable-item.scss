@@ -31,14 +31,6 @@
     transition: all 0.2s;
   }
 
-  .GenericCard:hover &__image {
-    transform: scale(1.1);
-
-    &--mini {
-      transform: scale(1);
-    }
-  }
-
   &__short-description {
     opacity: 0;
     position: absolute;
@@ -105,6 +97,10 @@
 
 @media screen and (min-width: 993px) {
   .BuyableItem {
+    .GenericCard:hover &__image {
+      transform: scale(1.1);
+    }
+
     &__image-container {
       height: 240px;
 
