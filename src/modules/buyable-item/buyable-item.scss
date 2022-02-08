@@ -16,6 +16,10 @@
     height: 180px;
     margin-bottom: 10px;
     overflow: hidden;
+
+    &--mini {
+      height: 100px;
+    }
   }
 
   &__image {
@@ -29,6 +33,10 @@
 
   .GenericCard:hover &__image {
     transform: scale(1.1);
+
+    &--mini {
+      transform: scale(1);
+    }
   }
 
   &__short-description {
@@ -60,14 +68,21 @@
 
   &__name {
     display: block;
-    font-size: $regular-text;
     width: 100%;
     font-size: 1.2em;
     font-weight: bold;
+    
+    &--mini {
+      font-size: 1em;
+    }
   }
 
   &__price {
     font-size: 1.3em;
+    
+    &--mini {
+      font-size: 1.1em;
+    }
   }
 
   &__discount {
@@ -80,6 +95,10 @@
   .BuyableItem {
     &__image-container {
       height: 200px;
+    
+      &--mini {
+        height: 120px;
+      }
     }
   }
 }
@@ -88,10 +107,18 @@
   .BuyableItem {
     &__image-container {
       height: 240px;
+
+      &--mini {
+        height: 170px;
+      }
     }
 
     &__price {
       font-size: 1.6em;
+    
+      &--mini {
+        font-size: 1.2em;
+      }
     }
   }
 }

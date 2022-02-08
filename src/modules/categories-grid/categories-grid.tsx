@@ -17,7 +17,7 @@ const CategoriesGrid = ( props: any ): React.ReactElement => {
   const headerPictureURL = `${prefix}${headerPictureFile}`;
 
   useEffect(() => {
-    fetchData('groups/?fields[Group]=name,img_picture,slug')
+    fetchData('groups/?fields[Group]=name,img_picture,slug&page[size]=20')
       .then((response: any) =>{
         setitems(response);
       });

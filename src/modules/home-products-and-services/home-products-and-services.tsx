@@ -11,7 +11,7 @@ const HomeProductAndServices = (): React.ReactElement => {
   const mealsURL = `meals/?include=stand&fields[Meal]=${commonFields}`;
   const realEstateURL = `real-estates/?include=stand&fields[RealEstate]=${commonFields}`;
 
-  const standURL = '&fields[Stand]=name,slug&page[number]=1&page[size]=1';
+  const standURL = '&fields[Stand]=name,slug&page[number]=1&page[size]=2';
   const bestSeller = '&sort=-times_selled';
   const newItems = '&sort=-created';
   const discounts = '&sort=-discount&filter[discount__gt]=0';

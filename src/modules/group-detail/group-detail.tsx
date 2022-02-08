@@ -79,12 +79,6 @@ const GroupDetailComponent = (): React.ReactElement => {
             email={group.attributes.email} />
           <HorizontalSpace size='small' />
           <GroupDetailContent description={group.attributes.description} />
-          <HorizontalSpace size='medium' />
-          {
-            stands && stands.data && stands.data.length ?
-              <SubTitle text='Stands de este pabellon' /> : null
-          }
-          <HorizontalSpace size='small' />
           {
             stands && stands.data && stands.data.length ?
               <StandGrid data={stands} /> : null

@@ -12,6 +12,7 @@ import HomeCategorySlider from 'src/modules/home-category-slider/home-category-s
 import HomeProductAndServices from 'src/modules/home-products-and-services/home-products-and-services';
 import HomeExpoGrid from 'src/modules/home-expos-grid/home-expos-grid';
 import HomeStandsGrid from 'src/modules/home-stands-grid/home-stands-grid';
+import HomeRestaurantsGrid from 'src/modules/home-restaurants-grid/home-restaurants-grid';
 
 const Home = (): React.ReactElement => {
   const [sectionMenu, setSectionMenu]: any = useState([]);
@@ -25,6 +26,7 @@ const Home = (): React.ReactElement => {
       <HomeProductAndServices />
       <HomeExpoGrid />
       <HomeStandsGrid />
+      <HomeRestaurantsGrid />
       <HorizontalSpace size='large' />
       <Footer />
       <SystemConfigurationLoader home={true} />
