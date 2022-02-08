@@ -35,7 +35,7 @@ const HomeExpoGrid = (): React.ReactElement => {
                   backgroundImage: `url(${i.attributes.img_picture}`
                 }}>
               </div>
-              <span className='HomeExpoGrid__name'>
+              <span className='HomeExpoGrid__name grey-text text-darken-4'>
                 {i.attributes.name}
               </span>
             </Link>

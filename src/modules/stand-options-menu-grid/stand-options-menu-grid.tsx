@@ -11,7 +11,6 @@ interface StandOptionMenuGridInterface {
 }
 
 const StandOptionMenuGrid = (props: StandOptionMenuGridInterface): React.ReactElement => {
-  console.log(data.options);
   const options = data.options;
 
   return (

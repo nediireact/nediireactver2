@@ -28,7 +28,7 @@
 @media screen and (min-width: 425px) {
   .NavSearchBox {
     input {
-      width: 180px !important;
+      width: 160px !important;
     }
   }
 }
@@ -36,7 +36,7 @@
 @media screen and (min-width: 601px) {
   .NavSearchBox {
     input {
-      width: 190px !important;
+      width: 170px !important;
     }
   }
 }
@@ -44,7 +44,16 @@
 @media screen and (min-width: 1024px) {
   .NavSearchBox {
     input {
-      width: 220px !important;
+      width: 180px !important;
+    }
+  }
+}
+
+
+@media screen and (min-width: 1201px) {
+  .NavSearchBox {
+    input {
+      width: 210px !important;
     }
   }
 }

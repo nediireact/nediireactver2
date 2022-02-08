@@ -17,11 +17,9 @@ import {
   getIcon,
   getType
 } from 'src/modules/changelog/helpers';
+import getMoneyFormat from 'src/modules/utils/money-formats';
 
 const headerPictureFile = '/assets/login.jpg';
-const changeLogData = {
-  data: []
-};
 
 const TaskItem = ( props: any ): React.ReactElement => {
   const tableRef: any = useRef(null);
@@ -76,7 +74,7 @@ const ChangeLog = (): React.ReactElement => {
   const system = useSelector((state: any) => state.system);
   const prefix = system.platform.prefix;
   const headerPictureURL = `${prefix}${headerPictureFile}`;
-  const [items, setitems]: any = useState(changeLogData);
+  const [items, setitems]: any = useState([]);
 
   useEffect(() => {
     fetchData('sprints/?include=tasks,tasks.user')
@@ -95,38 +93,72 @@ const ChangeLog = (): React.ReactElement => {
       <HorizontalSpace size='medium' />
       <div className='container ChangeLog'>
       {
-        items.data.map((i: any, index: number) => {
-          let totalTime = 0;
-          i.relationships.tasks.data.forEach((e: any) => {
-            totalTime += e.attributes.hours;
-          });
+        items && items.data ?
+          items.data.map((i: any, index: number) => {
+            let totalTime = 0;
+            const developers: any = {};
 
-          return (
-            <div key={index}>
-              <SubTitle
-                text={i.attributes.name}
-                fullWidth={true}
-                align='left' />
-              <span className='grey-text text-darken-3'>
-                De {DateParser(i.attributes.date_start)} a {DateParser(i.attributes.date_end)}
-              </span>
-              <br />
-              <span className='grey-text text-darken-3'>
-                Tiempo total de desarrollo: <b>{totalTime} horas.</b>
-              </span>
-              {
-                i.attributes.comments ?
-                  <div
-                    className='grey-text text-darken-3'
-                    dangerouslySetInnerHTML={{
-                      __html: i.attributes.comments
-                  }}></div> : <HorizontalSpace size='x-small' />
+            i.relationships.tasks.data.forEach((e: any) => {
+              totalTime += e.attributes.hours;
+              if ( e.relationships && e.relationships.user &&
+                e.relationships.user.data && e.relationships.user.data.id &&
+                !developers.hasOwnProperty(e.relationships.user.data.id) ) {
+                developers[e.relationships.user.data.id] = {
+                  ...e.relationships.user.data,
+                  hours: 0
+                };
               }
-              <TaskItem items={i.relationships.tasks}/>
-              <HorizontalSpace size='small' />
-            </div>
-          );
-        })
+              if ( e.relationships && e.relationships.user &&
+                e.relationships.user.data && e.relationships.user.data.id ) {
+                developers[e.relationships.user.data.id].hours += Number(e.attributes.hours);
+              }
+            });
+
+            const devArray = [];
+            for (const key in developers) {
+              if (Object.prototype.hasOwnProperty.call(developers, key)) {
+                const element = developers[key];
+                devArray.push(element);
+              }
+            }
+
+            return (
+              <div key={index}>
+                <SubTitle
+                  text={i.attributes.name}
+                  fullWidth={true}
+                  align='left' />
+                <span className='ChangeLog__data-item grey-text text-darken-3'>
+                  De {DateParser(i.attributes.date_start)} a {DateParser(i.attributes.date_end)}
+                </span>
+                {
+                  devArray.map((i: any, index: number) => {
+                    return (
+                      <span className='ChangeLog__data-item grey-text text-darken-3' key={index}>
+                        {i.attributes.first_name} {i.attributes.last_name}: {i.hours} horas ({getMoneyFormat(i.hours * 300)} MXN).
+                      </span>
+                    );
+                  })
+                }
+                <span className='ChangeLog__data-item grey-text text-darken-3'>
+                  Horas de desarrollo: <b className='indigo-text'>{totalTime} horas.</b>
+                </span>
+                <span className='ChangeLog__data-item grey-text text-darken-3'>
+                  Costo total del sprint: <b className='green-text'>{getMoneyFormat(totalTime * 300)} MXN.</b>
+                </span>
+                {
+                  i.attributes.comments ?
+                    <div
+                      className='grey-text text-darken-3'
+                      dangerouslySetInnerHTML={{
+                        __html: i.attributes.comments
+                    }}></div> : <HorizontalSpace size='x-small' />
+                }
+                <TaskItem items={i.relationships.tasks} />
+                <HorizontalSpace size='small' />
+              </div>
+            );
+          }) : null
       }
       </div>
       <HorizontalSpace size='small' />

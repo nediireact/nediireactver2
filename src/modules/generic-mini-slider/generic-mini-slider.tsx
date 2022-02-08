@@ -77,7 +77,6 @@ const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElemen
       });
   }, [fetchData]);
 
-
   const onSwiper = ( swiper: any ) => {
     setSwiperReference(swiper);
   };
