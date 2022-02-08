@@ -20,6 +20,8 @@ export const getIcon = ( type: string ): string => {
       return 'bug_report';
     case 'integration':
       return 'extension';
+    case 'testing':
+      return 'search';
     default:
       return '';
   }
