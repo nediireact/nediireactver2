@@ -52,6 +52,11 @@ $description-mobile-max-width: 280px;
       opacity: 1;
       transform: scale(0.9);
     }
+
+    &__slide {
+      box-sizing: border-box;
+      padding: 0 4px;
+    }
   }
 }
 

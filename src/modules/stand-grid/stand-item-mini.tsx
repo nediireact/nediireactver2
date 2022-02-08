@@ -5,7 +5,7 @@ import 'src/modules/stand-grid/stand-item-mini.scss';
 
 const StandItemMini = (props: any): React.ReactElement => {
   return (
-    <div className={`StandItemMini ${props.cols}`}>
+    <div className={`${props.cols} StandItemMini`}>
       <Link
         to={`/empresa/${props.item.attributes.slug}`}
         className='StandItemMini z-depth-1'>

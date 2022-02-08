@@ -4,9 +4,10 @@
 .HomeExpoGrid {
   &__item {
     position: relative;
-    height: 180px;
+    height: 190px;
     padding: 0 !important;
     overflow: hidden;
+    margin-bottom: 7px;
   }
   
   &__image {
@@ -31,10 +32,6 @@
     padding: 5px;
     @extend .white-text;
   }
-
-  &__item:hover &__image {
-    filter: blur(2px);
-  }
 }
 
 @media screen and (min-width: 601px) {
@@ -49,6 +46,11 @@
   .HomeExpoGrid {
     &__item {
       height: 280px;
+      margin-bottom: 0;
+    }
+
+    &__item:hover &__image {
+      filter: blur(2px);
     }
   }
 }
