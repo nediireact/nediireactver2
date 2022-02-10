@@ -22,7 +22,7 @@ const StandItemMini = (props: any): React.ReactElement => {
             <i className='material-icons white-text red StandItemMini__restaurant'>restaurant</i> : null
         }
         <Ratings
-          score={2}
+          score={props.item.attributes.average_rating}
           size='medium'
           centered={true} />
         <span className='StandItemMini__name truncate'>

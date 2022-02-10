@@ -23,7 +23,7 @@ const StandItem = (props: any): React.ReactElement => {
         }
         <HorizontalSpace size='medium'/>
         <Ratings
-          score={2}
+          score={props.item.attributes.average_rating}
           size='large'
           centered={true} />
         <StrongText text={props.item.attributes.name}/>

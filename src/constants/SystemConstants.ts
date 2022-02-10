@@ -7,5 +7,6 @@ export const FILE_PREFIX = {
 };
 export const CATEGORY_DATA = 'CATEGORY_DATA';
 export const STAND_DATA = 'STAND_DATA';
+export const UPDATE_STAND_AVERAGE_RATING = 'UPDATE_STAND_AVERAGE_RATING';
 export const EXPO_DATA = 'EXPO_DATA';
 export const GROUP_DATA = 'GROUP_DATA';
