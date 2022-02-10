@@ -36,7 +36,7 @@ const SearchResultsPage = (): React.ReactElement => {
       `vehicles/?include=model,model.make,${commonURL}&fields[Vehicle]=${commonFields},model,year&fields[VehicleMake]=name&fields[VehicleModel]=name,make`,
       `expos?fields[Expo]=name,img_picture,slug,real&filter[search]=${query}`,
       `groups/?fields[Group]=name,img_picture,slug&filter[search]=${query}`,
-      `stands/?&fields[Stand]=name,slug,img_logo,img_cover,ratings&fields[StandRating]=rating&filter[search]=${query}`
+      `stands/?&fields[Stand]=name,slug,img_logo,img_cover,average_rating&filter[search]=${query}`
     ];
     const promises: any[] = [];
     urls.forEach((i: string) => {

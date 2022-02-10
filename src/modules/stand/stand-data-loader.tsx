@@ -73,7 +73,7 @@ const StandDataLoader = (props: any): React.ReactElement => {
     if ( stand && stand && stand[params.standId] && stand[params.standId].attributes ) {
       setMenu(stand[params.standId]);
     }
-    fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones,ratings,pictures,expo,group,stand_news,stand_booking_questions,stand_booking_questions.options,survey_questions,city,city.state,city.state.country`)
+    fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones,pictures,expo,group,stand_news,stand_booking_questions,stand_booking_questions.options,survey_questions,city,city.state,city.state.country`)
       .then((response: any) => {
         if ( !response.data.length ) {
           return history.replace('/');
@@ -93,9 +93,8 @@ const StandDataLoader = (props: any): React.ReactElement => {
     {
       stand && stand && stand[params.standId] && stand[params.standId].attributes ? <>
         <StandHeader
-          stand={stand[params.standId].attributes}
-          size='medium'
-          ratings={stand[params.standId].relationships.ratings.data} />
+          stand={stand[params.standId]}
+          size='medium' />
         <StandRouteNav />
       </> : null
     }

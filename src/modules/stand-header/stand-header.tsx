@@ -11,7 +11,7 @@ const StandHeader = (props: any): React.ReactElement => {
     <div className='StandHeader'>
       <div
         className={`StandHeader${props.size ? `--${props.size}` : ''}`}
-        style={{backgroundImage: `url(${stand.img_cover})`}}>
+        style={{backgroundImage: `url(${stand.attributes.img_cover})`}}>
         <div
           className='StandHeader__info'
           style={{
@@ -19,7 +19,7 @@ const StandHeader = (props: any): React.ReactElement => {
           }}>
           <div className='container StandHeader__content-wrapper'>
             {
-              stand.restaurant ?
+              stand.attributes.restaurant ?
               <div className='StandHeader__restaurant-indicator'>
                 <i className='material-icons center white-text right red'>restaurant</i>
               </div> : null
@@ -27,19 +27,22 @@ const StandHeader = (props: any): React.ReactElement => {
             <div className='StandHeader__dummy-space'></div>
             <div className='StandHeader__stand-identity-wrapper'>
               <Link
-                to={`/empresa/${stand.slug}`}
+                to={`/empresa/${stand.attributes.slug}`}
                 className='StandHeader__logo white'
-                style={{backgroundImage: `url(${stand.img_logo})`}}>
+                style={{backgroundImage: `url(${stand.attributes.img_logo})`}}>
               </Link>
               <div className='StandHeader__title-wrapper'>
               <Title
-                link={`/empresa/${stand.slug}`}
+                link={`/empresa/${stand.attributes.slug}`}
                 color='white'
-                text={stand.name}
+                text={stand.attributes.name}
                 align='left'
                 fullWidth={true}
                 shadow={true} />
-              <StandRatings />
+              <StandRatings
+                standId={stand.id}
+                standSlug={stand.attributes.slug}
+                averageRating={stand.attributes.average_rating} />
               {
                 stand.slogan ?
                   <div className='StandHeader__slogan truncate'>{stand.slogan}</div> : null

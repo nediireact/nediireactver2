@@ -67,7 +67,7 @@ const StandItem = (props: any): React.ReactElement => {
                 }}></div>
               <HorizontalSpace size='x-small' />
               <Ratings
-                score={2}
+                score={item.attributes.average_rating}
                 size='x-large'
                 centered={true} />
             </Link>
@@ -111,8 +111,8 @@ const StandItem = (props: any): React.ReactElement => {
 const HomeRestaurantsGrid = (): React.ReactElement => {
   const [swiperReference, setSwiperReference]: any = useState(null);
   const [items, setitems]: any = useState([]);
-  const mealFields = 'name,img_picture,slug,price,final_price,discount';
-  const standFields = 'name,img_logo,img_cover,slug,highlighted_meals,restaurant';
+  const mealFields = 'name,img_picture,slug,price,final_price,discount,average_rating';
+  const standFields = 'name,img_logo,img_cover,slug,highlighted_meals,restaurant,average_rating';
 
   useEffect(() => {
     fetchData(`stands/?page[size]=3&fields[Stand]=${standFields}&include=highlighted_meals&fields[Meal]=${mealFields}&filter[restaurant]=true`)

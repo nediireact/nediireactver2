@@ -1,5 +1,6 @@
 import {
-  STAND_DATA
+  STAND_DATA,
+  UPDATE_STAND_AVERAGE_RATING
 } from 'src/constants/SystemConstants';
 
 const initialState: any = {};
@@ -14,6 +15,10 @@ const StandReducer = (state = initialState, action: any): any => {
       entry[slug] = stand;
       const newData = { ...state, ...entry };
       return newData;
+    case UPDATE_STAND_AVERAGE_RATING:
+      const newStandData: any = { ...state };
+      newStandData[action.data.standSlug].attributes.average_rating = action.data.rating;
+      return newStandData;
     default:
       return state;
   }

@@ -14,7 +14,7 @@ interface HomeStandsGridInterface {
 
 const HomeStandsGrid = (props: HomeStandsGridInterface): React.ReactElement => {
   const [items, setitems]: any = useState([]);
-  const fields = 'name,slug,img_logo,restaurant';
+  const fields = 'name,slug,img_logo,restaurant,average_rating';
   const url = props.onlyRestaurants ? `stands/?filter[restaurant]=true&page[number]=1&page[size]=6&fields[Stand]=${fields}` :
     `stands/?page[number]=1&page[size]=6&fields[Stand]=${fields}`;
   const cols = props.onlyRestaurants ? 'col s6 m4' : 'col s6 m3 l2';
