@@ -17,7 +17,7 @@ const NavSearchBox = (props: any): React.ReactElement => {
   const [query, setQuery] = useState(null);
   const history = useHistory();
 
-  const loginUser = (e: FormEvent) => {
+  const updateQuery = (e: FormEvent) => {
     e.preventDefault();
     formRef.current.reset();
     if ( props.updateQuery ) props.updateQuery(query);
@@ -27,7 +27,7 @@ const NavSearchBox = (props: any): React.ReactElement => {
   return (
     <form
       className='input-field NavSearchBox'
-      onSubmit={loginUser}
+      onSubmit={updateQuery}
       ref={formRef}>
       <input
         onChange={( e: any ) => setQuery(e.target.value)}

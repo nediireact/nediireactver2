@@ -71,7 +71,7 @@ const ExpoDetailComponent = (): React.ReactElement => {
           image={expo[params.expoId].attributes.img_picture}
           title={expo[params.expoId].attributes.name}
           email={expo[params.expoId].attributes.email}
-          indicator={!expo[params.expoId].attributes.real}/>
+          real={!expo[params.expoId].attributes.real} />
         <HorizontalSpace size='small' />
         <ExpoDetailContent description={expo[params.expoId].attributes.description} />
         <GroupGrid
