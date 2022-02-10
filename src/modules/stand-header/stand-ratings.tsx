@@ -62,7 +62,11 @@ const StandRatings = (props: any): React.ReactElement => {
         }));
       })
       .catch((error: any) => {
-        console.log('error', error.toString(), jwt, error);
+        console.log(
+          'Error', error.toString(),
+          'JWT:', jwt,
+          'Data sent:', ratingPayload,
+          'Raw error:', error);
       });
   };
 
