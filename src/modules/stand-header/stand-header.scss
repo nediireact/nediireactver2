@@ -3,43 +3,42 @@
 
 $logo-desktop-hight: 140px;
 
-.StandHeaderCommon {
+.StandHeader {
+  position: relative;
   width: 100%;
   height: 20vh;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-}
 
-.StandHeader {
   &--x-small {
     height: 30vh;
     background-size: auto calc(35vh + 100px);
-    @extend .StandHeaderCommon;
   }
   &--small {
     height: 40vh;
     background-size: auto calc(45vh + 100px);
-    @extend .StandHeaderCommon;
   }
   &--medium {
     height: 50vh;
     background-size: auto calc(55vh + 100px);
-    @extend .StandHeaderCommon;
   }
   &--large {
     height: 60vh;
     background-size: auto calc(65vh + 100px);
-    @extend .StandHeaderCommon;
   }
   &--x-large {
     height: 65vh;
     background-size: auto calc(70vh + 100px);
-    @extend .StandHeaderCommon;
   }
 
   &__info {
+    position: absolute;
+    top: 0;
+    right: left;
     height: 100%;
+    width: 100%;
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0));
   }
 
   &__content-wrapper {
@@ -48,6 +47,7 @@ $logo-desktop-hight: 140px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 1000;
     @extend .white-text;
   }
 
