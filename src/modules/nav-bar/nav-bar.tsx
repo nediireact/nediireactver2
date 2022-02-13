@@ -35,28 +35,30 @@ const NavBar = (props: any): React.ReactElement => {
 
   return (
     <>
-      <nav className='NavBar navbar-fixed white black-text'>
-        <div className='nav-wrapper container'>
-          <Link to='/' className='brand-logo left Logo'
-            style={{
-              backgroundImage: `url(${logoURL})`
-            }}>
-          </Link>
-          <NavSearchBox updateQuery={props.updateQuery} />
-          <a href='#'
-            data-target='mobile-demo'
-            className='sidenav-trigger cyan-text right'>
-            <i className='material-icons'>menu</i>
-          </a>
-          <ul
-            id='nav-mobile'
-            className='right hide-on-med-and-down Menu'>
-            <MenuItems
-              logout={logout}
-              sectionMenu={sectionMenu} />
-          </ul>
-        </div>
-      </nav>
+      <div className='navbar-fixed'>
+        <nav className='NavBar white black-text'>
+          <div className='nav-wrapper container'>
+            <Link to='/' className='brand-logo left Logo'
+              style={{
+                backgroundImage: `url(${logoURL})`
+              }}>
+            </Link>
+            <NavSearchBox updateQuery={props.updateQuery} />
+            <a href='#'
+              data-target='mobile-demo'
+              className='sidenav-trigger cyan-text right'>
+              <i className='material-icons'>menu</i>
+            </a>
+            <ul
+              id='nav-mobile'
+              className='right hide-on-med-and-down Menu'>
+              <MenuItems
+                logout={logout}
+                sectionMenu={sectionMenu} />
+            </ul>
+          </div>
+        </nav>
+      </div>
       <SideMenu
         sideNavRef={sideNavRef}
         closeSideNav={closeSideNav}
