@@ -13,6 +13,8 @@ const fillIncluded = ( item: any, included: any ): any => {
   }
   if ( item.relationships ) {
     item = rebuildObject(item, included);
+  } else if ( item.data && item.data.relationships ) {
+    item.data = rebuildObject(item.data, included);
   }
   return item;
 };
