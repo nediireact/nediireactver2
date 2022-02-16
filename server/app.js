@@ -38,6 +38,7 @@ const commonIndex = (req, res) => {
   });
 };
 
+app.get('/mi-cuenta', commonIndex);
 app.get('/terminos-y-condiciones', commonIndex);
 app.get('/politica-de-privacidad', commonIndex);
 app.get('/uso-de-datos-de-usuario', commonIndex);
