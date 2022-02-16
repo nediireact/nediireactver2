@@ -15,14 +15,14 @@ const UserFavorites = (): React.ReactElement => {
     userData.user : {};
   const [stands, setStands]: any = useState([]);
   const [items, setItems]: any = useState([]);
-  // const standFields = 'name,img_logo,img_cover,slug,highlighted_meals,restaurant,average_rating';
+  const standFields = 'name,img_logo,img_cover,slug,highlighted_meals,restaurant,average_rating';
   const commonFields = 'name,img_picture,slug,stand,price,final_price,discount,short_description';
 
   useEffect(() => {
-    // fetchData(`user-favorite-stands/?filter[user]=${user.id}&include=stand&fields=[Stand]=${standFields}`)
-    //   .then((response: any) =>{
-    //     setStands(response.data);
-    //   });
+    fetchData(`user-favorite-stands/?filter[user]=${user.id}&include=stand&fields=[Stand]=${standFields}`)
+      .then((response: any) =>{
+        setStands(response.data);
+      });
     setStands([]);
     fetchData(`user-favorite-items/?filter[user]=${user.id}&include=product,product.stand&fields[Product]=${commonFields}&fields[Stand]=name,slug`)
       .then((response: any) =>{
@@ -75,7 +75,6 @@ const UserFavorites = (): React.ReactElement => {
                     i.relationships.meal.data ? i.relationships.meal.data :
                     i.relationships.real_estate.data ? i.relationships.real_estate.data :
                     i.relationships.vehicle.data ? i.relationships.vehicle.data : null;
-                  // console.log('i', i, item);
                   return (
                     <div key={index} className='col s6 m4'>
                       <BuyableItem
