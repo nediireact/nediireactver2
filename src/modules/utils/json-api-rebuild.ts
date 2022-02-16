@@ -11,8 +11,8 @@ const fillIncluded = ( item: any, included: any ): any => {
       break;
     }
   }
-  if ( item.data ) {
-    item.data = rebuildObject(item.data, included);
+  if ( item.relationships ) {
+    item = rebuildObject(item, included);
   }
   return item;
 };

@@ -26,7 +26,6 @@ const UserFavorites = (): React.ReactElement => {
     setStands([]);
     fetchData(`user-favorite-items/?filter[user]=${user.id}&include=product,product.stand&fields[Product]=${commonFields}&fields[Stand]=name,slug`)
       .then((response: any) =>{
-        console.log('Output', response);
         setItems(response.data);
       })
       .catch((err: any) => {

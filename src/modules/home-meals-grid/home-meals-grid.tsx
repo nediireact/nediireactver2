@@ -19,7 +19,6 @@ const HomeMealsGrid = (): React.ReactElement => {
 
   const updateMealType = (type: string): void => {
     const url = `meals/?filter[${type}]=true&page[size]=12&include=stand&fields[Stand]=name,slug&fields[Meal]=${commonFields}`;
-    console.log('URL', url);
     setBackgroundIMG(`${prefix}assets/${type}.jpg`);
     setSelected(type);
     fetchData(url)
