@@ -36,7 +36,8 @@ const BuyableItem = (props: any): React.ReactElement => {
         </div>
         <div className='BuyableItem__info'>
           {
-            item.relationships && item.relationships.stand && item.relationships.stand.data ?
+            item.relationships && item.relationships.stand &&
+            item.relationships.stand.data && item.relationships.stand.data.attributes ?
               <span className='orange-text text-accent-4'>
                 Vendido por {item.relationships.stand.data.attributes.name}
               </span> : null

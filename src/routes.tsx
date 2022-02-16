@@ -36,6 +36,7 @@ import {
   PrivacyPolicy,
   UserData
 } from 'src/pages/terms-and-conditions/terms-and-conditions';
+import UserAccountPage from 'src/pages/user-account/user-account';
 
 const env = EnvironmentVariables.getInstance();
 const isMobileApp = env.isMobileApp;
@@ -44,82 +45,92 @@ const Routes = (): React.ReactElement => {
   return (
     <Router forceRefresh={isMobileApp}>
       <Switch>
-        <Route path="/empresa/:standId/inmuebles/:realEstateId">
+        <Route path='/mi-cuenta/favoritos'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/mi-cuenta'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/empresa/:standId/inmuebles/:realEstateId'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandRealEstateDetailPage /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/empresa/:standId/vehiculos/:vehicleId">
+        <Route path='/empresa/:standId/vehiculos/:vehicleId'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandVehicleDetailPage /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/empresa/:standId/servicios/:serviceId">
+        <Route path='/empresa/:standId/servicios/:serviceId'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandServiceDetailPage /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/empresa/:standId/productos/:productId">
+        <Route path='/empresa/:standId/productos/:productId'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StanProductDetailPage /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/empresa/:standId/menu/:mealId">
+        <Route path='/empresa/:standId/menu/:mealId'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandMealDetail /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/empresa/:standId/news/:standNewsId">
+        <Route path='/empresa/:standId/news/:standNewsId'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandNewsDetail /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/empresa/:standId/inmuebles">
+        <Route path='/empresa/:standId/inmuebles'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandRealEstate /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/empresa/:standId/vehiculos">
+        <Route path='/empresa/:standId/vehiculos'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandVehicles /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/empresa/:standId/productos">
+        <Route path='/empresa/:standId/productos'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandProducts /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/empresa/:standId/servicios">
+        <Route path='/empresa/:standId/servicios'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandServices /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/empresa/:standId/menu">
+        <Route path='/empresa/:standId/menu'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandMeals /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/empresa/:standId">
+        <Route path='/empresa/:standId'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandDetail /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/categorias/:groupId">
+        <Route path='/categorias/:groupId'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><GroupDetail /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/categorias">
+        <Route path='/categorias'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><CategoriesGridPage /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/expos/:expoId/:groupId">
+        <Route path='/expos/:expoId/:groupId'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><GroupDetail /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/expos/:expoId">
+        <Route path='/expos/:expoId'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><ExpoDetail /></PersistGate>
           </Provider>
@@ -134,7 +145,7 @@ const Routes = (): React.ReactElement => {
             <PersistGate loading={null} persistor={persistor}><SearchResultsPage /></PersistGate>
           </Provider>
         </Route>
-        <Route path="/activate/:token">
+        <Route path='/activate/:token'>
           <Provider store={store}>
             <ActivateUser />
           </Provider>

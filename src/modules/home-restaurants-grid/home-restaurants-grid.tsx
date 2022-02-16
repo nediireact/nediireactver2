@@ -91,7 +91,6 @@ const StandItem = (props: any): React.ReactElement => {
                   return (
                     <div key={index} className='col s6'>
                       <BuyableItem
-                        key={index}
                         item={i}
                         fullWidth={true}
                         standSlug={item.attributes.slug}

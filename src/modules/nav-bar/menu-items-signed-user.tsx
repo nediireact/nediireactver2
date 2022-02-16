@@ -22,19 +22,19 @@ const ItemsSignedUser = ( props: any ): React.ReactElement => {
         </a>
         <div className='Menu__sub-menu z-depth-2'>
           <Link
-            to='/ordenes'
+            to='/mi-cuenta/ordenes'
             className='grey-text text-darken-3 Menu__item-with-icon'>
             <i className='material-icons'>history</i>
             <span>Ordenes</span>
           </Link>
           <Link
-            to='/favoritos'
+            to='/mi-cuenta/favoritos'
             className='grey-text text-darken-3 Menu__item-with-icon Menu__item-left-line'>
             <i className='material-icons'>favorite</i>
             <span>Favoritos</span>
           </Link>
           <Link
-            to='/carrito'
+            to='/mi-cuenta/carrito'
             className='grey-text text-darken-3 Menu__item-with-icon Menu__item-left-line'>
             <i className='material-icons'>shopping_cart</i>
             <span>Carrito</span>
@@ -56,7 +56,7 @@ const ItemsSignedUser = ( props: any ): React.ReactElement => {
       <div className='hide-on-large-only'>
         <li className='Menu__item-with-icon'>
           <Link
-            to='/carrito'
+            to='/mi-cuenta/carrito'
             className='grey-text text-darken-3'>
             <i className='material-icons'>shopping_cart</i>
             <span>Carrito</span>
@@ -64,7 +64,7 @@ const ItemsSignedUser = ( props: any ): React.ReactElement => {
         </li>
         <li className='Menu__item-with-icon'>
           <Link
-            to='/favoritos'
+            to='/mi-cuenta/favoritos'
             className='grey-text text-darken-3'>
             <i className='material-icons'>favorite</i>
             <span>Favoritos</span>
@@ -72,7 +72,7 @@ const ItemsSignedUser = ( props: any ): React.ReactElement => {
         </li>
         <li className='Menu__item-with-icon'>
           <Link
-            to='/ordenes'
+            to='/mi-cuenta/ordenes'
             className='grey-text text-darken-3'>
             <i className='material-icons'>history</i>
             <span>Ordenes</span>
