@@ -1,40 +1,21 @@
-import React, {
-  useEffect,
-  useState
-} from 'react';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import fetchData from 'src/modules/utils/fetch-data';
+import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import StandItemMini from 'src/modules/stand-grid/stand-item-mini';
 import BuyableItem from 'src/modules/buyable-item/buyable-item';
 import SubTitle from 'src/modules/sub-title/sub-title';
+import LoadUserFavoriteStands from 'src/modules/user-favorites/load-user-favorite-stands';
+import LoadUserFavoriteItems from 'src/modules/user-favorites/load-user-favorite-items';
 
 const UserFavorites = (): React.ReactElement => {
   const userData = useSelector((state: any) => state.user);
-  const user = userData && userData.user && userData.user.id ?
-    userData.user : {};
-  const [stands, setStands]: any = useState([]);
-  const [items, setItems]: any = useState([]);
-  const standFields = 'name,img_logo,img_cover,slug,highlighted_meals,restaurant,average_rating';
-  const commonFields = 'name,img_picture,slug,stand,price,final_price,discount,short_description';
-
-  useEffect(() => {
-    fetchData(`user-favorite-stands/?filter[user]=${user.id}&include=stand&fields=[Stand]=${standFields}`)
-      .then((response: any) =>{
-        setStands(response.data);
-      });
-    setStands([]);
-    fetchData(`user-favorite-items/?filter[user]=${user.id}&include=product,product.stand&fields[Product]=${commonFields}&fields[Stand]=name,slug`)
-      .then((response: any) =>{
-        setItems(response.data);
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
-  }, [fetchData]);
+  const stands = userData.favoriteStands || [];
+  const items = userData.favoriteItems || [];
 
   return (
     <div className='col s12 m8'>
+      <LoadUserFavoriteStands />
+      <LoadUserFavoriteItems />
       {
         stands && stands.length ?
           <>

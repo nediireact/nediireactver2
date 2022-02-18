@@ -33,7 +33,7 @@ const StandProductDetail = (): React.ReactElement => {
     <>
       {
         product && product.id ?
-          <GenericItemDetail item={product}/> : null
+          <GenericItemDetail item={product} /> : null
       }
     </>
   );

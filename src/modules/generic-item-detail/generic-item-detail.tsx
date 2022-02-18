@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import GenericHeadDetail from 'src/modules/generic-item-detail/generic-head-detail';
 import StandDetailGallery from 'src/modules/stand-detail-gallery/stand-detail-gallery';
@@ -15,16 +16,28 @@ import ServicesAttributes from 'src/modules/services-attributes/services-attribu
 import ProductAttributes from 'src/modules/product-attributes/product-attributes';
 import TextWhitIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
 import RealStateAttributes from 'src/modules/real-estate-attributes/real-estate-attributes';
+import LoadUserFavoriteItems from 'src/modules/user-favorites/load-user-favorite-items';
+import { IsItAFavoriteItem } from 'src/modules/utils/user-favorites';
 
 const GenericItemDetail = (props: any): React.ReactElement => {
+  const userData = useSelector((state: any) => state.user);
+  const user = userData && userData.user && userData.user.id ?
+    userData.user : {};
   const name = props.item.type === 'Vehicle' ?
     `${props.item.attributes.year}
     ${props.item.relationships.model.data.relationships.make.data.attributes.name}
     ${props.item.relationships.model.data.attributes.name}` :
     props.item.attributes.name;
+  const isFavorite = user && userData.favoriteItems ?
+    IsItAFavoriteItem(
+      Number(props.item.id),
+      props.item.type,
+      userData.favoriteItems
+    ) : false;
 
   return (
     <div className='container row GenericItemDetail'>
+      <LoadUserFavoriteItems />
       <div className="col s12 m8">
         <div className='hide-on-med-and-up'>
           <HorizontalSpace size='small' />
@@ -131,8 +144,9 @@ const GenericItemDetail = (props: any): React.ReactElement => {
             props.item && props.item.type === 'RealEstate' ?
               <RealStateAttributes item={props.item} /> : null
           }
+          Favorito? {isFavorite ? 'si' : 'no'}
           <HorizontalSpace size='x-small' />
-          <ItemShoping/>
+          <ItemShoping />
         </div>
       </div>
       <div className='hide-on-med-and-up col s12'>

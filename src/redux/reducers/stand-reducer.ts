@@ -8,7 +8,7 @@ const initialState: any = {};
 const StandReducer = (state = initialState, action: any): any => {
   switch ( action.type ) {
     case STAND_DATA:
-      const stand = {...action.data};
+      const stand = { ...action.data };
       if ( !stand.attributes ) return state;
       const slug = stand.attributes.slug;
       const entry: any = {};
