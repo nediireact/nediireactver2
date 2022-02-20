@@ -33,8 +33,9 @@ const NavBar = (props: any): React.ReactElement => {
     dispatch(SetUserData({
       user: null,
       userProfile: null,
-      favoriteStands: null,
-      favoriteItems: null
+      favoriteStands: [],
+      favoriteItems: [],
+      cart: []
     }));
   };
 

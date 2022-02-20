@@ -9,6 +9,7 @@ import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import UserAccountMenu from 'src/modules/user-account-menu/user-account-menu';
 import UserDashboard from 'src/modules/user-dashboard/user-dashboard';
 import UserFavorites from 'src/modules/user-favorites/user-favorites';
+import UserCart from 'src/modules/user-cart/user-cart';
 
 const UserAccountPage = (): React.ReactElement => {
   const [sectionMenu, setSectionMenu]: any = useState([]);
@@ -24,6 +25,7 @@ const UserAccountPage = (): React.ReactElement => {
         <div className='col s12 m1 hide-on-med-and-down'></div>
         { pathname === '/mi-cuenta' ? <UserDashboard /> : null }
         { pathname === '/mi-cuenta/favoritos' ? <UserFavorites /> : null }
+        { pathname === '/mi-cuenta/carrito' ? <UserCart /> : null }
       </div>
       <Footer />
       <SystemCheck />
