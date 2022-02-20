@@ -6,15 +6,15 @@ import {
   useDispatch
 } from 'react-redux';
 import fetchData from 'src/modules/utils/fetch-data';
-import SetUserFavoriteItems from 'src/redux/actions/user-favorite-items';
+import { SetUserCart } from 'src/redux/actions/user-cart';
 
-const LoadUserFavoriteItems = (): React.ReactElement => {
+const LoadUserCart = (): React.ReactElement => {
   const userData = useSelector((state: any) => state.user);
   const user = userData && userData.user && userData.user.id ?
     userData.user : {};
   const dispatch = useDispatch();
   const commonFields = 'name,img_picture,slug,stand,price,final_price,discount,short_description';
-  let url = `user-favorite-items/?filter[user]=${user.id}&include=`;
+  let url = `user-cart-items/?filter[user]=${user.id}&include=`;
   url += 'product,product.stand,';
   url += 'service,service.stand,';
   url += 'meal,meal.stand,';
@@ -32,7 +32,7 @@ const LoadUserFavoriteItems = (): React.ReactElement => {
   useEffect(() => {
     fetchData(url)
       .then((response: any) => {
-        dispatch(SetUserFavoriteItems(response.data));
+        dispatch(SetUserCart(response.data));
       })
       .catch((err: any) => {
         console.log(err);
@@ -42,4 +42,4 @@ const LoadUserFavoriteItems = (): React.ReactElement => {
   return <></>;
 };
 
-export default LoadUserFavoriteItems;
+export default LoadUserCart;

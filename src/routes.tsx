@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -45,7 +46,67 @@ const Routes = (): React.ReactElement => {
   return (
     <Router forceRefresh={isMobileApp}>
       <Switch>
+        <Route path='/mi-cuenta/vehiculos'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/mi-cuenta/inmuebles'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/mi-cuenta/platillos'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/mi-cuenta/servicios'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/mi-cuenta/productos'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/mi-cuenta/ventas'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/mi-cuenta/empresas'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
+          </Provider>
+        </Route>
         <Route path='/mi-cuenta/favoritos'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/mi-cuenta/ordenes'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/mi-cuenta/carrito'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/mi-cuenta/pagos'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/mi-cuenta/direcciones'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/mi-cuenta/configuracion'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
           </Provider>

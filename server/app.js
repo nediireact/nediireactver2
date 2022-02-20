@@ -39,6 +39,19 @@ const commonIndex = (req, res) => {
 };
 
 app.get('/mi-cuenta', commonIndex);
+app.get('/mi-cuenta/configuracion', commonIndex);
+app.get('/mi-cuenta/direcciones', commonIndex);
+app.get('/mi-cuenta/pagos', commonIndex);
+app.get('/mi-cuenta/carrito', commonIndex);
+app.get('/mi-cuenta/ordenes', commonIndex);
+app.get('/mi-cuenta/favoritos', commonIndex);
+app.get('/mi-cuenta/empresas', commonIndex);
+app.get('/mi-cuenta/ventas', commonIndex);
+app.get('/mi-cuenta/productos', commonIndex);
+app.get('/mi-cuenta/servicios', commonIndex);
+app.get('/mi-cuenta/platillos', commonIndex);
+app.get('/mi-cuenta/inmuebles', commonIndex);
+app.get('/mi-cuenta/vehiculos', commonIndex);
 app.get('/terminos-y-condiciones', commonIndex);
 app.get('/politica-de-privacidad', commonIndex);
 app.get('/uso-de-datos-de-usuario', commonIndex);
@@ -46,7 +59,6 @@ app.get('/changelog', commonIndex);
 app.get('/about', commonIndex);
 app.get('/create-account', commonIndex);
 app.get('/login', commonIndex);
-app.get('/my-account', commonIndex);
 app.get('/activate/:token', commonIndex);
 app.get('/expos', commonIndex);
 app.get('/buscador', commonIndex);

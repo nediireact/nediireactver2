@@ -4,6 +4,11 @@ export const SET_MOBILE_PLATOFORM = 'SET_MOBILE_PLATOFORM';
 export const USER = 'USER';
 export const USER_FAVORITES_STANDS = 'USER_FAVORITES_STANDS';
 export const USER_FAVORITES_ITEMS = 'USER_FAVORITES_ITEMS';
+export const USER_CART = 'USER_CART';
+export const USER_CART_ADD_ITEM = 'USER_CART_ADD_ITEM';
+export const USER_CART_UPDATE_ITEM = 'USER_CART_UPDATE_ITEM';
+export const USER_CART_DELETE_ITEM = 'USER_CART_DELETE_ITEM';
+export const USER_ORDERS = 'USER_ORDERS';
 export const FILE_PREFIX = {
   ANDROID: 'file:///android_asset/www'
 };
