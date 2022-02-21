@@ -1,3 +1,5 @@
+// Deprecrated
+
 import React from 'react';
 import StandPictures from 'src/modules/stand-detail/stand-pictures';
 import StandMealsAddons from 'src/modules/stand-detail/meals/stand-meals-addons';
@@ -7,7 +9,7 @@ import CommonLargeText from 'src/modules/stand-detail/stand-common-large-text';
 import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 
-const TextWhitIconInfo = (props: any): React.ReactElement => {
+const TextWithIconInfo = (props: any): React.ReactElement => {
   return (
     <div className='StandDetailProduct__textIcon'>
       {props.apiInfo ?
@@ -51,17 +53,17 @@ const StandDetailProduct = (props: any): React.ReactElement => {
             <span className='StandDetailProduct__price'>${props.discount > 0 ? props.finaPrice : props.price}</span>
             {props.discount > 0 ? <span className='StandDetailProduct__discountOff green-text'>{props.discount}%Off</span> : null}
             <SubTitle text={props.subtitle1}/>
-            <TextWhitIconInfo
+            <TextWithIconInfo
               apiInfo={props.breakfast}
               text={props.desayuno}
               colorIcon={props.colorIcon1}
               icon={props.icon1} />
-            <TextWhitIconInfo
+            <TextWithIconInfo
               apiInfo={props.meal}
               text={props.comida}
               colorIcon={props.colorIcon2}
               icon={props.icon2} />
-            <TextWhitIconInfo
+            <TextWithIconInfo
               apiInfo={props.dinner}
               text={props.cena}
               colorIcon={props.colorIcon3}

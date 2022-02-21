@@ -8,18 +8,17 @@ import StrongText from 'src/modules/strong-text/strong-text';
 import {
   DeleteCartItem
 } from 'src/modules/user-cart/user-cart-api-calls';
-import { UserCartDeleteItem } from 'src/redux/actions/user-cart';
+import { UserCartDeleteItem } from 'src/redux/actions/user-cart-actions';
+import {
+  GetStandFromInclude,
+  GetBuyableItemName
+} from 'src/modules/utils/products-services';
 
 const UserCartItem = (props: any): React.ReactElement => {
   const dispatch = useDispatch();
   const item = props.item;
-  const stand = item.relationships && item.relationships.stand && item.relationships.stand.data &&
-    item.relationships.stand.data.attributes ? item.relationships.stand.data.attributes.slug :
-    props.standSlug ? props.standSlug : '';
-  const name = item.type === 'Vehicle' ?
-    `${item.attributes.year}
-    ${item.relationships.model.data.relationships.make.data.attributes.name}
-    ${item.relationships.model.data.attributes.name}` : item.attributes.name;
+  const stand = GetStandFromInclude(item);
+  const name = GetBuyableItemName(item);
   const deleteItem = (id: number) => {
     DeleteCartItem(id)
       .then(() => {
@@ -33,17 +32,16 @@ const UserCartItem = (props: any): React.ReactElement => {
   return (
     <div className='UserCartItem'>
       <div className='GenericCard UserCartItem__wrapper'>
-        <Link to={`/empresa/${stand}/${ProductTypeConverter(props.item.type)}/${item.attributes.slug}`}
+        <Link to={`/empresa/${props.standSlug ? props.standSlug : stand ? stand.attributes.slug : ''}/${ProductTypeConverter(props.item.type)}/${item.attributes.slug}`}
           className='UserCartItem__image'
           style={{ backgroundImage: `url(${item.attributes.img_picture})`}}></Link>
         <div className='UserCartItem__space'></div>
         <div className='UserCartItem__info'>
           <div className='UserCartItem__stand'>
           {
-            item.relationships && item.relationships.stand &&
-            item.relationships.stand.data && item.relationships.stand.data.attributes ?
+            stand ?
               <span className='orange-text text-accent-4 left'>
-                Vendido por {item.relationships.stand.data.attributes.name}
+                Vendido por {stand.attributes.name}
               </span> : null
           }
           </div>

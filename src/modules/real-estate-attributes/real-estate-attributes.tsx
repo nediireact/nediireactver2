@@ -1,49 +1,50 @@
 import React from 'react';
-import TextWhitIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
+import TextWithIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
 import StrongText from 'src/modules/strong-text/strong-text';
 import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
+import { ItemStateHumanReadable } from 'src/modules/utils/products-services';
 
 const RealEstateAttributes = (props: any): React.ReactElement => {
   return (
     <>
       {
         props.item.attributes.state ?
-          <TextWhitIconInfo
+          <TextWithIconInfo
             colorIcon='cyan-text'
             icon='check'
-            text={`Estado: ${props.item.attributes.state}`} /> : null
+            text={`Estado: ${ItemStateHumanReadable(props.item.attributes.state)}`} /> : null
       }
       {
         props.item.attributes.year ?
-          <TextWhitIconInfo
+          <TextWithIconInfo
             colorIcon='cyan-text'
             icon='check'
             text={`Año de construcción: ${props.item.attributes.year}`} /> : null
       }
       {
         props.item.attributes.area ?
-          <TextWhitIconInfo
+          <TextWithIconInfo
             colorIcon='cyan-text'
             icon='check'
             text={`Área de construcción: ${props.item.attributes.area} m2`} /> : null
       }
       {
         props.item.attributes.num_of_bedrooms ?
-          <TextWhitIconInfo
+          <TextWithIconInfo
             colorIcon='cyan-text'
             icon='check'
             text={`Numero de recamaras: ${props.item.attributes.num_of_bedrooms}`} /> : null
       }
       {
         props.item.attributes.num_of_bathrooms ?
-          <TextWhitIconInfo
+          <TextWithIconInfo
             colorIcon='cyan-text'
             icon='check'
             text={`Numero de baños: ${props.item.attributes.num_of_bathrooms}`} /> : null
       }
       {
         props.item.attributes.num_of_parking_spots ?
-          <TextWhitIconInfo
+          <TextWithIconInfo
             colorIcon='cyan-text'
             icon='check'
             text={`Numero de cajones estacionamientos: ${props.item.attributes.num_of_parking_spots}`} /> : null

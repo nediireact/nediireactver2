@@ -24,6 +24,11 @@ export const APIGet = ( endpoint: string, includeBaseURL = true, jwt: any = null
         return res(response.data);
       })
       .catch((error) => {
+        console.log(
+          '\n====== APIGet Error ======',
+          '\nURL:', url,
+          '\nJWT:', jwt
+        );
         return rej(error);
       });
   });
@@ -41,6 +46,12 @@ export const APIPost = ( endpoint: string, data: any, includeBaseURL = true, jwt
         return res(response.data);
       })
       .catch((error) => {
+        console.log(
+          '\n====== APIPost Error ======',
+          '\nData sent:', data,
+          '\nURL:', url,
+          '\nJWT:', jwt
+        );
         return rej(error);
       });
   });
@@ -58,6 +69,12 @@ export const APIPatch = ( endpoint: string, data: any, includeBaseURL = true, jw
         return res(response.data);
       })
       .catch((error) => {
+        console.log(
+          '\n====== APIPatch Error ======',
+          '\nData sent:', data,
+          '\nURL:', url,
+          '\nJWT:', jwt
+        );
         return rej(error);
       });
   });

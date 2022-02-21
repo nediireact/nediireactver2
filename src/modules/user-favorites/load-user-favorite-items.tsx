@@ -6,12 +6,12 @@ import {
   useDispatch
 } from 'react-redux';
 import fetchData from 'src/modules/utils/fetch-data';
-import SetUserFavoriteItems from 'src/redux/actions/user-favorite-items';
+import SetUserFavoriteItems from 'src/redux/actions/user-favorite-items-actions';
 
 const LoadUserFavoriteItems = (): React.ReactElement => {
   const userData = useSelector((state: any) => state.user);
-  const user = userData && userData.user && userData.user.id ?
-    userData.user : {};
+  const user = userData && userData.user && userData.user.id ? userData.user : null;
+  if ( !user ) return <></>;
   const dispatch = useDispatch();
   const commonFields = 'name,img_picture,slug,stand,price,final_price,discount,short_description';
   let url = `user-favorite-items/?filter[user]=${user.id}&include=`;
@@ -26,7 +26,7 @@ const LoadUserFavoriteItems = (): React.ReactElement => {
   url += `&fields[Meal]=${commonFields}`;
   url += '&fields[MealAddOn]=name,quantity,price';
   url += `&fields[RealEstate]=${commonFields}`;
-  url += `&fields[Vehicle]=${commonFields},model,model.make`;
+  url += `&fields[Vehicle]=${commonFields},year,model&fields[VehicleModel]=name,make&fields[VehicleMake]=name`;
   url += '&fields[Stand]=name,slug';
 
   useEffect(() => {

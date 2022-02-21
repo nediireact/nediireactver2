@@ -1,34 +1,33 @@
 import React from 'react';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import TextWhitIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
+import TextWithIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
 import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
 import StrongText from 'src/modules/strong-text/strong-text';
+import { ItemStateHumanReadable } from 'src/modules/utils/products-services';
 
 const ProductAttributes = (props: any): React.ReactElement => {
   return (
     <>
       {
         props.item.attributes.state ?
-          <TextWhitIconInfo
+          <TextWithIconInfo
             colorIcon='cyan-text'
             icon='check'
-            text={`Estado: ${props.item.attributes.state}`} /> : null
+            text={`Estado: ${ItemStateHumanReadable(props.item.attributes.state)}`} /> : null
       }
       {
         props.item.attributes.brand ?
-          <TextWhitIconInfo
+          <TextWithIconInfo
             colorIcon='cyan-text'
             icon='check'
             text={`Marca: ${props.item.attributes.brand}`} /> : null
       }
       {
         props.item.attributes.warranty_days && props.item.attributes.warranty_days > 0 ?
-          <TextWhitIconInfo
+          <TextWithIconInfo
             colorIcon='cyan-text'
             icon='check'
             text={`Días de garantía: ${props.item.attributes.warranty_days}`} /> : null
       }
-      <HorizontalSpace size='x-small' />
       {
         props.item.attributes.support_email || props.item.attributes.support_phone ?
           <StrongText text='Consultas o aclaraciones' /> : null

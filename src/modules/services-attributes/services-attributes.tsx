@@ -1,6 +1,6 @@
 import React from 'react';
 import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
-import TextWhitIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
+import TextWithIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
 import StrongText from 'src/modules/strong-text/strong-text';
 
 const ServicesAttributes = (props: any): React.ReactElement => {
@@ -8,7 +8,7 @@ const ServicesAttributes = (props: any): React.ReactElement => {
     <>
       {
         props.item.attributes.warranty_days && props.item.attributes.warranty_days > 0 ?
-          <TextWhitIconInfo
+          <TextWithIconInfo
             colorIcon='cyan-text'
             icon='check'
             text={`Días de garantía: ${props.item.attributes.warranty_days}`} /> : null

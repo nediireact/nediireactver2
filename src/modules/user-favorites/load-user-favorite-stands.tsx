@@ -10,8 +10,8 @@ import SetUserFavoriteStands from 'src/redux/actions/user-favorite-stands';
 
 const LoadUserFavoriteStands = (): React.ReactElement => {
   const userData = useSelector((state: any) => state.user);
-  const user = userData && userData.user && userData.user.id ?
-    userData.user : {};
+  const user = userData && userData.user && userData.user.id ? userData.user : null;
+  if ( !user ) return <></>;
   const dispatch = useDispatch();
   const standFields = 'name,img_logo,img_cover,slug,highlighted_meals,restaurant,average_rating';
 

@@ -6,7 +6,6 @@ import {
   useHistory,
   useParams } from 'react-router';
 import fetchData from 'src/modules/utils/fetch-data';
-import 'src/modules/stand-meals-detail/stand-meals-detail.scss';
 import GenericItemDetail from 'src/modules/generic-item-detail/generic-item-detail';
 
 const StandMealsDetail = (): React.ReactElement => {
@@ -17,7 +16,6 @@ const StandMealsDetail = (): React.ReactElement => {
   useEffect(() => {
     fetchData(`meals?filter[slug]=${params.mealId}&include=meal_pictures,meal_addons,classification,stand`)
     .then((response: any) => {
-      console.log(response);
       if ( !response.data.length ) {
         console.log('Error de platillo');
       } else {
