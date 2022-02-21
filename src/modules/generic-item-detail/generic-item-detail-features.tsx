@@ -1,28 +1,26 @@
 import React from 'react';
-import StrongText from 'src/modules/strong-text/strong-text';
-import TextWhitIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
+import TextWithIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
 
 const GenericItemDetailFeatures = (props: any): React.ReactElement => {
+  const item = props.item;
+  if ( !item || !item.relationships || !item.relationships.features ||
+    !item.relationships.features.data || !item.relationships.features.data.length ) {
+    return <></>;
+  }
   return (
-    <>
+    <div className='GenericItemDetailFeatures'>
     {
-      props.features && props.features.data && props.features.data.length ?
-      <>
-        <StrongText text='Caracteristicas'/>
-        {
-          props.features.data.map((item: any, index: number) => {
-            return (
-              <TextWhitIconInfo
-                key={index}
-                colorIcon='cyan-text'
-                icon='check'
-                text={item.attributes.name} />
-            );
-          })
-        }
-      </> : null
+      item.relationships.features.data.map((item: any, index: number) => {
+        return (
+          <TextWithIconInfo
+            key={index}
+            colorIcon='cyan-text'
+            icon='check'
+            text={item.attributes.name} />
+        );
+      })
     }
-    </>
+    </div>
   );
 };
 

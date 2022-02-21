@@ -10,8 +10,8 @@ import SetUserOrders from 'src/redux/actions/user-orders';
 
 const LoadUserOrders = (): React.ReactElement => {
   const userData = useSelector((state: any) => state.user);
-  const user = userData && userData.user && userData.user.id ?
-    userData.user : {};
+  const user = userData && userData.user && userData.user.id ? userData.user : null;
+  if ( !user ) return <></>;
   const dispatch = useDispatch();
   const commonFields = 'name,img_picture,slug,stand,price,final_price,discount,short_description';
   const includesFields = 'order_items,order_items.product,order_items.service'; // Add the rest buyable items here and in favorites

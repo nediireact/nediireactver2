@@ -1,7 +1,7 @@
 import React from 'react';
 import 'src/modules/text-with-icon/text-with-icon.scss';
 
-const TextWhitIconInfo = (props: any): React.ReactElement => {
+const TextWithIconInfo = (props: any): React.ReactElement => {
 
   return (
   <div className={`TextWithIconinfo ${props.className}`}>
@@ -11,4 +11,4 @@ const TextWhitIconInfo = (props: any): React.ReactElement => {
   );
 };
 
-export default TextWhitIconInfo;
+export default TextWithIconInfo;
