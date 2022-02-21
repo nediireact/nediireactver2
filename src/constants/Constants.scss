@@ -41,3 +41,7 @@ $regular-border-radius: 8px;
   transition: all 0.5s;
   @extend .z-depth-1;
 }
+
+.IsLoadingOpacity {
+  opacity: 0.5;
+}

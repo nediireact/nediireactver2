@@ -1,13 +1,14 @@
 import {
   APIDelete,
-  APIPost
+  APIPost,
+  APIPatch
 } from 'src/api/communicator';
 import { UserFavoriteItemsConverter } from 'src/modules/utils/products-services';
 import NewCartItem from 'src/modules/user-cart/new-cart-item.json';
 
 export const DeleteCartItem = ( id: number ): Promise<any> => {
   return new Promise((res, rej) => {
-    const url = `user-cart-items/${id}`;
+    const url = `user-cart-items/${id}/`;
     APIDelete(url)
       .then((response: any) => {
         res(response);
@@ -48,6 +49,21 @@ export const AddCartItem = ( item: any, user: any, jwt: string ): Promise<any> =
           itemAdded.relationships[UserFavoriteItemsConverter(item.type)].data = { ...item };
           res(itemAdded);
         }
+      })
+      .catch((error: any) => {
+        rej(error);
+      });
+  });
+};
+
+export const UpdateCartItem = ( item: any, user: any, jwt: string ): Promise<any> => {
+  return new Promise((res, rej) => {
+    if ( !user || !user.id || !jwt ) return res(new Error('Invalid data'));
+    const url = `user-cart-items/${item.data.id}/`;
+    APIPatch(url, item, true, jwt)
+      .then((response: any) => {
+        const itemUpdated = { ...response.data };
+        res(itemUpdated);
       })
       .catch((error: any) => {
         rej(error);

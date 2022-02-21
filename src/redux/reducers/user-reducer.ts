@@ -5,7 +5,8 @@ import {
   USER_CART,
   USER_ORDERS,
   USER_CART_ADD_ITEM,
-  USER_CART_DELETE_ITEM
+  USER_CART_DELETE_ITEM,
+  USER_CART_UPDATE_ITEM
 } from 'src/constants/SystemConstants';
 
 const initialState: any = {};
@@ -24,14 +25,14 @@ export const UserReducer = (state = initialState, action: any): any => {
       const cart = [ ...action.data ];
       return { ...state, cart };
     case USER_CART_ADD_ITEM:
-      const cartBeforeToAddItem = state.cart;
+      const cartBeforeToAddItem = [ ...state.cart ];
       const itemToAdd = action.data;
       cartBeforeToAddItem.push(itemToAdd);
       return { ...state, ...{
         cart: cartBeforeToAddItem
       }};
     case USER_CART_DELETE_ITEM:
-      const cartBeforeToDeleteItem = state.cart;
+      const cartBeforeToDeleteItem = [ ...state.cart ];
       const idItemToDelete = action.data;
       const itemToDelete = cartBeforeToDeleteItem.filter((i: any) => Number(i.id) === idItemToDelete);
       if ( itemToDelete.length ) {
@@ -40,6 +41,17 @@ export const UserReducer = (state = initialState, action: any): any => {
       }
       return { ...state, ...{
         cart: cartBeforeToDeleteItem
+      }};
+    case USER_CART_UPDATE_ITEM:
+      const cartBeforeToUpdateItem = [ ...state.cart ];
+      const itemToUpdate = action.data;
+      for (let j = 0; j < cartBeforeToUpdateItem.length; j++) {
+        if ( cartBeforeToUpdateItem[j].id === itemToUpdate.id ) {
+          cartBeforeToUpdateItem[j] = itemToUpdate;
+        }
+      }
+      return { ...state, ...{
+        cart: cartBeforeToUpdateItem
       }};
     case USER_ORDERS:
       const orders = [ ...action.data ];

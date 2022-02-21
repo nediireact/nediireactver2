@@ -12,11 +12,13 @@ const BuyableItem = (props: any): React.ReactElement => {
   const item = props.item;
   const stand = GetStandFromInclude(item);
   const name = GetBuyableItemName(item);
+  const url = `/empresa/${props.standSlug ? props.standSlug : stand ? stand.attributes.slug : ''}/${ProductTypeConverter(props.item.type)}/${item.attributes.slug}`;
+  const standURL = `/empresa/${props.standSlug ? props.standSlug : stand ? stand.attributes.slug : ''}`;
 
   return (
     <div className={`BuyableItem ${props.fullWidth ? '' : 'col s12 m4'}`}>
-      <Link to={`/empresa/${props.standSlug ? props.standSlug : stand ? stand.attributes.slug : ''}/${ProductTypeConverter(props.item.type)}/${item.attributes.slug}`} className='GenericCard'>
-        <div className={`BuyableItem__image-container ${props.mini ? 'BuyableItem__image-container--mini' : ''}`}>
+      <div className='GenericCard'>
+        <Link to={url} className={`BuyableItem__image-container ${props.mini ? 'BuyableItem__image-container--mini' : ''}`}>
           <div className={`BuyableItem__image ${props.mini ? 'BuyableItem__image--mini' : ''}`}
             style={{backgroundImage: `url(${item.attributes.img_picture})`}}>
           </div>
@@ -32,20 +34,20 @@ const BuyableItem = (props: any): React.ReactElement => {
                 {item.attributes.short_description}
               </span> : null
           }
-        </div>
+        </Link>
         <div className='BuyableItem__info'>
           {
             stand ?
-              <span className='orange-text text-accent-4'>
-                Vendido por {stand.attributes.name}
-              </span> : null
+              <Link to={standURL} className='orange-text text-accent-4 truncate'>
+                {stand.attributes.name}
+              </Link> : null
           }
-          <span className={`BuyableItem__name ${props.mini ? 'BuyableItem__name--mini' : ''} grey-text text-darken-4 truncate`}>
+          <Link to={url} className={`BuyableItem__name ${props.mini ? 'BuyableItem__name--mini' : ''} grey-text text-darken-4 truncate`}>
             {name}
-          </span>
-          <span className={`BuyableItem__price ${props.mini ? 'BuyableItem__price--mini' : ''} green-text text-darken-3`}>
+          </Link>
+          <Link to={url} className={`BuyableItem__price ${props.mini ? 'BuyableItem__price--mini' : ''} green-text text-darken-3`}>
             {getMoneyFormat(item.attributes.final_price)}
-          </span>
+          </Link>
           {
             item.attributes.discount ?
               <span className={`BuyableItem__discount ${props.mini ? 'BuyableItem__discount--mini' : ''} red-text text-lighten-2`}>
@@ -53,7 +55,7 @@ const BuyableItem = (props: any): React.ReactElement => {
               </span> : null
           }
         </div>
-      </Link>
+      </div>
     </div>
   );
 };
