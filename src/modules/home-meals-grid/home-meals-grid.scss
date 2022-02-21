@@ -11,12 +11,6 @@
     position: relative;
   }
 
-  &__blur {
-    width: 100%;
-    background: rgba(63, 63, 63, 0.3);
-    backdrop-filter: blur(15px);
-  }
-
   &__content {
     position: relative;
   }
@@ -24,10 +18,6 @@
   &__selected {
     border-radius: 16px;
     border: solid 2px white;
-  }
-
-  &__selected:hover {
-    @extend .cyan;
   }
 
   &__button {

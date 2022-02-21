@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'src/modules/generic-item-detail/generic-item-detail.scss';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import GenericHeaderDetail from 'src/modules/generic-item-detail/generic-header-detail';
@@ -24,6 +24,7 @@ import GenericItemBuyNowButton from 'src/modules/generic-item-detail/generic-ite
 const GenericItemDetail = (props: any): React.ReactElement => {
   const item = props.item;
   if ( !item || !item.attributes ) return <></>;
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div className='container row GenericItemDetail'>
@@ -60,8 +61,8 @@ const GenericItemDetail = (props: any): React.ReactElement => {
           { props.item && props.item.type === 'Service' ? <ServicesAttributes item={props.item} /> : null }
           { props.item && props.item.type === 'Product' ? <ProductAttributes item={props.item} /> : null }
           { props.item && props.item.type === 'RealEstate' ? <RealStateAttributes item={props.item} /> : null }
-          <GenericItemAddToCartButton item={props.item} />
-          <GenericItemAddToFavoritesButton />
+          <GenericItemAddToCartButton item={props.item} isLoading={isLoading} setIsLoading={setIsLoading} />
+          <GenericItemAddToFavoritesButton isLoading={isLoading} setIsLoading={setIsLoading} />
           <GenericItemBuyNowButton item={props.item} />
         </div>
       </div>

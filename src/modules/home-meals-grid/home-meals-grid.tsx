@@ -33,7 +33,6 @@ const HomeMealsGrid = (): React.ReactElement => {
 
   return (
     <div className='HomeMealsGrid__wrapper' style={{backgroundImage: `url(${backgroundIMG})`}}>
-      <div className='HomeMealsGrid__blur'>
         <div className='HomeMealsGrid__content container'>
           <HorizontalSpace size='x-small' />
           <div className='row'>
@@ -84,7 +83,6 @@ const HomeMealsGrid = (): React.ReactElement => {
             }
           </div>
         </div>
-      </div>
     </div>
   );
 };

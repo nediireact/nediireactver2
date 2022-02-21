@@ -16,6 +16,7 @@ import { GetBuyableItemName } from 'src/modules/utils/products-services';
 const GenericItemAddToCartButton = (props: any): React.ReactElement => {
   const item = props.item;
   if ( !item ) return <></>;
+  const isLoading = props.isLoading;
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.user);
   const user = userData && userData.user && userData.user.id ? userData.user : null;
@@ -31,22 +32,28 @@ const GenericItemAddToCartButton = (props: any): React.ReactElement => {
 
   const addItem = () => {
     if ( !user || !user.id || !jwt ) return;
+    props.setIsLoading(true);
     item.backup_name = name;
     AddCartItem(item, user, jwt)
       .then((itemAdded: any) => {
+        props.setIsLoading(false);
         dispatch(UserCartAddItem(itemAdded));
       })
       .catch((err) => {
+        props.setIsLoading(false);
         console.log('Error', err.toString());
       });
   };
 
   const deleteItem = (id: number) => {
+    props.setIsLoading(true);
     DeleteCartItem(id)
       .then(() => {
+        props.setIsLoading(false);
         dispatch(UserCartDeleteItem(id));
       })
       .catch((err) => {
+        props.setIsLoading(false);
         console.log('Error', err);
       });
   };
@@ -55,7 +62,7 @@ const GenericItemAddToCartButton = (props: any): React.ReactElement => {
     <>
     {
       isInUserCart && isInUserCart.id ?
-        <div className='GenericItemDetail__add-item-to-cart' onClick={() => {
+        <div className={`GenericItemDetail__add-item-to-cart ${isLoading ? 'IsLoadingOpacity' : ''}`} onClick={() => {
           deleteItem(Number(isInUserCart.id));
         }}>
           <TextWithIcon
@@ -64,7 +71,7 @@ const GenericItemAddToCartButton = (props: any): React.ReactElement => {
             text_color='grey-text text-darken-4'
             text='Eliminar del carrito' />
         </div> :
-        <div className='GenericItemDetail__add-item-to-cart' onClick={addItem}>
+        <div className={`GenericItemDetail__add-item-to-cart ${isLoading ? 'IsLoadingOpacity' : ''}`} onClick={addItem}>
           <TextWithIcon
             color_icon='cyan-text'
             icon='add_shopping_cart'
