@@ -36,6 +36,7 @@ const UserCartItem = (props: any): React.ReactElement => {
     userData.user.meta.access : null;
 
   const deleteItem = (id: number) => {
+    if ( isLoading ) return;
     props.setIsLoading(true);
     DeleteCartItem(id)
       .then(() => {
@@ -49,7 +50,7 @@ const UserCartItem = (props: any): React.ReactElement => {
   };
 
   const updateItem = (cartItem: any) => {
-    if ( !user || !user.id || !jwt ) return;
+    if ( !user || !user.id || !jwt || isLoading ) return;
     props.setIsLoading(true);
     UpdateCartItem(cartItem, user, jwt)
       .then((data: any) => {

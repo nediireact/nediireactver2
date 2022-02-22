@@ -8,8 +8,10 @@ import {
   DeleteCartItem
 } from 'src/modules/user-cart/user-cart-api-calls';
 import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
-import { UserCartAddItem } from 'src/redux/actions/user-cart-actions';
-import { UserCartDeleteItem } from 'src/redux/actions/user-cart-actions';
+import {
+  UserCartAddItem,
+  UserCartDeleteItem
+} from 'src/redux/actions/user-cart-actions';
 import { IsItACartItem } from 'src/modules/user-cart/is-item-in-user-cart';
 import { GetBuyableItemName } from 'src/modules/utils/products-services';
 
@@ -31,7 +33,7 @@ const GenericItemAddToCartButton = (props: any): React.ReactElement => {
   const name = GetBuyableItemName(item);
 
   const addItem = () => {
-    if ( !user || !user.id || !jwt ) return;
+    if ( !user || !user.id || !jwt || isLoading ) return;
     props.setIsLoading(true);
     item.backup_name = name;
     AddCartItem(item, user, jwt)
@@ -46,6 +48,7 @@ const GenericItemAddToCartButton = (props: any): React.ReactElement => {
   };
 
   const deleteItem = (id: number) => {
+    if ( isLoading ) return;
     props.setIsLoading(true);
     DeleteCartItem(id)
       .then(() => {
@@ -63,6 +66,7 @@ const GenericItemAddToCartButton = (props: any): React.ReactElement => {
     {
       isInUserCart && isInUserCart.id ?
         <div className={`GenericItemDetail__add-item-to-cart ${isLoading ? 'IsLoadingOpacity' : ''}`} onClick={() => {
+          if ( isLoading ) return;
           deleteItem(Number(isInUserCart.id));
         }}>
           <TextWithIcon
@@ -71,7 +75,10 @@ const GenericItemAddToCartButton = (props: any): React.ReactElement => {
             text_color='grey-text text-darken-4'
             text='Eliminar del carrito' />
         </div> :
-        <div className={`GenericItemDetail__add-item-to-cart ${isLoading ? 'IsLoadingOpacity' : ''}`} onClick={addItem}>
+        <div className={`GenericItemDetail__add-item-to-cart ${isLoading ? 'IsLoadingOpacity' : ''}`} onClick={() => {
+          if ( isLoading ) return;
+          addItem();
+        }}>
           <TextWithIcon
             color_icon='cyan-text'
             icon='add_shopping_cart'
