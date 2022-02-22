@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {
+  useState
+} from 'react';
 import { Link } from 'react-router-dom';
 import 'src/modules/buyable-item/buyable-item.scss';
 import getMoneyFormat from 'src/modules/utils/money-formats';
@@ -7,9 +9,12 @@ import {
   GetStandFromInclude,
   GetBuyableItemName
 } from 'src/modules/utils/products-services';
+import GenericItemAddToFavoritesButton from 'src/modules/favorite-button/favorite-button';
 
 const BuyableItem = (props: any): React.ReactElement => {
   const item = props.item;
+  if ( !item ) return <></>;
+  const [isLoading, setIsLoading] = useState(false);
   const stand = GetStandFromInclude(item);
   const name = GetBuyableItemName(item);
   const url = `/empresa/${props.standSlug ? props.standSlug : stand ? stand.attributes.slug : ''}/${ProductTypeConverter(props.item.type)}/${item.attributes.slug}`;
@@ -36,6 +41,10 @@ const BuyableItem = (props: any): React.ReactElement => {
           }
         </Link>
         <div className='BuyableItem__info'>
+          <GenericItemAddToFavoritesButton
+            item={item}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading} />
           {
             stand ?
               <Link to={standURL} className='orange-text text-accent-4 truncate'>
@@ -45,9 +54,9 @@ const BuyableItem = (props: any): React.ReactElement => {
           <Link to={url} className={`BuyableItem__name ${props.mini ? 'BuyableItem__name--mini' : ''} grey-text text-darken-4 truncate`}>
             {name}
           </Link>
-          <Link to={url} className={`BuyableItem__price ${props.mini ? 'BuyableItem__price--mini' : ''} green-text text-darken-3`}>
+          <span className={`BuyableItem__price ${props.mini ? 'BuyableItem__price--mini' : ''} green-text text-darken-3`}>
             {getMoneyFormat(item.attributes.final_price)}
-          </Link>
+          </span>
           {
             item.attributes.discount ?
               <span className={`BuyableItem__discount ${props.mini ? 'BuyableItem__discount--mini' : ''} red-text text-lighten-2`}>

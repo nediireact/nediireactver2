@@ -2,6 +2,10 @@
 @import 'src/constants/Constants.scss';
 
 .GenericItemDetail {
+  &__header {
+    position: relative;
+  }
+
   .GenericCard {
     padding: 12px !important;
   }
@@ -20,5 +24,11 @@
 
   &__buy-now {
     margin-top: 10px;
+  }
+
+  .FavoriteButton {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 }

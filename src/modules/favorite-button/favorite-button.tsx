@@ -4,13 +4,15 @@ import {
   useDispatch
 } from 'react-redux';
 import {
-  AddCartItem,
-  DeleteCartItem
-} from 'src/modules/user-cart/user-cart-api-calls';
-import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
-import { UserCartAddItem } from 'src/redux/actions/user-cart-actions';
-import { UserCartDeleteItem } from 'src/redux/actions/user-cart-actions';
+  AddFavoriteItem,
+  DeleteFavoriteItem
+} from 'src/modules/user-favorites/user-favorites-api-calls';
+import {
+  UserFavoritesAddItem,
+  UserFavoritesDeleteItem
+} from 'src/redux/actions/user-favorite-items-actions';
 import { IsItAFavoriteItem } from 'src/modules/user-favorites/is-item-in-user-favorites';
+import 'src/modules/favorite-button/favorite-button.scss';
 import { GetBuyableItemName } from 'src/modules/utils/products-services';
 
 const GenericItemAddToFavoritesButton = (props: any): React.ReactElement => {
@@ -31,13 +33,13 @@ const GenericItemAddToFavoritesButton = (props: any): React.ReactElement => {
   const name = GetBuyableItemName(item);
 
   const addItem = () => {
-    if ( !user || !user.id || !jwt ) return;
+    if ( !user || !user.id || !jwt || isLoading ) return;
     props.setIsLoading(true);
     item.backup_name = name;
-    AddCartItem(item, user, jwt)
+    AddFavoriteItem(item, user, jwt)
       .then((itemAdded: any) => {
         props.setIsLoading(false);
-        dispatch(UserCartAddItem(itemAdded));
+        dispatch(UserFavoritesAddItem(itemAdded));
       })
       .catch((err) => {
         props.setIsLoading(false);
@@ -46,11 +48,12 @@ const GenericItemAddToFavoritesButton = (props: any): React.ReactElement => {
   };
 
   const deleteItem = (id: number) => {
+    if ( isLoading ) return;
     props.setIsLoading(true);
-    DeleteCartItem(id)
+    DeleteFavoriteItem(id)
       .then(() => {
         props.setIsLoading(false);
-        dispatch(UserCartDeleteItem(id));
+        dispatch(UserFavoritesDeleteItem(id));
       })
       .catch((err) => {
         props.setIsLoading(false);
@@ -62,23 +65,18 @@ const GenericItemAddToFavoritesButton = (props: any): React.ReactElement => {
     <>
     {
       isFavorite && isFavorite.id ?
-        <div className={`GenericItemDetail__add-item-to-cart ${isLoading ? 'IsLoadingOpacity' : ''}`} onClick={() => {
+        <div
+          className={`material-icons red-text FavoriteButton ${isLoading ? 'IsLoadingOpacity' : ''}`}
+          onClick={() => {
           if ( isLoading ) return;
           deleteItem(Number(isFavorite.id));
-        }}>
-          <TextWithIcon
-            color_icon='red-text'
-            icon='cancel'
-            text_color='grey-text text-darken-4'
-            text='Eliminar de favorito' />
-        </div> :
-        <div className={`GenericItemDetail__add-item-to-cart ${isLoading ? 'IsLoadingOpacity' : ''}`} onClick={addItem}>
-          <TextWithIcon
-            color_icon='cyan-text'
-            icon='add_shopping_cart'
-            text_color='grey-text text-darken-4'
-            text='Agregar a favoritos' />
-        </div>
+        }}>favorite</div> :
+        <div
+          className={`material-icons red-text FavoriteButton ${isLoading ? 'IsLoadingOpacity' : ''}`}
+          onClick={() => {
+          if ( isLoading ) return;
+          addItem();
+        }}>favorite_border</div>
     }
     </>
   );

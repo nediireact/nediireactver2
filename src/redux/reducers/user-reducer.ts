@@ -2,6 +2,8 @@ import {
   USER,
   USER_FAVORITES_STANDS,
   USER_FAVORITES_ITEMS,
+  USER_FAVORITES_ADD_ITEM,
+  USER_FAVORITES_DELETE_ITEM,
   USER_CART,
   USER_ORDERS,
   USER_CART_ADD_ITEM,
@@ -21,22 +23,40 @@ export const UserReducer = (state = initialState, action: any): any => {
     case USER_FAVORITES_ITEMS:
       const favoriteItems = [ ...action.data ];
       return { ...state, favoriteItems };
+    case USER_FAVORITES_ADD_ITEM:
+      const favoriteListBeforeToAddItem = [ ...state.favoriteItems ];
+      const favoriteItemToAdd = action.data;
+      favoriteListBeforeToAddItem.push(favoriteItemToAdd);
+      return { ...state, ...{
+        favoriteItems: favoriteListBeforeToAddItem
+      }};
+    case USER_FAVORITES_DELETE_ITEM:
+      const favoriteListBeforeToDeleteItem = [ ...state.favoriteItems ];
+      const idFavoriteItemToDelete = action.data;
+      const favoriteItemCartToDelete = favoriteListBeforeToDeleteItem.filter((i: any) => Number(i.id) === idFavoriteItemToDelete);
+      if ( favoriteItemCartToDelete.length ) {
+        const index = favoriteListBeforeToDeleteItem.indexOf(favoriteItemCartToDelete[0]);
+        favoriteListBeforeToDeleteItem.splice(index, 1);
+      }
+      return { ...state, ...{
+        favoriteItems: favoriteListBeforeToDeleteItem
+      }};
     case USER_CART:
       const cart = [ ...action.data ];
       return { ...state, cart };
     case USER_CART_ADD_ITEM:
       const cartBeforeToAddItem = [ ...state.cart ];
-      const itemToAdd = action.data;
-      cartBeforeToAddItem.push(itemToAdd);
+      const cartItemToAdd = action.data;
+      cartBeforeToAddItem.push(cartItemToAdd);
       return { ...state, ...{
         cart: cartBeforeToAddItem
       }};
     case USER_CART_DELETE_ITEM:
       const cartBeforeToDeleteItem = [ ...state.cart ];
-      const idItemToDelete = action.data;
-      const itemToDelete = cartBeforeToDeleteItem.filter((i: any) => Number(i.id) === idItemToDelete);
-      if ( itemToDelete.length ) {
-        const index = cartBeforeToDeleteItem.indexOf(itemToDelete[0]);
+      const idCartItemToDelete = action.data;
+      const itemCartToDelete = cartBeforeToDeleteItem.filter((i: any) => Number(i.id) === idCartItemToDelete);
+      if ( itemCartToDelete.length ) {
+        const index = cartBeforeToDeleteItem.indexOf(itemCartToDelete[0]);
         cartBeforeToDeleteItem.splice(index, 1);
       }
       return { ...state, ...{
@@ -44,10 +64,10 @@ export const UserReducer = (state = initialState, action: any): any => {
       }};
     case USER_CART_UPDATE_ITEM:
       const cartBeforeToUpdateItem = [ ...state.cart ];
-      const itemToUpdate = action.data;
+      const cartItemToUpdate = action.data;
       for (let j = 0; j < cartBeforeToUpdateItem.length; j++) {
-        if ( cartBeforeToUpdateItem[j].id === itemToUpdate.id ) {
-          cartBeforeToUpdateItem[j] = itemToUpdate;
+        if ( cartBeforeToUpdateItem[j].id === cartItemToUpdate.id ) {
+          cartBeforeToUpdateItem[j] = cartItemToUpdate;
         }
       }
       return { ...state, ...{
