@@ -24,6 +24,7 @@ export const AddCartItem = ( item: any, user: any, jwt: string ): Promise<any> =
     if ( !user || !user.id || !jwt ) return res(new Error('Invalid data'));
     const data: any = { ...NewCartItem };
     const userName = `${user.attributes.first_name} ${user.attributes.last_name}`;
+    data.data.type = 'UserCartBuyableItems';
     data.data.relationships.user.data = null;
     data.data.relationships.product.data = null;
     data.data.relationships.meal.data = null;
