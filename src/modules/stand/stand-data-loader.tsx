@@ -3,7 +3,10 @@ import {
   useHistory,
   useParams
 } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import {
+  useSelector,
+  useDispatch
+} from 'react-redux';
 import fetchData from 'src/modules/utils/fetch-data';
 import StandHeader from 'src/modules/stand-header/stand-header';
 import StandRouteNav from 'src/modules/stand-route-nav/stand-route-nav';
@@ -13,6 +16,7 @@ const StandDataLoader = (props: any): React.ReactElement => {
   const stand = useSelector((state: any) => state.stand);
   const history = useHistory();
   const params: any = useParams();
+  const dispatch = useDispatch();
 
   const setMenu = (stand: any) => {
     const menu: any[] = [];
@@ -80,7 +84,7 @@ const StandDataLoader = (props: any): React.ReactElement => {
         }
         const standData = response.data[0];
         setMenu(standData);
-        props.setStand(setStandData(standData));
+        dispatch(setStandData(standData));
       })
       .catch((error) => {
         console.log('Hubo un error', error);

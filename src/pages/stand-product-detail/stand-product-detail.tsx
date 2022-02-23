@@ -1,10 +1,7 @@
 import React, {
   useState
 } from 'react';
-import {
-  useSelector,
-  useDispatch
-} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import SystemCheck from 'src/modules/system-check/system-check';
 import NavBar from 'src/modules/nav-bar/nav-bar';
@@ -14,17 +11,13 @@ import StandProductDetail from 'src/modules/stand-product-detail/stand-product-d
 
 const StanProductDetailPage = (): React.ReactElement => {
   const params: any = useParams();
-  const dispatch = useDispatch();
   const stand = useSelector((state: any) => state.stand);
   const [sectionMenu, setSectionMenu] = useState({});
 
   return (
     <>
       <NavBar sectionMenu={sectionMenu} />
-      <StandDataLoader
-        stand={stand}
-        setStand={dispatch}
-        setSectionMenu={setSectionMenu} />
+      <StandDataLoader setSectionMenu={setSectionMenu} />
       {
         stand && stand[params.standId] && stand[params.standId].id ?
           <StandProductDetail /> : null
