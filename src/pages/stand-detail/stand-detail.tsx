@@ -1,10 +1,7 @@
 import React, {
   useState
 } from 'react';
-import {
-  useSelector,
-  useDispatch
-} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import SystemCheck from 'src/modules/system-check/system-check';
 import NavBar from 'src/modules/nav-bar/nav-bar';
@@ -15,16 +12,13 @@ import SystemConfigurationLoader from 'src/modules/system-configuration-loader/s
 
 const StandDetail = (): React.ReactElement => {
   const params: any = useParams();
-  const dispatch = useDispatch();
   const stand = useSelector((state: any) => state.stand);
   const [sectionMenu, setSectionMenu]: any = useState([]);
 
   return (
     <>
       <NavBar sectionMenu={sectionMenu} />
-      <StandDataLoader
-        setStand={dispatch}
-        setSectionMenu={setSectionMenu} />
+      <StandDataLoader setSectionMenu={setSectionMenu} />
       {
         stand && stand[params.standId] && stand[params.standId].id ?
           <StandComponent stand={stand[params.standId]} /> : null
