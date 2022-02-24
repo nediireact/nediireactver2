@@ -13,6 +13,7 @@ import EnvironmentVariables from 'src/constants/EnvironmentVariables';
 import { FILE_PREFIX } from 'src/constants/SystemConstants';
 import SetMobilePlatform from 'src/redux/actions/set-mobile-platform';
 import * as M from 'materialize-css';
+import GlobalAlertDialog from 'src/modules/global-alert-dialog/global-alert-dialog';
 
 const env = EnvironmentVariables.getInstance();
 const isMobileApp = env.isMobileApp;
@@ -56,7 +57,11 @@ const SystemCheck = (): React.ReactElement => {
     }
   }, [M]);
 
-  return (<></>);
+  return (
+    <>
+      <GlobalAlertDialog />
+    </>
+  );
 };
 
 export default SystemCheck;
