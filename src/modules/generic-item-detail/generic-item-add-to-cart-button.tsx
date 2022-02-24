@@ -14,6 +14,7 @@ import {
 } from 'src/redux/actions/user-cart-actions';
 import { IsItACartItem } from 'src/modules/user-cart/is-item-in-user-cart';
 import { GetBuyableItemName } from 'src/modules/utils/products-services';
+import SetGlobalAlertDialog from 'src/redux/actions/set-global-alert-dialog';
 
 const GenericItemAddToCartButton = (props: any): React.ReactElement => {
   const item = props.item;
@@ -33,7 +34,13 @@ const GenericItemAddToCartButton = (props: any): React.ReactElement => {
   const name = GetBuyableItemName(item);
 
   const addItem = () => {
-    if ( !user || !user.id || !jwt || isLoading ) return;
+    if ( !user || !user.id || !jwt || isLoading ) {
+      dispatch(SetGlobalAlertDialog({
+        active: true,
+        dialog: 'missingLogin'
+      }));
+      return;
+    }
     props.setIsLoading(true);
     item.backup_name = name;
     AddCartItem(item, user, jwt)
@@ -48,7 +55,13 @@ const GenericItemAddToCartButton = (props: any): React.ReactElement => {
   };
 
   const deleteItem = (id: number) => {
-    if ( isLoading ) return;
+    if ( !user || !user.id || !jwt || isLoading ) {
+      dispatch(SetGlobalAlertDialog({
+        active: true,
+        dialog: 'missingLogin'
+      }));
+      return;
+    }
     props.setIsLoading(true);
     DeleteCartItem(id)
       .then(() => {

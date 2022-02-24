@@ -12,20 +12,18 @@ import { SetUserData } from 'src/redux/actions/user-actions';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-const modelInterface = {
-  open: () => null,
-  close: () => null
-};
-
-const loginPayload = {
-  data: {
-    type: 'login',
-    email: '',
-    password: ''
-  }
-};
-
 const EmailLogin = ( porps: any ): React.ReactElement => {
+  const modelInterface = {
+    open: () => null,
+    close: () => null
+  };
+  const loginPayload = {
+    data: {
+      type: 'login',
+      email: '',
+      password: ''
+    }
+  };
   const dispatch = useDispatch();
   const history = useHistory();
   const [email, setEmail] = useState('');
@@ -73,7 +71,13 @@ const EmailLogin = ( porps: any ): React.ReactElement => {
   return (
     <>
       <div className='col s12'><SubTitle text='Login con correo' /></div>
-      <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} onCloseEnd={onCloseEnd} fixedFooter={true} />
+      <Modal
+        setModal={setModal}
+        success={modalSuccess}
+        title={modalTitle}
+        message={modalMessage}
+        onCloseEnd={onCloseEnd}
+        fixedFooter={true} />
       <EmailLoginFrom formRef={formRef}
         email={email} setEmail={setEmail}
         password={password} setPassword={setPassword}

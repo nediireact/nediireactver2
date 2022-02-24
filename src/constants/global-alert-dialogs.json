@@ -1,0 +1,7 @@
+{
+  "missingLogin": {
+    "success": false,
+    "title": "Login requerido",
+    "message": "Para completar esta accion, por favor ingrese a su cuenta en el menu de login o cree una cuenta."
+  }
+}

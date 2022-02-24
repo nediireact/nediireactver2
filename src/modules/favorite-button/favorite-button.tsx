@@ -14,6 +14,7 @@ import {
 import { IsItAFavoriteItem } from 'src/modules/user-favorites/is-item-in-user-favorites';
 import 'src/modules/favorite-button/favorite-button.scss';
 import { GetBuyableItemName } from 'src/modules/utils/products-services';
+import SetGlobalAlertDialog from 'src/redux/actions/set-global-alert-dialog';
 
 const GenericItemAddToFavoritesButton = (props: any): React.ReactElement => {
   const item = props.item;
@@ -33,7 +34,13 @@ const GenericItemAddToFavoritesButton = (props: any): React.ReactElement => {
   const name = GetBuyableItemName(item);
 
   const addItem = () => {
-    if ( !user || !user.id || !jwt || isLoading ) return;
+    if ( !user || !user.id || !jwt || isLoading ) {
+      dispatch(SetGlobalAlertDialog({
+        active: true,
+        dialog: 'missingLogin'
+      }));
+      return;
+    }
     props.setIsLoading(true);
     item.backup_name = name;
     AddFavoriteItem(item, user, jwt)
@@ -48,7 +55,13 @@ const GenericItemAddToFavoritesButton = (props: any): React.ReactElement => {
   };
 
   const deleteItem = (id: number) => {
-    if ( isLoading ) return;
+    if ( !user || !user.id || !jwt || isLoading ) {
+      dispatch(SetGlobalAlertDialog({
+        active: true,
+        dialog: 'missingLogin'
+      }));
+      return;
+    }
     props.setIsLoading(true);
     DeleteFavoriteItem(id)
       .then(() => {
