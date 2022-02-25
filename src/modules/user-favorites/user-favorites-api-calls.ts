@@ -55,3 +55,42 @@ export const AddFavoriteItem = ( item: any, user: any, jwt: string ): Promise<an
       });
   });
 };
+
+export const DeleteFavoriteStand = ( id: number ): Promise<any> => {
+  return new Promise((res, rej) => {
+    const url = `user-favorite-stands/${id}/`;
+    APIDelete(url)
+      .then((response: any) => {
+        res(response);
+      })
+      .catch((error: any) => {
+        rej(error);
+      });
+  });
+};
+
+export const AddFavoriteStand = ( item: any, user: any, jwt: string ): Promise<any> => {
+  return new Promise((res, rej) => {
+    if ( !user || !user.id || !jwt ) return res(new Error('Invalid data'));
+    const data: any = { data: {
+      type: 'UserFavoriteStands',
+      relationships: {
+        stand: { data: { type: 'Stand', id: item.id } },
+        user: { data: { type: 'User', id: user.id } }
+      }
+    }};
+    APIPost('user-favorite-stands/', data, true, jwt)
+      .then((response: any) => {
+        const itemAdded = { ...response.data };
+        if ( itemAdded.attributes && itemAdded.relationships &&
+          itemAdded.relationships.stand &&
+          itemAdded.relationships.stand.data ) {
+          itemAdded.relationships.stand.data = { ...item };
+          res(itemAdded);
+        }
+      })
+      .catch((error: any) => {
+        rej(error);
+      });
+  });
+};

@@ -6,7 +6,7 @@ import {
   useDispatch
 } from 'react-redux';
 import fetchData from 'src/modules/utils/fetch-data';
-import SetUserFavoriteStands from 'src/redux/actions/user-favorite-stands';
+import { SetUserFavoriteStands } from 'src/redux/actions/user-favorite-stands-actions';
 
 const LoadUserFavoriteStands = (): React.ReactElement => {
   const userData = useSelector((state: any) => state.user);

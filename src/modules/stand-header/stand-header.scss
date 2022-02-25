@@ -76,6 +76,7 @@ $logo-desktop-hight: 140px;
   }
 
   &__logo {
+    display: block;
     width: 100px;
     height: 100px;
     border-radius: 5px;
@@ -88,6 +89,15 @@ $logo-desktop-hight: 140px;
 
   &__slogan {
     font-size: $medium-text;
+  }
+  
+  .FavoriteButton {
+    width: fit-content;
+    width: -moz-fit-content;
+    background-color: white;
+    font-size: 1.7em;
+    border-radius: 30px;
+    padding: 3px;
   }
 }
 

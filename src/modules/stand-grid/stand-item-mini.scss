@@ -7,6 +7,7 @@
   padding: 7px;
   
   &__image {
+    display: block;
     position: relative;
     width: 100%;
     height: 100px;
@@ -36,6 +37,17 @@
     right: 5px;
     top: 5px;
     text-align: center;
+  }
+
+  .FavoriteButton {
+    position: absolute;
+    z-index: 2;
+    left: 5px;
+    top: 5px;
+    background-color: white;
+    padding: 4px;
+    font-size: 1.4em;
+    border-radius: 3px;
   }
 }
 

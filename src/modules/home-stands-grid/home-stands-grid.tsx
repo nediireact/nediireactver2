@@ -6,6 +6,7 @@ import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import fetchData from 'src/modules/utils/fetch-data';
 import SubTitle from 'src/modules/sub-title/sub-title';
 import StandItemMini from 'src/modules/stand-grid/stand-item-mini';
+import LoadUserFavoriteStands from 'src/modules/user-favorites/load-user-favorite-stands';
 import 'src/modules/home-stands-grid/home-stands-grid.scss';
 
 interface HomeStandsGridInterface {
@@ -29,21 +30,22 @@ const HomeStandsGrid = (props: HomeStandsGridInterface): React.ReactElement => {
 
   return (
     <div className='HomeStandsGrid container row'>
-    <HorizontalSpace size='medium' />
-    <SubTitle text={title} />
-    {
-      items && items.length ?
-        items.map((i: any, index: number) => {
-          return (
-            <StandItemMini
-              key={index}
-              cols={cols}
-              item={i}
-              onlyRestaurants={props.onlyRestaurants} />
-          );
-        }) : null
-    }
-    <HorizontalSpace size='medium' />
+      <LoadUserFavoriteStands />
+      <HorizontalSpace size='medium' />
+      <SubTitle text={title} />
+      {
+        items && items.length ?
+          items.map((i: any, index: number) => {
+            return (
+              <StandItemMini
+                key={index}
+                cols={cols}
+                item={i}
+                onlyRestaurants={props.onlyRestaurants} />
+            );
+          }) : null
+      }
+      <HorizontalSpace size='medium' />
     </div>
   );
 };

@@ -1,6 +1,8 @@
 import {
   USER,
   USER_FAVORITES_STANDS,
+  USER_FAVORITES_ADD_STAND,
+  USER_FAVORITES_DELETE_STAND,
   USER_FAVORITES_ITEMS,
   USER_FAVORITES_ADD_ITEM,
   USER_FAVORITES_DELETE_ITEM,
@@ -20,6 +22,24 @@ export const UserReducer = (state = initialState, action: any): any => {
     case USER_FAVORITES_STANDS:
       const favoriteStands = [ ...action.data ];
       return { ...state, favoriteStands };
+    case USER_FAVORITES_ADD_STAND:
+      const favoriteListBeforeToAddStand = [ ...state.favoriteStands ];
+      const favoriteStandToAdd = action.data;
+      favoriteListBeforeToAddStand.push(favoriteStandToAdd);
+      return { ...state, ...{
+        favoriteStands: favoriteListBeforeToAddStand
+      }};
+    case USER_FAVORITES_DELETE_STAND:
+      const favoriteListBeforeToDeleteStand = [ ...state.favoriteStands ];
+      const idFavoriteStandToDelete = action.data;
+      const favoriteStandCartToDelete = favoriteListBeforeToDeleteStand.filter((i: any) => Number(i.id) === idFavoriteStandToDelete);
+      if ( favoriteStandCartToDelete.length ) {
+        const index = favoriteListBeforeToDeleteStand.indexOf(favoriteStandCartToDelete[0]);
+        favoriteListBeforeToDeleteStand.splice(index, 1);
+      }
+      return { ...state, ...{
+        favoriteStands: favoriteListBeforeToDeleteStand
+      }};
     case USER_FAVORITES_ITEMS:
       const favoriteItems = [ ...action.data ];
       return { ...state, favoriteItems };

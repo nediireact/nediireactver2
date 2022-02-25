@@ -1,5 +1,6 @@
 import React, {
-  useState
+  useState,
+  useEffect
 } from 'react';
 import { useSelector } from 'react-redux';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
@@ -11,6 +12,11 @@ const UserCart = (): React.ReactElement => {
   const userData = useSelector((state: any) => state.user);
   const items = userData.cart || [];
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const w: any = window;
+    w.scrollTo(0, 0);
+  });
 
   return (
     <div className='col s12 m8'>

@@ -2,6 +2,7 @@ import React from 'react';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import GenericMiniSlider from 'src/modules/generic-mini-slider/generic-mini-slider';
 import 'src/modules/home-products-and-services/home-products-and-services.scss';
+import LoadUserFavoriteItems from 'src/modules/user-favorites/load-user-favorite-items';
 
 const HomeProductAndServices = (): React.ReactElement => {
   const commonFields = 'name,img_picture,slug,stand,price,final_price,discount,created,times_selled,short_description';
@@ -18,6 +19,7 @@ const HomeProductAndServices = (): React.ReactElement => {
 
   return (
     <>
+    <LoadUserFavoriteItems />
     <HorizontalSpace size='medium' />
     <div className='HomeProductAndServices blue-grey white-text'>
       <div className='container'>
