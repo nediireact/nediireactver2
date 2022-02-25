@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {
+  useEffect
+} from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
@@ -25,6 +27,11 @@ const UserDashboard = (): React.ReactElement => {
   const stands = userData.favoriteStands || [];
   const items = userData.favoriteItems || [];
   const cartItems = userData.cart || [];
+
+  useEffect(() => {
+    const w: any = window;
+    w.scrollTo(0, 0);
+  });
 
   return (
     <div className='col s12 m8 UserDashboard'>

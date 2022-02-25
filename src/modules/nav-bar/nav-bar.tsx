@@ -10,10 +10,12 @@ import MenuItems from 'src/modules/nav-bar/menu-items';
 import { SetUserData } from 'src/redux/actions/user-actions';
 import { useDispatch } from 'react-redux';
 import NavSearchBox from 'src/modules/nav-search-box/nav-search-box';
+import { useHistory } from 'react-router-dom';
 
 const logoFile = '/assets/logo.jpg';
 
 const NavBar = (props: any): React.ReactElement => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const system = useSelector((state: any) => state.system);
   const prefix = system.platform.prefix;
@@ -37,6 +39,7 @@ const NavBar = (props: any): React.ReactElement => {
       favoriteItems: [],
       cart: []
     }));
+    return history.replace('/');
   };
 
   return (

@@ -71,6 +71,17 @@
   .StrongText {
     margin: 0 auto 10px !important;
   }
+
+  .FavoriteButton {
+    position: absolute;
+    z-index: 2;
+    left: 8px;
+    top: 8px;
+    background-color: white;
+    padding: 4px;
+    font-size: 2em;
+    border-radius: 3px;
+  }
 }
 
 @media screen and (min-width: 601px) {

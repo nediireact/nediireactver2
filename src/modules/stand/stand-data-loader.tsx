@@ -11,6 +11,8 @@ import fetchData from 'src/modules/utils/fetch-data';
 import StandHeader from 'src/modules/stand-header/stand-header';
 import StandRouteNav from 'src/modules/stand-route-nav/stand-route-nav';
 import setStandData from 'src/redux/actions/set-stand-data';
+import LoadUserFavoriteStands from 'src/modules/user-favorites/load-user-favorite-stands';
+import LoadUserFavoriteItems from 'src/modules/user-favorites/load-user-favorite-items';
 
 const StandDataLoader = (props: any): React.ReactElement => {
   const stand = useSelector((state: any) => state.stand);
@@ -95,11 +97,14 @@ const StandDataLoader = (props: any): React.ReactElement => {
   return (
     <>
     {
-      stand && stand && stand[params.standId] && stand[params.standId].attributes ? <>
+      stand && stand && stand[params.standId] && stand[params.standId].attributes ?
+      <>
         <StandHeader
           stand={stand[params.standId]}
           size='medium' />
         <StandRouteNav />
+        <LoadUserFavoriteStands />
+        <LoadUserFavoriteItems />
       </> : null
     }
     </>

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {
+  useEffect
+} from 'react';
 import { useSelector } from 'react-redux';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import StandItemMini from 'src/modules/stand-grid/stand-item-mini';
@@ -11,6 +13,11 @@ const UserFavorites = (): React.ReactElement => {
   const userData = useSelector((state: any) => state.user);
   const stands = userData.favoriteStands || [];
   const items = userData.favoriteItems || [];
+
+  useEffect(() => {
+    const w: any = window;
+    w.scrollTo(0, 0);
+  });
 
   return (
     <div className='col s12 m8'>
