@@ -78,6 +78,7 @@ app.get('/empresa/:standId/vehiculos', commonIndex);
 app.get('/empresa/:standId/vehiculos/:vehicleId', commonIndex);
 app.get('/empresa/:standId/inmuebles', commonIndex);
 app.get('/empresa/:standId/inmuebles/:realEstateId', commonIndex);
+app.get('/empresa/:standId/tarjeta-de-negocio/', commonIndex);
 app.get('/', commonIndex);
 
 app.listen(port, () => {

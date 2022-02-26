@@ -34,4 +34,11 @@
     font-size: $regular-text;
     margin-right: 7px;
   }
+
+  .image {
+    background-size: contain;
+    background-attachment: fixed;
+    width: 16px;
+    height: 16px;
+  }
 }

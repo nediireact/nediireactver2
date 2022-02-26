@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable max-lines-per-function */
 import React from 'react';
 import {
@@ -38,6 +39,7 @@ import {
   UserData
 } from 'src/pages/terms-and-conditions/terms-and-conditions';
 import UserAccountPage from 'src/pages/user-account/user-account';
+import BusinessCarPage from 'src/pages/business-card/business-card-page';
 
 const env = EnvironmentVariables.getInstance();
 const isMobileApp = env.isMobileApp;
@@ -169,6 +171,11 @@ const Routes = (): React.ReactElement => {
         <Route path='/empresa/:standId/menu'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><StandMeals /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path='/empresa/:standId/tarjeta-de-negocio/'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><BusinessCarPage /></PersistGate>
           </Provider>
         </Route>
         <Route path='/empresa/:standId'>
