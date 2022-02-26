@@ -3,8 +3,9 @@ import SubTitle from 'src/modules/sub-title/sub-title';
 import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
 
 const SectionsBusinessCard = (props: any): React.ReactElement => {
-  const [aboutSelected, setAboutSelected] = useState('us');
   const stand = props.stand;
+  if ( !stand || !stand.id ) return <></>;
+  const [aboutSelected, setAboutSelected] = useState('us');
 
   return (
     <>
@@ -27,30 +28,36 @@ const SectionsBusinessCard = (props: any): React.ReactElement => {
         <SubTitle text='Comunícate con Nosotros' />
           <div className='col s12 m3'>
             {
-              stand.relationships.phones.data.map((i: any, index: number) => {
-                return (
-                  <TextWithIcon
-                    key={index}
-                    text={i.attributes.phone}
-                    color_icon='cyan-text'
-                    icon='call'
-                    link={`tel:${i.attributes.phone}`} />
-                );
-              })
+              stand.relationships &&
+              stand.relationships.phones &&
+              stand.relationships.phones.data &&
+              stand.relationships.phones.data.length ?
+                stand.relationships.phones.data.map((i: any, index: number) => {
+                  return (
+                    <TextWithIcon
+                      key={index}
+                      text={i.attributes.phone}
+                      color_icon='cyan-text'
+                      icon='call'
+                      link={`tel:${i.attributes.phone}`} />
+                  );
+                }) : null
             }
           </div>
           <div className='col s12 m3'>
             {
-              stand.relationships.owner.data.map((i: any, index: number) => {
-                return (
-                  <TextWithIcon
-                    key={index}
-                    text={i.attributes.profile.owner_whatsapp}
-                    color_icon='cyan-text'
-                    icon='call'
-                    link={`tel:${i.attributes.profile.owner_whatsapp}`} />
-                );
-              })
+              stand.relationships &&
+              stand.relationships.owner &&
+              stand.relationships.owner.data &&
+              stand.relationships.owner.data.attributes &&
+              stand.relationships.owner.data.attributes.profile &&
+              stand.relationships.owner.data.attributes.profile.owner_whatsapp ?
+                <TextWithIcon
+                  text={stand.relationships.owner.data.attributes.profile.owner_whatsapp}
+                  color_icon='green-text'
+                  icon='whatsapp'
+                  link={`https://wa.me/+521${stand.relationships.owner.data.attributes.profile.owner_whatsapp}`} /> :
+                null
             }
           </div>
           <div className="col s12 m3">
