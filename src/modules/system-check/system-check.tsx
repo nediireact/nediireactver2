@@ -2,7 +2,7 @@ import React, {
   useEffect
 } from 'react';
 import {
-  useHistory,
+  useNavigate,
   useLocation
 } from 'react-router-dom';
 import {
@@ -21,15 +21,13 @@ const isMobileApp = env.isMobileApp;
 const SystemCheck = (): React.ReactElement => {
   const login = useSelector((state: any) => state.login);
   const dispatch = useDispatch();
-  const history: any = useHistory();
+  const navigate: any = useNavigate();
   const location: any = useLocation();
 
   const redirect = () => {
     if ( location.path === 'login' ) {
       if ( login.id ) {
-        history.replace({
-          pathname: '/'
-        });
+        navigate('/');
       }
     }
   };

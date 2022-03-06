@@ -2,14 +2,14 @@ import React, {
   useEffect, useState
 } from 'react';
 import {
-  useHistory,
+  useNavigate,
   useParams
 } from 'react-router';
 import GenericItemDetail from 'src/modules/generic-item-detail/generic-item-detail';
 import fetchData from 'src/modules/utils/fetch-data';
 
 const StandVehicleDetail = (): React.ReactElement => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const params: any = useParams();
   const [vehicle, setVehicle]: any = useState({});
 
@@ -20,7 +20,7 @@ const StandVehicleDetail = (): React.ReactElement => {
         console.log('Error de servicio');
       } else {
         const vehicleData = response.data[0];
-        if (!vehicleData) return history.replace('/');
+        if (!vehicleData) return navigate('/');
         setVehicle(vehicleData);
       }
     })

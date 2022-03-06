@@ -7,7 +7,7 @@ type TitleInterface = {
   fullWidth?: boolean;
   link?: string;
   color?: string;
-  align?: String;
+  align?: string;
   shadow?: boolean;
 }
 

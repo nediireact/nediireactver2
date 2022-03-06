@@ -1,8 +1,10 @@
+// DEPRECATED
+
 import React, {
   useState
 } from 'react';
-import EnvironmentVariables from 'src/constants/EnvironmentVariables';
-import FacebookLogin from 'react-facebook-login'; // https://www.npmjs.com/package/react-facebook-login
+// import EnvironmentVariables from 'src/constants/EnvironmentVariables';
+// import FacebookLogin from 'react-facebook-login'; // https://www.npmjs.com/package/react-facebook-login
 import RegisterUserAPICall from 'src/modules/register-user/register-user-api-calls';
 import { APIGet } from 'src/api/communicator';
 import SubTitle from 'src/modules/sub-title/sub-title';
@@ -10,10 +12,10 @@ import Modal from 'src/modules/modal/modal';
 import { ArrayErrorsToHTMLList } from 'src/modules/utils/date-parser';
 import { SetUserData } from 'src/redux/actions/user-actions';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const env = EnvironmentVariables.getInstance();
-const facebookAppID = env.facebookAppID;
+// const env = EnvironmentVariables.getInstance();
+// const facebookAppID = env.facebookAppID;
 const modelInterface = {
   open: () => null,
   close: () => null
@@ -34,7 +36,7 @@ const newUserPayload = {
 
 const FacebookRegistration = ( porps: any ): React.ReactElement => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [modal, setModal] = useState(modelInterface);
   const [modalSuccess, setModalSuccess] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
@@ -42,7 +44,7 @@ const FacebookRegistration = ( porps: any ): React.ReactElement => {
 
   const onCloseEnd = () => {
     modal.close();
-    if ( modalSuccess ) return history.replace('/');
+    if ( modalSuccess ) return navigate('/');
   };
 
   const FacebookCB = (response: any) => {
@@ -106,10 +108,10 @@ const FacebookRegistration = ( porps: any ): React.ReactElement => {
     <>
       <div className='col s12'><SubTitle text='Registro con redes sociales' /></div>
       <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} onCloseEnd={onCloseEnd} fixedFooter={true} />
-      <div className='RegisterUser__social-login col s12 row'>
-        <FacebookLogin appId={facebookAppID} autoLoad={false} callback={FacebookCB}
+      <div className='RegisterUser__social-login col s12 row' onClick={FacebookCB}>
+        {/* <FacebookLogin appId={facebookAppID} autoLoad={false} callback={FacebookCB}
           fields='name,email,picture' scope='public_profile,email'
-          icon='fa-facebook' textButton='Registro' />
+          icon='fa-facebook' textButton='Registro' /> */}
       </div>
     </>
   );

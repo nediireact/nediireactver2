@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  useHistory,
+  useNavigate,
   useParams
 } from 'react-router-dom';
 import {
@@ -16,7 +16,7 @@ import LoadUserFavoriteItems from 'src/modules/user-favorites/load-user-favorite
 
 const StandDataLoader = (props: any): React.ReactElement => {
   const stand = useSelector((state: any) => state.stand);
-  const history = useHistory();
+  const navigate = useNavigate();
   const params: any = useParams();
   const dispatch = useDispatch();
 
@@ -82,7 +82,7 @@ const StandDataLoader = (props: any): React.ReactElement => {
     fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones,pictures,expo,group,stand_news,stand_booking_questions,stand_booking_questions.options,survey_questions,city,city.state,city.state.country`)
       .then((response: any) => {
         if ( !response.data.length ) {
-          return history.replace('/');
+          return navigate('/');
         }
         const standData = response.data[0];
         setMenu(standData);
@@ -90,7 +90,7 @@ const StandDataLoader = (props: any): React.ReactElement => {
       })
       .catch((error) => {
         console.log('Hubo un error', error);
-        return history.replace('/');
+        return navigate('/');
       });
   }, [fetchData]);
 

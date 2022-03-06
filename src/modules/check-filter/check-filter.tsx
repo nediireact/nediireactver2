@@ -8,7 +8,7 @@ interface FilterInterface {
   items: Array<any>;
   filter: string;
   join?: boolean;
-  updateItems: Function;
+  updateItems: any;
 }
 
 const CheckFilter = (props: FilterInterface): React.ReactElement => {
@@ -18,7 +18,7 @@ const CheckFilter = (props: FilterInterface): React.ReactElement => {
 
   const updateAddOnFilter = (e: any) => {
     const itemsCopy: Array<any> = [...items];
-    const value: Number = Number(e.target.value);
+    const value = Number(e.target.value);
     const add: boolean = e.target.checked ? true : false;
     if ( add ) {
       itemsCopy.push(value);
@@ -30,7 +30,7 @@ const CheckFilter = (props: FilterInterface): React.ReactElement => {
     if ( join ) {
       filterValues = itemsCopy.length ? `&filter[${filter}__in]=${itemsCopy.join(',')}` : '';
     } else {
-      itemsCopy.forEach((i: Number) => {
+      itemsCopy.forEach((i: number) => {
         filterValues += `&filter[${filter}]=${i}`;
       });
     }

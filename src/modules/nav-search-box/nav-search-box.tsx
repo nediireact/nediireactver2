@@ -4,7 +4,7 @@ import React, {
   useState
 } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import 'src/modules/nav-search-box/nav-search-box.scss';
 
 const iconFile = '/assets/iconmonstr-magnifier-3.svg';
@@ -15,13 +15,13 @@ const NavSearchBox = (props: any): React.ReactElement => {
   const iconURL = `${prefix}${iconFile}`;
   const formRef: any = useRef(null);
   const [query, setQuery] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const updateQuery = (e: FormEvent) => {
     e.preventDefault();
     formRef.current.reset();
     if ( props.updateQuery ) props.updateQuery(query);
-    return history.replace(`/buscador?q=${query}`);
+    return navigate(`/buscador?q=${query}`);
   };
 
   return (
