@@ -1,12 +1,12 @@
-import https from 'https';
+// import https from 'https';
 import axios from 'axios';
 import EnvironmentVariables from 'src/constants/EnvironmentVariables';
 
 const env = EnvironmentVariables.getInstance();
 const instance = axios.create({
-  httpsAgent: new https.Agent({
-    rejectUnauthorized: false
-  }),
+  // httpsAgent: new https.Agent({
+  //   rejectUnauthorized: false
+  // }),
   headers: {
     'Content-Type': 'application/vnd.api+json'
   }

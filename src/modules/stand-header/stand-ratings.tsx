@@ -50,8 +50,8 @@ const StandRatings = (props: any): React.ReactElement => {
     };
     APIPost('post-rating/', ratingPayload, true, jwt)
       .then((response: any) => {
-        const rating: Number = Number(response.data.attributes.rating);
-        const average_rating: Number = Number(response.data.attributes.average_rating);
+        const rating = Number(response.data.attributes.rating);
+        const average_rating = Number(response.data.attributes.average_rating);
         setModalSuccess(true);
         setModalTitle('Puntuaciones');
         setModaMessage(`Usted ha puntuado el stand con <b>${rating}</b> estrella${rating === 1 ? '' : 's'}.<br/><br/>Gracias.`);

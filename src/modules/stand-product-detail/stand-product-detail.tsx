@@ -3,14 +3,14 @@ import React, {
   useState
 } from 'react';
 import {
-  useHistory,
+  useNavigate,
   useParams
 } from 'react-router';
 import GenericItemDetail from 'src/modules/generic-item-detail/generic-item-detail';
 import fetchData from 'src/modules/utils/fetch-data';
 
 const StandProductDetail = (): React.ReactElement => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const params: any = useParams();
   const [product, setProduct]: any = useState({});
 
@@ -21,7 +21,7 @@ const StandProductDetail = (): React.ReactElement => {
         console.log('Error de producto');
       } else {
         const productsData = response.data[0];
-        if (!productsData) return history.replace('/');
+        if (!productsData) return navigate('/');
         setProduct(productsData);
       }
     })

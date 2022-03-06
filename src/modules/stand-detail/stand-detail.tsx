@@ -3,7 +3,7 @@ import React, {
   useState
 } from 'react';
 import {
-  useHistory,
+  useNavigate,
   useParams
 } from 'react-router-dom';
 import fetchData from 'src/modules/utils/fetch-data';
@@ -99,7 +99,7 @@ const standData = {
 };
 
 const StandDetailComponent = (props: any): React.ReactElement => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const params: any = useParams();
   const [stand, setStand] = useState(standData);
 
@@ -108,10 +108,10 @@ const StandDetailComponent = (props: any): React.ReactElement => {
       .then((response: any) => {
         if (response.data.length === 0) {
           console.log('Error, stand no existe');
-          return history.replace('/');
+          return navigate('/');
         }
         const standData = response.data[0];
-        if (!standData) return history.replace('/');
+        if (!standData) return navigate('/');
         console.log('standData', standData);
         const menu: any[] = [];
         if ( standData.meta.meals ) {
@@ -131,7 +131,7 @@ const StandDetailComponent = (props: any): React.ReactElement => {
       })
       .catch((error) => {
         console.log('Hubo un error', error);
-        return history.replace('/');
+        return navigate('/');
       });
   }, [fetchData]);
 

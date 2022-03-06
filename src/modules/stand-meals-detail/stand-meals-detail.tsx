@@ -3,13 +3,13 @@ import React, {
   useState
 } from 'react';
 import {
-  useHistory,
+  useNavigate,
   useParams } from 'react-router';
 import fetchData from 'src/modules/utils/fetch-data';
 import GenericItemDetail from 'src/modules/generic-item-detail/generic-item-detail';
 
 const StandMealsDetail = (): React.ReactElement => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const params: any = useParams();
   const [meal, setMeal]: any = useState({});
 
@@ -20,7 +20,7 @@ const StandMealsDetail = (): React.ReactElement => {
         console.log('Error de platillo');
       } else {
         const mealsData = response.data[0];
-        if (!mealsData) return history.replace('/');
+        if (!mealsData) return navigate('/');
         setMeal(mealsData);
       }
     })

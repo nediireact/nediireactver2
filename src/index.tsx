@@ -7,26 +7,26 @@ import {
   RadialLinearScale, TimeScale, TimeSeriesScale, Filler, Legend, Title, Tooltip
 } from 'chart.js';
 import SwiperCore, {
-  Navigation, Pagination, Scrollbar, A11y, Autoplay,
+  Navigation, Pagination, Scrollbar, A11y, Autoplay, Manipulation,
   EffectFade, EffectCube, EffectFlip, EffectCoverflow, Thumbs
 } from 'swiper';
-import 'swiper/swiper.scss';
-import 'swiper/components/navigation/navigation.scss';
-import 'swiper/components/pagination/pagination.scss';
-import 'swiper/components/scrollbar/scrollbar.scss';
-import 'swiper/components/effect-fade/effect-fade.scss';
-import 'swiper/components/effect-cube/effect-cube.scss';
-import 'swiper/components/controller/controller.scss';
-import 'swiper/components/effect-coverflow/effect-coverflow.scss';
-import 'swiper/components/effect-cube/effect-cube.scss';
-import 'swiper/components/effect-fade/effect-fade.scss';
-import 'swiper/components/effect-flip/effect-flip.scss';
+import 'swiper/scss';
+import 'swiper/css/bundle';
 // import reportWebVitals from './reportWebVitals';
 import 'src/constants/Constants.scss';
+import { Provider } from 'react-redux';
+import store, {
+  persistor
+} from 'src/redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Routes />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Routes />
+      </PersistGate>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
@@ -44,6 +44,6 @@ Chart.register(
 
 // https://swiperjs.com/demos
 SwiperCore.use([
-  Navigation, Pagination, Scrollbar, A11y, Autoplay,
+  Navigation, Pagination, Scrollbar, A11y, Autoplay, Manipulation,
   EffectFade, EffectCube, EffectFlip, EffectFlip, EffectCoverflow, Thumbs
 ]);

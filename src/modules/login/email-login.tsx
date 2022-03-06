@@ -10,7 +10,7 @@ import Modal from 'src/modules/modal/modal';
 import { ArrayErrorsToHTMLList } from 'src/modules/utils/date-parser';
 import { SetUserData } from 'src/redux/actions/user-actions';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const EmailLogin = ( porps: any ): React.ReactElement => {
   const modelInterface = {
@@ -25,7 +25,7 @@ const EmailLogin = ( porps: any ): React.ReactElement => {
     }
   };
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const formRef: any = useRef(null);
@@ -50,7 +50,7 @@ const EmailLogin = ( porps: any ): React.ReactElement => {
         setEmail('');
         setPassword('');
         dispatch(SetUserData(response));
-        return history.replace('/');
+        return navigate('/');
       })
       .catch((error: any) => {
         porps.setIsLoading(false);

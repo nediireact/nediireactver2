@@ -3,7 +3,7 @@ import React, {
   useState
 } from 'react';
 import {
-  useHistory,
+  useNavigate,
   useParams
 } from 'react-router-dom';
 import {
@@ -41,7 +41,7 @@ const QRodeComponent = (): React.ReactElement => {
 
 const ExpoDetailComponent = (): React.ReactElement => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const params: any = useParams();
   const expo = useSelector((state: any) => state.expo);
 
@@ -52,7 +52,7 @@ const ExpoDetailComponent = (): React.ReactElement => {
           console.log('Error, expo no existe');
         } else {
           const expoData = response.data[0];
-          if (!expoData) return history.replace('/');
+          if (!expoData) return navigate('/');
           dispatch(SetExpoData(expoData));
         }
       })

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 'use strict';
 
 const fs = require('fs');
@@ -19,7 +20,7 @@ const upgradeVersion = ( packageJSON, filename ) => {
     a[2] = Number(a[2]) + 1;
   }
   packageJSON.version = `${a[0]}.${a[1]}.${a[2]}`;
-  console.log(`${filename} new version: packageJSON.version`);
+  console.log(`${filename} new version: ${packageJSON.version}`);
   const data = JSON.stringify(packageJSON, null, 2);
   fs.writeFileSync(filename, data);
 };

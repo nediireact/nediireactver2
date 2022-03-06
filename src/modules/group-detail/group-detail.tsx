@@ -3,7 +3,7 @@ import React, {
   useState
 } from 'react';
 import {
-  useHistory,
+  useNavigate,
   useParams
 } from 'react-router-dom';
 import fetchData from 'src/modules/utils/fetch-data';
@@ -34,7 +34,7 @@ const QRCodeComponent = ( props: any ): React.ReactElement => {
 };
 
 const GroupDetailComponent = (): React.ReactElement => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const params: any = useParams();
   const [group, setGroup]: any = useState({});
   const [stands, setStands]: any = useState([]);
@@ -46,7 +46,7 @@ const GroupDetailComponent = (): React.ReactElement => {
           console.log('Error, grupo no existe');
         } else {
           const groupsData = response.data[0];
-          if (!groupsData) return history.replace('/');
+          if (!groupsData) return navigate('/');
           setGroup(groupsData);
         }
       })

@@ -1,17 +1,13 @@
 /* eslint-disable max-lines-per-function */
 import React from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
+  BrowserRouter,
+  Routes,
   Route
 } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import store, { persistor } from 'src/redux/store';
 import Home from 'src/pages/home/home';
 import About from 'src/pages/about/about';
 import ActivateUser from 'src/pages/activate-user/activate-user';
-import EnvironmentVariables from 'src/constants/EnvironmentVariables';
 import ChangeLogPage from 'src/pages/changelog/changelog';
 import CreateAccount from 'src/pages/create-account/create-account';
 import LoginUser from 'src/pages/login/login';
@@ -39,221 +35,54 @@ import {
 } from 'src/pages/terms-and-conditions/terms-and-conditions';
 import UserAccountPage from 'src/pages/user-account/user-account';
 
-const env = EnvironmentVariables.getInstance();
-const isMobileApp = env.isMobileApp;
-
-const Routes = (): React.ReactElement => {
+const AppRoutes = (): React.ReactElement => {
   return (
-    <Router forceRefresh={isMobileApp}>
-      <Switch>
-        <Route path='/mi-cuenta/vehiculos'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/mi-cuenta/inmuebles'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/mi-cuenta/platillos'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/mi-cuenta/servicios'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/mi-cuenta/productos'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/mi-cuenta/ventas'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/mi-cuenta/empresas'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/mi-cuenta/favoritos'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/mi-cuenta/ordenes'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/mi-cuenta/carrito'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/mi-cuenta/pagos'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/mi-cuenta/direcciones'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/mi-cuenta/configuracion'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/mi-cuenta'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserAccountPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/empresa/:standId/inmuebles/:realEstateId'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><StandRealEstateDetailPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/empresa/:standId/vehiculos/:vehicleId'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><StandVehicleDetailPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/empresa/:standId/servicios/:serviceId'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><StandServiceDetailPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/empresa/:standId/productos/:productId'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><StanProductDetailPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/empresa/:standId/menu/:mealId'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><StandMealDetail /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/empresa/:standId/news/:standNewsId'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><StandNewsDetail /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/empresa/:standId/inmuebles'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><StandRealEstate /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/empresa/:standId/vehiculos'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><StandVehicles /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/empresa/:standId/productos'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><StandProducts /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/empresa/:standId/servicios'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><StandServices /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/empresa/:standId/menu'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><StandMeals /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/empresa/:standId'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><StandDetail /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/categorias/:groupId'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><GroupDetail /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/categorias'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><CategoriesGridPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/expos/:expoId/:groupId'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><GroupDetail /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/expos/:expoId'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><ExpoDetail /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/expos'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><Expos /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/buscador'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><SearchResultsPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/activate/:token'>
-          <Provider store={store}>
-            <ActivateUser />
-          </Provider>
-        </Route>
-        <Route path='/about'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><About /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/create-account'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><CreateAccount /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/login'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><LoginUser /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/changelog'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><ChangeLogPage /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/terminos-y-condiciones'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><TermsAndConditions /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/politica-de-privacidad'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><PrivacyPolicy /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/uso-de-datos-de-usuario'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><UserData /></PersistGate>
-          </Provider>
-        </Route>
-        <Route path='/'>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}><Home /></PersistGate>
-          </Provider>
-        </Route>
-      </Switch>
-    </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/mi-cuenta/vehiculos' element={<UserAccountPage />} />
+        <Route path='/mi-cuenta/inmuebles' element={<UserAccountPage />} />
+        <Route path='/mi-cuenta/platillos' element={<UserAccountPage />} />
+        <Route path='/mi-cuenta/servicios' element={<UserAccountPage />} />
+        <Route path='/mi-cuenta/productos' element={<UserAccountPage />} />
+        <Route path='/mi-cuenta/ventas' element={<UserAccountPage />} />
+        <Route path='/mi-cuenta/empresas' element={<UserAccountPage />} />
+        <Route path='/mi-cuenta/favoritos' element={<UserAccountPage />} />
+        <Route path='/mi-cuenta/ordenes' element={<UserAccountPage />} />
+        <Route path='/mi-cuenta/carrito' element={<UserAccountPage />} />
+        <Route path='/mi-cuenta/pagos' element={<UserAccountPage />} />
+        <Route path='/mi-cuenta/direcciones' element={<UserAccountPage />} />
+        <Route path='/mi-cuenta/configuracion' element={<UserAccountPage />} />
+        <Route path='/mi-cuenta' element={<UserAccountPage />} />
+        <Route path='/empresa/:standId/inmuebles/:realEstateId' element={<StandRealEstateDetailPage />} />
+        <Route path='/empresa/:standId/vehiculos/:vehicleId' element={<StandVehicleDetailPage />} />
+        <Route path='/empresa/:standId/servicios/:serviceId' element={<StandServiceDetailPage />} />
+        <Route path='/empresa/:standId/productos/:productId' element={<StanProductDetailPage />} />
+        <Route path='/empresa/:standId/menu/:mealId' element={<StandMealDetail />} />
+        <Route path='/empresa/:standId/news/:standNewsId' element={<StandNewsDetail />} />
+        <Route path='/empresa/:standId/inmuebles' element={<StandRealEstate />} />
+        <Route path='/empresa/:standId/vehiculos' element={<StandVehicles />} />
+        <Route path='/empresa/:standId/productos' element={<StandProducts />} />
+        <Route path='/empresa/:standId/servicios' element={<StandServices />} />
+        <Route path='/empresa/:standId/menu' element={<StandMeals />} />
+        <Route path='/empresa/:standId' element={<StandDetail />} />
+        <Route path='/categorias/:groupId' element={<GroupDetail />} />
+        <Route path='/categorias' element={<CategoriesGridPage />} />
+        <Route path='/expos/:expoId/:groupId' element={<GroupDetail />} />
+        <Route path='/expos/:expoId' element={<ExpoDetail />} />
+        <Route path='/expos' element={<Expos />} />
+        <Route path='/buscador' element={<SearchResultsPage />} />
+        <Route path='/activate/:token' element={<ActivateUser />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/create-account' element={<CreateAccount />} />
+        <Route path='/login' element={<LoginUser />} />
+        <Route path='/changelog' element={<ChangeLogPage />} />
+        <Route path='/terminos-y-condiciones' element={<TermsAndConditions />} />
+        <Route path='/politica-de-privacidad' element={<PrivacyPolicy />} />
+        <Route path='/uso-de-datos-de-usuario' element={<UserData />} />
+        <Route path='/' element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
-export default Routes;
+export default AppRoutes;
