@@ -35,8 +35,8 @@ const TaskItem = ( props: any ): React.ReactElement => {
         return (
           <li key={index}>
             <div className='collapsible-header ChangeLog__header'>
-              <i className={`material-icons ChangeLog__icon--${i.attributes.type}`}>
-                {getIcon(i.attributes.type)}
+              <i className={`material-icons ChangeLog__icon--${i.attributes.task_type}`}>
+                {getIcon(i.attributes.task_type)}
               </i>
               <div className='ChangeLog__task-name'>
                 <span>{i.attributes.task_name}</span>
@@ -52,7 +52,7 @@ const TaskItem = ( props: any ): React.ReactElement => {
                   <b>Autor:</b> {i.relationships.user.data.attributes.first_name} {i.relationships.user.data.attributes.last_name}
                 </div>
                 <div>
-                  <b>Tipo de tarea:</b> {getType(i.attributes.type)}
+                  <b>Tipo de tarea:</b> {getType(i.attributes.task_type)}
                 </div>
                 <div>
                   <b>Tiempo de desarrollo:</b> {i.attributes.hours} hora{i.attributes.hours !== 1 ? 's' : ''}
