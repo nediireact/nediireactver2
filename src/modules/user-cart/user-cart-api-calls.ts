@@ -19,9 +19,9 @@ export const DeleteCartItem = ( id: number ): Promise<any> => {
   });
 };
 
-export const AddCartItem = ( item: any, user: any, jwt: string ): Promise<any> => {
+export const AddCartItem = ( item: any, user: any ): Promise<any> => {
   return new Promise((res, rej) => {
-    if ( !user || !user.id || !jwt ) return res(new Error('Invalid data'));
+    if ( !user || !user.id ) return res(new Error('Invalid data'));
     const data: any = { ...NewCartItem };
     const userName = `${user.attributes.first_name} ${user.attributes.last_name}`;
     data.data.type = 'UserCartBuyableItems';
@@ -41,7 +41,7 @@ export const AddCartItem = ( item: any, user: any, jwt: string ): Promise<any> =
       id: item.id,
       type: item.type
     };
-    APIPost('user-cart-items/', data, true, jwt)
+    APIPost('user-cart-items/', data, true)
       .then((response: any) => {
         const itemAdded = { ...response.data };
         if ( itemAdded.attributes && itemAdded.relationships &&
@@ -57,11 +57,11 @@ export const AddCartItem = ( item: any, user: any, jwt: string ): Promise<any> =
   });
 };
 
-export const UpdateCartItem = ( item: any, user: any, jwt: string ): Promise<any> => {
+export const UpdateCartItem = ( item: any, user: any ): Promise<any> => {
   return new Promise((res, rej) => {
-    if ( !user || !user.id || !jwt ) return res(new Error('Invalid data'));
+    if ( !user || !user.id ) return res(new Error('Invalid data'));
     const url = `user-cart-items/${item.data.id}/`;
-    APIPatch(url, item, true, jwt)
+    APIPatch(url, item, true)
       .then((response: any) => {
         const itemUpdated = { ...response.data };
         res(itemUpdated);

@@ -2,7 +2,6 @@ import React, {
   useState
 } from 'react';
 import {
-  useSelector,
   useDispatch
 } from 'react-redux';
 import Ratings from 'src/modules/ratings/ratings';
@@ -23,10 +22,6 @@ const StandRatings = (props: any): React.ReactElement => {
   const [modalSuccess, setModalSuccess] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalMessage, setModaMessage] = useState('');
-  const userData = useSelector((state: any) => state.user);
-  const jwt = userData && userData.user &&
-    userData.user.meta && userData.user.meta.access ?
-    userData.user.meta.access : '';
 
   const onCloseEnd = () => {
     modal.close();
@@ -48,7 +43,7 @@ const StandRatings = (props: any): React.ReactElement => {
         }
       }
     };
-    APIPost('post-rating/', ratingPayload, true, jwt)
+    APIPost('post-rating/', ratingPayload, true)
       .then((response: any) => {
         const rating = Number(response.data.attributes.rating);
         const average_rating = Number(response.data.attributes.average_rating);

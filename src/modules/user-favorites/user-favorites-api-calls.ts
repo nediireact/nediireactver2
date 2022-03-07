@@ -18,9 +18,9 @@ export const DeleteFavoriteItem = ( id: number ): Promise<any> => {
   });
 };
 
-export const AddFavoriteItem = ( item: any, user: any, jwt: string ): Promise<any> => {
+export const AddFavoriteItem = ( item: any, user: any ): Promise<any> => {
   return new Promise((res, rej) => {
-    if ( !user || !user.id || !jwt ) return res(new Error('Invalid data'));
+    if ( !user || !user.id ) return res(new Error('Invalid data'));
     const data: any = { ...NewCartItem };
     const userName = `${user.attributes.first_name} ${user.attributes.last_name}`;
     data.data.type = 'UserFavoriteBuyableItems';
@@ -40,7 +40,7 @@ export const AddFavoriteItem = ( item: any, user: any, jwt: string ): Promise<an
       id: item.id,
       type: item.type
     };
-    APIPost('user-favorite-items/', data, true, jwt)
+    APIPost('user-favorite-items/', data, true)
       .then((response: any) => {
         const itemAdded = { ...response.data };
         if ( itemAdded.attributes && itemAdded.relationships &&
@@ -69,9 +69,9 @@ export const DeleteFavoriteStand = ( id: number ): Promise<any> => {
   });
 };
 
-export const AddFavoriteStand = ( item: any, user: any, jwt: string ): Promise<any> => {
+export const AddFavoriteStand = ( item: any, user: any ): Promise<any> => {
   return new Promise((res, rej) => {
-    if ( !user || !user.id || !jwt ) return res(new Error('Invalid data'));
+    if ( !user || !user.id ) return res(new Error('Invalid data'));
     const data: any = { data: {
       type: 'UserFavoriteStands',
       relationships: {
@@ -79,7 +79,7 @@ export const AddFavoriteStand = ( item: any, user: any, jwt: string ): Promise<a
         user: { data: { type: 'User', id: user.id } }
       }
     }};
-    APIPost('user-favorite-stands/', data, true, jwt)
+    APIPost('user-favorite-stands/', data, true)
       .then((response: any) => {
         const itemAdded = { ...response.data };
         if ( itemAdded.attributes && itemAdded.relationships &&

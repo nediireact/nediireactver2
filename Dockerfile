@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:16-alpine
 
 ARG REACT_APP_API_URL
 ARG REACT_APP_BRANCH_NAME

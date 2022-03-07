@@ -6,7 +6,7 @@ import {
 const GetUserProfileAPICall = ( data: any ): Promise<any> => {
   return new Promise((res, rej) => {
     const url = `user-profile/?filter[user]=${data.id}`;
-    APIGet(url, true, data.meta.access)
+    APIGet(url, true)
       .then((response: any) => {
         return res({
           user: data,
