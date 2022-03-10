@@ -79,7 +79,7 @@ const StandDataLoader = (props: any): React.ReactElement => {
     if ( stand && stand && stand[params.standId] && stand[params.standId].attributes ) {
       setMenu(stand[params.standId]);
     }
-    fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones,pictures,expo,group,stand_news,stand_booking_questions,stand_booking_questions.options,survey_questions,city,city.state,city.state.country`)
+    fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones,pictures,expo,group,stand_news,stand_booking_questions,stand_booking_questions.options,survey_questions,city,city.state,city.state.country,highlighted_products,highlighted_services,highlighted_meals,highlighted_real_estates,highlighted_vehicles&fields[Product]=name,slug,price,discount,final_price,img_picture,short_description`)
       .then((response: any) => {
         if ( !response.data.length ) {
           return navigate('/');

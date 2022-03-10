@@ -1,10 +1,5 @@
 @import 'materialize-css';
 
-.StandDetailGallery {
-  position: relative;
-  margin: 25px 0;
-}
-
 .StandDetailGallery .Swiper {
   display: block;
   overflow: hidden;
@@ -16,6 +11,10 @@
     background-size: cover;
     height: 50vh;
     @extend .white-text;
+
+    &--small {
+      height: 35vh;
+    }
   }
 
   .swiper-pagination-bullet-active {
@@ -71,6 +70,12 @@
         left: 10px;
       }
     }
+
+    &__content {
+      &--small {
+        height: 20vh;
+      }
+    }
   }
 }
 
@@ -78,6 +83,10 @@
   .StandDetailGallery .Swiper {  
     &__content {
       height: 60vh;
+
+      &--small {
+        height: 35vh;
+      }
     }
   }
 }

@@ -67,7 +67,7 @@ const StandDetailGallery = (props: any): React.ReactElement => {
                 key={index}
                 virtualIndex={index}>
                 <div
-                  className='Swiper__content'
+                  className={`Swiper__content Swiper__content--${props.sizeGallery}`}
                   style={{
                     backgroundImage: `url(${item.attributes.img_picture})`
                   }}>

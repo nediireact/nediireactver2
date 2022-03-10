@@ -1,7 +1,10 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, {useState} from 'react';
 import 'src/modules/card-holder/card-holder.scss';
+import { useSelector } from 'react-redux';
 import BasicTextWithIcon from 'src/modules/text-with-icon/basic-text-with-icon';
+import StrongText from '../strong-text/strong-text';
+import GenericItemAddToFavoritesButton from 'src/modules/favorite-button/favorite-button';
+import BasicIcon from 'src/modules/basic-icon/basic-icon';
 
 const imageCardHolder = '/assets/card-holder.jpg';
 
@@ -9,68 +12,69 @@ const CardHolder = (props: any): React.ReactElement => {
   const system = useSelector((state: any) => state.system);
   const prefix = system.platform.prefix;
   const cardHolder = `${prefix}${imageCardHolder}`;
+  const stand = props.stand;
+  if ( !stand ) return <></>;
+  const [isLoading, setIsLoading] = useState(false);
   const standURL = `/empresa/${props.standSlug ? props.standSlug : props.stand.attributes.slug}`;
-  const address = props.stand.attributes.address;
-  const zipCode = props.stand.attributes.zip_code;
+  const zip_code = props.stand.attributes.zip_code ? props.stand.attributes.zip_code : null;
+  const address = props.stand.attributes.address ? props.stand.attributes.address : null;
   let fullAddress: string = address;
-  if (zipCode) fullAddress += `,${zipCode}`;
+  if (zip_code) {
+    fullAddress += `,${zip_code}`;
+  }
 
   return (
-    <div className='CardHolder col s12 m6 l6'>
-      <div className='CardHolder__card z-depth-3'>
-        <div
-          className='CardHolder__header'
-          style={{backgroundImage: `url(${cardHolder})`}}>
-            <div className='CardHolder__headerSection'>
-              <div className='CardHolder__icons'>
-                <BasicTextWithIcon
-                  icon='home'
-                  colorICon='white-text'
-                  alignIcon='center-align'
-                  link={standURL}/>
-                <BasicTextWithIcon
-                  icon='location_on'
-                  colorICon='white-text'
-                  alignIcon='center-align'
-                  target='_blank'
-                  link={`https://www.google.com/maps?q=${fullAddress}`} />
-              </div>
-              <a className='CardHolder__logo'
-                href={standURL}
-                target='_parent'
-                rel='noreferrer'>
-                <div style={{backgroundImage: `url(${props.stand.attributes.img_logo})`}}
-                  className='CardHolder__imageLogo'>
-                </div>
-              </a>
-            </div>
+    <div className='CardHolder col s12 m6'>
+      <div className='GenericCard'>
+        <div className='CardHolder__wrapper' style={{backgroundImage: `url(${cardHolder})`}}>
+          <div className='CardHolder__icons'>
+            <GenericItemAddToFavoritesButton
+              item={stand}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading} />
+            <BasicIcon
+              icon='home'
+              color_icon='white-text'
+              link={standURL}
+              parent={true} />
+            <BasicIcon
+              icon='place'
+              color_icon='white-text'
+              link={`https://www.google.com/maps?q=${fullAddress}`} />
+          </div>
+          <div className='blue CardHolder__flex-filler'></div>
+          <div className='CardHolder__container-logo'>
+            <a
+            href={standURL}
+            className='CardHolder__img-logo'
+            style={{backgroundImage: `url(${props.stand.attributes.img_logo})`}}></a>
+          </div>
         </div>
-        <div className='CardHolder__linksSection'>
+        <div className='CardHolder__info'>
+          <StrongText text={props.stand.attributes.name} align='right' fullWidth={true} shadow={true} />
           {
             props.stand.attributes.contact_email ?
               <BasicTextWithIcon
-                icon='home'
-                colorICon='red-text'
-                link={`mailto:${props.stand.attributes.contact_email}`}
-                text={props.stand.attributes.contact_email}
-                truncate={true} /> : null
+              icon='email'
+              color_icon='red-text'
+              text={props.stand.attributes.contact_email}
+              link={`mailto:${props.stand.attributes.contact_email}`} /> : null
           }
           {
             props.stand.relationships.owner.data.attributes.profile.owner_phone ?
               <BasicTextWithIcon
                 icon='local_phone'
-                colorICon='green-text'
-                link={`tel:+521${props.stand.relationships.owner.data.attributes.profile.owner_phone}`}
-                text={props.stand.relationships.owner.data.attributes.profile.owner_phone} /> : null
+                color_icon='green-text'
+                text={props.stand.relationships.owner.data.attributes.profile.owner_phone}
+                link={`tel:521+${props.stand.relationships.owner.data.attributes.profile.owner_phone}`} /> : null
           }
           {
             props.stand.attributes.web_link ?
               <BasicTextWithIcon
-                icon='language'
-                colorICon='amber-text'
-                target='_blank'
-                link={props.stand.attributes.web_link}
-                text={props.stand.attributes.web_link} /> : null
+              icon='language'
+              color_icon='yellow-text'
+              text={props.stand.attributes.web_link}
+              link={props.stand.attributes.web_link} /> : null
           }
         </div>
       </div>
