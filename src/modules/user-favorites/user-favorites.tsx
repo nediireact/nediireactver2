@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useSelector } from 'react-redux';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import StandItemMini from 'src/modules/stand-grid/stand-item-mini';
+import CardHolder from 'src/modules/card-holder/card-holder';
 import BuyableItem from 'src/modules/buyable-item/buyable-item';
 import SubTitle from 'src/modules/sub-title/sub-title';
 import LoadUserFavoriteStands from 'src/modules/user-favorites/load-user-favorite-stands';
@@ -35,10 +35,10 @@ const UserFavorites = (): React.ReactElement => {
               {
                 stands.map((i: any, index: number) => {
                   return (
-                    <StandItemMini
+                    <CardHolder
                       key={index}
                       cols='col s6 m3'
-                      item={i.relationships.stand.data} />
+                      stand={i.relationships.stand.data}/>
                   );
                 })
               }
