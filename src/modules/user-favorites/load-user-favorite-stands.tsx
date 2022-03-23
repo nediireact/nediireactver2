@@ -16,7 +16,7 @@ const LoadUserFavoriteStands = (): React.ReactElement => {
   const standFields = 'name,img_logo,img_cover,slug,highlighted_meals,restaurant,average_rating';
 
   useEffect(() => {
-    fetchData(`user-favorite-stands/?filter[user]=${user.id}&include=stand&fields=[Stand]=${standFields}`)
+    fetchData(`user-favorite-stands/?filter[user]=${user.id}&include=stand,stand.owner&fields=[Stand]=${standFields}`)
       .then((response: any) => {
         dispatch(SetUserFavoriteStands(response.data));
       })
