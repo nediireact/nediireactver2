@@ -53,7 +53,6 @@ const AccountForm = (props: any): React.ReactElement => {
     data.userProfile.promotions = promotions;
     if ( biography ) data.userProfile.biography = biography;
     if ( ownerPositionDescription ) data.userProfile.owner_position_description = ownerPositionDescription;
-    console.log('>>> Data', data);
     props.updateUserData(data);
   };
 
