@@ -51,12 +51,10 @@ const GenericItemAddToFavoritesButton = (props: any): React.ReactElement => {
   const userData = useSelector((state: any) => state.user);
   const user = userData && userData.user && userData.user.id ? userData.user : null;
   const isFavorite = getIsFavorite(userData, item);
-  const jwt = user && user.meta && userData.user.meta.access ?
-    userData.user.meta.access : null;
   const name = item.type !== 'Stand' ? GetBuyableItemName(item) : null;
 
   const addItem = () => {
-    if ( !user || !user.id || !jwt || isLoading ) {
+    if ( !user || !user.id || isLoading ) {
       dispatch(SetGlobalAlertDialog({
         active: true,
         dialog: 'missingLogin'
@@ -66,7 +64,7 @@ const GenericItemAddToFavoritesButton = (props: any): React.ReactElement => {
     props.setIsLoading(true);
     const apiCaller = item.type === 'Stand' ? AddFavoriteStand : AddFavoriteItem;
     item.backup_name = name;
-    apiCaller(item, user, jwt)
+    apiCaller(item, user)
       .then((itemAdded: any) => {
         props.setIsLoading(false);
         if ( item.type === 'Stand' ) {
@@ -82,7 +80,7 @@ const GenericItemAddToFavoritesButton = (props: any): React.ReactElement => {
   };
 
   const deleteItem = (id: number) => {
-    if ( !user || !user.id || !jwt || isLoading ) {
+    if ( !user || !user.id || isLoading ) {
       dispatch(SetGlobalAlertDialog({
         active: true,
         dialog: 'missingLogin'

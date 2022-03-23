@@ -3,28 +3,18 @@ import React, {
   useRef,
   useState
 } from 'react';
-import LoginUserAPICall from 'src/modules/login/login-user-api-calls';
 import EmailLoginFrom from 'src/modules/login/email-login-from';
 import SubTitle from 'src/modules/sub-title/sub-title';
 import Modal from 'src/modules/modal/modal';
 import { ArrayErrorsToHTMLList } from 'src/modules/utils/date-parser';
-import { SetUserData } from 'src/redux/actions/user-actions';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import APISDK from 'src/api/api-sdk/api-sdk';
 
 const EmailLogin = ( porps: any ): React.ReactElement => {
   const modelInterface = {
     open: () => null,
     close: () => null
   };
-  const loginPayload = {
-    data: {
-      type: 'login',
-      email: '',
-      password: ''
-    }
-  };
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,18 +31,20 @@ const EmailLogin = ( porps: any ): React.ReactElement => {
   const loginUser = (e: FormEvent) => {
     e.preventDefault();
     porps.setIsLoading(true);
-    loginPayload.data.email = email;
-    loginPayload.data.password = password;
-    LoginUserAPICall(loginPayload)
-      .then((response) => {
+    APISDK.Login({
+      email: email,
+      password: password
+    })
+      .then((response: any) => {
+        console.log(response);
         formRef.current.reset();
         porps.setIsLoading(false);
         setEmail('');
         setPassword('');
-        dispatch(SetUserData(response));
         return navigate('/');
       })
       .catch((error: any) => {
+        console.log(error);
         porps.setIsLoading(false);
         setModalSuccess(false);
         setModalTitle('Error');

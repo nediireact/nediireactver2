@@ -32,8 +32,6 @@ const UserCartItem = (props: any): React.ReactElement => {
   const isLoading = props.isLoading;
   const url = `/empresa/${props.standSlug ? props.standSlug : stand ? stand.attributes.slug : ''}/${ProductTypeConverter(props.item.type)}/${item.attributes.slug}`;
   const standURL = `/empresa/${props.standSlug ? props.standSlug : stand ? stand.attributes.slug : ''}`;
-  const jwt = user && user.meta && userData.user.meta.access ?
-    userData.user.meta.access : null;
 
   const deleteItem = (id: number) => {
     if ( isLoading ) return;
@@ -50,9 +48,9 @@ const UserCartItem = (props: any): React.ReactElement => {
   };
 
   const updateItem = (cartItem: any) => {
-    if ( !user || !user.id || !jwt || isLoading ) return;
+    if ( !user || !user.id || isLoading ) return;
     props.setIsLoading(true);
-    UpdateCartItem(cartItem, user, jwt)
+    UpdateCartItem(cartItem, user)
       .then((data: any) => {
         console.log('data', data);
         props.setIsLoading(false);

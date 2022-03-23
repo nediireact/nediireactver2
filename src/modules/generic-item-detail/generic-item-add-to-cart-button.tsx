@@ -29,12 +29,10 @@ const GenericItemAddToCartButton = (props: any): React.ReactElement => {
       item.type,
       userData.cart
     ) : null;
-  const jwt = user && user.meta && userData.user.meta.access ?
-    userData.user.meta.access : null;
   const name = GetBuyableItemName(item);
 
   const addItem = () => {
-    if ( !user || !user.id || !jwt || isLoading ) {
+    if ( !user || !user.id || isLoading ) {
       dispatch(SetGlobalAlertDialog({
         active: true,
         dialog: 'missingLogin'
@@ -43,7 +41,7 @@ const GenericItemAddToCartButton = (props: any): React.ReactElement => {
     }
     props.setIsLoading(true);
     item.backup_name = name;
-    AddCartItem(item, user, jwt)
+    AddCartItem(item, user)
       .then((itemAdded: any) => {
         props.setIsLoading(false);
         dispatch(UserCartAddItem(itemAdded));
@@ -55,7 +53,7 @@ const GenericItemAddToCartButton = (props: any): React.ReactElement => {
   };
 
   const deleteItem = (id: number) => {
-    if ( !user || !user.id || !jwt || isLoading ) {
+    if ( !user || !user.id || isLoading ) {
       dispatch(SetGlobalAlertDialog({
         active: true,
         dialog: 'missingLogin'

@@ -16,6 +16,7 @@ import UserAccountMenu from 'src/modules/user-account-menu/user-account-menu';
 import UserDashboard from 'src/modules/user-dashboard/user-dashboard';
 import UserFavorites from 'src/modules/user-favorites/user-favorites';
 import UserCart from 'src/modules/user-cart/user-cart';
+import UserAccountConfigurations from 'src/modules/user-account-configurations/user-account-configurations';
 
 const UserAccountPage = (): React.ReactElement => {
   const [sectionMenu, setSectionMenu]: any = useState([]);
@@ -56,6 +57,7 @@ const UserAccountPage = (): React.ReactElement => {
           { pathname === '/mi-cuenta' ? <UserDashboard /> : null }
           { pathname === '/mi-cuenta/favoritos' ? <UserFavorites /> : null }
           { pathname === '/mi-cuenta/carrito' ? <UserCart /> : null }
+          { pathname === '/mi-cuenta/configuracion' ? <UserAccountConfigurations /> : null }
         </div>
         <Footer />
         <SystemCheck />

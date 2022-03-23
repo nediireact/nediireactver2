@@ -33,6 +33,7 @@ const NavBar = (props: any): React.ReactElement => {
   const logout = (e: any) => {
     e.preventDefault();
     dispatch(SetUserData({
+      jwt: null,
       user: null,
       userProfile: null,
       favoriteStands: [],

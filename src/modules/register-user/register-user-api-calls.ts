@@ -24,7 +24,7 @@ const UpdateUserProfileAPICall = ( data: any ): Promise<any> => {
       }
     };
     const url = `user-profile/${data.data.profile.id}/`;
-    APIPatch(url, userProfileData, true, data.data.login.meta.access)
+    APIPatch(url, userProfileData, true)
       .then((response: any) => {
         return res({
           user: data.data.login,
@@ -40,7 +40,7 @@ const UpdateUserProfileAPICall = ( data: any ): Promise<any> => {
 const GetUserProfileAPICall = ( data: any ): Promise<any> => {
   return new Promise((res, rej) => {
     const url = `user-profile/?filter[user]=${data.data.id}`;
-    APIGet(url, true, data.data.login.meta.access)
+    APIGet(url, true)
       .then((response: any) => {
         if ( data.data.attributes.img_picture ) {
           data.data.profile = response.data[0];
