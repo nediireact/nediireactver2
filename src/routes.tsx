@@ -34,6 +34,7 @@ import {
   UserData
 } from 'src/pages/terms-and-conditions/terms-and-conditions';
 import UserAccountPage from 'src/pages/user-account/user-account';
+import StandCardBusiness from 'src/pages/stand-card-business/stand-card-business';
 
 const AppRoutes = (): React.ReactElement => {
   return (
@@ -53,6 +54,7 @@ const AppRoutes = (): React.ReactElement => {
         <Route path='/mi-cuenta/direcciones' element={<UserAccountPage />} />
         <Route path='/mi-cuenta/configuracion' element={<UserAccountPage />} />
         <Route path='/mi-cuenta' element={<UserAccountPage />} />
+        <Route path='/empresa/:standId/tarjeta-de-negocio' element={<StandCardBusiness />} />
         <Route path='/empresa/:standId/inmuebles/:realEstateId' element={<StandRealEstateDetailPage />} />
         <Route path='/empresa/:standId/vehiculos/:vehicleId' element={<StandVehicleDetailPage />} />
         <Route path='/empresa/:standId/servicios/:serviceId' element={<StandServiceDetailPage />} />

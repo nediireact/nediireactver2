@@ -5,10 +5,11 @@ const BasicTextWithIcon = (props: any): React.ReactElement => {
   return (
     <div className='BasicTextWithIcon'>
       <a href={`${props.link}`}
-        target={props.target ? props.target : '_parent'}
+        target={props.parent ? '_parent' : '_blank'}
         rel='noreferrer'
-        className='grey-text text-darken-3 truncate'>
-        <i className={`material-icons left ${props.colorICon}`}>{props.icon}</i>{props.text}
+        className='grey-text text-darken-3'>
+        <i className={`material-icons left ${props.color_icon}`}>{props.icon}</i>
+        <span className='truncate'>{props.text}</span>
       </a>
     </div>
   );

@@ -15,6 +15,7 @@ import HomeStandsGrid from 'src/modules/home-stands-grid/home-stands-grid';
 import HomeRestaurantsGrid from 'src/modules/home-restaurants-grid/home-restaurants-grid';
 import HomeMealsGrid from 'src/modules/home-meals-grid/home-meals-grid';
 
+
 const Home = (): React.ReactElement => {
   const [sectionMenu, setSectionMenu]: any = useState([]);
 
