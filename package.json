@@ -1,6 +1,6 @@
 {
   "name": "nedii",
-  "version": "0.6.3",
+  "version": "0.6.9",
   "private": false,
   "dependencies": {
     "axios": "^0.26.0",

@@ -2,6 +2,14 @@
   display: block;
   width: 100%;
 
+  &--xxx-small {
+    height: 5px;
+  }
+
+  &--xx-small {
+    height: 10px;
+  }
+
   &--x-small {
     height: 20px;
   }

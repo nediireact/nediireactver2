@@ -10,7 +10,8 @@ const GenericTextInput = (props: any): React.ReactElement => {
         disabled={props.disabled}
         onChange={( e: any ) => props.setValue(e.target.value)}
         defaultValue={props.value}
-        placeholder={props.placeholder} />
+        placeholder={props.placeholder}
+        required={props.required} />
       <span className='cyan-text GenericTextInput__placeholder'>
         {props.placeholder}
       </span>

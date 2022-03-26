@@ -1,5 +1,10 @@
 @import 'materialize-css';
 
 .BasicIcon {
-  cursor: pointer;
+  padding: 4px;
+  border-radius: 20px;
+
+  &--no-padding {
+    padding: 0;
+  }
 }
