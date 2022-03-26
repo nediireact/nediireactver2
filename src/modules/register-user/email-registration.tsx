@@ -8,7 +8,7 @@ import EmailFrom from 'src/modules/register-user/email-from';
 import SubTitle from 'src/modules/sub-title/sub-title';
 import Modal from 'src/modules/modal/modal';
 import { ArrayErrorsToHTMLList } from 'src/modules/utils/date-parser';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const modelInterface = {
   open: () => null,
@@ -30,7 +30,7 @@ const newUserPayload = {
 };
 
 const EmailRegistration = ( porps: any ): React.ReactElement => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -44,7 +44,7 @@ const EmailRegistration = ( porps: any ): React.ReactElement => {
 
   const onCloseEnd = () => {
     modal.close();
-    if ( modalSuccess ) return history.replace('/login');
+    if ( modalSuccess ) return navigate('/login');
   };
 
   const registerUser = (e: FormEvent) => {

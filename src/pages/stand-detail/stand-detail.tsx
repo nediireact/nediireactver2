@@ -1,32 +1,30 @@
 import React, {
   useState
 } from 'react';
-import {
-  useSelector,
-  useDispatch
-} from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import SystemCheck from 'src/modules/system-check/system-check';
 import NavBar from 'src/modules/nav-bar/nav-bar';
 import Footer from 'src/modules/footer/footer';
 import StandDataLoader from 'src/modules/stand/stand-data-loader';
 import StandComponent from 'src/modules/stand/stand';
+import SystemConfigurationLoader from 'src/modules/system-configuration-loader/system-configuration-loader';
 
 const StandDetail = (): React.ReactElement => {
-  const dispatch = useDispatch();
+  const params: any = useParams();
   const stand = useSelector((state: any) => state.stand);
-  const [sectionMenu, setSectionMenu] = useState([]);
+  const [sectionMenu, setSectionMenu]: any = useState([]);
 
   return (
     <>
       <NavBar sectionMenu={sectionMenu} />
-      <StandDataLoader
-        setStand={dispatch}
-        setSectionMenu={setSectionMenu} />
+      <StandDataLoader setSectionMenu={setSectionMenu} />
       {
-        stand && stand.id ?
-          <StandComponent stand={stand} /> : null
+        stand && stand[params.standId] && stand[params.standId].id ?
+          <StandComponent stand={stand[params.standId]} /> : null
       }
       <Footer />
+      <SystemConfigurationLoader basic={true} />
       <SystemCheck />
     </>
   );

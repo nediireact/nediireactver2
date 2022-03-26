@@ -2,7 +2,7 @@ import React, {
   useEffect,
   useState } from 'react';
 import {
-  useHistory,
+  useNavigate,
   useParams } from 'react-router';
 import fetchData from 'src/modules/utils/fetch-data';
 import StandParallaxHeaderImage from 'src/modules/stand-detail/stand-parallax-header-image';
@@ -32,7 +32,7 @@ const newsData = {
 };
 
 const StandNewDetail = (): React.ReactElement => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const params: any = useParams();
   const [news, setnews]: any = useState(newsData);
   const url = `stand-news?filter[slug]=${params.standNewsId}&include=stand`;
@@ -45,7 +45,7 @@ const StandNewDetail = (): React.ReactElement => {
           console.log('Error, noticia no existe');
         } else {
           const newsData = response.data[0];
-          if (!newsData) return history.replace('/');
+          if (!newsData) return navigate('/');
           console.log('newsData', newsData);
           setnews(newsData);
         }

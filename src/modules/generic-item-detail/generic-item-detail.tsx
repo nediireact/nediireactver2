@@ -1,62 +1,79 @@
-import React from 'react';
-import HorizontalSpace from '../horizontal-space/horizontal-space';
-import GenericHeadDetail from 'src/modules/generic-item-detail/generic-head-detail';
-import StandPictures from '../stand-detail/stand-pictures';
-import CommonLargeText from '../stand-detail/stand-common-large-text';
+import React, { useState } from 'react';
+import 'src/modules/generic-item-detail/generic-item-detail.scss';
+import Title from 'src/modules/title/title';
+import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import GenericHeaderDetail from 'src/modules/generic-item-detail/generic-header-detail';
+import GenericItemGallery from 'src/modules/generic-item-detail/generic-item-gallery';
+import CommonLargeText from 'src/modules/stand-detail/stand-common-large-text';
 import GenericItemPrice from 'src/modules/generic-item-detail/generic-item-price';
-import FoodTime from 'src/modules/food-time/food-time';
+import GenericItemDetailMealsAvailability from 'src/modules/generic-item-detail/generic-item-meal-availability';
 import StandMealsAddons from 'src/modules/stand-meals-detail/stand-meals-addons';
 import StrongText from 'src/modules/strong-text/strong-text';
-import ItemShoping from 'src/modules/item-shoping/item-shoping';
-import 'src/modules/buyable-item/buyable-item.scss';
-import 'src/modules/generic-item-detail/generic-item-detail.scss';
+import { GetBuyableItemName } from 'src/modules/utils/products-services';
+import GenericItemDetailFeatures from 'src/modules/generic-item-detail/generic-item-detail-features';
+import VehicleAttributes from 'src/modules/vehicle-attributes/vehicle-attributes';
+import ServicesAttributes from 'src/modules/services-attributes/services-attributes';
+import ProductAttributes from 'src/modules/product-attributes/product-attributes';
+import RealStateAttributes from 'src/modules/real-estate-attributes/real-estate-attributes';
+import LoadUserFavoriteItems from 'src/modules/user-favorites/load-user-favorite-items';
+import LoadUserCart from 'src/modules/user-cart/load-user-cart';
+import GenericItemStockInfo from 'src/modules/generic-item-detail/generic-item-stock-info';
+import GenericItemShippingInfo from 'src/modules/generic-item-detail/generic-item-shipping-info';
+import GenericItemAddToCartButton from 'src/modules/generic-item-detail/generic-item-add-to-cart-button';
+import GenericItemBuyNowButton from 'src/modules/generic-item-detail/generic-item-buy-now-button';
 
 const GenericItemDetail = (props: any): React.ReactElement => {
+  const item = props.item;
+  if ( !item || !item.attributes ) return <></>;
+  const [isLoading, setIsLoading] = useState(false);
+  const name = GetBuyableItemName(item);
+
   return (
-    <div className='container row'>
-      <div className="col s12 m8">
+    <div className='container row GenericItemDetail'>
+      <LoadUserFavoriteItems />
+      <LoadUserCart />
+      <div className='col s12 m8'>
         <div className='hide-on-med-and-up'>
-          <HorizontalSpace size='small'/>
-          <GenericHeadDetail
-            times_selled={props.item.attributes.times_selled}
-            category={props.item.relationships.classification.data.attributes.name}
-            name={props.item.attributes.name}/>
+          <HorizontalSpace size='x-small' />
+          <Title text={name} fullWidth={true}/>
         </div>
-        <StandPictures images={props.item.relationships.meal_pictures.data}/>
+        <GenericItemGallery item={item} />
         <div className='Description-movil hide-on-small-only'>
-          <CommonLargeText text={props.item.attributes.description}/>
+          <CommonLargeText text={item.attributes.description} />
         </div>
       </div>
-      <HorizontalSpace size='small'/>
+      <HorizontalSpace size='small' />
       <div className='col s12 m4'>
         <div className='GenericCard'>
-          <GenericHeadDetail
-            times_selled={props.item.attributes.times_selled}
-            category={props.item.relationships.classification.data.attributes.name}
-            name={props.item.attributes.name}/>
+          <GenericHeaderDetail
+            item={item}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading} />
           <GenericItemPrice
-            discount={props.item.attributes.discount}
-            price={props.item.attributes.price}
-            final_price={props.item.attributes.final_price}/>
-          {
-            props.item && props.item.type === 'Meal' && (
-              props.item.attributes.is_breakfast || props.item.attributes.is_meal || props.item.attributes.is_dinner
-            ) ? <FoodTime/> : null
-          }
-          {
-            props.item && props.item.type === 'Meal' ?
+            discount={item.attributes.discount}
+            price={item.attributes.price}
+            final_price={item.attributes.final_price} />
+          <GenericItemStockInfo item={item} />
+          <GenericItemShippingInfo item={item} />
+          { item && item.type === 'Meal' ?
             <>
-              <StrongText text='Adicionales'/>
-              <StandMealsAddons mealsAddons={props.item.relationships.meal_addons}/>
-            </> : null
-          }
-          <ItemShoping/>
+              <GenericItemDetailMealsAvailability item={item} />
+              <StandMealsAddons item={item} />
+            </> : null }
+          { item && item.type !== 'Meal' ? <StrongText text='Caracteristicas' fullWidth={true} /> : null }
+          <GenericItemDetailFeatures item={props.item} />
+          { props.item && props.item.type === 'Vehicle' ? <VehicleAttributes item={props.item} /> : null }
+          { props.item && props.item.type === 'Service' ? <ServicesAttributes item={props.item} /> : null }
+          { props.item && props.item.type === 'Product' ? <ProductAttributes item={props.item} /> : null }
+          { props.item && props.item.type === 'RealEstate' ? <RealStateAttributes item={props.item} /> : null }
+          <GenericItemAddToCartButton item={props.item} isLoading={isLoading} setIsLoading={setIsLoading} />
+          <GenericItemBuyNowButton item={props.item} />
         </div>
       </div>
       <div className='hide-on-med-and-up col s12'>
-        <HorizontalSpace size='x-small'/>
-        <CommonLargeText text={props.item.attributes.description}/>
-        <HorizontalSpace size='small'/>
+        <HorizontalSpace size='x-small' />
+        <CommonLargeText text={props.item.attributes.description} />
+        <HorizontalSpace size='small' />
       </div>
     </div>
   );

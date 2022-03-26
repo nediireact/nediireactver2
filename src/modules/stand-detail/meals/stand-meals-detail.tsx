@@ -2,7 +2,7 @@ import React, {
   useEffect,
   useState } from 'react';
 import {
-  useHistory,
+  useNavigate,
   useParams } from 'react-router';
 import fetchData from 'src/modules/utils/fetch-data';
 import StandParallaxHeaderImage from 'src/modules/stand-detail/stand-parallax-header-image';
@@ -51,7 +51,7 @@ const mealsData = {
 };
 
 const StandMealsDetail = (): React.ReactElement => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const params: any = useParams();
   const [meals, setmeals]: any = useState(mealsData);
 
@@ -63,7 +63,7 @@ const StandMealsDetail = (): React.ReactElement => {
         console.log('Error de platillo');
       } else {
         const mealsData = response.data[0];
-        if (!mealsData) return history.replace('/');
+        if (!mealsData) return navigate('/');
         setmeals(mealsData);
       }
     })

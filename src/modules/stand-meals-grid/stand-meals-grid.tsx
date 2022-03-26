@@ -12,7 +12,8 @@ const urlValues: any = {};
 
 const StandMealsGrid = (props: any): React.ReactElement => {
   const [meals, setMeals] = useState([]);
-  const baseURL = `meals/?filter[stand]=${props.stand.id}&include=classification,meal_addons`;
+  const fields = 'name,img_picture,slug,stand,price,final_price,discount,short_description';
+  const baseURL = `meals/?filter[stand]=${props.stand.id}&include=classification,meal_addons,stand&fields[Stand]=name,slug&fields[Meal]=${fields}`;
   const [classifications, setClassifications] = useState([]);
   const [addOns, setAddOns] = useState([]);
 
@@ -61,17 +62,18 @@ const StandMealsGrid = (props: any): React.ReactElement => {
             filter='classification'
             join={true}
             updateItems={updateItems} />
-          <HorizontalSpace size='small' />
+          <HorizontalSpace size='x-small' />
           <PriceRangeFilter
             maxPrice={props.stand.attributes.meals_max_price + 100}
             updateItems={updateItems} />
-          <HorizontalSpace size='small' />
+          <HorizontalSpace size='x-small' />
           <CheckFilter
             name='Ingredientes adicionales'
             items={[...addOns]}
             filter='meal_addons'
             updateItems={updateItems} />
         </div>
+        <HorizontalSpace size='small' />
       </div>
       {
         meals && meals.length ?
@@ -79,10 +81,9 @@ const StandMealsGrid = (props: any): React.ReactElement => {
           {
             meals.map((i: any, index: number) => {
               return (
-                <BuyableItem key={index}
-                  type='menu'
-                  item={i.attributes}
-                  standSlug={props.stand.attributes.slug} />
+                <BuyableItem
+                  key={index}
+                  item={i} />
               );
             })
           }

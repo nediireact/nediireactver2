@@ -1,20 +1,22 @@
+// Deprecated
+
 import React from 'react';
-import TextWhitIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
+import TextWithIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
 import StrongText from 'src/modules/strong-text/strong-text';
 
 const FoodTime = (): React.ReactElement => {
   return (
     <div>
        <StrongText text='Tiempo de platillo'/>
-        <TextWhitIconInfo
+        <TextWithIconInfo
           text='Desayuno'
           colorIcon='orange-text'
           icon='brightness_7' />
-        <TextWhitIconInfo
+        <TextWithIconInfo
           text='Comida'
           colorIcon='cyan-text'
           icon='brightness_6' />
-        <TextWhitIconInfo
+        <TextWithIconInfo
           text='Cena'
           colorIcon='indigo-text'
           icon='brightness_2' />

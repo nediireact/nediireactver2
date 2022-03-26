@@ -1,5 +1,4 @@
 {
-  "parser": "babel-eslint",
   "plugins": [
     "@typescript-eslint",
     "react-hooks"
@@ -38,6 +37,7 @@
         "skipComments": true 
       }
     ],
+    "@typescript-eslint/no-explicit-any": "off",
     "max-depth": ["error", 4],
     "max-params": ["error", 5],
     "max-nested-callbacks": ["error", 4],

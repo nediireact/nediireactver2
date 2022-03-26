@@ -2,7 +2,7 @@ import React, {
   useEffect
 } from 'react';
 import {
-  useHistory,
+  useNavigate,
   useLocation
 } from 'react-router-dom';
 import {
@@ -13,6 +13,7 @@ import EnvironmentVariables from 'src/constants/EnvironmentVariables';
 import { FILE_PREFIX } from 'src/constants/SystemConstants';
 import SetMobilePlatform from 'src/redux/actions/set-mobile-platform';
 import * as M from 'materialize-css';
+import GlobalAlertDialog from 'src/modules/global-alert-dialog/global-alert-dialog';
 
 const env = EnvironmentVariables.getInstance();
 const isMobileApp = env.isMobileApp;
@@ -20,15 +21,13 @@ const isMobileApp = env.isMobileApp;
 const SystemCheck = (): React.ReactElement => {
   const login = useSelector((state: any) => state.login);
   const dispatch = useDispatch();
-  const history: any = useHistory();
+  const navigate: any = useNavigate();
   const location: any = useLocation();
 
   const redirect = () => {
     if ( location.path === 'login' ) {
       if ( login.id ) {
-        history.replace({
-          pathname: '/'
-        });
+        navigate('/');
       }
     }
   };
@@ -56,7 +55,11 @@ const SystemCheck = (): React.ReactElement => {
     }
   }, [M]);
 
-  return (<></>);
+  return (
+    <>
+      <GlobalAlertDialog />
+    </>
+  );
 };
 
 export default SystemCheck;

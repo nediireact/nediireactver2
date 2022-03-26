@@ -12,7 +12,8 @@ const urlValues: any = {};
 
 const StandProductsGrid = (props: any): React.ReactElement => {
   const [meals, setMeals] = useState([]);
-  const baseURL = `products/?filter[stand]=${props.stand.id}&include=classification`;
+  const fields = 'name,img_picture,slug,stand,price,final_price,discount,short_description';
+  const baseURL = `products/?filter[stand]=${props.stand.id}&include=classification,stand&fields[Stand]=name,slug&fields[Product]=${fields}`;
   const [classifications, setClassifications] = useState([]);
   const [addOns, setAddOns] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -93,10 +94,9 @@ const StandProductsGrid = (props: any): React.ReactElement => {
           {
             meals.map((i: any, index: number) => {
               return (
-                <BuyableItem key={index}
-                  type='producto'
-                  item={i.attributes}
-                  standSlug={props.stand.attributes.slug} />
+                <BuyableItem
+                  key={index}
+                  item={i} />
               );
             })
           }

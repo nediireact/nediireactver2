@@ -6,7 +6,7 @@ import getMoneyFormat from 'src/modules/utils/money-formats';
 
 interface UpdateInterface {
   value: number;
-  type: String;
+  type: string;
 }
 
 const values = {

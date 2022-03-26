@@ -12,7 +12,8 @@ const urlValues: any = {};
 
 const StandVehiclesGrid = (props: any): React.ReactElement => {
   const [meals, setMeals] = useState([]);
-  const baseURL = `vehicles/?filter[stand]=${props.stand.id}&include=classification`;
+  const fields = 'name,img_picture,slug,stand,price,final_price,discount,short_description,model,year&fields[Make]=name';
+  const baseURL = `vehicles/?filter[stand]=${props.stand.id}&include=classification,model,model.make,stand&fields[Stand]=name,slug&fields[Vehicle]=${fields}`;
   const [classifications, setClassifications] = useState([]);
   const [addOns, setAddOns] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -77,7 +78,7 @@ const StandVehiclesGrid = (props: any): React.ReactElement => {
             updateItems={updateItems} />
           <HorizontalSpace size='small' />
           <PriceRangeFilter
-            maxPrice={props.stand.attributes.products_max_price + 100}
+            maxPrice={props.stand.attributes.vehicles_max_price + 100}
             updateItems={updateItems} />
           <HorizontalSpace size='small' />
           <CheckFilter
@@ -93,10 +94,9 @@ const StandVehiclesGrid = (props: any): React.ReactElement => {
           {
             meals.map((i: any, index: number) => {
               return (
-                <BuyableItem key={index}
-                  type='producto'
-                  item={i.attributes}
-                  standSlug={props.stand.attributes.slug} />
+                <BuyableItem
+                  key={index}
+                  item={i} />
               );
             })
           }

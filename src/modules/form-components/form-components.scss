@@ -1,0 +1,25 @@
+.GenericTextInput,
+.GenericCheckboxInput,
+.GenericTextArea {
+  margin: 0 0 10px !important;
+}
+
+.GenericTextInput {
+  .validate {
+    margin-bottom: 0 !important;
+  }
+
+  &__placeholder {
+    font-size: 0.9em;
+  }
+}
+
+.GenericCheckboxInput {
+  padding: 0 !important;
+  margin: -5px 0 35px !important;
+
+  [type="checkbox"]+span::before,
+  [type="checkbox"]+span::after {
+    left: 2px !important;
+  }
+}

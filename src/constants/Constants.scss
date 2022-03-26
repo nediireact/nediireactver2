@@ -18,14 +18,17 @@ $bold-font-weight: 500;
 $items-number: 1.5em;
 $icons-size: 2.3em;
 
+$nav-height: 64px;
+
 // Colors
 $white: white;
+$black: black;
 $fruit-salad: #4CAF50;
 
 $regular-border-radius: 8px;
 
 .lemon-black {
-  background-color: #000103;
+  background-color: $black;
 }
 
 .GenericCard {
@@ -33,7 +36,12 @@ $regular-border-radius: 8px;
   overflow: hidden;
   padding: 10px;
   width: 100%;
+  background-color: $white;
   border-radius: $regular-border-radius;
   transition: all 0.5s;
   @extend .z-depth-1;
+}
+
+.IsLoadingOpacity {
+  opacity: 0.5;
 }

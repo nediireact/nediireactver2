@@ -1,14 +1,13 @@
 import React from 'react';
 import CommonLargeText from 'src/modules/stand-detail/stand-common-large-text';
-
-import StandPictures from 'src/modules/stand-detail/stand-pictures';
+import StandDetailGallery from 'src/modules/stand-detail-gallery/stand-detail-gallery';
 import QRCodeComponent from 'src/modules/stand-detail/stand-qr';
-
 import StandContactInfo from 'src/modules/stand-contact-info/stand-contact-info';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import StandOwnerInfo from 'src/modules/stand-owner-info/stand-owner-info';
 import ExpoItem from 'src/modules/expo-grid/expo-item';
 import GroupItem from 'src/modules/group-grid/group-item';
+import StandOptionMenuGrid from 'src/modules/stand-options-menu-grid/stand-options-menu-grid';
 
 const StandComponent = (props: any): React.ReactElement => {
   const stand = props.stand;
@@ -17,9 +16,11 @@ const StandComponent = (props: any): React.ReactElement => {
     <div className='Stand container row'>
       <HorizontalSpace size='small' />
       <div className='col s12 m8'>
+        <StandOptionMenuGrid standSlug={stand.attributes.slug} />
         <CommonLargeText text={stand.attributes.description} />
-        <StandPictures images={stand.relationships.pictures.data} />
-        <QRCodeComponent title={`QR code de ${stand.attributes.name}`}/>
+        <StandDetailGallery images={stand.relationships.pictures.data} />
+        <QRCodeComponent title={`QR code de ${stand.attributes.name}`} />
+        <HorizontalSpace size='small' />
       </div>
       <div className='col s12 m4'>
         {

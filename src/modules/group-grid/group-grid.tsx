@@ -7,7 +7,7 @@ const GroupGrid = ( props: any ): React.ReactElement => {
     <div className='container'>
       <div className='row'>
         {
-          props.data.data.map((i: any, index: number) => {
+          props.data.map((i: any, index: number) => {
             return (
               <GroupItem
                 key={index}

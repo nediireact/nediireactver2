@@ -10,26 +10,15 @@ import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-head
 import 'src/modules/expo-grid/expo-grid.scss';
 
 const headerPictureFile = '/assets/expos.jpg';
-const expoData = {
-  data: [{
-    id: 0,
-    attributes: {
-      img_picture: '',
-      name: '',
-      description: '',
-      real: ''
-    }
-  }]
-};
 
 const ExpoGrid = (): React.ReactElement => {
-  const [items, setitems]: any = useState(expoData);
+  const [items, setitems]: any = useState([]);
   const system = useSelector((state: any) => state.system);
   const prefix = system.platform.prefix;
   const headerPictureURL = `${prefix}${headerPictureFile}`;
 
   useEffect(() => {
-    fetchData('expos')
+    fetchData('expos?fields[Expo]=name,img_picture,slug,real')
       .then((response: any) =>{
         setitems(response);
       });
@@ -45,14 +34,15 @@ const ExpoGrid = (): React.ReactElement => {
       <div className='container'>
         <div className='row'>
           {
-            items.data.map((item: any, index: number) => {
-              return (
-                <ExpoItem
-                  key={index}
-                  item={item}
-                  col='col s12 m6 l4' />
-              );
-            })
+            items && items.data && items.data.length ?
+              items.data.map((item: any, index: number) => {
+                return (
+                  <ExpoItem
+                    key={index}
+                    item={item}
+                    col='col s12 m6 l4' />
+                );
+              }) : null
           }
         </div>
       </div>

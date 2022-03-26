@@ -3,28 +3,24 @@ import React, {
   useState
 } from 'react';
 import {
-  useHistory,
+  useNavigate,
   useParams } from 'react-router';
 import fetchData from 'src/modules/utils/fetch-data';
-import mealsData from 'src/modules/stand-meals-detail/meals-data';
-import 'src/modules/stand-meals-detail/stand-meals-detail.scss';
-
 import GenericItemDetail from 'src/modules/generic-item-detail/generic-item-detail';
 
 const StandMealsDetail = (): React.ReactElement => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const params: any = useParams();
-  const [meal, setMeal]: any = useState(mealsData);
+  const [meal, setMeal]: any = useState({});
 
   useEffect(() => {
     fetchData(`meals?filter[slug]=${params.mealId}&include=meal_pictures,meal_addons,classification,stand`)
     .then((response: any) => {
-      console.log(response);
-      if ( response.data.length === 0 ) {
+      if ( !response.data.length ) {
         console.log('Error de platillo');
       } else {
         const mealsData = response.data[0];
-        if (!mealsData) return history.replace('/');
+        if (!mealsData) return navigate('/');
         setMeal(mealsData);
       }
     })
@@ -33,9 +29,12 @@ const StandMealsDetail = (): React.ReactElement => {
     });
   }, [fetchData]);
   return (
-      <div>
-        <GenericItemDetail item={meal}/>
-      </div>
+    <>
+    {
+      meal && meal.id ?
+        <GenericItemDetail item={meal}/> : null
+    }
+    </>
   );
 };
 

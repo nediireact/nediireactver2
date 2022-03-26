@@ -1,46 +1,70 @@
-import React from 'react';
+import React, {
+  useState
+} from 'react';
 import { Link } from 'react-router-dom';
 import 'src/modules/buyable-item/buyable-item.scss';
 import getMoneyFormat from 'src/modules/utils/money-formats';
+import { ProductTypeConverter } from 'src/modules/utils/products-services';
+import {
+  GetStandFromInclude,
+  GetBuyableItemName
+} from 'src/modules/utils/products-services';
+import GenericItemAddToFavoritesButton from 'src/modules/favorite-button/favorite-button';
 
 const BuyableItem = (props: any): React.ReactElement => {
   const item = props.item;
+  if ( !item ) return <></>;
+  const [isLoading, setIsLoading] = useState(false);
+  const stand = GetStandFromInclude(item);
+  const name = GetBuyableItemName(item);
+  const url = `/empresa/${props.standSlug ? props.standSlug : stand ? stand.attributes.slug : ''}/${ProductTypeConverter(props.item.type)}/${item.attributes.slug}`;
+  const standURL = `/empresa/${props.standSlug ? props.standSlug : stand ? stand.attributes.slug : ''}`;
 
   return (
-    <div className='BuyableItem col s12 m4'>
-      <Link to={`/empresa/${props.standSlug}/${props.type}/${item.slug}`} className='GenericCard'>
-        <div className='BuyableItem__image-container'>
-          <div className='BuyableItem__image'
-            style={{backgroundImage: `url(${item.img_picture})`}}>
+    <div className={`BuyableItem ${props.fullWidth ? '' : 'col s12 m4'}`}>
+      <div className='GenericCard'>
+        <Link to={url} className={`BuyableItem__image-container ${props.mini ? 'BuyableItem__image-container--mini' : ''}`}>
+          <div className={`BuyableItem__image ${props.mini ? 'BuyableItem__image--mini' : ''}`}
+            style={{backgroundImage: `url(${item.attributes.img_picture})`}}>
           </div>
           {
-            item.discount ?
+            item.attributes.discount && !props.mini ?
               <span className='BuyableItem__discount-label right-align red darken-1 white-text z-depth-1'>
-                {`${item.discount}% de descuento`}
+                {`${item.attributes.discount}% de descuento`}
               </span> : null
           }
           {
-            item.short_description ?
+            item.attributes.short_description ?
               <span className='BuyableItem__short-description grey-text text-darken-4'>
-                {item.short_description}
+                {item.attributes.short_description}
               </span> : null
           }
-        </div>
+        </Link>
         <div className='BuyableItem__info'>
-          <span className='BuyableItem__name grey-text text-darken-4 truncate'>
-            {item.name}
-          </span>
-          <span className='BuyableItem__price grey-text text-darken-4'>
-            {getMoneyFormat(item.final_price)}
+          <GenericItemAddToFavoritesButton
+            item={item}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading} />
+          {
+            stand ?
+              <Link to={standURL} className='orange-text text-accent-4 truncate'>
+                {stand.attributes.name}
+              </Link> : null
+          }
+          <Link to={url} className={`BuyableItem__name ${props.mini ? 'BuyableItem__name--mini' : ''} grey-text text-darken-4 truncate`}>
+            {name}
+          </Link>
+          <span className={`BuyableItem__price ${props.mini ? 'BuyableItem__price--mini' : ''} green-text text-darken-3`}>
+            {getMoneyFormat(item.attributes.final_price)}
           </span>
           {
-            item.discount ?
-              <span className='BuyableItem__discount green-text text-darken-3'>
-                {getMoneyFormat(item.price)}
+            item.attributes.discount ?
+              <span className={`BuyableItem__discount ${props.mini ? 'BuyableItem__discount--mini' : ''} red-text text-lighten-2`}>
+                {getMoneyFormat(item.attributes.price)}
               </span> : null
           }
         </div>
-      </Link>
+      </div>
     </div>
   );
 };

@@ -6,6 +6,11 @@
     flex-direction: row;
     justify-content: left;
   }
+
+  &__data-item {
+    display: block;
+  }
+
   &__icon {
     &--back-end {
       @extend .deep-purple-text, .text-darken-4;

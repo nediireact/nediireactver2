@@ -1,18 +1,20 @@
+// DEPRECATED
+
 import React, {
   useState
 } from 'react';
-import EnvironmentVariables from 'src/constants/EnvironmentVariables';
-import FacebookLogin from 'react-facebook-login'; // https://www.npmjs.com/package/react-facebook-login
+// import EnvironmentVariables from 'src/constants/EnvironmentVariables';
+// import FacebookLogin from 'react-facebook-login'; // https://www.npmjs.com/package/react-facebook-login
 import LoginUserAPICall from 'src/modules/login/login-user-api-calls';
 import SubTitle from 'src/modules/sub-title/sub-title';
 import Modal from 'src/modules/modal/modal';
 import { ArrayErrorsToHTMLList } from 'src/modules/utils/date-parser';
 import { SetUserData } from 'src/redux/actions/user-actions';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const env = EnvironmentVariables.getInstance();
-const facebookAppID = env.facebookAppID;
+// const env = EnvironmentVariables.getInstance();
+// const facebookAppID = env.facebookAppID;
 const modelInterface = {
   open: () => null,
   close: () => null
@@ -32,7 +34,7 @@ const loginPayload = {
 
 const FacebookLoginComponent = ( porps: any ): React.ReactElement => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [modal, setModal] = useState(modelInterface);
   const [modalSuccess, setModalSuccess] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
@@ -57,7 +59,7 @@ const FacebookLoginComponent = ( porps: any ): React.ReactElement => {
       .then((response) => {
         porps.setIsLoading(false);
         dispatch(SetUserData(response));
-        return history.replace('/');
+        return navigate('/');
       })
       .catch((error: any) => {
         porps.setIsLoading(false);
@@ -79,10 +81,10 @@ const FacebookLoginComponent = ( porps: any ): React.ReactElement => {
     <>
       <div className='col s12'><SubTitle text='Login con redes sociales' /></div>
       <Modal setModal={setModal} success={modalSuccess} title={modalTitle} message={modalMessage} onCloseEnd={onCloseEnd} fixedFooter={true} />
-      <div className='RegisterUser__social-login col s12 row'>
-        <FacebookLogin appId={facebookAppID} autoLoad={false} callback={FacebookCB}
+      <div className='RegisterUser__social-login col s12 row' onClick={FacebookCB}>
+        {/* <FacebookLogin appId={facebookAppID} autoLoad={false} callback={FacebookCB}
           fields='name,email,picture' scope='public_profile,email'
-          icon='fa-facebook' textButton='Login' />
+          icon='fa-facebook' textButton='Login' /> */}
       </div>
     </>
   );
