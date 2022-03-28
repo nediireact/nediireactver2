@@ -1,18 +1,41 @@
-import React, { useState } from 'react';
-import 'src/modules/basic-icon/basic-icon';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import 'src/modules/basic-icon/basic-icon.scss';
 
 const BasicIcon = (props: any): React.ReactElement => {
-  const [click, setClick] = useState('offclick');
+  const link = props.link;
+  const external = props.link && props.link.search(/\:\/\//g) >= 0 ? true : false;
+  const action = props.action;
+
   return (
-    <a
-      className={`BasicICon ${click === 'onclick' ? 'IsLoadingOpacity' : '' }`}
-      href={props.link}
-      target={`${props.parent ? '_parent' : '_blank'}`}
-      onClick={() =>{
-        setClick('onclick');
-      }}>
-      <i className={`material-icons ${props.color_icon}`}>{props.icon}</i>
-    </a>
+    <>
+    {
+      action ?
+        <a className={`BasicIcon material-icons ${props.color} waves-effect waves-light ${props.noPadding ? 'BasicIcon--no-padding' : ''} ${props.disabled ? 'disabled' : ''}`}
+          onClick={action} >
+          {props.icon}
+        </a> : link ?
+        <>
+          {
+            external ?
+            <a rel='noreferrer'
+              className={`BasicIcon material-icons ${props.color} waves-effect waves-light ${props.noPadding ? 'BasicIcon--no-padding' : ''} ${props.disabled ? 'disabled' : ''}`}
+              href={props.link}
+              target='_blank'>
+              {props.icon}
+            </a> :
+            <Link
+              className={`BasicIcon material-icons ${props.color} waves-effect waves-light ${props.noPadding ? 'BasicIcon--no-padding' : ''} ${props.disabled ? 'disabled' : ''}`}
+              to={props.link}>
+              {props.icon}
+            </Link>
+          }
+          </> :
+        <div className={`BasicIcon material-icons ${props.color} ${props.noPadding ? 'BasicIcon--no-padding' : ''} ${props.disabled ? 'disabled' : ''}`}>
+          {props.icon}
+        </div>
+    }
+    </>
   );
 };
 

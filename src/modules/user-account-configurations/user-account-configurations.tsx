@@ -118,7 +118,7 @@ const AccountForm = (props: any): React.ReactElement => {
         <HorizontalSpace size='small' />
         <input id='submit' type='submit'
           value='Guardar'
-          className='waves-effect waves-light btn right'
+          className='waves-effect waves-light btn right cyan'
           disabled={props.isLoading} />
       </div>
       <div className={`progress col s12 ${ props.isLoading ? '' : 'hide' }`}>
@@ -143,7 +143,7 @@ const AccountForm = (props: any): React.ReactElement => {
               text='Planes Nedii'
               fullWidth={true}
               align='left' />
-            <p>Para continuar selecciones un Plan de Nedii.</p>
+            <p>Para continuar seleccione un Plan de Nedii.</p>
             <NediiPlans />
           </div>
       }

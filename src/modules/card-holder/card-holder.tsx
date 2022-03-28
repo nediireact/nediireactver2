@@ -5,6 +5,7 @@ import BasicTextWithIcon from 'src/modules/text-with-icon/basic-text-with-icon';
 import StrongText from '../strong-text/strong-text';
 import GenericItemAddToFavoritesButton from 'src/modules/favorite-button/favorite-button';
 import BasicIcon from 'src/modules/basic-icon/basic-icon';
+import { Link } from 'react-router-dom';
 
 const imageCardHolder = '/assets/card-holder.jpg';
 
@@ -34,20 +35,19 @@ const CardHolder = (props: any): React.ReactElement => {
               setIsLoading={setIsLoading} />
             <BasicIcon
               icon='home'
-              color_icon='white-text'
-              link={standURL}
-              parent={true} />
+              color='white-text'
+              link={standURL} />
             <BasicIcon
               icon='place'
-              color_icon='white-text'
+              color='white-text'
               link={`https://www.google.com/maps?q=${fullAddress}`} />
           </div>
           <div className='blue CardHolder__flex-filler'></div>
           <div className='CardHolder__container-logo'>
-            <a
-            href={standURL}
-            className='CardHolder__img-logo'
-            style={{backgroundImage: `url(${props.stand.attributes.img_logo})`}}></a>
+            <Link
+              to={standURL}
+              className='CardHolder__img-logo'
+              style={{backgroundImage: `url(${props.stand.attributes.img_logo})`}}></Link>
           </div>
         </div>
         <div className='CardHolder__info'>
@@ -55,10 +55,10 @@ const CardHolder = (props: any): React.ReactElement => {
           {
             props.stand.attributes.contact_email ?
               <BasicTextWithIcon
-              icon='email'
-              color_icon='red-text'
-              text={props.stand.attributes.contact_email}
-              link={`mailto:${props.stand.attributes.contact_email}`} /> : null
+                icon='email'
+                color_icon='red-text'
+                text={props.stand.attributes.contact_email}
+                link={`mailto:${props.stand.attributes.contact_email}`} /> : null
           }
           {
             props.stand.relationships.owner.data.attributes.profile.owner_phone ?
@@ -71,10 +71,10 @@ const CardHolder = (props: any): React.ReactElement => {
           {
             props.stand.attributes.web_link ?
               <BasicTextWithIcon
-              icon='language'
-              color_icon='yellow-text'
-              text={props.stand.attributes.web_link}
-              link={props.stand.attributes.web_link} /> : null
+                icon='language'
+                color_icon='yellow-text'
+                text={props.stand.attributes.web_link}
+                link={props.stand.attributes.web_link} /> : null
           }
         </div>
       </div>
