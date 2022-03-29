@@ -6,6 +6,7 @@ import {
   TheCompany,
   StarProducts
 } from 'src/modules/business-card/sections-pages';
+import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 
 export const BusinessCardMenuItem = (props: any): React.ReactElement => {
   const select = props.select;
@@ -56,6 +57,7 @@ const BusinessCard = (props: any): React.ReactElement => {
           </div>
         </div>
         <ContactBusiness stand={stand}/>
+        <HorizontalSpace size='small' />
       </div>
       <div className='container'>
         <div className='row'>
