@@ -7,6 +7,7 @@ import GetUserAddress from 'src/api/api-sdk/get-user-address';
 import AddUserAddress from 'src/api/api-sdk/add-user-address';
 import UpdateUserAddress from 'src/api/api-sdk/update-user-address';
 import DeleteUserAddress from 'src/api/api-sdk/delete-user-address';
+import GetUserStands from 'src/api/api-sdk/get-user-stands';
 
 const APISDK = {
   Login: Login,
@@ -17,7 +18,8 @@ const APISDK = {
   GetUserAddress: GetUserAddress,
   AddUserAddress: AddUserAddress,
   UpdateUserAddress: UpdateUserAddress,
-  DeleteUserAddress: DeleteUserAddress
+  DeleteUserAddress: DeleteUserAddress,
+  GetUserStands: GetUserStands
 };
 
 export default APISDK;

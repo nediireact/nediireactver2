@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 import { useSelector } from 'react-redux';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import SubTitle from 'src/modules/sub-title/sub-title';
+import StrongText from 'src/modules/strong-text/strong-text';
 import LoadUserCart from 'src/modules/user-cart/load-user-cart';
 import UserCartItem from 'src/modules/user-cart/user-cart-item';
 
@@ -24,10 +24,7 @@ const UserCart = (): React.ReactElement => {
       {
         items && items.length ?
           <>
-            <SubTitle
-              text='Carrito de compras'
-              fullWidth={true}
-              align='left' />
+            <StrongText text='Carrito de compras' fullWidth={true} align='left' />
             <HorizontalSpace size='x-small' />
             <div className='row'>
               {
