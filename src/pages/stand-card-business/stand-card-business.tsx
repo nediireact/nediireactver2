@@ -13,7 +13,7 @@ import BusinessCard from 'src/modules/business-card/business-card';
 const StandCardBusiness = (): React.ReactElement => {
   const params: any = useParams();
   const stand = useSelector((state: any) => state.stand);
-  const [sectionMenu, setSectionMenu]: any = useState([]);
+  const [sectionMenu, setSectionMenu] = useState([]);
 
   return (
     <>

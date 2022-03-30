@@ -52,17 +52,18 @@ export const TheCompany = (props: any): React.ReactElement => {
 };
 
 export const StarProductItem = (props: any): React.ReactElement => {
-  const stand = props.stand;
+  const items = props.items;
   return (
     <>
       {
-        stand.data.map((i: any, index: number) => {
+        items.data.map((i: any, index: number) => {
           return (
             <div className='col s6 m4 l3' key={index}>
               <BuyableItem
-              fullWidth={true}
-              mini={true}
-              item={i} />
+                fullWidth={true}
+                mini={true}
+                item={i}
+                standSlug={props.standSlug} />
             </div>
           );
         })
@@ -75,11 +76,21 @@ export const StarProducts = (props: any): React.ReactElement => {
   const stand = props.stand;
   return (
     <div>
-      <StarProductItem stand={stand.relationships.highlighted_products} />
-      <StarProductItem stand={stand.relationships.highlighted_meals} />
-      <StarProductItem stand={stand.relationships.highlighted_services} />
-      <StarProductItem stand={stand.relationships.highlighted_real_estates} />
-      <StarProductItem stand={stand.relationships.highlighted_vehicles} />
+      <StarProductItem
+        items={stand.relationships.highlighted_products}
+        standSlug={stand.attributes.slug} />
+      <StarProductItem
+        items={stand.relationships.highlighted_meals}
+        standSlug={stand.attributes.slug} />
+      <StarProductItem
+        items={stand.relationships.highlighted_services}
+        standSlug={stand.attributes.slug}/>
+      <StarProductItem
+        items={stand.relationships.highlighted_real_estates}
+        standSlug={stand.attributes.slug} />
+      <StarProductItem
+        items={stand.relationships.highlighted_vehicles}
+        standSlug={stand.attributes.slug} />
     </div>
   );
 };

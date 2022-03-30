@@ -16,12 +16,29 @@ const CardHolder = (props: any): React.ReactElement => {
   const stand = props.stand;
   if ( !stand ) return <></>;
   const [isLoading, setIsLoading] = useState(false);
-  const standURL = `/empresa/${props.standSlug ? props.standSlug : props.stand.attributes.slug}`;
-  const zip_code = props.stand.attributes.zip_code ? props.stand.attributes.zip_code : null;
-  const address = props.stand.attributes.address ? props.stand.attributes.address : null;
+  const standURL = `/empresa/${props.standSlug ? props.standSlug : stand.attributes.slug}`;
+  const zip_code = stand.attributes.zip_code ? stand.attributes.zip_code : null;
+  const address = stand.attributes.address ? stand.attributes.address : null;
   let fullAddress: string = address;
+  if (stand.relationships &&
+    stand.relationships.city &&
+    stand.relationships.city.data &&
+    stand.relationships.city.data.attributes &&
+    stand.relationships.city.data.attributes.name) {
+      fullAddress += `, ${stand.relationships.city.data.attributes.name}`;
+  }
+  if (stand.relationships &&
+    stand.relationships.city &&
+    stand.relationships.city.data &&
+    stand.relationships.city.data.relationships &&
+    stand.relationships.city.data.relationships.state &&
+    stand.relationships.city.data.relationships.state.data &&
+    stand.relationships.city.data.relationships.state.data.attributes &&
+    stand.relationships.city.data.relationships.state.data.attributes.name) {
+    fullAddress += `, ${stand.relationships.city.data.relationships.state.data.attributes.name}`;
+  }
   if (zip_code) {
-    fullAddress += `,${zip_code}`;
+    fullAddress += `, ${zip_code}`;
   }
 
   return (
