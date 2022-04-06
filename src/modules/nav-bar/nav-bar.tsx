@@ -38,7 +38,8 @@ const NavBar = (props: any): React.ReactElement => {
       userProfile: null,
       favoriteStands: [],
       favoriteItems: [],
-      cart: []
+      cart: [],
+      userStands: []
     }));
     return navigate('/');
   };

@@ -10,7 +10,7 @@ const StandItemMini = (props: any): React.ReactElement => {
   const stand: any = props.item;
   if ( !stand || !stand.id || !stand.attributes ) return <></>;
   const [isLoading, setIsLoading] = useState(false);
-  const url = `/empresa/${stand.attributes.slug}`;
+  const url = props.url ? props.url : `/empresa/${stand.attributes.slug}`;
 
   return (
     <div className={`${props.cols} StandItemMini`}>

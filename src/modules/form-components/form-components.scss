@@ -1,16 +1,36 @@
 .GenericTextInput,
 .GenericCheckboxInput,
-.GenericTextArea {
+.GenericTextArea,
+.GenericImgInput {
   margin: 0 0 10px !important;
+
+  input {
+    margin-bottom: 0 !important;
+  }
 }
 
-.GenericTextInput {
+.GenericTextInput,
+.GenericImgInput {
   .validate {
     margin-bottom: 0 !important;
   }
 
   &__placeholder {
     font-size: 0.9em;
+  }
+}
+
+$generic-img-input-height: 35px;
+
+.GenericImgInput {
+  .btn {
+    height: $generic-img-input-height !important;
+    margin-top: 10px;
+    line-height: $generic-img-input-height !important;
+  }
+
+  i {
+    line-height: $generic-img-input-height;
   }
 }
 

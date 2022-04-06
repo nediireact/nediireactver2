@@ -1,15 +1,16 @@
 import React, {
-  useState
+  useState,
+  useEffect
 } from 'react';
 import { useSelector } from 'react-redux';
 import 'src/modules/user-account-configurations/user-account-configurations.scss';
 import GenericTextInput from 'src/modules/form-components/generic-text-input';
 import GenericCheckboxInput from 'src/modules/form-components/generic-checkbox-input';
 import GenericTextArea from 'src/modules/form-components/generic-text-area';
-import SubTitle from 'src/modules/sub-title/sub-title';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import APISDK from 'src/api/api-sdk/api-sdk';
 import NediiPlans from 'src/modules/nedii-plans/nedii-plans';
+import StrongText from 'src/modules/strong-text/strong-text';
 
 const AccountForm = (props: any): React.ReactElement => {
   const userData = useSelector((state: any) => state.user);
@@ -57,97 +58,92 @@ const AccountForm = (props: any): React.ReactElement => {
   };
 
   return (
-    <form onSubmit={updateUserData} ref={props.formRef} className='row UserAccountConfigurations__form'>
-      <div className='input-field col s12 m6 UserAccountConfigurations__input'>
-        <div className='UserAccountConfigurations__user-image-wrapper'>
-          <div className='UserAccountConfigurations__user-image z-depth-1'
-            style={{ backgroundImage: `url(${userImage})` }}></div>
-          <div className='UserAccountConfigurations__user-image-input-wrapper white z-depth-1'>
-            <i className='material-icons UserAccountConfigurations__user-image-input-icon grey-text text-darken-3'>add_a_photo</i>
-            <input type='file' id='user-image' onChange={(e: any) => {
-                const file = e.target.files[0];
-                const reader = new FileReader();
-                reader.onload = (e: any) => {
-                  setUserImage(e.target.result);
-                };
-                reader.readAsDataURL(file);
-              }} accept='image/*' className='UserAccountConfigurations__user-image-input' />
+    <>
+      <StrongText text='Configuracion de la cuenta' fullWidth={true} align='left' />
+      <HorizontalSpace size='small' />
+      <form onSubmit={updateUserData} ref={props.formRef} className='row UserAccountConfigurations__form'>
+        <div className='input-field col s12 m6 UserAccountConfigurations__input'>
+          <div className='UserAccountConfigurations__user-image-wrapper'>
+            <div className='UserAccountConfigurations__user-image z-depth-1'
+              style={{ backgroundImage: `url(${userImage})` }}></div>
+            <div className='UserAccountConfigurations__user-image-input-wrapper white z-depth-1'>
+              <i className='material-icons UserAccountConfigurations__user-image-input-icon grey-text text-darken-3'>add_a_photo</i>
+              <input type='file' id='user-image' onChange={(e: any) => {
+                  const file = e.target.files[0];
+                  const reader = new FileReader();
+                  reader.onload = (e: any) => {
+                    setUserImage(e.target.result);
+                  };
+                  reader.readAsDataURL(file);
+                }} accept='image/*' className='UserAccountConfigurations__user-image-input' />
+            </div>
+            <label htmlFor='user-image' className='hide'>-</label>
           </div>
-          <label htmlFor='user-image' className='hide'>-</label>
         </div>
-      </div>
-      <GenericTextInput id='firstName' type='text' placeholder='Nombre(s)'
-        disabled={props.isLoading} value={firstName} setValue={setFirstName} />
-      <GenericTextInput id='lastName' type='text' placeholder='Apellidos'
-        disabled={props.isLoading} value={lastName} setValue={setLastName} />
-      <GenericTextInput id='email' type='email' placeholder='Correo electronico'
-        disabled={true} value={email} setValue={setEmail} />
-      <GenericCheckboxInput id='newsletter' placeholder='News letter'
-        checked={newsletter} setValue={setNewsletter} />
-      <GenericCheckboxInput id='promotions' placeholder='Promociones'
-        checked={promotions} setValue={setPromotions} />
-      {
-        profile.attributes.is_seller ?
-          <>
+        <GenericTextInput id='firstName' type='text' placeholder='Nombre(s)'
+          disabled={props.isLoading} value={firstName} setValue={setFirstName} />
+        <GenericTextInput id='lastName' type='text' placeholder='Apellidos'
+          disabled={props.isLoading} value={lastName} setValue={setLastName} />
+        <GenericTextInput id='email' type='email' placeholder='Correo electronico'
+          disabled={true} value={email} setValue={setEmail} />
+        <GenericCheckboxInput id='newsletter' placeholder='News letter'
+          checked={newsletter} setValue={setNewsletter} />
+        <GenericCheckboxInput id='promotions' placeholder='Promociones'
+          checked={promotions} setValue={setPromotions} />
+        {
+          profile.attributes.is_seller ?
+            <>
+              <div className='col s12'>
+                <HorizontalSpace size='small' />
+                <StrongText text='Informacion de expositor' fullWidth={true} align='left' />
+              </div>
+              <GenericTextInput id='ownerPosition' type='text' placeholder='Posicion del expositor'
+                disabled={props.isLoading} value={ownerPosition} setValue={setOwnerPosition} />
+              <GenericTextInput id='ownerPhone' type='tel' placeholder='Telefono del expositor'
+                disabled={props.isLoading} value={ownerPhone} setValue={setOwnerPhone} />
+              <GenericTextInput id='ownerEmail' type='email' placeholder='Email del expositor'
+                disabled={props.isLoading} value={ownerEmail} setValue={setOwnerEmail} />
+              <GenericTextInput id='ownerOfficePhone' type='tel' placeholder='Tel. de oficina del expositor'
+                disabled={props.isLoading} value={ownerOfficePhone} setValue={setOwnerOfficePhone} />
+              <GenericTextInput id='ownerWhatsApp' type='tel' placeholder='WhatsApp del expositor'
+                disabled={props.isLoading} value={ownerWhatsApp} setValue={setOwnerWhatsApp} />
+              <GenericTextInput id='ownerAddress' type='text' placeholder='Direccion del expositor'
+                disabled={props.isLoading} value={ownerAddress} setValue={setOwnerAddress} />
+              <GenericTextArea id='biography' placeholder='Biografia del expositor'
+                disabled={props.isLoading} value={biography} setValue={setBiography} />
+              <GenericTextArea id='ownerPositionDescription' placeholder='Descripcion del puesto del expositor'
+                disabled={props.isLoading} value={ownerPositionDescription} setValue={setOwnerPositionDescription} />
+            </> : null
+        }
+        <div className='input-field col s12 UserAccountConfigurations__input'>
+          <HorizontalSpace size='small' />
+          <input id='submit' type='submit'
+            value='Guardar'
+            className='waves-effect waves-light btn right cyan'
+            disabled={props.isLoading} />
+        </div>
+        <div className={`progress col s12 ${ props.isLoading ? '' : 'hide' }`}>
+          <div className='indeterminate'></div>
+        </div>
+        {
+          !profile.attributes.is_seller ?
             <div className='col s12'>
               <HorizontalSpace size='small' />
-              <SubTitle
-                text='Informacion de expositor'
-                fullWidth={true}
-                align='left' />
+              <StrongText text='Convertirse en expositor de Nedii' fullWidth={true} align='left' />
+              <p>Ser expositor en Nedii es rapido y <b>gratis</b>, comienza ahora.</p>
+              <a className='waves-effect waves-light btn' onClick={props.upgradeToSeller}>
+                <i className='material-icons left'>business_center</i>Ser expositor
+              </a>
+            </div> :
+            <div className='col s12'>
+              <HorizontalSpace size='small' />
+              <StrongText text='Planes Nedii' fullWidth={true} align='left' />
+              <p>Para continuar seleccione un Plan de Nedii.</p>
+              <NediiPlans />
             </div>
-            <GenericTextInput id='ownerPosition' type='text' placeholder='Posicion del expositor'
-              disabled={props.isLoading} value={ownerPosition} setValue={setOwnerPosition} />
-            <GenericTextInput id='ownerPhone' type='tel' placeholder='Telefono del expositor'
-              disabled={props.isLoading} value={ownerPhone} setValue={setOwnerPhone} />
-            <GenericTextInput id='ownerEmail' type='email' placeholder='Email del expositor'
-              disabled={props.isLoading} value={ownerEmail} setValue={setOwnerEmail} />
-            <GenericTextInput id='ownerOfficePhone' type='tel' placeholder='Tel. de oficina del expositor'
-              disabled={props.isLoading} value={ownerOfficePhone} setValue={setOwnerOfficePhone} />
-            <GenericTextInput id='ownerWhatsApp' type='tel' placeholder='WhatsApp del expositor'
-              disabled={props.isLoading} value={ownerWhatsApp} setValue={setOwnerWhatsApp} />
-            <GenericTextInput id='ownerAddress' type='text' placeholder='Direccion del expositor'
-              disabled={props.isLoading} value={ownerAddress} setValue={setOwnerAddress} />
-            <GenericTextArea id='ownerAddress' placeholder='Biografia del expositor'
-              disabled={props.isLoading} value={biography} setValue={setBiography} />
-            <GenericTextArea id='ownerAddress' placeholder='Descripcion del puesto del expositor'
-              disabled={props.isLoading} value={ownerPositionDescription} setValue={setOwnerPositionDescription} />
-          </> : null
-      }
-      <div className='input-field col s12 UserAccountConfigurations__input'>
-        <HorizontalSpace size='small' />
-        <input id='submit' type='submit'
-          value='Guardar'
-          className='waves-effect waves-light btn right cyan'
-          disabled={props.isLoading} />
-      </div>
-      <div className={`progress col s12 ${ props.isLoading ? '' : 'hide' }`}>
-        <div className='indeterminate'></div>
-      </div>
-      {
-        !profile.attributes.is_seller ?
-          <div className='col s12'>
-            <HorizontalSpace size='small' />
-            <SubTitle
-              text='Convertirse en expositor de Nedii'
-              fullWidth={true}
-              align='left' />
-            <p>Ser expositor en Nedii es rapido y <b>gratis</b>, comienza ahora.</p>
-            <a className='waves-effect waves-light btn' onClick={props.upgradeToSeller}>
-              <i className='material-icons left'>business_center</i>Ser expositor
-            </a>
-          </div> :
-          <div className='col s12'>
-            <HorizontalSpace size='small' />
-            <SubTitle
-              text='Planes Nedii'
-              fullWidth={true}
-              align='left' />
-            <p>Para continuar seleccione un Plan de Nedii.</p>
-            <NediiPlans />
-          </div>
-      }
-    </form>
+        }
+      </form>
+    </>
   );
 };
 
@@ -189,6 +185,11 @@ const UserAccountConfigurations = (): React.ReactElement => {
         console.log(error);
       });
   };
+
+  useEffect(() => {
+    const w: any = window;
+    w.scrollTo(0, 0);
+  });
 
   return (
     <div className='col s12 m8 UserAccountConfigurations'>

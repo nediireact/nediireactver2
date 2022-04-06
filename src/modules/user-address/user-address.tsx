@@ -120,6 +120,8 @@ const UserAddress = (): React.ReactElement => {
   const userAddress = userData && userData.userAddress && userData.userAddress.length ? userData.userAddress : [];
 
   useEffect(() => {
+    const w: any = window;
+    w.scrollTo(0, 0);
     setIsLoading(true);
     APISDK.GetUserAddress()
       .then(() => {
@@ -137,7 +139,7 @@ const UserAddress = (): React.ReactElement => {
         <StrongText
           fullWidth={true}
           align='left'
-          text={`${userAddress.length} Direcciones registradas`} />
+          text={`${userAddress.length} Direccion${userAddress.length === 1 ? '' : 'es'} registrada${userAddress.length === 1 ? '' : 's'}`} />
         <HorizontalSpace size='x-small' />
       </div>
       {

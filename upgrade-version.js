@@ -27,5 +27,3 @@ const upgradeVersion = ( packageJSON, filename ) => {
 
 upgradeVersion(packageJSON, './package.json');
 upgradeVersion(versionJSON, './src/assets/version.json');
-
-return;
