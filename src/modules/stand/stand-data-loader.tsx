@@ -79,7 +79,26 @@ const StandDataLoader = (props: any): React.ReactElement => {
     if ( stand && stand && stand[params.standId] && stand[params.standId].attributes ) {
       setMenu(stand[params.standId]);
     }
-    fetchData(`stands?filter[slug]=${params.standId}&include=owner,phones,pictures,expo,group,stand_news,stand_booking_questions,stand_booking_questions.options,survey_questions,city,city.state,city.state.country,highlighted_products,highlighted_services,highlighted_meals,highlighted_real_estates,highlighted_vehicles&fields[Product]=name,slug,price,discount,final_price,img_picture,short_description`)
+    const commonFields = 'name,slug,price,discount,final_price,img_picture,short_description';
+    let url = `stands?filter[slug]=${params.standId}`;
+    url += '&include=owner,phones,pictures,expo,group,stand_news,';
+    url += 'stand_booking_questions,stand_booking_questions.options,';
+    url += 'survey_questions,city,city.state,city.state.country,';
+    url += 'highlighted_products,highlighted_services,highlighted_meals,';
+    url += 'highlighted_real_estates,highlighted_vehicles,';
+    url += 'highlighted_vehicles.model,highlighted_vehicles.model.make';
+    url += `&fields[Product]=${commonFields}`;
+    url += `&fields[Service]=${commonFields}`;
+    url += `&fields[Meal]=${commonFields}`;
+    url += `&fields[RealEstate]=${commonFields}`;
+    url += `&fields[Vehicle]=${commonFields},year,model`;
+    url += '&fields[VehicleModel]=name,make';
+    url += '&fields[VehicleMake]=name';
+    url += '&fields[City]=name,state';
+    url += '&fields[State]=name,country';
+    url += '&fields[Country]=name';
+
+    fetchData(url)
       .then((response: any) => {
         if ( !response.data.length ) {
           return navigate('/');

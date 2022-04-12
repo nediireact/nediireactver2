@@ -4,13 +4,13 @@ import React, {
 import { Link } from 'react-router-dom';
 import * as M from 'materialize-css';
 import { useSelector } from 'react-redux';
-import 'src/modules/nav-bar/nav-bar.scss';
-import SideMenu from 'src/modules/nav-bar/side-menu';
-import MenuItems from 'src/modules/nav-bar/menu-items';
+import './nav-bar.scss';
+import SideMenu from './side-menu';
+import MenuItems from './menu-items';
 import { SetUserData } from 'src/redux/actions/user-actions';
 import { useDispatch } from 'react-redux';
-import NavSearchBox from 'src/modules/nav-search-box/nav-search-box';
 import { useNavigate } from 'react-router-dom';
+import NavSearchBox from 'src/components/nav-search-box/nav-search-box';
 
 const logoFile = '/assets/logo.jpg';
 

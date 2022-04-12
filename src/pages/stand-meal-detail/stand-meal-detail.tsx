@@ -3,9 +3,9 @@ import React, {
 } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import SystemCheck from 'src/modules/system-check/system-check';
+import SystemCheck from 'src/components/system-check/system-check';
 import NavBar from 'src/modules/nav-bar/nav-bar';
-import Footer from 'src/modules/footer/footer';
+import Footer from 'src/components/footer/footer';
 import StandDataLoader from 'src/modules/stand/stand-data-loader';
 import StandMealsDetail from 'src/modules/stand-meals-detail/stand-meals-detail';
 
@@ -15,7 +15,7 @@ const StandMealDetail = (): React.ReactElement => {
   const [sectionMenu, setSectionMenu] = useState([]);
 
   return (
-    <>
+    <div className='page'>
       <NavBar sectionMenu={sectionMenu} />
       <StandDataLoader setSectionMenu={setSectionMenu} />
       {
@@ -24,7 +24,7 @@ const StandMealDetail = (): React.ReactElement => {
       }
       <Footer />
       <SystemCheck />
-    </>
+    </div>
   );
 };
 

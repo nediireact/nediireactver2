@@ -1,25 +1,32 @@
 import React, {
-  useEffect,
-  useState
+  useEffect
 } from 'react';
-import { useSelector } from 'react-redux';
+import {
+  useDispatch,
+  useSelector
+} from 'react-redux';
+import { HorizontalSpace } from 'rrmc';
 import fetchData from 'src/modules/utils/fetch-data';
 import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import GroupItem from 'src/modules/group-grid/group-item';
+import SetSystemData from 'src/redux/actions/set-system-data';
 
 const headerPictureFile = '/assets/digital-services.jpg';
 
 const CategoriesGrid = ( props: any ): React.ReactElement => {
-  const [items, setitems]: any = useState([]);
+  const dispatch = useDispatch();
   const system = useSelector((state: any) => state.system);
+  const items = system && system.categories ? system.categories : [];
   const prefix = system.platform.prefix;
   const headerPictureURL = `${prefix}${headerPictureFile}`;
 
   useEffect(() => {
     fetchData('groups/?fields[Group]=name,img_picture,slug&page[size]=20')
       .then((response: any) =>{
-        setitems(response);
+        // setitems(response);
+        dispatch(SetSystemData({
+          categories: response.data
+        }));
       });
   }, [fetchData]);
 
@@ -33,8 +40,8 @@ const CategoriesGrid = ( props: any ): React.ReactElement => {
       <div className='container'>
         <div className='row'>
           {
-            items && items.data && items.data.length ?
-              items.data.map((item: any, index: number) => {
+            items && items.length ?
+              items.map((item: any, index: number) => {
                 return (
                   <GroupItem
                     key={index}

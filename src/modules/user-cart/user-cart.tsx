@@ -3,8 +3,10 @@ import React, {
   useEffect
 } from 'react';
 import { useSelector } from 'react-redux';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import StrongText from 'src/modules/strong-text/strong-text';
+import {
+  HorizontalSpace,
+  StrongText
+} from 'rrmc';
 import LoadUserCart from 'src/modules/user-cart/load-user-cart';
 import UserCartItem from 'src/modules/user-cart/user-cart-item';
 

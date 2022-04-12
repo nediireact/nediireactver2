@@ -3,11 +3,11 @@ import React, {
   useState
 } from 'react';
 import { useSelector } from 'react-redux';
+import { HorizontalSpace } from 'rrmc';
+import './expo-grid.scss';
 import fetchData from 'src/modules/utils/fetch-data';
 import ExpoItem from 'src/modules/expo-grid/expo-item';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
-import 'src/modules/expo-grid/expo-grid.scss';
 
 const headerPictureFile = '/assets/expos.jpg';
 

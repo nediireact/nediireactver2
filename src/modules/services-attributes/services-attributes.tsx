@@ -1,7 +1,9 @@
 import React from 'react';
-import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
-import TextWithIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
-import StrongText from 'src/modules/strong-text/strong-text';
+import {
+  TextWithIcon,
+  TextWithIconInfo,
+  StrongText
+} from 'rrmc';
 
 const ServicesAttributes = (props: any): React.ReactElement => {
   return (

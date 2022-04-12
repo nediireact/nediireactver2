@@ -1,7 +1,9 @@
 import React from 'react';
-import TextWithIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
-import StrongText from 'src/modules/strong-text/strong-text';
-import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
+import {
+  TextWithIconInfo,
+  StrongText,
+  TextWithIcon
+} from 'rrmc';
 import { ItemStateHumanReadable } from 'src/modules/utils/products-services';
 
 const VehicleAttributes = (props: any): React.ReactElement => {

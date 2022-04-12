@@ -1,7 +1,10 @@
 import React from 'react';
-import 'src/modules/parallax-header-image/parallax-header-image.scss';
-import Title from 'src/modules/title/title';
-import Indicator from 'src/modules/indicator/indicator';
+import './parallax-header-image.scss';
+import { Link } from 'react-router-dom';
+import {
+  Title,
+  Indicator
+} from 'rrmc';
 
 const ParallaxHeaderImage = (props: any): React.ReactElement => {
   return (
@@ -24,7 +27,8 @@ const ParallaxHeaderImage = (props: any): React.ReactElement => {
             text={props.title}
             align='left'
             fullWidth={true}
-            shadow={true} />
+            shadow={true}
+            Link={Link} />
           { props.email ?
             <a
               className='ParallaxHeaderImage__email white-text'

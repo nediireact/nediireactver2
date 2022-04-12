@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
-import 'src/modules/card-holder/card-holder.scss';
+import './card-holder.scss';
 import { useSelector } from 'react-redux';
-import BasicTextWithIcon from 'src/modules/text-with-icon/basic-text-with-icon';
-import StrongText from '../strong-text/strong-text';
-import GenericItemAddToFavoritesButton from 'src/modules/favorite-button/favorite-button';
-import BasicIcon from 'src/modules/basic-icon/basic-icon';
+import {
+  BasicTextWithIcon,
+  StrongText,
+  FavoriteButton,
+  BasicIcon
+} from 'rrmc';
 import { Link } from 'react-router-dom';
 
 const imageCardHolder = '/assets/card-holder.jpg';
@@ -29,18 +31,19 @@ const CardHolder = (props: any): React.ReactElement => {
       <div className='GenericCard'>
         <div className='CardHolder__wrapper' style={{backgroundImage: `url(${cardHolder})`}}>
           <div className='CardHolder__icons'>
-            <GenericItemAddToFavoritesButton
-              item={stand}
+            <FavoriteButton
               isLoading={isLoading}
               setIsLoading={setIsLoading} />
             <BasicIcon
               icon='home'
               color='white-text'
-              link={standURL} />
+              link={standURL}
+              Link={Link} />
             <BasicIcon
               icon='place'
               color='white-text'
-              link={`https://www.google.com/maps?q=${fullAddress}`} />
+              link={`https://www.google.com/maps?q=${fullAddress}`}
+              Link={Link} />
           </div>
           <div className='blue CardHolder__flex-filler'></div>
           <div className='CardHolder__container-logo'>

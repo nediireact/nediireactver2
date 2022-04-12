@@ -1,5 +1,5 @@
 import React from 'react';
-import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
+import { TextWithIcon } from 'rrmc';
 
 const ContactBusiness = (props: any): React.ReactElement => {
   return (

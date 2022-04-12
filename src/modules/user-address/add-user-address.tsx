@@ -2,11 +2,13 @@ import React, {
   useState,
   useRef
 } from 'react';
+import {
+  HorizontalSpace,
+  StrongText,
+  GenericTextInput
+} from 'rrmc';
 import APISDK from 'src/api/api-sdk/api-sdk';
-import StrongText from 'src/modules/strong-text/strong-text';
-import GenericTextInput from 'src/modules/form-components/generic-text-input';
-import 'src/modules/user-address/user-address.scss';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import './user-address.scss';
 
 const MenuOptionItem = (props: any): React.ReactElement => {
   return (

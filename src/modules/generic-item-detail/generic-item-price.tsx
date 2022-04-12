@@ -2,7 +2,7 @@ import React from 'react';
 import {
   TextPriceLine,
   TextPriceBlock
-} from 'src/modules/item-price/item-price';
+} from 'rrmc';
 
 const GenericItemPrice = (props: any): React.ReactElement => {
   return (

@@ -2,9 +2,11 @@ import React, {
   useEffect,
   useState
 } from 'react';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import {
+  HorizontalSpace,
+  SubTitle
+} from 'rrmc';
 import fetchData from 'src/modules/utils/fetch-data';
-import SubTitle from 'src/modules/sub-title/sub-title';
 import StandItemMini from 'src/modules/stand-grid/stand-item-mini';
 import LoadUserFavoriteStands from 'src/modules/user-favorites/load-user-favorite-stands';
 import 'src/modules/home-stands-grid/home-stands-grid.scss';

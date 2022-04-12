@@ -5,11 +5,11 @@ import React, {
 import {
   useLocation
 } from 'react-router-dom';
-import SystemCheck from 'src/modules/system-check/system-check';
+import SystemCheck from 'src/components/system-check/system-check';
 import NavBar from 'src/modules/nav-bar/nav-bar';
 import DefaultNavButtons from 'src/modules/nav-bar/default-nav-buttons';
-import Footer from 'src/modules/footer/footer';
-import SystemConfigurationLoader from 'src/modules/system-configuration-loader/system-configuration-loader';
+import Footer from 'src/components/footer/footer';
+import SystemConfigurationLoader from 'src/components/system-configuration-loader/system-configuration-loader';
 import SearchResults from 'src/modules/search-results/search-results';
 import fetchData from 'src/modules/utils/fetch-data';
 
@@ -86,14 +86,14 @@ const SearchResultsPage = (): React.ReactElement => {
   }, [fetchData]);
 
   return (
-    <>
+    <div className='page'>
       <NavBar sectionMenu={sectionMenu} updateQuery={updateQuery} />
       <DefaultNavButtons setSectionMenu={setSectionMenu} />
       <SearchResults results={items} />
       <Footer />
       <SystemConfigurationLoader home={true} />
       <SystemCheck />
-    </>
+    </div>
   );
 };
 

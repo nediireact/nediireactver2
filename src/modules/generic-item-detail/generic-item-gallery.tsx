@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+  HorizontalSpace
+} from 'rrmc';
 import StandDetailGallery from 'src/modules/stand-detail-gallery/stand-detail-gallery';
 
 const GenericItemGallery = (props: any): React.ReactElement => {
@@ -7,6 +10,7 @@ const GenericItemGallery = (props: any): React.ReactElement => {
 
   return (
     <>
+      <HorizontalSpace size='small' />
       {
         item.type === 'Meal' && item.relationships.meal_pictures &&
         item.relationships.meal_pictures.data ?

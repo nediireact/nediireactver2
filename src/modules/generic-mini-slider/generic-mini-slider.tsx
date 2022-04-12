@@ -6,11 +6,15 @@ import {
   Swiper,
   SwiperSlide
 } from 'swiper/react';
-import { useSelector } from 'react-redux';
+import {
+  useDispatch,
+  useSelector
+} from 'react-redux';
 import 'src/modules/generic-mini-slider/generic-mini-slider.scss';
 import fetchData from 'src/modules/utils/fetch-data';
-import SubTitle from 'src/modules/sub-title/sub-title';
-import BuyableItem from 'src/modules/buyable-item/buyable-item';
+import { SubTitle } from 'rrmc';
+import BuyableItemAdapter from 'src/adapters/buyable-item-adapter/buyable-item-adapter';
+import SetSystemData from 'src/redux/actions/set-system-data';
 
 const sliderNextButtonFile = '/assets/slider-button-2-next.svg';
 const sliderPrevButtonFile = '/assets/slider-button-2-prev.svg';
@@ -45,20 +49,24 @@ interface GenericMiniSliderInterface {
   urls: Array<any>;
   stand?: any;
   title: string;
+  cacheKey: string;
 }
 
 const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElement => {
+  const dispatch = useDispatch();
+  const cacheKey = props.cacheKey;
   const [swiperReference, setSwiperReference]: any = useState(null);
-  const [items, setitems]: any = useState([]);
+  const system: any = useSelector((state: any) => state.system);
+  const items = system && system[cacheKey] ? system[cacheKey] : [];
 
   useEffect(() => {
     const promises: any[] = [];
     props.urls.forEach((i: string) => {
       promises.push(new Promise((res) => {
         fetchData(i)
-        .then((response: any) =>{
-          res(response);
-        });
+          .then((response: any) =>{
+            res(response);
+          });
       }));
     });
 
@@ -70,7 +78,9 @@ const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElemen
             results.push(j);
           });
         });
-        setitems(results);
+        const cacheData: any = {};
+        cacheData[cacheKey] = results;
+        dispatch(SetSystemData(cacheData));
       })
       .catch((err: any) => {
         console.log('error:', err);
@@ -105,7 +115,7 @@ const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElemen
                     className='Swiper__slide'
                     key={index}
                     virtualIndex={index}>
-                    <BuyableItem
+                    <BuyableItemAdapter
                       key={index}
                       item={item}
                       fullWidth={true} />

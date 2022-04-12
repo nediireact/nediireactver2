@@ -3,12 +3,14 @@ import React, {
   useRef,
   useState
 } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  SubTitle,
+  ArrayErrorsToHTMLList,
+  Modal
+} from 'rrmc';
 import RegisterUserAPICall from 'src/modules/register-user/register-user-api-calls';
 import EmailFrom from 'src/modules/register-user/email-from';
-import SubTitle from 'src/modules/sub-title/sub-title';
-import Modal from 'src/modules/modal/modal';
-import { ArrayErrorsToHTMLList } from 'src/modules/utils/date-parser';
-import { useNavigate } from 'react-router-dom';
 
 const modelInterface = {
   open: () => null,

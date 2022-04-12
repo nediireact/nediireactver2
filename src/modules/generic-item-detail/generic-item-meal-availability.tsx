@@ -1,6 +1,8 @@
 import React from 'react';
-import TextWithIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
-import StrongText from 'src/modules/strong-text/strong-text';
+import {
+  TextWithIconInfo,
+  StrongText
+} from 'rrmc';
 
 const GenericItemDetailMealsAvailability = (props: any): React.ReactElement => {
   const item = props.item;

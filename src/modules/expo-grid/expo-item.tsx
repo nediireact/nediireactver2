@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import StrongText from 'src/modules/strong-text/strong-text';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import {
+  HorizontalSpace,
+  StrongText
+} from 'rrmc';
 
 const ExpoItem = (props: any): React.ReactElement => {
   const isReal = props.item.attributes.real;

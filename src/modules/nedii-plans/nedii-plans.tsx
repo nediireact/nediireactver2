@@ -3,13 +3,15 @@ import React, {
   useState
 } from 'react';
 import { useSelector } from 'react-redux';
+import './nedii-plans.scss';
+import {
+  StrongText,
+  TextWithIconInfo,
+  GetMoneyFormat,
+  HorizontalSpace
+} from 'rrmc';
 import APISDK from 'src/api/api-sdk/api-sdk';
-import 'src/modules/nedii-plans/nedii-plans.scss';
-import StrongText from 'src/modules/strong-text/strong-text';
-import TextWithIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
 import { NediiPlanExposure } from 'src/modules/utils/nedii-plans';
-import getMoneyFormat from 'src/modules/utils/money-formats';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 
 const NediiPlanBillableItem = (props: any): React.ReactElement => {
   const item = props.item;
@@ -54,7 +56,7 @@ const NediiPlanBillableItem = (props: any): React.ReactElement => {
         <div className='NediiPlan__item-flex-filler'></div>
         <div className='NediiPlan__item-footer-wrapper'>
           <span className='NediiPlan__item-price'>
-            MXN {getMoneyFormat(item.attributes.price)} {item.attributes.billed_monthly ? 'mensuales' : 'anuales'}
+            MXN {GetMoneyFormat(item.attributes.price)} {item.attributes.billed_monthly ? 'mensuales' : 'anuales'}
           </span>
           <div className='NediiPlan__item-button'>
             <a className='waves-effect waves-light btn cyan'>Obtener</a>

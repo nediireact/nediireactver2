@@ -1,5 +1,5 @@
 import React from 'react';
-import TextWithIconInfo from 'src/modules/text-with-icon/text-with-icon-info';
+import { TextWithIconInfo } from 'rrmc';
 
 const GenericItemStockInfo = (props: any): React.ReactElement => {
   const item = props.item;

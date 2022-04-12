@@ -3,14 +3,16 @@ import React, {
   useEffect
 } from 'react';
 import { useSelector } from 'react-redux';
+import {
+  StrongText,
+  BasicIcon,
+  HorizontalSpace,
+  VerticalSpace
+} from 'rrmc';
 import APISDK from 'src/api/api-sdk/api-sdk';
-import StrongText from 'src/modules/strong-text/strong-text';
-import BasicIcon from 'src/modules/basic-icon/basic-icon';
-import 'src/modules/user-address/user-address.scss';
+import './user-address.scss';
 import AddUserAddress from 'src/modules/user-address/add-user-address';
 import EditUserAddress from 'src/modules/user-address/edit-user-address';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import VerticalSpace from 'src/modules/vertical-space/vertical-space';
 
 const getAddressIcon = (type: string): string => {
   switch ( type ) {

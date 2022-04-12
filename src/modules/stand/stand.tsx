@@ -1,9 +1,12 @@
 import React from 'react';
-import CommonLargeText from 'src/modules/stand-detail/stand-common-large-text';
+import {
+  HorizontalSpace,
+  CommonLargeText,
+  QRCodeComponent
+} from 'rrmc';
+import { Link } from 'react-router-dom';
 import StandDetailGallery from 'src/modules/stand-detail-gallery/stand-detail-gallery';
-import QRCodeComponent from 'src/modules/stand-detail/stand-qr';
 import StandContactInfo from 'src/modules/stand-contact-info/stand-contact-info';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import StandOwnerInfo from 'src/modules/stand-owner-info/stand-owner-info';
 import ExpoItem from 'src/modules/expo-grid/expo-item';
 import GroupItem from 'src/modules/group-grid/group-item';
@@ -17,7 +20,7 @@ const StandComponent = (props: any): React.ReactElement => {
       <HorizontalSpace size='small' />
       <div className='col s12 m8'>
         <StandOptionMenuGrid standSlug={stand.attributes.slug} />
-        <CommonLargeText text={stand.attributes.description} />
+        <CommonLargeText text={stand.attributes.description} Link={Link} />
         <StandDetailGallery images={stand.relationships.pictures.data} />
         <QRCodeComponent title={`QR code de ${stand.attributes.name}`} />
         <HorizontalSpace size='small' />

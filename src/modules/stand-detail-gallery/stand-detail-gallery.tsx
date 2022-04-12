@@ -6,7 +6,7 @@ import {
   SwiperSlide
 } from 'swiper/react';
 import { useSelector } from 'react-redux';
-import 'src/modules/stand-detail-gallery/stand-detail-gallery.scss';
+import './stand-detail-gallery.scss';
 
 const sliderNextButtonFile = '/assets/slider-button-next.svg';
 const sliderPrevButtonFile = '/assets/slider-button-prev.svg';

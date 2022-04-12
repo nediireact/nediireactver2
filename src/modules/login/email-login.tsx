@@ -4,9 +4,11 @@ import React, {
   useState
 } from 'react';
 import EmailLoginFrom from 'src/modules/login/email-login-from';
-import SubTitle from 'src/modules/sub-title/sub-title';
-import Modal from 'src/modules/modal/modal';
-import { ArrayErrorsToHTMLList } from 'src/modules/utils/date-parser';
+import {
+  SubTitle,
+  ArrayErrorsToHTMLList,
+  Modal
+} from 'rrmc';
 import { useNavigate } from 'react-router-dom';
 import APISDK from 'src/api/api-sdk/api-sdk';
 

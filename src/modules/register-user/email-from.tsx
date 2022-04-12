@@ -1,7 +1,8 @@
 import React, {
-  useRef, useState
+  useRef,
+  useState
 } from 'react';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import { HorizontalSpace } from 'rrmc';
 
 const EmailFrom = ( props: any ): React.ReactElement => {
   const firstNameRef: any = useRef(null);
@@ -67,11 +68,10 @@ const EmailFrom = ( props: any ): React.ReactElement => {
       </div>
       <div className='col s12'><HorizontalSpace size='small' /></div>
       <div className='col s12'>
-        <div
-          onClick={props.registerUser}
-          className={`waves-effect waves-light btn cyan darken-1 right white-text ${!validForm() || props.isLoading ? 'disabled' : ''}`}>
-          Crear cuenta
-        </div>
+        <input id='submit' type='submit'
+          value='Crear cuenta'
+          className='waves-effect waves-light btn right cyan darken-1 right white-text'
+          disabled={!validForm()} />
       </div>
       <div className={`col s12 ${ props.isLoading ? '' : 'hide' }`}><HorizontalSpace size='small' /></div>
       <div className={`progress col s12 ${ props.isLoading ? '' : 'hide' }`}>

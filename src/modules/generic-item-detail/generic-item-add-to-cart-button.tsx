@@ -7,7 +7,7 @@ import {
   AddCartItem,
   DeleteCartItem
 } from 'src/modules/user-cart/user-cart-api-calls';
-import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
+import { TextWithIcon } from 'rrmc';
 import {
   UserCartAddItem,
   UserCartDeleteItem

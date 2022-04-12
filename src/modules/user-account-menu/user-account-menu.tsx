@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import StrongText from 'src/modules/strong-text/strong-text';
-import 'src/modules/user-account-menu/user-account-menu.scss';
+import { StrongText } from 'rrmc';
+import './user-account-menu.scss';
 import MenuItemsJSON from 'src/modules/user-account-menu/menu-items.json';
 import SellerMenuItemsJSON from 'src/modules/user-account-menu/seller-menu-items.json';
 

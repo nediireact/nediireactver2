@@ -1,15 +1,16 @@
 import React, {
   useState
 } from 'react';
-import Title from 'src/modules/title/title';
-import StandRatings from 'src/modules/stand-header/stand-ratings';
-import 'src/modules/stand-header/stand-header.scss';
 import { Link } from 'react-router-dom';
-import GenericItemAddToFavoritesButton from 'src/modules/favorite-button/favorite-button';
+import {
+  Title,
+  FavoriteButton
+} from 'rrmc';
+import './stand-header.scss';
+import StandRatings from 'src/modules/stand-header/stand-ratings';
 
 const StandHeader = (props: any): React.ReactElement => {
   const stand: any = props.stand;
-  if ( !stand ) return <></>;
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -32,12 +33,13 @@ const StandHeader = (props: any): React.ReactElement => {
               style={{backgroundImage: `url(${stand.attributes.img_logo})`}}>
             </Link>
             <div className='StandHeader__title-wrapper'>
-            <GenericItemAddToFavoritesButton
+            <FavoriteButton
               item={stand}
               isLoading={isLoading}
               setIsLoading={setIsLoading} />
             <Title
               link={`/empresa/${stand.attributes.slug}`}
+              Link={Link}
               color='white'
               text={stand.attributes.name}
               align='left'

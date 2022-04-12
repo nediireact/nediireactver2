@@ -3,8 +3,10 @@ import React, {
   useEffect
 } from 'react';
 import { useSelector } from 'react-redux';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import StrongText from 'src/modules/strong-text/strong-text';
+import {
+  HorizontalSpace,
+  StrongText
+} from 'rrmc';
 import APISDK from 'src/api/api-sdk/api-sdk';
 import MyStandItem from 'src/modules/my-stands/stand-item';
 import AddStandForm from 'src/modules/my-stands/add-stand-from';

@@ -8,9 +8,11 @@ import {
 } from 'react-router-dom';
 import fetchData from 'src/modules/utils/fetch-data';
 import GroupDetailContent from 'src/modules/group-detail/group-detail-content';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import {
+  HorizontalSpace,
+  SubTitle
+} from 'rrmc';
 import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
-import SubTitle from 'src/modules/sub-title/sub-title';
 import QRCode from 'qrcode.react'; // https://www.npmjs.com/package/qrcode.react
 import StandGrid from 'src/modules/stand-grid/stand-grid';
 

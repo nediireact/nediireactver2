@@ -45,3 +45,9 @@ $regular-border-radius: 8px;
 .IsLoadingOpacity {
   opacity: 0.5;
 }
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

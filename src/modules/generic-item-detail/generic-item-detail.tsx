@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import 'src/modules/generic-item-detail/generic-item-detail.scss';
-import Title from 'src/modules/title/title';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import './generic-item-detail.scss';
+import { Link } from 'react-router-dom';
+import {
+  Title,
+  HorizontalSpace,
+  StrongText,
+  CommonLargeText
+} from 'rrmc';
 import GenericHeaderDetail from 'src/modules/generic-item-detail/generic-header-detail';
 import GenericItemGallery from 'src/modules/generic-item-detail/generic-item-gallery';
-import CommonLargeText from 'src/modules/stand-detail/stand-common-large-text';
 import GenericItemPrice from 'src/modules/generic-item-detail/generic-item-price';
 import GenericItemDetailMealsAvailability from 'src/modules/generic-item-detail/generic-item-meal-availability';
 import StandMealsAddons from 'src/modules/stand-meals-detail/stand-meals-addons';
-import StrongText from 'src/modules/strong-text/strong-text';
 import { GetBuyableItemName } from 'src/modules/utils/products-services';
 import GenericItemDetailFeatures from 'src/modules/generic-item-detail/generic-item-detail-features';
 import VehicleAttributes from 'src/modules/vehicle-attributes/vehicle-attributes';
@@ -35,11 +38,11 @@ const GenericItemDetail = (props: any): React.ReactElement => {
       <div className='col s12 m8'>
         <div className='hide-on-med-and-up'>
           <HorizontalSpace size='x-small' />
-          <Title text={name} fullWidth={true}/>
+          <Title text={name} fullWidth={true} Link={Link} />
         </div>
         <GenericItemGallery item={item} />
         <div className='Description-movil hide-on-small-only'>
-          <CommonLargeText text={item.attributes.description} />
+          <CommonLargeText text={item.attributes.description} Link={Link} />
         </div>
       </div>
       <HorizontalSpace size='small' />
@@ -72,7 +75,7 @@ const GenericItemDetail = (props: any): React.ReactElement => {
       </div>
       <div className='hide-on-med-and-up col s12'>
         <HorizontalSpace size='x-small' />
-        <CommonLargeText text={props.item.attributes.description} />
+        <CommonLargeText text={props.item.attributes.description} Link={Link} />
         <HorizontalSpace size='small' />
       </div>
     </div>

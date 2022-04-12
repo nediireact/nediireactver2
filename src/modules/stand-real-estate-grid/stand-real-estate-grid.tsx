@@ -2,11 +2,13 @@ import React, {
   useEffect,
   useState
 } from 'react';
+import {
+  HorizontalSpace,
+  CheckFilter
+} from 'rrmc';
 import fetchData from 'src/modules/utils/fetch-data';
-import BuyableItem from 'src/modules/buyable-item/buyable-item';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import BuyableItemAdapter from 'src/adapters/buyable-item-adapter/buyable-item-adapter';
 import PriceRangeFilter from 'src/modules/price-range-filter/price-range-filter';
-import CheckFilter from 'src/modules/check-filter/check-filter';
 
 const urlValues: any = {};
 
@@ -94,7 +96,7 @@ const StandRealEstateGrid = (props: any): React.ReactElement => {
           {
             meals.map((i: any, index: number) => {
               return (
-                <BuyableItem
+                <BuyableItemAdapter
                   key={index}
                   item={i} />
               );
