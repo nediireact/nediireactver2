@@ -13,7 +13,6 @@ export const AddUserAddress = (address: any): Promise<any> => {
     if ( !user ) return rej(new Error('no user'));
     const data: any = {
       data: {
-        id: address.id,
         type: 'UserAddress',
         attributes: address,
         relationships: {

@@ -38,16 +38,18 @@ const HomeExpoGrid = (): React.ReactElement => {
           return (
             <Link
               to={`/expos/${i.attributes.slug}`}
-              className='HomeExpoGrid__item col s12 m6 l4' key={index}>
+              className='HomeExpoGrid__item col s6 l4' key={index}>
               <div
                 className='HomeExpoGrid__image'
                 style={{
                   backgroundImage: `url(${i.attributes.img_picture}`
                 }}>
               </div>
+              <div className='HomeExpoGrid__flex-filler'></div>
               <span className='HomeExpoGrid__name grey-text text-darken-4'>
                 {i.attributes.name}
               </span>
+              <div className='HomeExpoGrid__flex-filler'></div>
             </Link>
           );
         }) : null

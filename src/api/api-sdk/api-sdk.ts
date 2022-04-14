@@ -1,13 +1,16 @@
-import Login from 'src/api/api-sdk/login';
-import UpdateUser from 'src/api/api-sdk/update-user';
-import UpdateUserProfile from 'src/api/api-sdk/update-user-profile';
-import GetNediiPlans from 'src/api/api-sdk/get-nedii-plans';
-import UpgradeUserToSeller from 'src/api/api-sdk/upgrade-user-to-seller';
-import GetUserAddress from 'src/api/api-sdk/get-user-address';
-import AddUserAddress from 'src/api/api-sdk/add-user-address';
-import UpdateUserAddress from 'src/api/api-sdk/update-user-address';
-import DeleteUserAddress from 'src/api/api-sdk/delete-user-address';
-import GetUserStands from 'src/api/api-sdk/get-user-stands';
+import Login from './login';
+import UpdateUser from './update-user';
+import UpdateUserProfile from './update-user-profile';
+import GetNediiPlans from './get-nedii-plans';
+import UpgradeUserToSeller from './upgrade-user-to-seller';
+import GetUserAddress from './get-user-address';
+import AddUserAddress from './add-user-address';
+import UpdateUserAddress from './update-user-address';
+import DeleteUserAddress from './delete-user-address';
+import GetUserStands from './get-user-stands';
+import AddStand from './add-stand';
+import AddStandPhone from './add-stand-phone';
+import UpdateStand from './update-stand';
 
 const APISDK = {
   Login: Login,
@@ -19,7 +22,10 @@ const APISDK = {
   AddUserAddress: AddUserAddress,
   UpdateUserAddress: UpdateUserAddress,
   DeleteUserAddress: DeleteUserAddress,
-  GetUserStands: GetUserStands
+  GetUserStands: GetUserStands,
+  AddStand: AddStand,
+  UpdateStand: UpdateStand,
+  AddStandPhone: AddStandPhone
 };
 
 export default APISDK;

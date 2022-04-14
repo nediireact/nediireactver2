@@ -49,7 +49,6 @@ const MyStands = (): React.ReactElement => {
         }) : null
       }
       </div>
-      <HorizontalSpace size='small' />
       <AddStandForm
         isLoading={isLoading}
         setIsLoading={setIsLoading} />

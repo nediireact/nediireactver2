@@ -1,7 +1,11 @@
 import React, {
   useState
 } from 'react';
-import { HorizontalSpace } from 'rrmc';
+import {
+  SubTitle,
+  HorizontalSpace
+} from 'rrmc';
+import { Link } from 'react-router-dom';
 import SystemCheck from 'src/components/system-check/system-check';
 import NavBar from 'src/modules/nav-bar/nav-bar';
 import DefaultNavButtons from 'src/modules/nav-bar/default-nav-buttons';
@@ -14,7 +18,7 @@ import HomeExpoGrid from 'src/modules/home-expos-grid/home-expos-grid';
 import HomeStandsGrid from 'src/modules/home-stands-grid/home-stands-grid';
 import HomeRestaurantsGrid from 'src/modules/home-restaurants-grid/home-restaurants-grid';
 import HomeMealsGrid from 'src/modules/home-meals-grid/home-meals-grid';
-
+import NediiPlans from 'src/modules/nedii-plans/nedii-plans';
 
 const Home = (): React.ReactElement => {
   const [sectionMenu, setSectionMenu]: any = useState([]);
@@ -32,6 +36,11 @@ const Home = (): React.ReactElement => {
       <HomeStandsGrid />
       <HomeRestaurantsGrid />
       <HorizontalSpace size='large' />
+      <div className='container'>
+        <SubTitle text='Planes Nedii' fullWidth={true} Link={Link} />
+        <HorizontalSpace size='x-small' />
+        <NediiPlans />
+      </div>
       <Footer />
       <SystemConfigurationLoader home={true} />
       <SystemCheck />

@@ -5,27 +5,34 @@ import {
   StrongText,
   BasicIcon,
   GenericTextInput,
-  HorizontalSpace
+  HorizontalSpace,
+  MenuChoiceMenu
 } from 'rrmc';
 import APISDK from 'src/api/api-sdk/api-sdk';
 import './user-address.scss';
 
-const MenuOptionItem = (props: any): React.ReactElement => {
-  return (
-    <div className='UserAddress__address-type-item' onClick={() => {
-        props.setAddressType(props.value);
-      }}>
-      <i className={`material-icons hoverable white-text ${
-        props.addressType === props.value ? 'cyan' : 'grey lighten-1'
-      }`}>
-        {props.icon}
-      </i>
-      <span className={props.addressType === props.value ? 'cyan-text' : ''}>
-        {props.name}
-      </span>
-    </div>
-  );
-};
+const menuItems = [
+  {
+    name: 'Casa',
+    value: 'house',
+    icon: 'house'
+  },
+  {
+    name: 'Departamento',
+    value: 'apartment',
+    icon: 'location_city'
+  },
+  {
+    name: 'Trabajo',
+    value: 'work',
+    icon: 'work'
+  },
+  {
+    name: 'Buzon',
+    value: 'mail_box',
+    icon: 'markunread_mailbox'
+  }
+];
 
 const EditUserAddress = (props: any): React.ReactElement => {
   const item = props.item;
@@ -113,17 +120,12 @@ const EditUserAddress = (props: any): React.ReactElement => {
       <GenericTextInput id='deliveryInstructions' type='text' placeholder='Instrucciones de entrega'
         disabled={props.isLoading} value={deliveryInstructions} setValue={setDeliveryInstructions} />
       <div className='col s12'>
-        <p>Tipo de direccion</p>
-        <div className='UserAddress__address-type '>
-          <MenuOptionItem icon='house' value='house' name='Casa'
-            addressType={addressType} setAddressType={setAddressType} />
-          <MenuOptionItem icon='location_city' value='apartment' name='Departamento'
-            addressType={addressType} setAddressType={setAddressType} />
-          <MenuOptionItem icon='work' value='work' name='Trabajo'
-            addressType={addressType} setAddressType={setAddressType} />
-          <MenuOptionItem icon='markunread_mailbox' value='mail_box' name='Buzon'
-            addressType={addressType} setAddressType={setAddressType} />
-        </div>
+        <MenuChoiceMenu
+          title='Tipo de direccion'
+          color='cyan'
+          items={menuItems}
+          valueReference={addressType}
+          setValueReference={setAddressType} />
         <HorizontalSpace size='xx-small' />
       </div>
       <div className='input-field col s12'>
