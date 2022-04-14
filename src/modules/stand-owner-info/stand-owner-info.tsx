@@ -1,6 +1,6 @@
 import React from 'react';
-import 'src/modules/stand-owner-info/stand-owner-info.scss';
-import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
+import { TextWithIcon } from 'rrmc';
+import './stand-owner-info.scss';
 
 const StandOwnerInfo = (props: any): React.ReactElement => {
   const owner: any = props.owner;

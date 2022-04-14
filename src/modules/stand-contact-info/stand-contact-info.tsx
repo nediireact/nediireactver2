@@ -1,7 +1,9 @@
 import React from 'react';
-import 'src/modules/stand-contact-info/stand-contact-info.scss';
-import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
-import StrongText from 'src/modules/strong-text/strong-text';
+import {
+  TextWithIcon,
+  StrongText
+} from 'rrmc';
+import './stand-contact-info.scss';
 
 const StandContactInfo = (props: any): React.ReactElement => {
   const phones = props.phones;

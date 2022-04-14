@@ -3,13 +3,15 @@ import React, {
   useState
 } from 'react';
 import 'src/modules/my-stands/add-stand-form.scss';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import StrongText from 'src/modules/strong-text/strong-text';
-import GenericTextInput from 'src/modules/form-components/generic-text-input';
-import GenericImgInput from 'src/modules/form-components/generic-img-input';
-import GenericTextArea from 'src/modules/form-components/generic-text-area';
-import GenericCheckboxInput from 'src/modules/form-components/generic-checkbox-input';
-import MenuChoiceMenu from 'src/modules/multi-choice-menu/multi-choice-menu';
+import {
+  HorizontalSpace,
+  StrongText,
+  GenericTextInput,
+  GenericImgInput,
+  GenericTextArea,
+  GenericCheckboxInput,
+  MenuChoiceMenu
+} from 'rrmc';
 import NediiPlans from 'src/modules/nedii-plans/nedii-plans';
 
 const menuItems = [

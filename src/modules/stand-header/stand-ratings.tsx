@@ -4,11 +4,13 @@ import React, {
 import {
   useDispatch
 } from 'react-redux';
-import Ratings from 'src/modules/ratings/ratings';
-import Modal from 'src/modules/modal/modal';
 import {
   APIPost
 } from 'src/api/communicator';
+import {
+  Modal,
+  Ratings
+} from 'rrmc';
 import UpdateStandAverageRating from 'src/redux/actions/update-stand-average-rating';
 
 const StandRatings = (props: any): React.ReactElement => {

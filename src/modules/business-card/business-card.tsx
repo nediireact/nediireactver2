@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import 'src/modules/business-card/business-card.scss';
-import ContactBusiness from 'src/modules/business-card/contact-business';
+import './business-card.scss';
+import ContactBusiness from './contact-business';
 import {
   AboutUs,
   TheCompany,
   StarProducts
-} from 'src/modules/business-card/sections-pages';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+} from './sections-pages';
+import { HorizontalSpace } from 'rrmc';
 
 export const BusinessCardMenuItem = (props: any): React.ReactElement => {
   const select = props.select;

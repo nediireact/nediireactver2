@@ -2,9 +2,11 @@ import React, {
   useState
 } from 'react';
 import { Link } from 'react-router-dom';
-import Ratings from 'src/modules/ratings/ratings';
-import GenericItemAddToFavoritesButton from 'src/modules/favorite-button/favorite-button';
-import 'src/modules/stand-grid/stand-item-mini.scss';
+import {
+  FavoriteButton,
+  Ratings
+} from 'rrmc';
+import './stand-item-mini.scss';
 
 const StandItemMini = (props: any): React.ReactElement => {
   const stand: any = props.item;
@@ -27,7 +29,7 @@ const StandItemMini = (props: any): React.ReactElement => {
           !props.onlyRestaurants && props.item.attributes.restaurant ?
             <i className='material-icons white-text red StandItemMini__restaurant'>restaurant</i> : null
         }
-        <GenericItemAddToFavoritesButton
+        <FavoriteButton
           item={stand}
           isLoading={isLoading}
           setIsLoading={setIsLoading} />

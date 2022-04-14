@@ -1,10 +1,12 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import BuyableItem from 'src/modules/buyable-item/buyable-item';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import {
+  HorizontalSpace,
+  SubTitle
+} from 'rrmc';
+import BuyableItemAdapter from 'src/adapters/buyable-item-adapter/buyable-item-adapter';
 import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
-import SubTitle from 'src/modules/sub-title/sub-title';
 import ExpoItem from 'src/modules/expo-grid/expo-item';
 import GroupItem from 'src/modules/group-grid/group-item';
 import StandItem from 'src/modules/stand-grid/stand-item';
@@ -45,7 +47,7 @@ const SearchResults = (props: any): React.ReactElement => {
           {
             props.results.items.map((item: any, index: any ) => {
               return (
-                <BuyableItem
+                <BuyableItemAdapter
                   key={index}
                   item={item} />
               );

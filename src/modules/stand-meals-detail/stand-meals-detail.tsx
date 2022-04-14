@@ -4,7 +4,8 @@ import React, {
 } from 'react';
 import {
   useNavigate,
-  useParams } from 'react-router';
+  useParams
+} from 'react-router';
 import fetchData from 'src/modules/utils/fetch-data';
 import GenericItemDetail from 'src/modules/generic-item-detail/generic-item-detail';
 

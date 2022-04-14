@@ -1,7 +1,7 @@
+import { RebuildData } from 'rrmc';
 import { APIGet } from 'src/api/communicator';
 import store from 'src/redux/store';
 import { SetUserData } from 'src/redux/actions/user-actions';
-import rebuildData from 'src/modules/utils/json-api-rebuild';
 
 export const GetUserStands = (): Promise<any> => {
   return new Promise((res, rej) => {
@@ -14,7 +14,7 @@ export const GetUserStands = (): Promise<any> => {
     const url = `stands/?filter[owner]=${user.id}&page[number]=1&page[size]=6&fields[Stand]=${fields}`;
     APIGet(url, true)
       .then((response: any) => {
-        const data = rebuildData(response).data;
+        const data = RebuildData(response).data;
         store.dispatch(SetUserData({
           userStands: data
         }));

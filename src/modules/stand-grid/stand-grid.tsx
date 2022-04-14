@@ -1,5 +1,5 @@
 import React from 'react';
-import StandItem from 'src/modules/stand-grid/stand-item';
+import StandItem from './stand-item';
 
 const StandGrid = ( props: any ): React.ReactElement => {
   return (

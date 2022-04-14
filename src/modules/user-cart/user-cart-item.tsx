@@ -4,14 +4,16 @@ import {
   useSelector
 } from 'react-redux';
 import { Link } from 'react-router-dom';
-import 'src/modules/user-cart/user-cart-item.scss';
-import getMoneyFormat from 'src/modules/utils/money-formats';
-import { ProductTypeConverter } from 'src/modules/utils/products-services';
-import StrongText from 'src/modules/strong-text/strong-text';
+import {
+  GetMoneyFormat,
+  StrongText
+} from 'rrmc';
+import './user-cart-item.scss';
 import {
   DeleteCartItem,
   UpdateCartItem
-} from 'src/modules/user-cart/user-cart-api-calls';
+} from './user-cart-api-calls';
+import { ProductTypeConverter } from 'src/modules/utils/products-services';
 import {
   UserCartDeleteItem,
   UserCartUpdateItem
@@ -83,12 +85,12 @@ const UserCartItem = (props: any): React.ReactElement => {
             {item.attributes.short_description}
           </span>
           <Link to={url} className='green-text text-darken-3 left UserCartItem__price'>
-            {getMoneyFormat(item.attributes.final_price)}
+            {GetMoneyFormat(item.attributes.final_price)}
           </Link>
           {
             item.attributes.discount ?
               <span className='red-text text-lighten-2 UserCartItem__discount'>
-                {getMoneyFormat(item.attributes.price)}
+                {GetMoneyFormat(item.attributes.price)}
               </span> : null
           }
         </div>

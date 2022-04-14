@@ -6,14 +6,16 @@ import {
   Swiper,
   SwiperSlide
 } from 'swiper/react';
-import 'src/modules/home-restaurants-grid/home-restaurants-grid.scss';
 import { useSelector } from 'react-redux';
 import fetchData from 'src/modules/utils/fetch-data';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import SubTitle from 'src/modules/sub-title/sub-title';
-import Ratings from 'src/modules/ratings/ratings';
-import BuyableItem from 'src/modules/buyable-item/buyable-item';
+import {
+  HorizontalSpace,
+  SubTitle,
+  Ratings
+} from 'rrmc';
 import { Link } from 'react-router-dom';
+import './home-restaurants-grid.scss';
+import BuyableItemAdapter from 'src/adapters/buyable-item-adapter/buyable-item-adapter';
 
 const sliderNextButtonFile = '/assets/slider-button-2-next.svg';
 const sliderPrevButtonFile = '/assets/slider-button-2-prev.svg';
@@ -90,10 +92,10 @@ const StandItem = (props: any): React.ReactElement => {
                 item.relationships.highlighted_meals.data.map((i: any, index: number) => {
                   return (
                     <div key={index} className='col s6'>
-                      <BuyableItem
+                      <BuyableItemAdapter
                         item={i}
                         fullWidth={true}
-                        standSlug={item.attributes.slug}
+                        parentSlug={item.attributes.slug}
                         mini={true} />
                     </div>
                   );

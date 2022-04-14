@@ -6,11 +6,11 @@ import {
   useSelector,
   useDispatch
 } from 'react-redux';
-import SystemCheck from 'src/modules/system-check/system-check';
+import { HorizontalSpace } from 'rrmc';
+import SystemCheck from 'src/components/system-check/system-check';
 import NavBar from 'src/modules/nav-bar/nav-bar';
 import DefaultNavButtons from 'src/modules/nav-bar/default-nav-buttons';
-import Footer from 'src/modules/footer/footer';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import Footer from 'src/components/footer/footer';
 import SetGlobalAlertDialog from 'src/redux/actions/set-global-alert-dialog';
 import UserAccountMenu from 'src/modules/user-account-menu/user-account-menu';
 import UserDashboard from 'src/modules/user-dashboard/user-dashboard';
@@ -40,7 +40,7 @@ const UserAccountPage = (): React.ReactElement => {
     <>
     {
       !user || !user.id ?
-      <>
+      <div className='page'>
         <NavBar sectionMenu={sectionMenu} />
         <DefaultNavButtons setSectionMenu={setSectionMenu} />
         <HorizontalSpace size='medium' />
@@ -48,8 +48,8 @@ const UserAccountPage = (): React.ReactElement => {
         <HorizontalSpace size='medium' />
         <Footer />
         <SystemCheck />
-      </> :
-      <>
+      </div> :
+      <div className='page'>
         <NavBar sectionMenu={sectionMenu} />
         <DefaultNavButtons setSectionMenu={setSectionMenu} />
         <HorizontalSpace size='medium' />
@@ -65,7 +65,7 @@ const UserAccountPage = (): React.ReactElement => {
         </div>
         <Footer />
         <SystemCheck />
-      </>
+      </div>
     }
     </>
   );

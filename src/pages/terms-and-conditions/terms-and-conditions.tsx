@@ -1,18 +1,18 @@
 import React, {
   useState
 } from 'react';
-import SystemCheck from 'src/modules/system-check/system-check';
+import SystemCheck from 'src/components/system-check/system-check';
 import NavBar from 'src/modules/nav-bar/nav-bar';
 import DefaultNavButtons from 'src/modules/nav-bar/default-nav-buttons';
-import Footer from 'src/modules/footer/footer';
-import CommonDocument from 'src/modules/common-document/common-document';
-import SystemConfigurationLoader from 'src/modules/system-configuration-loader/system-configuration-loader';
+import Footer from 'src/components/footer/footer';
+import { CommonDocument } from 'rrmc';
+import SystemConfigurationLoader from 'src/components/system-configuration-loader/system-configuration-loader';
 
 export const TermsAndConditions = (): React.ReactElement => {
   const [sectionMenu, setSectionMenu]: any = useState([]);
 
   return (
-    <>
+    <div className='page'>
       <NavBar sectionMenu={sectionMenu} />
       <DefaultNavButtons setSectionMenu={setSectionMenu} />
       <CommonDocument
@@ -21,7 +21,7 @@ export const TermsAndConditions = (): React.ReactElement => {
       <Footer />
       <SystemConfigurationLoader terms_and_conditions={true} />
       <SystemCheck />
-    </>
+    </div>
   );
 };
 

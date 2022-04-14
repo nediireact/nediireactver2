@@ -3,16 +3,18 @@
 import React, {
   useState
 } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 // import EnvironmentVariables from 'src/constants/EnvironmentVariables';
 // import FacebookLogin from 'react-facebook-login'; // https://www.npmjs.com/package/react-facebook-login
 import RegisterUserAPICall from 'src/modules/register-user/register-user-api-calls';
 import { APIGet } from 'src/api/communicator';
-import SubTitle from 'src/modules/sub-title/sub-title';
-import Modal from 'src/modules/modal/modal';
-import { ArrayErrorsToHTMLList } from 'src/modules/utils/date-parser';
+import {
+  SubTitle,
+  ArrayErrorsToHTMLList,
+  Modal
+} from 'rrmc';
 import { SetUserData } from 'src/redux/actions/user-actions';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 // const env = EnvironmentVariables.getInstance();
 // const facebookAppID = env.facebookAppID;

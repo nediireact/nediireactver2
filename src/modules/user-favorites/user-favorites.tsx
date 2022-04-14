@@ -2,10 +2,12 @@ import React, {
   useEffect
 } from 'react';
 import { useSelector } from 'react-redux';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import {
+  HorizontalSpace,
+  SubTitle
+} from 'rrmc';
 import CardHolder from 'src/modules/card-holder/card-holder';
-import BuyableItem from 'src/modules/buyable-item/buyable-item';
-import SubTitle from 'src/modules/sub-title/sub-title';
+import BuyableItemAdapter from 'src/adapters/buyable-item-adapter/buyable-item-adapter';
 import LoadUserFavoriteStands from 'src/modules/user-favorites/load-user-favorite-stands';
 import LoadUserFavoriteItems from 'src/modules/user-favorites/load-user-favorite-items';
 
@@ -38,7 +40,7 @@ const UserFavorites = (): React.ReactElement => {
                     <CardHolder
                       key={index}
                       cols='col s6 m3'
-                      stand={i.relationships.stand.data}/>
+                      stand={i.relationships.stand.data} />
                   );
                 })
               }
@@ -64,7 +66,7 @@ const UserFavorites = (): React.ReactElement => {
                     i.relationships.vehicle.data ? i.relationships.vehicle.data : null;
                   return (
                     <div key={index} className='col s6 m4'>
-                      <BuyableItem
+                      <BuyableItemAdapter
                         item={item}
                         fullWidth={true}
                         mini={true} />

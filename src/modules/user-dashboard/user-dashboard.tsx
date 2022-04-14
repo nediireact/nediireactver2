@@ -3,9 +3,11 @@ import React, {
 } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import StrongText from 'src/modules/strong-text/strong-text';
-import 'src/modules/user-dashboard/user-dashboard.scss';
+import {
+  HorizontalSpace,
+  StrongText
+} from 'rrmc';
+import './user-dashboard.scss';
 
 const UserDashboardItemCard = (props: any): React.ReactElement => {
   return (

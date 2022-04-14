@@ -1,5 +1,5 @@
 import React from 'react';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import { HorizontalSpace } from 'rrmc';
 import GenericMiniSlider from 'src/modules/generic-mini-slider/generic-mini-slider';
 import 'src/modules/home-products-and-services/home-products-and-services.scss';
 import LoadUserFavoriteItems from 'src/modules/user-favorites/load-user-favorite-items';
@@ -26,6 +26,7 @@ const HomeProductAndServices = (): React.ReactElement => {
         <div className='row'>
           <GenericMiniSlider
             title='Lo mas vendidos'
+            cacheKey='homeBestSeller'
             urls={[
               `${productsURL}${standURL}${bestSeller}`,
               `${servicesURL}${standURL}${bestSeller}`,
@@ -35,6 +36,7 @@ const HomeProductAndServices = (): React.ReactElement => {
             ]} />
           <GenericMiniSlider
             title='Articulos del mes'
+            cacheKey='homeMonthDeals'
             urls={[
               `${productsURL}${standURL}${newItems}`,
               `${servicesURL}${standURL}${newItems}`,
@@ -44,6 +46,7 @@ const HomeProductAndServices = (): React.ReactElement => {
             ]} />
           <GenericMiniSlider
             title='Con descuento'
+            cacheKey='homeDeals'
             urls={[
               `${productsURL}${standURL}${discounts}`,
               `${servicesURL}${standURL}${discounts}`,

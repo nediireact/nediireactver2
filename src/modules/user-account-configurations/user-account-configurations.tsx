@@ -3,14 +3,16 @@ import React, {
   useEffect
 } from 'react';
 import { useSelector } from 'react-redux';
-import 'src/modules/user-account-configurations/user-account-configurations.scss';
-import GenericTextInput from 'src/modules/form-components/generic-text-input';
-import GenericCheckboxInput from 'src/modules/form-components/generic-checkbox-input';
-import GenericTextArea from 'src/modules/form-components/generic-text-area';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import {
+  GenericTextInput,
+  GenericCheckboxInput,
+  GenericTextArea,
+  HorizontalSpace,
+  StrongText
+} from 'rrmc';
+import './user-account-configurations.scss';
 import APISDK from 'src/api/api-sdk/api-sdk';
 import NediiPlans from 'src/modules/nedii-plans/nedii-plans';
-import StrongText from 'src/modules/strong-text/strong-text';
 
 const AccountForm = (props: any): React.ReactElement => {
   const userData = useSelector((state: any) => state.user);

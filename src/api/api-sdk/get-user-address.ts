@@ -1,7 +1,7 @@
+import { RebuildData } from 'rrmc';
 import { APIGet } from 'src/api/communicator';
 import store from 'src/redux/store';
 import { SetUserData } from 'src/redux/actions/user-actions';
-import rebuildData from 'src/modules/utils/json-api-rebuild';
 
 export const GetUserAddress = (): Promise<any> => {
   return new Promise((res, rej) => {
@@ -13,7 +13,7 @@ export const GetUserAddress = (): Promise<any> => {
     const url = `user-address/?filter[user]=${user.id}&include=city,city.state`;
     APIGet(url, true)
       .then((response: any) => {
-        const data = rebuildData(response).data;
+        const data = RebuildData(response).data;
         store.dispatch(SetUserData({
           userAddress: data
         }));

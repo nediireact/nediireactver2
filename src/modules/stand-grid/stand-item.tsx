@@ -2,11 +2,13 @@ import React, {
   useState
 } from 'react';
 import { Link } from 'react-router-dom';
-import StrongText from 'src/modules/strong-text/strong-text';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import Ratings from 'src/modules/ratings/ratings';
-import 'src/modules/stand-grid/stand-grid.scss';
-import GenericItemAddToFavoritesButton from 'src/modules/favorite-button/favorite-button';
+import {
+  StrongText,
+  HorizontalSpace,
+  FavoriteButton,
+  Ratings
+} from 'rrmc';
+import './stand-grid.scss';
 
 const StandItem = (props: any): React.ReactElement => {
   const stand: any = props.item;
@@ -29,7 +31,7 @@ const StandItem = (props: any): React.ReactElement => {
           stand.attributes.restaurant ?
             <i className='material-icons white-text red StandItem__restaurant'>restaurant</i> : null
         }
-        <GenericItemAddToFavoritesButton
+        <FavoriteButton
           item={stand}
           isLoading={isLoading}
           setIsLoading={setIsLoading} />

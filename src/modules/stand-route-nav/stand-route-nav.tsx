@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import 'src/modules/stand-route-nav/stand-route-nav.scss';
+import { HorizontalSpace } from 'rrmc';
+import './stand-route-nav.scss';
 
 interface ParsedURLType {
   slug: string;
@@ -18,7 +18,9 @@ interface ParsedURLType {
 const formatString = ( str: string ): string => {
   const cleanStr = str.replaceAll('-', ' ');
   const array = cleanStr.split('');
-  array[0] = array[0].toUpperCase();
+  if ( array.length ) {
+    array[0] = array[0].toUpperCase();
+  }
   return array.join('');
 };
 

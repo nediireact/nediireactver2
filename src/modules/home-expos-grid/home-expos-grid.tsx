@@ -1,20 +1,30 @@
 import React, {
-  useEffect,
-  useState
+  useEffect
 } from 'react';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import 'src/modules/home-expos-grid/home-expos-grid.scss';
+import {
+  HorizontalSpace,
+  SubTitle
+} from 'rrmc';
+import './home-expos-grid.scss';
 import fetchData from 'src/modules/utils/fetch-data';
-import SubTitle from 'src/modules/sub-title/sub-title';
 import { Link } from 'react-router-dom';
+import {
+  useDispatch,
+  useSelector
+} from 'react-redux';
+import SetSystemData from 'src/redux/actions/set-system-data';
 
 const HomeExpoGrid = (): React.ReactElement => {
-  const [items, setitems]: any = useState([]);
+  const dispatch = useDispatch();
+  const system: any = useSelector((state: any) => state.system);
+  const items = system && system.homeExpos ? system.homeExpos : [];
 
   useEffect(() => {
     fetchData('expos/?page[number]=1&page[size]=6&fields[Expo]=name,slug,img_picture')
       .then((response: any) =>{
-        setitems(response.data);
+        dispatch(SetSystemData({
+          homeExpos: response.data
+        }));
       });
   }, [fetchData]);
 

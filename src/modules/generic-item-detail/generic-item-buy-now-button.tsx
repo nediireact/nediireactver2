@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import TextWithIcon from 'src/modules/text-with-icon/text-with-icon';
+import { TextWithIcon } from 'rrmc';
 import { GetBuyableItemName } from 'src/modules/utils/products-services';
 
 const GenericItemBuyNowButton = (props: any): React.ReactElement => {

@@ -1,10 +1,12 @@
 import React from 'react';
-import StrongText from 'src/modules/strong-text/strong-text';
-import BasicText from 'src/modules/basic-text/basic-text';
-import SubTitle from 'src/modules/sub-title/sub-title';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import {
+  StrongText,
+  BasicText,
+  SubTitle,
+  HorizontalSpace
+} from 'rrmc';
 import StandDetailGallery from 'src/modules/stand-detail-gallery/stand-detail-gallery';
-import BuyableItem from 'src/modules/buyable-item/buyable-item';
+import BuyableItemAdapter from 'src/adapters/buyable-item-adapter/buyable-item-adapter';
 
 export const AboutUs = (props: any): React.ReactElement => {
   const stand = props.stand;
@@ -52,17 +54,20 @@ export const TheCompany = (props: any): React.ReactElement => {
 };
 
 export const StarProductItem = (props: any): React.ReactElement => {
-  const stand = props.stand;
+  const items = props.items;
+  const parentSlug = props.standSlug;
+
   return (
     <>
       {
-        stand.data.map((i: any, index: number) => {
+        items.map((i: any, index: number) => {
           return (
             <div className='col s6 m4 l3' key={index}>
-              <BuyableItem
-              fullWidth={true}
-              mini={true}
-              item={i} />
+              <BuyableItemAdapter
+                fullWidth={true}
+                mini={true}
+                item={i}
+                parentSlug={parentSlug} />
             </div>
           );
         })
@@ -75,11 +80,21 @@ export const StarProducts = (props: any): React.ReactElement => {
   const stand = props.stand;
   return (
     <div>
-      <StarProductItem stand={stand.relationships.highlighted_products} />
-      <StarProductItem stand={stand.relationships.highlighted_meals} />
-      <StarProductItem stand={stand.relationships.highlighted_services} />
-      <StarProductItem stand={stand.relationships.highlighted_real_estates} />
-      <StarProductItem stand={stand.relationships.highlighted_vehicles} />
+      <StarProductItem
+        items={stand.relationships.highlighted_products.data}
+        standSlug={stand.attributes.slug} />
+      <StarProductItem
+        items={stand.relationships.highlighted_meals.data}
+        standSlug={stand.attributes.slug} />
+      <StarProductItem
+        items={stand.relationships.highlighted_services.data}
+        standSlug={stand.attributes.slug} />
+      <StarProductItem
+        items={stand.relationships.highlighted_real_estates.data}
+        standSlug={stand.attributes.slug} />
+      <StarProductItem
+        items={stand.relationships.highlighted_vehicles.data}
+        standSlug={stand.attributes.slug} />
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import React, {
   useRef
 } from 'react';
-import 'src/modules/price-range-filter/price-range-filter.scss';
-import getMoneyFormat from 'src/modules/utils/money-formats';
+import './price-range-filter.scss';
+import { GetMoneyFormat } from 'rrmc';
 
 interface UpdateInterface {
   value: number;
@@ -46,7 +46,7 @@ const PriceRangeFilter = (props: any): React.ReactElement => {
         <div className='input-field'>
           <input id='maxPrice' name='minPrice' type='number' className='validate'
             ref={maxPrice} min='0' max={props.maxPrice}
-            placeholder={`Max ${getMoneyFormat(props.maxPrice)}`}
+            placeholder={`Max ${GetMoneyFormat(props.maxPrice)}`}
             onChange={( e: any ) => updateAddOnFilter({
               value: Number(e.target.value),
               type: 'max'

@@ -1,7 +1,9 @@
 import React from 'react';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import {
+  HorizontalSpace,
+  StrongText
+} from 'rrmc';
 import { Link } from 'react-router-dom';
-import StrongText from 'src/modules/strong-text/strong-text';
 
 const GroupItem = (props: any): React.ReactElement => {
   const color = props.item.attributes.color;

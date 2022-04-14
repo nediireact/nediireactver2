@@ -1,5 +1,5 @@
 import React from 'react';
-import StrongText from 'src/modules/strong-text/strong-text';
+import { StrongText } from 'rrmc';
 
 const StandMealsAddons = (props: any): React.ReactElement => {
   const item = props.item;

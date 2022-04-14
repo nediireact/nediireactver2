@@ -6,12 +6,18 @@ import {
   Swiper,
   SwiperSlide
 } from 'swiper/react';
-import { useSelector } from 'react-redux';
+import {
+  useDispatch,
+  useSelector
+} from 'react-redux';
 import 'src/modules/home-category-slider/home-category-slider.scss';
 import fetchData from 'src/modules/utils/fetch-data';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
+import {
+  HorizontalSpace,
+  SubTitle
+} from 'rrmc';
+import SetSystemData from 'src/redux/actions/set-system-data';
 import GroupItem from 'src/modules/group-grid/group-item';
-import SubTitle from 'src/modules/sub-title/sub-title';
 
 const sliderNextButtonFile = '/assets/slider-button-next.svg';
 const sliderPrevButtonFile = '/assets/slider-button-prev.svg';
@@ -43,13 +49,17 @@ const SlideAddons = ( props: any ): React.ReactElement => {
 };
 
 const HomeCategorySlider = (): React.ReactElement => {
+  const dispatch = useDispatch();
   const [swiperReference, setSwiperReference]: any = useState(null);
-  const [items, setitems]: any = useState([]);
+  const system: any = useSelector((state: any) => state.system);
+  const items = system && system.categories ? system.categories : [];
 
   useEffect(() => {
     fetchData('groups/?fields[Group]=name,img_picture,slug')
       .then((response: any) =>{
-        setitems(response);
+        dispatch(SetSystemData({
+          categories: response.data
+        }));
       });
   }, [fetchData]);
 
@@ -60,7 +70,7 @@ const HomeCategorySlider = (): React.ReactElement => {
   return (
     <div className='container'>
     {
-      items && items.data && items.data.length ?
+      items && items.length ?
         <div className='HomeCategorySlider'>
           <HorizontalSpace size='medium' />
           <SubTitle text='Categorías' />
@@ -86,7 +96,7 @@ const HomeCategorySlider = (): React.ReactElement => {
             }}
           >
             {
-              items.data.map((item: any, index: any ) => {
+              items.map((item: any, index: any ) => {
                 if ( !item.attributes ) return null;
                 return (
                   <SwiperSlide

@@ -1,6 +1,8 @@
 @import 'materialize-css';
 
 .HomeRestaurantsGrid {
+  width: 100%;
+
   .swiper-pagination-bullets {
     bottom: 25px !important;
   }

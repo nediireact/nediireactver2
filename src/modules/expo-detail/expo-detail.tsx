@@ -10,14 +10,16 @@ import {
   useSelector,
   useDispatch
 } from 'react-redux';
-import fetchData from 'src/modules/utils/fetch-data';
-import 'src/modules/expo-detail/expo-detail.scss';
-import ExpoDetailContent from 'src/modules/expo-detail/expo-detail-content';
-import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
-import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
-import SubTitle from 'src/modules/sub-title/sub-title';
-import GroupGrid from 'src/modules/group-grid/group-grid';
+import {
+  HorizontalSpace,
+  SubTitle
+} from 'rrmc';
 import QRCode from 'qrcode.react'; // https://www.npmjs.com/package/qrcode.react
+import './expo-detail.scss';
+import ExpoDetailContent from './expo-detail-content';
+import fetchData from 'src/modules/utils/fetch-data';
+import ParallaxHeaderImage from 'src/modules/parallax-header-image/parallax-header-image';
+import GroupGrid from 'src/modules/group-grid/group-grid';
 import SetExpoData from 'src/redux/actions/set-expo-data';
 
 const QRodeComponent = (): React.ReactElement => {

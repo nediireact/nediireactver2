@@ -1,8 +1,11 @@
 import React from 'react';
-import SimpleAttribute from 'src/modules/simple-attribute/simple-attribute';
-import Title from 'src/modules/title/title';
+import { Link } from 'react-router-dom';
+import {
+  SimpleAttribute,
+  Title,
+  FavoriteButton
+} from 'rrmc';
 import { GetBuyableItemName } from 'src/modules/utils/products-services';
-import GenericItemAddToFavoritesButton from 'src/modules/favorite-button/favorite-button';
 
 const GenericHeaderDetail = (props: any): React.ReactElement => {
   const item = props.item;
@@ -11,7 +14,7 @@ const GenericHeaderDetail = (props: any): React.ReactElement => {
 
   return (
     <div className='GenericItemDetail__header'>
-      <GenericItemAddToFavoritesButton
+      <FavoriteButton
         item={item}
         isLoading={props.isLoading}
         setIsLoading={props.setIsLoading} />
@@ -29,7 +32,7 @@ const GenericHeaderDetail = (props: any): React.ReactElement => {
             attribute={item.relationships.classification.data.attributes.name}
             size='small'/> : null
       }
-      <Title text={name} fullWidth={true}/>
+      <Title text={name} fullWidth={true} Link={Link} />
     </div>
   );
 };
