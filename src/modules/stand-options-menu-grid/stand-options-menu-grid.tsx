@@ -27,6 +27,7 @@ const StandOptionMenuGrid = (props: StandOptionMenuGridInterface): React.ReactEl
                 to={`/empresa/${props.standSlug}/${i.href}`}
                 className='col s6 m4 StandOptionMenuGrid__items' >
                 <i className={`material-icons z-depth-3 white-text ${i.color}`}>{i.icon}</i>
+      <HorizontalSpace size='xx-small' />
                 <StrongText text={i.text} fullWidth={true} />
               </Link>
             );

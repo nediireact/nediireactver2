@@ -1,12 +1,33 @@
 import React, { useState } from 'react';
 import './business-card.scss';
+import {
+  HorizontalSpace,
+  MenuChoiceMenu
+} from 'rrmc';
 import ContactBusiness from './contact-business';
 import {
   AboutUs,
   TheCompany,
   StarProducts
 } from './sections-pages';
-import { HorizontalSpace } from 'rrmc';
+
+const menuItems = [
+  {
+    name: 'Nosotros',
+    value: 'nosotros',
+    icon: 'supervisor_account'
+  },
+  {
+    name: 'La Empresa',
+    value: 'empresa',
+    icon: 'store'
+  },
+  {
+    name: 'Productos estrella',
+    value: 'productos',
+    icon: 'star'
+  }
+];
 
 export const BusinessCardMenuItem = (props: any): React.ReactElement => {
   const select = props.select;
@@ -27,35 +48,13 @@ const BusinessCard = (props: any): React.ReactElement => {
   return (
     <div>
       <div className='container BusinessCard'>
-        <div className='row BusinessCard__section grey-text'>
-          <div className='col s12 m4' onClick={() => {
-            setSelected('nosotros');
-              }}>
-                <BusinessCardMenuItem
-                  text='Nosotros'
-                  icon='supervisor_account'
-                  select={select}
-                  option='nosotros' />
-          </div>
-          <div className='col s12 m4' onClick={() => {
-            setSelected('empresa');
-              }}>
-                <BusinessCardMenuItem
-                text='La Empresa'
-                icon='store'
-                select={select}
-                option='empresa' />
-          </div>
-          <div className='col s12 m4' onClick={() => {
-            setSelected('productos');
-              }}>
-                <BusinessCardMenuItem
-                  text='Productos estrella'
-                  icon='star'
-                  select={select}
-                  option='productos' />
-          </div>
-        </div>
+        <HorizontalSpace size='small' />
+        <MenuChoiceMenu
+          color='cyan'
+          items={menuItems}
+          valueReference={select}
+          setValueReference={setSelected} />
+        <HorizontalSpace size='small' />
         <ContactBusiness stand={stand}/>
         <HorizontalSpace size='small' />
       </div>

@@ -18,7 +18,7 @@ export const AboutUs = (props: any): React.ReactElement => {
           <SubTitle text={`${stand.relationships.owner.data.attributes.first_name} ${stand.relationships.owner.data.attributes.last_name}`} /> : null
         }
         <StrongText text={stand.attributes.short_description} />
-        <BasicText text={stand.attributes.about} />
+        <BasicText text={stand.attributes.description} />
       </div>
       <div className='col s12 m6'>
         {

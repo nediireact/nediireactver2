@@ -1,8 +1,10 @@
 import React, {
-  useEffect,
-  useState
+  useEffect
 } from 'react';
-import { useSelector } from 'react-redux';
+import {
+  useDispatch,
+  useSelector
+} from 'react-redux';
 import './nedii-plans.scss';
 import {
   StrongText,
@@ -10,14 +12,18 @@ import {
   GetMoneyFormat,
   HorizontalSpace
 } from 'rrmc';
+import { Link } from 'react-router-dom';
 import APISDK from 'src/api/api-sdk/api-sdk';
 import { NediiPlanExposure } from 'src/modules/utils/nedii-plans';
+import SetSystemData from 'src/redux/actions/set-system-data';
 
 const NediiPlanBillableItem = (props: any): React.ReactElement => {
   const item = props.item;
 
   return (
-    <div className='col s12 m6 xl4 NediiPlan__item'>
+    <div className={`col s12 m6 xl4 NediiPlan__item ${
+      props.plan && item.id !== props.plan ? 'NediiPlan__item--faded' : ''
+    }`}>
       <div className='GenericCard'>
         <div className='NediiPlan__item-header-wrapper'>
           <StrongText
@@ -59,7 +65,25 @@ const NediiPlanBillableItem = (props: any): React.ReactElement => {
             MXN {GetMoneyFormat(item.attributes.price)} {item.attributes.billed_monthly ? 'mensuales' : 'anuales'}
           </span>
           <div className='NediiPlan__item-button'>
-            <a className='waves-effect waves-light btn cyan'>Obtener</a>
+          {
+            props.link ?
+              <Link
+                to={props.link}
+                className='btn cyan'>
+                {
+                  item.id === props.plan ? 'Seleccionado' : 'Obtener'
+                }
+              </Link> :
+              <a
+                className='btn cyan'
+                onClick={() => {
+                  props.setValue(item.id);
+                }}>
+                {
+                  item.id === props.plan ? 'Seleccionado' : 'Obtener'
+                }
+              </a>
+          }
           </div>
         </div>
       </div>
@@ -74,7 +98,9 @@ const NediiPlanFreeItem = (props: any): React.ReactElement => {
   const item = props.item;
 
   return (
-    <div className='NediiPlan__free-item'
+    <div className={`NediiPlan__free-item ${
+      props.plan && item.id !== props.plan ? 'NediiPlan__free-item--faded' : ''
+    }`}
       style={{
         backgroundImage: `url(${headerPictureURL})`
       }}>
@@ -85,18 +111,52 @@ const NediiPlanFreeItem = (props: any): React.ReactElement => {
         Publica hasta {item.attributes.number_of_items} anuncios
       </span>
       <div className='NediiPlan__free-item-button'>
-        <a className='waves-effect waves-light btn cyan'>Obtener</a>
+      {
+        props.link ?
+          <Link
+            to={props.link}
+            className='btn cyan'>
+            {
+              item.id === props.plan ? 'Seleccionado' : 'Obtener'
+            }
+          </Link> :
+          <a
+            className='btn cyan'
+            onClick={() => {
+              props.setValue(item.id);
+            }}>
+            {
+              item.id === props.plan ? 'Seleccionado' : 'Obtener'
+            }
+          </a>
+      }
       </div>
     </div>
   );
 };
 
-const NediiPlans = (): React.ReactElement => {
-  const [plans, setPlans] = useState([]);
+interface NediiPlansInterface {
+  setValue?: CallableFunction;
+  plan?: number;
+}
+
+const NediiPlans = (props: NediiPlansInterface): React.ReactElement => {
+  const dispatch = useDispatch();
+  const system = useSelector((state: any) => state.system);
+  const plans = system && system.nediiPlans ? system.nediiPlans : [];
+  // const [plans, setPlans] = useState([]);
+  const userData = useSelector((state: any) => state.user);
+  const user = userData && userData.user && userData.user.id ? userData.user : null;
+  const link = !props.setValue ?
+    user ? '/mi-cuenta/empresas' : '/create-account' :
+    null;
+
   useEffect(() => {
     APISDK.GetNediiPlans()
       .then((data: any) => {
-        setPlans(data);
+        dispatch(SetSystemData({
+          nediiPlans: data
+        }));
       })
       .catch((error: any) => {
         console.log(error);
@@ -111,7 +171,12 @@ const NediiPlans = (): React.ReactElement => {
       {
         plans.map((i: any, index: number) => {
           if ( i && i.id && i.attributes.price === '0.00' ) {
-            return <NediiPlanFreeItem item={i} key={index} />;
+            return <NediiPlanFreeItem
+                      item={i}
+                      key={index}
+                      setValue={props.setValue}
+                      plan={props.plan}
+                      link={link} />;
           }
         })
       }
@@ -123,7 +188,12 @@ const NediiPlans = (): React.ReactElement => {
       {
         plans.map((i: any, index: number) => {
           if ( i && i.id && i.attributes.price !== '0.00' ) {
-            return <NediiPlanBillableItem item={i} key={index} />;
+            return <NediiPlanBillableItem
+                      item={i}
+                      key={index}
+                      setValue={props.setValue}
+                      plan={props.plan}
+                      link={link} />;
           }
         })
       }

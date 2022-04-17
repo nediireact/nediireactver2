@@ -68,7 +68,6 @@ const HomeMealsGrid = (): React.ReactElement => {
             results.push(j);
           });
         });
-        console.log('results', results);
         dispatch(SetSystemData({
           homeMealsGridItems: results
         }));

@@ -10,6 +10,10 @@
 
   &__item {
     margin-bottom: 25px;
+
+    &--faded {
+      opacity: 0.4;
+    }
   }
 
   .GenericCard {
@@ -45,6 +49,10 @@
     height: 130px;
     border-radius: 130px;
     margin: 10px;
+
+    &--faded {
+      opacity: 0.4;
+    }
   }
 
   &__free-item-name {
@@ -94,7 +102,7 @@
 @media screen and (min-width: 993px) {
   .NediiPlan {
     .GenericCard {
-      height: 320px;
+      height: 340px;
       padding-bottom: 15px;
     }
 
