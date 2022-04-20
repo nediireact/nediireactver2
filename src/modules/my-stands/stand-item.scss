@@ -4,9 +4,12 @@
 .MyStandItem {
   display: block;
   position: relative;
-  padding: 7px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   
+  &__wrapper {
+    padding: 10px 5px 0;
+  }
+
   &__image {
     display: block;
     position: relative;
@@ -16,6 +19,11 @@
     background-size: contain;
     background-repeat: no-repeat;
     transition: all 0.2s;
+
+    &--add {
+      background-size: 40%;
+      cursor: pointer;
+    }
   }
 
   &__name {
@@ -24,6 +32,19 @@
     text-align: center;
     padding: 4px 10px;
     @extend .black-text;
+  }
+
+  &__button {
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  .left {
+    border-radius: 0 0 7px 0;
+  }
+
+  .right {
+    border-radius: 0 0 0 7px;
   }
 }
 

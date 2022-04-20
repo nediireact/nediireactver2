@@ -11,6 +11,8 @@ import GetUserStands from './get-user-stands';
 import AddStand from './add-stand';
 import AddStandPhone from './add-stand-phone';
 import UpdateStand from './update-stand';
+import AddStandPicture from './add-stand-picture';
+import DeleteStandPicture from './delete-stand-picture';
 
 const APISDK = {
   Login: Login,
@@ -25,7 +27,9 @@ const APISDK = {
   GetUserStands: GetUserStands,
   AddStand: AddStand,
   UpdateStand: UpdateStand,
-  AddStandPhone: AddStandPhone
+  AddStandPhone: AddStandPhone,
+  AddStandPicture: AddStandPicture,
+  DeleteStandPicture: DeleteStandPicture
 };
 
 export default APISDK;

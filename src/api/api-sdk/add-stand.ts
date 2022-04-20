@@ -133,8 +133,7 @@ export const AddStand = (stand: any): Promise<any> => {
             });
           })
           .then((response: any) => {
-            console.log('UpdateStand:', response);
-            res(newStandData);
+            res(response.data);
           })
           .catch((error: any) => {
             rej(error);
