@@ -1,20 +1,48 @@
 import React, {
-  useState,
-  useEffect
+  useEffect,
+  useState
 } from 'react';
 import { useSelector } from 'react-redux';
 import {
   HorizontalSpace,
-  StrongText
+  StrongText,
+  MenuChoiceMenu
 } from 'rrmc';
 import APISDK from 'src/api/api-sdk/api-sdk';
-import MyStandItem from 'src/modules/my-stands/stand-item';
-import AddStandForm from 'src/modules/my-stands/add-stand-from';
+import MyStandItem from './stand-item';
+import AddStandBasicInfo from './add-stand-basic-info';
+import AddStandMultimedia from './add-stand-multimedia';
+import './my-stands.scss';
+
+const menuItems = [
+  {
+    name: 'Informacion basica',
+    value: 'step-1',
+    icon: 'house'
+  },
+  {
+    name: 'Mulimedia',
+    value: 'step-2',
+    icon: 'image'
+  },
+  {
+    name: 'Redes sociales',
+    value: 'step-3',
+    icon: 'group'
+  },
+  {
+    name: 'Comunica...',
+    value: 'step-5',
+    icon: 'language'
+  }
+];
 
 const MyStands = (): React.ReactElement => {
-  const userData = useSelector((state: any) => state.user);
   const [isLoading, setIsLoading] = useState(false);
+  const [valueReference, setValueReference] = useState('');
+  const userData = useSelector((state: any) => state.user);
   const userStands = userData && userData.userStands && userData.userStands.length ? userData.userStands : [];
+  const [stand, setStand]: any = useState(null);
 
   useEffect(() => {
     const w: any = window;
@@ -31,27 +59,88 @@ const MyStands = (): React.ReactElement => {
   }, [APISDK]);
 
   return (
-    <div className='col s12 m8'>
-      <StrongText
-        fullWidth={true}
-        align='left'
-        text={`${userStands.length} Empresa${userStands.length === 1 ? '' : 's'} registrada${userStands.length === 1 ? '' : 's'}`} />
-      <HorizontalSpace size='x-small' />
-      <div className='row'>
+    <div className='col s12 m8 MyStands'>
       {
-        userStands && userStands.length ?
-        userStands.map((i: any, index: number) => {
-          return (
-            <MyStandItem
-              key={index}
-              item={i} />
-          );
-        }) : null
+        stand || valueReference === 'add-stand' ?
+          <div onClick={(e: any) => {
+            e.preventDefault();
+            setValueReference('');
+            setStand(null);
+          }} className='MyStands__return-button'>
+            <i className='material-icons white cyan-text'>arrow_back</i>
+            <span>Regresar</span>
+          </div> : null
       }
-      </div>
-      <AddStandForm
-        isLoading={isLoading}
-        setIsLoading={setIsLoading} />
+      {
+        stand ?
+        <>
+        {
+          valueReference !== 'add-stand' ?
+            <MenuChoiceMenu
+              color='cyan'
+              items={menuItems}
+              valueReference={valueReference}
+              setValueReference={setValueReference} /> : null
+        }
+        {
+          valueReference === 'step-1' ?
+            <>
+            <AddStandBasicInfo
+              stand={stand}
+              setStand={setStand}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading} />
+            </> : null
+        }
+        {
+          valueReference === 'step-2' ?
+            <>
+            <AddStandMultimedia
+              stand={stand}
+              setStand={setStand}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading} />
+            </> : null
+        }
+        </> : null
+      }
+      {
+        !valueReference && !stand ?
+        <>
+          <StrongText
+            fullWidth={true}
+            align='left'
+            text={`${userStands.length} Empresa${userStands.length === 1 ? '' : 's'} registrada${userStands.length === 1 ? '' : 's'}`} />
+          <HorizontalSpace size='x-small' />
+          <div className='row MyStands__stands-wrapper'>
+            <MyStandItem
+              setStand={setStand}
+              valueReference={valueReference}
+              setValueReference={setValueReference} />
+            {
+              userStands && userStands.length ?
+              userStands.map((i: any, index: number) => {
+                return (
+                  <MyStandItem
+                    key={index}
+                    item={i}
+                    stand={stand}
+                    setStand={setStand}
+                    valueReference={valueReference}
+                    setValueReference={setValueReference} />
+                );
+              }) : null
+            }
+          </div>
+        </> : null
+      }
+      {
+        valueReference === 'add-stand' ?
+          <AddStandBasicInfo
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            setStand={setStand} /> : null
+      }
     </div>
   );
 };

@@ -10,8 +10,11 @@ export const GetUserStands = (): Promise<any> => {
       store.getState().user.user.id ?
       store.getState().user.user : null;
     if ( !user ) return rej(new Error('no user'));
-    const fields = 'name,slug,img_logo,average_rating';
-    const url = `stands/?filter[owner]=${user.id}&page[number]=1&page[size]=6&fields[Stand]=${fields}`;
+    let url = `stands/?filter[owner]=${user.id}&include=pictures,panorama,`;
+    url += 'video_links,phones,stand_booking_questions,stand_news,promotions,';
+    url += 'highlighted_products,highlighted_services,highlighted_meals,';
+    url += 'highlighted_real_estates,highlighted_vehicles,';
+    url += 'city,city.state';
     APIGet(url, true)
       .then((response: any) => {
         const data = RebuildData(response).data;
