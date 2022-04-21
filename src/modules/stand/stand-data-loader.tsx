@@ -80,20 +80,26 @@ const StandDataLoader = (props: any): React.ReactElement => {
       setMenu(stand[params.standId]);
     }
     const commonFields = 'name,slug,price,discount,final_price,img_picture,short_description';
-    let includes = 'owner,phones,pictures,expo,group,stand_news,stand_booking_questions,stand_booking_questions.options,survey_questions,city,city.state,city.state.country,';
-    includes += 'highlighted_products,highlighted_services,highlighted_meals,highlighted_real_estates,highlighted_vehicles';
-    let url = `stands?filter[slug]=${params.standId}`;
-    url += `&include=${includes}`;
-    url += `&fields[Product]=${commonFields}`;
-    url += `&fields[Service]=${commonFields}`;
-    url += `&fields[Meal]=${commonFields}`;
-    url += `&fields[RealEstate]=${commonFields}`;
-    // url += `&fields[Vehicle]=${commonFields},year,model&fields[VehicleModel]=name,make&fields[VehicleMake]=name`;
-    url += '&fields[City]=name,state';
-    url += '&fields[State]=name,country';
-    url += '&fields[Country]=name';
-    console.log('URL FINAL:', url);
-    fetchData(url)
+    let urlStandDataLoader = `stands?filter[slug]=${params.standId}`;
+    urlStandDataLoader += '&include=owner,phones,pictures,expo,group,stand_news,';
+    urlStandDataLoader += 'stand-booking-questions,stand-booking-questions.options,';
+    urlStandDataLoader += 'survey_questions,';
+    urlStandDataLoader += 'city,city.state,city.state.country,';
+    urlStandDataLoader += 'highlighted_products,highlighted_services,highlighted_meals,highlighted_real_estates,highlighted_vehicles,';
+    urlStandDataLoader += 'highlighted_vehicles.model,highlighted_vehicles.model.make';
+    urlStandDataLoader += `&fields[Product]=${commonFields}`;
+    urlStandDataLoader += `&fields[Service]=${commonFields},warranty_days`;
+    urlStandDataLoader += `&fields[Meal]=${commonFields},is_breakfast,is_meal,is_dinner`;
+    urlStandDataLoader += `&fields[Vehicle]=${commonFields},year,model`;
+    urlStandDataLoader += '&fields[VehicleModel]=name,make';
+    urlStandDataLoader += '&fields[VehicleMake]=name';
+    urlStandDataLoader += `&fields[RealEstate]=${commonFields},state,area,num_of_bedrooms,num_of_bathrooms,num_of_parking_spots`;
+    urlStandDataLoader += '&fields[City]=name,state';
+    urlStandDataLoader += '&fields[State]=name,country';
+    urlStandDataLoader += '&fields[Country]=name,code,phone_code,img_flag';
+    console.log('Url optimizada', urlStandDataLoader);
+
+    fetchData(urlStandDataLoader)
       .then((response: any) => {
         if ( !response.data.length ) {
           return navigate('/');
