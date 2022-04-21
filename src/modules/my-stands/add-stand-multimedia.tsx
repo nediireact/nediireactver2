@@ -45,6 +45,12 @@ const AddStandMultimedia = ( props: any ): React.ReactElement => {
     props.setIsLoading(true);
     APISDK.DeleteStandPicture(pictureId, standId, pictures)
       .then(() => {
+        return APISDK.GetUserStands();
+      })
+      .then(() => {
+        return APISDK.GetUserStandById(standId);
+      })
+      .then(() => {
         props.setIsLoading(false);
         setNewPicture('');
         formRef.current.reset();
@@ -60,6 +66,12 @@ const AddStandMultimedia = ( props: any ): React.ReactElement => {
     if ( props.isLoading ) return;
     props.setIsLoading(true);
     APISDK.AddStandPicture(newPicture, standId, pictures)
+      .then(() => {
+        return APISDK.GetUserStands();
+      })
+      .then(() => {
+        return APISDK.GetUserStandById(standId);
+      })
       .then(() => {
         props.setIsLoading(false);
         formRef.current.reset();

@@ -8,6 +8,7 @@ import AddUserAddress from './add-user-address';
 import UpdateUserAddress from './update-user-address';
 import DeleteUserAddress from './delete-user-address';
 import GetUserStands from './get-user-stands';
+import GetUserStandById from './get-user-stand-by-id';
 import AddStand from './add-stand';
 import AddStandPhone from './add-stand-phone';
 import UpdateStand from './update-stand';
@@ -25,6 +26,7 @@ const APISDK = {
   UpdateUserAddress: UpdateUserAddress,
   DeleteUserAddress: DeleteUserAddress,
   GetUserStands: GetUserStands,
+  GetUserStandById: GetUserStandById,
   AddStand: AddStand,
   UpdateStand: UpdateStand,
   AddStandPhone: AddStandPhone,

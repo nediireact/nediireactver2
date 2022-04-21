@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable max-lines-per-function */
 import React, {
   useRef,
@@ -34,8 +35,7 @@ const AddStandBasicInfo = ( props: any ): React.ReactElement => {
   const [alwaysOpen, setAlwaysOpen] = useState(false);
   const [contactEmail, setContactEmail] = useState('');
   const [supportEmail, setSupportEmail] = useState('');
-  const [phone1, setPhone1] = useState('');
-  const [phone2, setPhone2] = useState('');
+  const [phone, setPhone] = useState('');
   const [plan, setPlan] = useState(0);
   const system: any = useSelector((state: any) => state.system);
   const expos = system && system.homeExpos ? system.homeExpos : [];
@@ -120,35 +120,72 @@ const AddStandBasicInfo = ( props: any ): React.ReactElement => {
     e.preventDefault();
     if ( props.isLoading ) return;
     props.setIsLoading(true);
-    const stand: any = {
-      name: name,
-      slogan: slogan,
-      img_logo: logo,
-      img_cover: cover,
-      state: state,
-      city: city,
-      address: address,
-      short_description: shortDescription,
-      description: description,
-      restaurant: restaurant,
-      contact_email: contactEmail,
-      plan: plan,
-      expo: expo,
-      group: category,
-      support_email: supportEmail,
-      phone1: phone1,
-      phone2: phone2,
-      always_open: alwaysOpen
-    };
-    APISDK.AddStand(stand)
-      .then((response: any) => {
-        props.setStand(response);
-        props.setIsLoading(false);
-      })
-      .catch((error: any) => {
-        console.log('error', error);
-        props.setIsLoading(false);
-      });
+    if ( stand ) {
+      const standToUpdate: any = {
+        id: stand.id
+      };
+      if ( name ) standToUpdate.name = name;
+      if ( slogan ) standToUpdate.slogan = slogan;
+      if ( logo ) standToUpdate.img_logo = logo;
+      if ( cover ) standToUpdate.img_cover = cover;
+      if ( state ) standToUpdate.state = state;
+      if ( city ) standToUpdate.city = city;
+      if ( address ) standToUpdate.address = address;
+      if ( shortDescription ) standToUpdate.short_description = shortDescription;
+      if ( description ) standToUpdate.description = description;
+      if ( restaurant ) standToUpdate.restaurant = restaurant;
+      if ( contactEmail ) standToUpdate.contact_email = contactEmail;
+      if ( plan ) standToUpdate.plan = plan;
+      if ( expo ) standToUpdate.expo = expo;
+      if ( category ) standToUpdate.group = category;
+      if ( supportEmail ) standToUpdate.support_email = supportEmail;
+      if ( phone ) standToUpdate.phone = phone;
+      if ( alwaysOpen ) standToUpdate.always_open = alwaysOpen;
+      APISDK.UpdateStand(standToUpdate)
+        .then(() => {
+          return APISDK.GetUserStands();
+        })
+        .then(() => {
+          return APISDK.GetUserStandById(stand.id);
+        })
+        .then((response: any) => {
+          props.setStand(response);
+          props.setIsLoading(false);
+        })
+        .catch((error: any) => {
+          console.log('error', error);
+          props.setIsLoading(false);
+        });
+    } else {
+      const standToCreate: any = {
+        name: name ? name : cName,
+        slogan: slogan ? slogan : cSlogan,
+        img_logo: logo ? logo : null,
+        img_cover: cover,
+        state: state,
+        city: city,
+        address: address,
+        short_description: shortDescription,
+        description: description,
+        restaurant: restaurant,
+        contact_email: contactEmail,
+        plan: plan ? plan : cPlan,
+        expo: expo,
+        group: category,
+        support_email: supportEmail,
+        phone: phone,
+        always_open: alwaysOpen
+      };
+      APISDK.AddStand(standToCreate)
+        .then((response: any) => {
+          props.setStand(response);
+          props.setIsLoading(false);
+        })
+        .catch((error: any) => {
+          console.log('error', error);
+          props.setIsLoading(false);
+        });
+    }
   };
 
   return (
@@ -169,39 +206,39 @@ const AddStandBasicInfo = ( props: any ): React.ReactElement => {
       </div>
       <GenericTextInput id='name' type='text' placeholder='Nombre de la empresa'
         disabled={props.isLoading} value={cName}
-        setValue={setName} required={true} />
+        setValue={setName} required={stand ? false : true} />
       <GenericSelectInput id='expo' placeholder='Expo' items={getExpos()}
         disabled={props.isLoading} value={cExpo}
-        setValue={setExpo} required={true} />
+        setValue={setExpo} required={stand ? false : true} />
       <GenericSelectInput id='category' placeholder='Categoria' items={getCategories()}
         disabled={props.isLoading} value={cGroup}
-        setValue={setCategory} required={true} />
+        setValue={setCategory} required={stand ? false : true} />
 
       <div className='input-field col s12 AddStandForm__sub-title'>
         <HorizontalSpace size='x-small' />
         <b>Direccion de la empresa</b>
       </div>
       <GenericTextInput id='state' type='text' placeholder='Estado del pais'
-        disabled={props.isLoading} value={cState} setValue={setState} required={true} />
+        disabled={props.isLoading} value={cState} setValue={setState} required={stand ? false : true} />
       <GenericTextInput id='city' type='text' placeholder='Ciudad'
-        disabled={props.isLoading} value={cCity} setValue={setCity} required={true} />
+        disabled={props.isLoading} value={cCity} setValue={setCity} required={stand ? false : true} />
       <GenericTextInput id='address' type='text' placeholder='Calle, numero y colonia'
-        disabled={props.isLoading} value={cAddress} setValue={setAddress} required={true} />
+        disabled={props.isLoading} value={cAddress} setValue={setAddress} required={stand ? false : true} />
 
       <div className='input-field col s12 AddStandForm__sub-title'>
         <HorizontalSpace size='x-small' />
         <b>Identidad de la empresa</b>
       </div>
       <GenericTextInput id='slogan' type='text' placeholder='Slogan de la empresa'
-        disabled={props.isLoading} value={cSlogan} setValue={setSlogan} required={true} />
+        disabled={props.isLoading} value={cSlogan} setValue={setSlogan} required={stand ? false : true} />
       <GenericTextInput id='shortDescription' type='text' placeholder='Descripcion corta de la empresa'
-        disabled={props.isLoading} value={cShortDescription} setValue={setShortDescription} required={true} />
+        disabled={props.isLoading} value={cShortDescription} setValue={setShortDescription} required={stand ? false : true} />
       <GenericTextArea id='description' placeholder='Descripcion larga de la empresa'
         disabled={props.isLoading} value={cDescription} setValue={setDescription} />
       <GenericImgInput id='logo' placeholder={stand ? 'Actualizar logo de la empresa' : 'Logo de la empresa'}
-        disabled={props.isLoading} value={logo} setValue={setLogo} required={true} />
+        disabled={props.isLoading} value={logo} setValue={setLogo} required={stand ? false : true} />
       <GenericImgInput id='cover' placeholder={stand ? 'Actualizar imagen de encabezado' : 'Imagen de encabezado de la empresa'}
-        disabled={props.isLoading} value={cover} setValue={setCover} required={true} />
+        disabled={props.isLoading} value={cover} setValue={setCover} required={stand ? false : true} />
       <div className='input-field col s12 AddStandForm__sub-title'>
         <GenericCheckboxInput id='promotions' placeholder='La empresa es un restaurante?'
           checked={cRestaurant} setValue={setRestaurant} />
@@ -216,13 +253,11 @@ const AddStandBasicInfo = ( props: any ): React.ReactElement => {
         <b>Datos de contacto</b>
       </div>
       <GenericTextInput id='contactEmail' type='email' placeholder='Email de contacto'
-        disabled={props.isLoading} value={cContactEmail} setValue={setContactEmail} required={true} />
+        disabled={props.isLoading} value={cContactEmail} setValue={setContactEmail} required={stand ? false : true} />
       <GenericTextInput id='supportEmail' type='email' placeholder='Email de soporte'
         disabled={props.isLoading} value={cSupportEmail} setValue={setSupportEmail} />
       <GenericTextInput id='phone1' type='tel' placeholder='Telefono de contacto'
-        disabled={props.isLoading} value={phone1} setValue={setPhone1} />
-      <GenericTextInput id='phone2' type='tel' placeholder='Telefono de oficina'
-        disabled={props.isLoading} value={phone2} setValue={setPhone2} />
+        disabled={props.isLoading} value={phone} setValue={setPhone} />
 
       <div className='input-field col s12'>
         <HorizontalSpace size='xx-small' />
@@ -235,7 +270,7 @@ const AddStandBasicInfo = ( props: any ): React.ReactElement => {
       <div className='input-field col s12'>
         <input id='submit' type='submit'
           value='Guardar'
-          className={`waves-effect waves-light btn right cyan ${ props.isLoading || !plan ? 'disabled' : ''}`}
+          className={`waves-effect waves-light btn right cyan ${ (props.isLoading || !plan) && !stand ? 'disabled' : ''}`}
           disabled={props.isLoading} />
       </div>
     </form>

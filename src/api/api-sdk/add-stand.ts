@@ -4,7 +4,6 @@ import GetUserAddress from './get-user-address';
 import CheckState from './check-state';
 import CheckCity from './check-city';
 import AddStandPhone from './add-stand-phone';
-import UpdateStand from './update-stand';
 
 export const AddStand = (stand: any): Promise<any> => {
   return new Promise((res, rej) => {
@@ -36,16 +35,16 @@ export const AddStand = (stand: any): Promise<any> => {
               id: stand.plan
             }
           },
-          group: {
-            data: {
-              type: 'Group',
-              id: stand.group
-            }
-          },
           expo: {
             data: {
               type: 'Expo',
               id: stand.expo
+            }
+          },
+          group: {
+            data: {
+              type: 'Group',
+              id: stand.group
             }
           },
           highlighted_meals: {
@@ -107,30 +106,10 @@ export const AddStand = (stand: any): Promise<any> => {
           })
           .then(() => {
             const promises = [];
-            if ( stand.phone1 ) {
-              promises.push(AddStandPhone(stand.phone1, newStandData.id));
-            }
-            if ( stand.phone2 ) {
-              promises.push(AddStandPhone(stand.phone2, newStandData.id));
+            if ( stand.phone ) {
+              promises.push(AddStandPhone(stand.phone, newStandData.id, []));
             }
             return Promise.all(promises);
-          })
-          .then((response: any) => {
-            const phones: Array<any> = [];
-            response.forEach((i: any) => {
-              phones.push({
-                type: i.type,
-                id: i.id
-              });
-            });
-            return UpdateStand({
-              id: newStandData.id,
-              relationships: {
-                phones: {
-                  data: phones
-                }
-              }
-            });
           })
           .then((response: any) => {
             res(response.data);

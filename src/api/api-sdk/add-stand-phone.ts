@@ -1,7 +1,8 @@
 import { APIPost } from 'src/api/communicator';
 import store from 'src/redux/store';
+import UpdateStand from './update-stand';
 
-export const AddStandPhone = (phone: string, stand: number): Promise<any> => {
+export const AddStandPhone = (phone: string, stand: number, preExistentPhones: Array<any>): Promise<any> => {
   return new Promise((res, rej) => {
     const user = store && store.getState().user &&
       store.getState().user.user &&
@@ -25,6 +26,13 @@ export const AddStandPhone = (phone: string, stand: number): Promise<any> => {
       }
     };
     APIPost('stand-phones/', data)
+      .then((response: any) => {
+        preExistentPhones.push(response.data);
+        return UpdateStand({
+          id: stand,
+          phones: preExistentPhones
+        });
+      })
       .then((response: any) => {
         res(response.data);
       })

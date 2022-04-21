@@ -18,11 +18,7 @@ export const DeleteStandPicture = (pictureId: number, standId: number, preExiste
         }
         return UpdateStand({
           id: standId,
-          relationships: {
-            pictures: {
-              data: preExistentPictures
-            }
-          }
+          pictures: preExistentPictures
         });
       })
       .then((response: any) => {
