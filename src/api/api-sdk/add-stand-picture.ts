@@ -30,11 +30,7 @@ export const AddStandPicture = (picture: string, stand: number, preExistentPictu
         preExistentPictures.push(response.data);
         return UpdateStand({
           id: stand,
-          relationships: {
-            pictures: {
-              data: preExistentPictures
-            }
-          }
+          pictures: preExistentPictures
         });
       })
       .then((response: any) => {

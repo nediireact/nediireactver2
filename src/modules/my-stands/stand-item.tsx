@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import APISDK from 'src/api/api-sdk/api-sdk';
 import './stand-item.scss';
 
 const MyStandItem = (props: any): React.ReactElement => {
@@ -8,6 +9,23 @@ const MyStandItem = (props: any): React.ReactElement => {
   const addStandImgURL = `${prefix}/assets/add-stand.png`;
   const item: any = props.item;
   const stand: any = props.stand ? props.stand : null;
+
+  const deleteStand = () => {
+    if ( props.isLoading || !item || !item.id ) return;
+    props.setIsLoading(true);
+    console.log('stand.id', item);
+    APISDK.DeleteStandById(item.id)
+      .then(() => {
+        return APISDK.GetUserStands();
+      })
+      .then(() => {
+        props.setIsLoading(false);
+      })
+      .catch((error: any) => {
+        props.setIsLoading(false);
+        console.log(error);
+      });
+  };
 
   if ( !item || !item.id || !item.attributes ) {
     return (
@@ -40,18 +58,24 @@ const MyStandItem = (props: any): React.ReactElement => {
           style={{
             backgroundImage: `url(${item.attributes.img_logo}`
           }}>
-          <i
-          className='material-icons left white blue-text MyStandItem__button'
-          onClick={(e: any) => {
-            e.preventDefault();
-            props.setValueReference('step-1');
-            props.setStand(item);
-          }}>create</i>
-          <i
-          className='material-icons right white red-text MyStandItem__button'
-          onClick={(e: any) => {
-            e.preventDefault();
-          }}>delete</i>
+          {
+            !props.isLoading ?
+            <>
+              <i
+              className='material-icons left white blue-text MyStandItem__button'
+              onClick={(e: any) => {
+                e.preventDefault();
+                props.setValueReference('step-1');
+                props.setStand(item);
+              }}>create</i>
+              <i
+              className='material-icons right white red-text MyStandItem__button'
+              onClick={(e: any) => {
+                e.preventDefault();
+                deleteStand();
+              }}>delete</i>
+            </> : null
+          }
         </div>
         <div className='MyStandItem__name truncate'>
           {props.item.attributes.name}
