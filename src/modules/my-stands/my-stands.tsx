@@ -12,6 +12,7 @@ import APISDK from 'src/api/api-sdk/api-sdk';
 import MyStandItem from './stand-item';
 import AddStandBasicInfo from './add-stand-basic-info';
 import AddStandMultimedia from './add-stand-multimedia';
+import AddSocialMedia from './add-social-media';
 import './my-stands.scss';
 
 const menuItems = [
@@ -102,6 +103,16 @@ const MyStands = (): React.ReactElement => {
               setIsLoading={setIsLoading} />
             </> : null
         }
+        {
+          valueReference === 'step-3' ?
+            <>
+            <AddSocialMedia
+              stand={stand}
+              setStand={setStand}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading} />
+            </> : null
+        }
         </> : null
       }
       {
@@ -127,7 +138,9 @@ const MyStands = (): React.ReactElement => {
                     stand={stand}
                     setStand={setStand}
                     valueReference={valueReference}
-                    setValueReference={setValueReference} />
+                    setValueReference={setValueReference}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading} />
                 );
               }) : null
             }

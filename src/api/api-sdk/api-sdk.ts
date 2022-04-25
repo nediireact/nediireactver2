@@ -14,6 +14,7 @@ import AddStandPhone from './add-stand-phone';
 import UpdateStand from './update-stand';
 import AddStandPicture from './add-stand-picture';
 import DeleteStandPicture from './delete-stand-picture';
+import DeleteStandById from './delete-stand-by-id';
 
 const APISDK = {
   Login: Login,
@@ -29,6 +30,7 @@ const APISDK = {
   GetUserStandById: GetUserStandById,
   AddStand: AddStand,
   UpdateStand: UpdateStand,
+  DeleteStandById: DeleteStandById,
   AddStandPhone: AddStandPhone,
   AddStandPicture: AddStandPicture,
   DeleteStandPicture: DeleteStandPicture

@@ -87,9 +87,17 @@ const AddStandMultimedia = ( props: any ): React.ReactElement => {
     {
       stand ?
         <>
+          {
+            stand ?
+              <>
+              <HorizontalSpace size='small' />
+              <StrongText
+                fullWidth={true}
+                align='left'
+                text={`Editando fotos de ${stand.attributes.name}`} />
+              </> : null
+          }
           <HorizontalSpace size='small' />
-          <StrongText text={`${pictures.length} Fotos de ${stand.attributes.name}`} fullWidth={true} align='left' />
-          <HorizontalSpace size='x-small' />
           <div className='row'>
           {
             pictures.map((i: any, index: number) => {
