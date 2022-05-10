@@ -4,7 +4,7 @@ import React, {
 import { useSelector } from 'react-redux';
 import {
   HorizontalSpace,
-  SubTitle
+  StrongText
 } from 'rrmc';
 import CardHolder from 'src/modules/card-holder/card-holder';
 import BuyableItemAdapter from 'src/adapters/buyable-item-adapter/buyable-item-adapter';
@@ -19,7 +19,7 @@ const UserFavorites = (): React.ReactElement => {
   useEffect(() => {
     const w: any = window;
     w.scrollTo(0, 0);
-  });
+  }, [window]);
 
   return (
     <div className='col s12 m8'>
@@ -28,10 +28,7 @@ const UserFavorites = (): React.ReactElement => {
       {
         stands && stands.length ?
           <>
-            <SubTitle
-              text='Empresas favoritas'
-              fullWidth={true}
-              align='left' />
+            <StrongText text='Empresas favoritas' fullWidth={true} align='left' />
             <HorizontalSpace size='x-small' />
             <div className='row'>
               {
@@ -47,14 +44,11 @@ const UserFavorites = (): React.ReactElement => {
             </div>
           </> : null
       }
-      <HorizontalSpace size='small' />
+      <HorizontalSpace size='x-small' />
       {
         items && items.length ?
           <>
-            <SubTitle
-              text='Elementos favoritos'
-              fullWidth={true}
-              align='left' />
+            <StrongText text='Elementos favoritas' fullWidth={true} align='left' />
             <HorizontalSpace size='x-small' />
             <div className='row'>
               {

@@ -21,7 +21,7 @@ const QRCodeComponent = ( props: any ): React.ReactElement => {
 
   useEffect(() => {
     setCanonicalURL(window.location.href);
-  });
+  }, [window]);
 
   return (
     <div className='container QRCode'>

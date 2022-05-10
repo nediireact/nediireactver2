@@ -12,7 +12,8 @@ import {
 } from 'react-redux';
 import {
   HorizontalSpace,
-  SubTitle
+  SubTitle,
+  LoadingIndicator
 } from 'rrmc';
 import QRCode from 'qrcode.react'; // https://www.npmjs.com/package/qrcode.react
 import './expo-detail.scss';
@@ -27,7 +28,7 @@ const QRodeComponent = (): React.ReactElement => {
 
   useEffect(() => {
     setCanonicalURL(window.location.href);
-  }, [fetchData]);
+  }, [fetchData, window]);
 
   return (
     <div className='container QRCode'>
@@ -45,11 +46,14 @@ const ExpoDetailComponent = (): React.ReactElement => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params: any = useParams();
+  const [isLoading, setIsLoading] = useState(false);
   const expo = useSelector((state: any) => state.expo);
 
   useEffect(() => {
+    setIsLoading(true);
     fetchData(`expos?filter[slug]=${params.expoId}&include=groups&fields[Group]=name,img_picture,slug`)
       .then((response: any) => {
+        setIsLoading(false);
         if (response.data.length === 0) {
           console.log('Error, expo no existe');
         } else {
@@ -59,12 +63,14 @@ const ExpoDetailComponent = (): React.ReactElement => {
         }
       })
       .catch((error) => {
+        setIsLoading(false);
         console.log('Hubo un error', error);
       });
   }, [fetchData]);
 
   return (
     <>
+    <LoadingIndicator isLoading={isLoading} />
     {
       expo && expo[params.expoId] && expo[params.expoId].id ?
         <>

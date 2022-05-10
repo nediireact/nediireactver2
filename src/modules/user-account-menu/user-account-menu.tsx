@@ -43,13 +43,16 @@ const UserAccountMenu = (): React.ReactElement => {
           })
         }
       </ul>
-      <ul className='UserAccount__list'>
-        {
-          SellerMenuItemsJSON.map((i: any, index: number) => {
-            return <AccountMenuItem key={index} item={i} />;
-          })
-        }
-      </ul>
+      {
+        profile && profile.is_seller ?
+          <ul className='UserAccount__list'>
+            {
+              SellerMenuItemsJSON.map((i: any, index: number) => {
+                return <AccountMenuItem key={index} item={i} />;
+              })
+            }
+          </ul> : null
+      }
     </div>
   );
 };
