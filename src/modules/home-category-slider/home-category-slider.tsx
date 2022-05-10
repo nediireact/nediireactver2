@@ -14,7 +14,8 @@ import 'src/modules/home-category-slider/home-category-slider.scss';
 import fetchData from 'src/modules/utils/fetch-data';
 import {
   HorizontalSpace,
-  SubTitle
+  SubTitle,
+  LoadingIndicator
 } from 'rrmc';
 import SetSystemData from 'src/redux/actions/set-system-data';
 import GroupItem from 'src/modules/group-grid/group-item';
@@ -51,15 +52,21 @@ const SlideAddons = ( props: any ): React.ReactElement => {
 const HomeCategorySlider = (): React.ReactElement => {
   const dispatch = useDispatch();
   const [swiperReference, setSwiperReference]: any = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const system: any = useSelector((state: any) => state.system);
   const items = system && system.categories ? system.categories : [];
 
   useEffect(() => {
+    setIsLoading(true);
     fetchData('groups/?fields[Group]=name,img_picture,slug')
       .then((response: any) =>{
+        setIsLoading(false);
         dispatch(SetSystemData({
           categories: response.data
         }));
+      })
+      .catch(() => {
+        setIsLoading(false);
       });
   }, [fetchData]);
 
@@ -69,6 +76,7 @@ const HomeCategorySlider = (): React.ReactElement => {
 
   return (
     <div className='container'>
+    <LoadingIndicator isLoading={isLoading} />
     {
       items && items.length ?
         <div className='HomeCategorySlider'>

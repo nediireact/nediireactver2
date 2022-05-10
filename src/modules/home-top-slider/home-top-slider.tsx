@@ -1,5 +1,6 @@
 import React, {
-  useEffect
+  useEffect,
+  useState
 } from 'react';
 import {
   useDispatch,
@@ -10,7 +11,10 @@ import {
   SwiperSlide
 } from 'swiper/react';
 import { Link } from 'react-router-dom';
-import { PictureSlider } from 'rrmc';
+import {
+  PictureSlider,
+  LoadingIndicator
+} from 'rrmc';
 import fetchData from 'src/modules/utils/fetch-data';
 import SetSystemData from 'src/redux/actions/set-system-data';
 
@@ -20,14 +24,17 @@ const sliderPrevButtonFile = '/assets/slider-button-prev.svg';
 const HomeTopSlider = (): React.ReactElement => {
   const dispatch = useDispatch();
   const system: any = useSelector((state: any) => state.system);
+  const [isLoading, setIsLoading] = useState(false);
   const items = system && system.homePictures ? system.homePictures : [];
   const prefix = system.platform.prefix;
   const sliderNextButtonFileURL = `${prefix}${sliderNextButtonFile}`;
   const sliderPrevButtonFileURL = `${prefix}${sliderPrevButtonFile}`;
 
   useEffect(() => {
+    setIsLoading(true);
     fetchData('system/?include=home_pictures')
       .then((response: any) =>{
+        setIsLoading(false);
         const data = response.data && response.data.length ?
           response.data[0] : null;
         if ( data && data.relationships &&
@@ -39,11 +46,15 @@ const HomeTopSlider = (): React.ReactElement => {
             homePictures: homePictures
           }));
         }
+      })
+      .catch(() => {
+        setIsLoading(false);
       });
   }, [fetchData]);
 
   return (
     <>
+    <LoadingIndicator isLoading={isLoading} />
     {
       items && items.length ?
           <PictureSlider

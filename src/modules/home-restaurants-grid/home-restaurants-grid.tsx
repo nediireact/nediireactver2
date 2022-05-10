@@ -11,7 +11,8 @@ import fetchData from 'src/modules/utils/fetch-data';
 import {
   HorizontalSpace,
   SubTitle,
-  Ratings
+  Ratings,
+  LoadingIndicator
 } from 'rrmc';
 import { Link } from 'react-router-dom';
 import './home-restaurants-grid.scss';
@@ -112,13 +113,19 @@ const StandItem = (props: any): React.ReactElement => {
 const HomeRestaurantsGrid = (): React.ReactElement => {
   const [swiperReference, setSwiperReference]: any = useState(null);
   const [items, setitems]: any = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const mealFields = 'name,img_picture,slug,price,final_price,discount,average_rating';
   const standFields = 'name,img_logo,img_cover,slug,highlighted_meals,restaurant,average_rating';
 
   useEffect(() => {
+    setIsLoading(true);
     fetchData(`stands/?page[size]=3&fields[Stand]=${standFields}&include=highlighted_meals&fields[Meal]=${mealFields}&filter[restaurant]=true`)
       .then((response: any) =>{
+        setIsLoading(false);
         setitems(response.data);
+      })
+      .catch(() => {
+        setIsLoading(false);
       });
   }, [fetchData]);
 
@@ -128,6 +135,7 @@ const HomeRestaurantsGrid = (): React.ReactElement => {
 
   return (
     <>
+    <LoadingIndicator isLoading={isLoading} />
     <HorizontalSpace size='large' />
     <Swiper
       className='Swiper HomeRestaurantsGrid' autoplay={true}

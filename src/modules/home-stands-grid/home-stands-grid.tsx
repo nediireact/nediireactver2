@@ -4,7 +4,8 @@ import React, {
 } from 'react';
 import {
   HorizontalSpace,
-  SubTitle
+  SubTitle,
+  LoadingIndicator
 } from 'rrmc';
 import fetchData from 'src/modules/utils/fetch-data';
 import StandItemMini from 'src/modules/stand-grid/stand-item-mini';
@@ -16,6 +17,7 @@ interface HomeStandsGridInterface {
 }
 
 const HomeStandsGrid = (props: HomeStandsGridInterface): React.ReactElement => {
+  const [isLoading, setIsLoading] = useState(false);
   const [items, setitems]: any = useState([]);
   const fields = 'name,slug,img_logo,restaurant,average_rating';
   const url = props.onlyRestaurants ? `stands/?filter[restaurant]=true&page[number]=1&page[size]=6&fields[Stand]=${fields}` :
@@ -24,14 +26,20 @@ const HomeStandsGrid = (props: HomeStandsGridInterface): React.ReactElement => {
   const title = props.onlyRestaurants ? 'Restaurantes' : 'Nuestros expositores';
 
   useEffect(() => {
+    setIsLoading(true);
     fetchData(url)
       .then((response: any) =>{
+        setIsLoading(false);
         setitems(response.data);
+      })
+      .catch(() => {
+        setIsLoading(false);
       });
   }, [fetchData]);
 
   return (
     <div className='HomeStandsGrid container row'>
+      <LoadingIndicator isLoading={isLoading} />
       <LoadUserFavoriteStands />
       <HorizontalSpace size='medium' />
       <SubTitle text={title} />

@@ -1,4 +1,7 @@
-import React, { useEffect } from 'react';
+import React, {
+  useEffect,
+  useState
+} from 'react';
 import {
   useNavigate,
   useParams
@@ -7,6 +10,9 @@ import {
   useSelector,
   useDispatch
 } from 'react-redux';
+import {
+  LoadingIndicator
+} from 'rrmc';
 import fetchData from 'src/modules/utils/fetch-data';
 import StandHeader from 'src/modules/stand-header/stand-header';
 import StandRouteNav from 'src/modules/stand-route-nav/stand-route-nav';
@@ -16,6 +22,7 @@ import LoadUserFavoriteItems from 'src/modules/user-favorites/load-user-favorite
 
 const StandDataLoader = (props: any): React.ReactElement => {
   const stand = useSelector((state: any) => state.stand);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const params: any = useParams();
   const dispatch = useDispatch();
@@ -76,6 +83,7 @@ const StandDataLoader = (props: any): React.ReactElement => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     if ( stand && stand && stand[params.standId] && stand[params.standId].attributes ) {
       setMenu(stand[params.standId]);
     }
@@ -100,6 +108,7 @@ const StandDataLoader = (props: any): React.ReactElement => {
 
     fetchData(url)
       .then((response: any) => {
+        setIsLoading(false);
         if ( !response.data.length ) {
           return navigate('/');
         }
@@ -108,6 +117,7 @@ const StandDataLoader = (props: any): React.ReactElement => {
         dispatch(setStandData(standData));
       })
       .catch((error) => {
+        setIsLoading(false);
         console.log('Hubo un error', error);
         return navigate('/');
       });
@@ -115,6 +125,7 @@ const StandDataLoader = (props: any): React.ReactElement => {
 
   return (
     <>
+    <LoadingIndicator isLoading={isLoading} />
     {
       stand && stand && stand[params.standId] && stand[params.standId].attributes ?
       <>

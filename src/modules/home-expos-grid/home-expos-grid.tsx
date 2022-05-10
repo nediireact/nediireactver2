@@ -1,9 +1,11 @@
 import React, {
-  useEffect
+  useEffect,
+  useState
 } from 'react';
 import {
   HorizontalSpace,
-  SubTitle
+  SubTitle,
+  LoadingIndicator
 } from 'rrmc';
 import './home-expos-grid.scss';
 import fetchData from 'src/modules/utils/fetch-data';
@@ -17,19 +19,26 @@ import SetSystemData from 'src/redux/actions/set-system-data';
 const HomeExpoGrid = (): React.ReactElement => {
   const dispatch = useDispatch();
   const system: any = useSelector((state: any) => state.system);
+  const [isLoading, setIsLoading] = useState(false);
   const items = system && system.homeExpos ? system.homeExpos : [];
 
   useEffect(() => {
+    setIsLoading(true);
     fetchData('expos/?page[number]=1&page[size]=6&fields[Expo]=name,slug,img_picture')
       .then((response: any) =>{
+        setIsLoading(false);
         dispatch(SetSystemData({
           homeExpos: response.data
         }));
+      })
+      .catch(() => {
+        setIsLoading(false);
       });
   }, [fetchData]);
 
   return (
     <div className='HomeExpoGrid container row'>
+    <LoadingIndicator isLoading={isLoading} />
     <HorizontalSpace size='medium' />
     <SubTitle text='Expos Nedii' />
     {

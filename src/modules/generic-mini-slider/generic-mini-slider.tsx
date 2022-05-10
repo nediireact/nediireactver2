@@ -12,7 +12,10 @@ import {
 } from 'react-redux';
 import 'src/modules/generic-mini-slider/generic-mini-slider.scss';
 import fetchData from 'src/modules/utils/fetch-data';
-import { SubTitle } from 'rrmc';
+import {
+  SubTitle,
+  LoadingIndicator
+} from 'rrmc';
 import BuyableItemAdapter from 'src/adapters/buyable-item-adapter/buyable-item-adapter';
 import SetSystemData from 'src/redux/actions/set-system-data';
 
@@ -53,6 +56,7 @@ interface GenericMiniSliderInterface {
 }
 
 const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElement => {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const cacheKey = props.cacheKey;
   const [swiperReference, setSwiperReference]: any = useState(null);
@@ -60,6 +64,7 @@ const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElemen
   const items = system && system[cacheKey] ? system[cacheKey] : [];
 
   useEffect(() => {
+    setIsLoading(true);
     const promises: any[] = [];
     props.urls.forEach((i: string) => {
       promises.push(new Promise((res) => {
@@ -72,6 +77,7 @@ const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElemen
 
     Promise.all(promises)
       .then((data: any) => {
+        setIsLoading(false);
         const results: Array<any> = [];
         data.forEach((i: any) => {
           i.data.forEach((j: any) => {
@@ -83,6 +89,7 @@ const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElemen
         dispatch(SetSystemData(cacheData));
       })
       .catch((err: any) => {
+        setIsLoading(false);
         console.log('error:', err);
       });
   }, [fetchData]);
@@ -93,6 +100,7 @@ const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElemen
 
   return (
     <>
+    <LoadingIndicator isLoading={isLoading} />
     {
       items && items.length ?
         <div className='GenericMiniSlider col s12 m6 l4'>

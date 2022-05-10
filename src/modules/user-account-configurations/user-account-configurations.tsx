@@ -191,7 +191,7 @@ const UserAccountConfigurations = (): React.ReactElement => {
   useEffect(() => {
     const w: any = window;
     w.scrollTo(0, 0);
-  });
+  }, [window]);
 
   return (
     <div className='col s12 m8 UserAccountConfigurations'>

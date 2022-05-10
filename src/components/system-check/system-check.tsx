@@ -53,7 +53,7 @@ const SystemCheck = (): React.ReactElement => {
     } else {
       redirect();
     }
-  }, [M]);
+  }, [M, window]);
 
   return (
     <>

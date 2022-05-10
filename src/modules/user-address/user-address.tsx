@@ -11,6 +11,7 @@ import {
 } from 'rrmc';
 import APISDK from 'src/api/api-sdk/api-sdk';
 import './user-address.scss';
+import LoadUserAddress from './load-user-address';
 import AddUserAddress from 'src/modules/user-address/add-user-address';
 import EditUserAddress from 'src/modules/user-address/edit-user-address';
 
@@ -124,19 +125,11 @@ const UserAddress = (): React.ReactElement => {
   useEffect(() => {
     const w: any = window;
     w.scrollTo(0, 0);
-    setIsLoading(true);
-    APISDK.GetUserAddress()
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch((error: any) => {
-        setIsLoading(false);
-        console.log(error);
-      });
-  }, [APISDK]);
+  }, [window]);
 
   return (
     <div className='col s12 m8 UserAddress row'>
+      <LoadUserAddress setIsLoading={setIsLoading} />
       <div className='col s12'>
         <StrongText
           fullWidth={true}

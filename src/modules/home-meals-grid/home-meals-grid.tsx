@@ -8,7 +8,8 @@ import {
 } from 'react-redux';
 import {
   SubTitle,
-  HorizontalSpace
+  HorizontalSpace,
+  LoadingIndicator
 } from 'rrmc';
 import './home-meals-grid.scss';
 import fetchData from 'src/modules/utils/fetch-data';
@@ -18,6 +19,7 @@ import SetSystemData from 'src/redux/actions/set-system-data';
 const HomeMealsGrid = (): React.ReactElement => {
   const dispatch = useDispatch();
   const system = useSelector((state: any) => state.system);
+  const [isLoading, setIsLoading] = useState(false);
   const homeMealsGridItems = system && system.homeMealsGridItems ? system.homeMealsGridItems : [];
   const [items, setItems]: Array<any> = useState([]);
   const prefix = system.platform.prefix;
@@ -39,6 +41,7 @@ const HomeMealsGrid = (): React.ReactElement => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     updateMealType('is_breakfast');
     const promises = [];
     const url = `meals/?page[size]=12&include=stand&fields[Stand]=name,slug&fields[Meal]=${commonFields}`;
@@ -62,6 +65,7 @@ const HomeMealsGrid = (): React.ReactElement => {
     }));
     Promise.all(promises)
       .then((data: any) => {
+        setIsLoading(false);
         const results: Array<any> = [];
         data.forEach((i: any) => {
           i.forEach((j: any) => {
@@ -73,62 +77,64 @@ const HomeMealsGrid = (): React.ReactElement => {
         }));
       })
       .catch((error) => {
+        setIsLoading(false);
         console.log('error', error);
       });
   }, [fetchData]);
 
   return (
     <div className='HomeMealsGrid__wrapper' style={{backgroundImage: `url(${backgroundIMG})`}}>
-        <div className='HomeMealsGrid__content container'>
-          <HorizontalSpace size='x-small' />
-          <div className='row'>
-            <div className={`col s12 m4 HomeMealsGrid__button ${selected === 'is_breakfast' ? 'HomeMealsGrid__selected' : ''}`}
-              onClick={() => {
-                updateMealType('is_breakfast');
-              }}>
-              <SubTitle
-                text='Vamos a desayunar'
-                fullWidth={true}
-                color='white'
-                shadow={true} />
-            </div>
-            <div className={`col s12 m4 HomeMealsGrid__button ${selected === 'is_meal' ? 'HomeMealsGrid__selected' : ''}`}
-              onClick={() => {
-                updateMealType('is_meal');
-              }}>
-              <SubTitle
-                text='Vamos a comer'
-                fullWidth={true}
-                color='white'
-                shadow={true} />
-            </div>
-            <div className={`col s12 m4 HomeMealsGrid__button ${selected === 'is_dinner' ? 'HomeMealsGrid__selected' : ''}`}
-              onClick={() => {
-                updateMealType('is_dinner');
-              }}>
-              <SubTitle
-                text='Vamos a cenar'
-                fullWidth={true}
-                color='white'
-                shadow={true} />
-            </div>
+      <LoadingIndicator isLoading={isLoading} />
+      <div className='HomeMealsGrid__content container'>
+        <HorizontalSpace size='x-small' />
+        <div className='row'>
+          <div className={`col s12 m4 HomeMealsGrid__button ${selected === 'is_breakfast' ? 'HomeMealsGrid__selected' : ''}`}
+            onClick={() => {
+              updateMealType('is_breakfast');
+            }}>
+            <SubTitle
+              text='Vamos a desayunar'
+              fullWidth={true}
+              color='white'
+              shadow={true} />
           </div>
-          <div className='row'>
-            {
-              items && items.length ?
-                items.map((i: any, index: number) => {
-                  return (
-                    <div key={index} className='col s6 m4 l3'>
-                      <BuyableItemAdapter
-                        mini={true}
-                        fullWidth={true}
-                        item={i} />
-                    </div>
-                  );
-                }) : null
-            }
+          <div className={`col s12 m4 HomeMealsGrid__button ${selected === 'is_meal' ? 'HomeMealsGrid__selected' : ''}`}
+            onClick={() => {
+              updateMealType('is_meal');
+            }}>
+            <SubTitle
+              text='Vamos a comer'
+              fullWidth={true}
+              color='white'
+              shadow={true} />
+          </div>
+          <div className={`col s12 m4 HomeMealsGrid__button ${selected === 'is_dinner' ? 'HomeMealsGrid__selected' : ''}`}
+            onClick={() => {
+              updateMealType('is_dinner');
+            }}>
+            <SubTitle
+              text='Vamos a cenar'
+              fullWidth={true}
+              color='white'
+              shadow={true} />
           </div>
         </div>
+        <div className='row'>
+          {
+            items && items.length ?
+              items.map((i: any, index: number) => {
+                return (
+                  <div key={index} className='col s6 m4 l3'>
+                    <BuyableItemAdapter
+                      mini={true}
+                      fullWidth={true}
+                      item={i} />
+                  </div>
+                );
+              }) : null
+          }
+        </div>
+      </div>
     </div>
   );
 };

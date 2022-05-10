@@ -6,14 +6,15 @@ import { useSelector } from 'react-redux';
 import {
   HorizontalSpace,
   StrongText,
-  MenuChoiceMenu
+  MenuChoiceMenu,
+  LoadingIndicator
 } from 'rrmc';
-import APISDK from 'src/api/api-sdk/api-sdk';
 import MyStandItem from './stand-item';
 import AddStandBasicInfo from './add-stand-basic-info';
 import AddStandMultimedia from './add-stand-multimedia';
 import AddSocialMedia from './add-social-media';
 import './my-stands.scss';
+import LoadMyStands from './load-my-stands';
 
 const menuItems = [
   {
@@ -48,19 +49,12 @@ const MyStands = (): React.ReactElement => {
   useEffect(() => {
     const w: any = window;
     w.scrollTo(0, 0);
-    setIsLoading(true);
-    APISDK.GetUserStands()
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch((error: any) => {
-        setIsLoading(false);
-        console.log(error);
-      });
-  }, [APISDK]);
+  }, [window]);
 
   return (
     <div className='col s12 m8 MyStands'>
+      <LoadMyStands setIsLoading={setIsLoading} />
+      <LoadingIndicator isLoading={isLoading} />
       {
         stand || valueReference === 'add-stand' ?
           <div onClick={(e: any) => {
