@@ -21,9 +21,13 @@ const StandComponent = (props: any): React.ReactElement => {
       <div className='col s12 m8'>
         <StandOptionMenuGrid standSlug={stand.attributes.slug} />
         <CommonLargeText text={stand.attributes.description} Link={Link} />
+        <HorizontalSpace size='x-small' />
         <StandDetailGallery images={stand.relationships.pictures.data} />
-        <QRCodeComponent title={`QR code de ${stand.attributes.name}`} />
         <HorizontalSpace size='small' />
+        <div className='hide-on-small-only'>
+          <QRCodeComponent title={`QR code de ${stand.attributes.name}`} />
+          <HorizontalSpace size='small' />
+        </div>
       </div>
       <div className='col s12 m4'>
         {
@@ -50,6 +54,11 @@ const StandComponent = (props: any): React.ReactElement => {
         <GroupItem
           item={stand.relationships.group.data}
           expoId={stand.relationships.expo.data.attributes.slug} />
+        <div className='hide-on-med-and-up'>
+          <HorizontalSpace size='x-small' />
+          <QRCodeComponent title={`QR code de ${stand.attributes.name}`} />
+          <HorizontalSpace size='x-small' />
+        </div>
       </div>
     </div>
   );

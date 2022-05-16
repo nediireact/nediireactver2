@@ -7,23 +7,23 @@ import {
   StrongText,
   CommonLargeText
 } from 'rrmc';
-import GenericHeaderDetail from 'src/modules/generic-item-detail/generic-header-detail';
-import GenericItemGallery from 'src/modules/generic-item-detail/generic-item-gallery';
-import GenericItemPrice from 'src/modules/generic-item-detail/generic-item-price';
-import GenericItemDetailMealsAvailability from 'src/modules/generic-item-detail/generic-item-meal-availability';
+import GenericHeaderDetail from './generic-header-detail';
+import GenericItemGallery from './generic-item-gallery';
+import GenericItemPrice from './generic-item-price';
+import GenericItemDetailMealsAvailability from './generic-item-meal-availability';
 import StandMealsAddons from 'src/modules/stand-meals-detail/stand-meals-addons';
 import { GetBuyableItemName } from 'src/modules/utils/products-services';
-import GenericItemDetailFeatures from 'src/modules/generic-item-detail/generic-item-detail-features';
+import GenericItemDetailFeatures from './generic-item-detail-features';
 import VehicleAttributes from 'src/modules/vehicle-attributes/vehicle-attributes';
 import ServicesAttributes from 'src/modules/services-attributes/services-attributes';
 import ProductAttributes from 'src/modules/product-attributes/product-attributes';
 import RealStateAttributes from 'src/modules/real-estate-attributes/real-estate-attributes';
 import LoadUserFavoriteItems from 'src/modules/user-favorites/load-user-favorite-items';
 import LoadUserCart from 'src/modules/user-cart/load-user-cart';
-import GenericItemStockInfo from 'src/modules/generic-item-detail/generic-item-stock-info';
-import GenericItemShippingInfo from 'src/modules/generic-item-detail/generic-item-shipping-info';
-import GenericItemAddToCartButton from 'src/modules/generic-item-detail/generic-item-add-to-cart-button';
-import GenericItemBuyNowButton from 'src/modules/generic-item-detail/generic-item-buy-now-button';
+import GenericItemStockInfo from './generic-item-stock-info';
+import GenericItemShippingInfo from './generic-item-shipping-info';
+import GenericItemAddToCartButton from './generic-item-add-to-cart-button';
+import GenericItemBuyNowButton from './generic-item-buy-now-button';
 
 const GenericItemDetail = (props: any): React.ReactElement => {
   const item = props.item;
@@ -47,6 +47,7 @@ const GenericItemDetail = (props: any): React.ReactElement => {
       </div>
       <HorizontalSpace size='small' />
       <div className='col s12 m4'>
+        <HorizontalSpace size='small' />
         <div className='GenericCard'>
           <GenericHeaderDetail
             item={item}
