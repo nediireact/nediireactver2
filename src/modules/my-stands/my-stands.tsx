@@ -9,12 +9,13 @@ import {
   MenuChoiceMenu,
   LoadingIndicator
 } from 'rrmc';
-import MyStandItem from './stand-item';
+import APISDK from 'src/api/api-sdk/api-sdk';
 import AddStandBasicInfo from './add-stand-basic-info';
 import AddStandMultimedia from './add-stand-multimedia';
 import AddSocialMedia from './add-social-media';
 import './my-stands.scss';
 import LoadMyStands from './load-my-stands';
+import ItemToEdit from 'src/modules/item-to-edit/item-to-edit';
 
 const menuItems = [
   {
@@ -51,12 +52,28 @@ const MyStands = (): React.ReactElement => {
     w.scrollTo(0, 0);
   }, [window]);
 
+  const deleteStand = (id: number) => {
+    if ( isLoading || !id ) return;
+    setIsLoading(true);
+    APISDK.DeleteStandById(id)
+      .then(() => {
+        return APISDK.GetUserStands();
+      })
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error: any) => {
+        setIsLoading(false);
+        console.log(error);
+      });
+  };
+
   return (
     <div className='col s12 m8 MyStands'>
       <LoadMyStands setIsLoading={setIsLoading} />
       <LoadingIndicator isLoading={isLoading} />
       {
-        stand || valueReference === 'add-stand' ?
+        stand || valueReference === 'add-item' ?
           <div onClick={(e: any) => {
             e.preventDefault();
             setValueReference('');
@@ -70,7 +87,7 @@ const MyStands = (): React.ReactElement => {
         stand ?
         <>
         {
-          valueReference !== 'add-stand' ?
+          valueReference !== 'add-item' ?
             <MenuChoiceMenu
               color='cyan'
               items={menuItems}
@@ -118,19 +135,24 @@ const MyStands = (): React.ReactElement => {
             text={`${userStands.length} Empresa${userStands.length === 1 ? '' : 's'} registrada${userStands.length === 1 ? '' : 's'}`} />
           <HorizontalSpace size='x-small' />
           <div className='row MyStands__stands-wrapper'>
-            <MyStandItem
-              setStand={setStand}
+            <ItemToEdit
+              addLabel='Agregar empresa'
+              setItem={setStand}
               valueReference={valueReference}
               setValueReference={setValueReference} />
             {
               userStands && userStands.length ?
               userStands.map((i: any, index: number) => {
                 return (
-                  <MyStandItem
+                  <ItemToEdit
                     key={index}
                     item={i}
-                    stand={stand}
-                    setStand={setStand}
+                    setItem={setStand}
+                    deleteItem={deleteStand}
+                    id={i.id}
+                    name={i.attributes.name}
+                    image={i.attributes.img_logo}
+                    url={`/empresa/${i.attributes.slug}`}
                     valueReference={valueReference}
                     setValueReference={setValueReference}
                     isLoading={isLoading}
@@ -142,7 +164,7 @@ const MyStands = (): React.ReactElement => {
         </> : null
       }
       {
-        valueReference === 'add-stand' ?
+        valueReference === 'add-item' ?
           <AddStandBasicInfo
             isLoading={isLoading}
             setIsLoading={setIsLoading}

@@ -19,6 +19,7 @@ import UserCart from 'src/modules/user-cart/user-cart';
 import UserAccountConfigurations from 'src/modules/user-account-configurations/user-account-configurations';
 import UserAddress from 'src/modules/user-address/user-address';
 import MyStands from 'src/modules/my-stands/my-stands';
+import MyProducts from 'src/modules/my-products/my-products';
 
 const UserAccountPage = (): React.ReactElement => {
   const [sectionMenu, setSectionMenu]: any = useState([]);
@@ -62,6 +63,7 @@ const UserAccountPage = (): React.ReactElement => {
           { pathname === '/mi-cuenta/configuracion' ? <UserAccountConfigurations /> : null }
           { pathname === '/mi-cuenta/direcciones' ? <UserAddress /> : null }
           { pathname === '/mi-cuenta/empresas' ? <MyStands /> : null }
+          { pathname === '/mi-cuenta/productos' ? <MyProducts /> : null }
         </div>
         <Footer />
         <SystemCheck />
