@@ -12,6 +12,8 @@ import {
 import './my-products.scss';
 import LoadMyProducts from './load-my-products';
 import ItemToEdit from 'src/modules/item-to-edit/item-to-edit';
+import AddItemBasicInfo from 'src/modules/item-basic-info-form/item-basic-info-form';
+import APISDK from 'src/api/api-sdk/api-sdk';
 
 const menuItems = [
   {
@@ -23,16 +25,6 @@ const menuItems = [
     name: 'Mulimedia',
     value: 'step-2',
     icon: 'image'
-  },
-  {
-    name: 'Redes sociales',
-    value: 'step-3',
-    icon: 'group'
-  },
-  {
-    name: 'Comunica...',
-    value: 'step-5',
-    icon: 'language'
   }
 ];
 
@@ -48,12 +40,28 @@ const MyProducts = (): React.ReactElement => {
     w.scrollTo(0, 0);
   }, [window]);
 
+  const deleteItem = (id: number) => {
+    if ( isLoading || !id ) return;
+    setIsLoading(true);
+    APISDK.DeleteProductById(id)
+      .then(() => {
+        return APISDK.GetUserProducts();
+      })
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error: any) => {
+        setIsLoading(false);
+        console.log(error);
+      });
+  };
+
   return (
     <div className='col s12 m8 MyStands'>
       <LoadMyProducts setIsLoading={setIsLoading} />
       <LoadingIndicator isLoading={isLoading} />
       {
-        product || valueReference === 'add-stand' ?
+        product || valueReference === 'add-item' ?
           <div onClick={(e: any) => {
             e.preventDefault();
             setValueReference('');
@@ -67,7 +75,7 @@ const MyProducts = (): React.ReactElement => {
         product ?
         <>
         {
-          valueReference !== 'add-stand' ?
+          valueReference !== 'add-item' ?
             <MenuChoiceMenu
               color='cyan'
               items={menuItems}
@@ -75,6 +83,14 @@ const MyProducts = (): React.ReactElement => {
               setValueReference={setValueReference} /> : null
         }
         </> : null
+      }
+      {
+        valueReference === 'step-1' ?
+          <AddItemBasicInfo
+            item={product}
+            setStand={setProduct}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading} /> : null
       }
       {
         !valueReference && !product ?
@@ -88,7 +104,6 @@ const MyProducts = (): React.ReactElement => {
             <ItemToEdit
               addLabel='Agregar producto'
               setItem={setProduct}
-              valueReference={valueReference}
               setValueReference={setValueReference} />
             {
               userProducts && userProducts.length ?
@@ -102,15 +117,27 @@ const MyProducts = (): React.ReactElement => {
                     name={i.attributes.name}
                     image={i.attributes.img_picture}
                     url={`/empresa/${i.relationships.stand.data.attributes.slug}/productos/${i.attributes.slug}`}
+                    standName={i.relationships.stand.data.attributes.name}
                     valueReference={valueReference}
                     setValueReference={setValueReference}
                     isLoading={isLoading}
-                    setIsLoading={setIsLoading} />
+                    setIsLoading={setIsLoading}
+                    deleteItem={deleteItem} />
                 );
               }) : null
             }
           </div>
         </> : null
+      }
+      {
+        valueReference === 'add-item' ?
+          <AddItemBasicInfo
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            setItem={setProduct}
+            itemType='Product'
+            itemClassificacionType='ProductClassification'
+            setValueReference={setValueReference} /> : null
       }
     </div>
   );

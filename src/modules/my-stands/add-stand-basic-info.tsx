@@ -242,7 +242,7 @@ const AddStandBasicInfo = ( props: any ): React.ReactElement => {
       <div className='input-field col s12 AddStandForm__sub-title'>
         <GenericCheckboxInput id='promotions' placeholder='La empresa es un restaurante?'
           checked={cRestaurant} setValue={setRestaurant} />
-        </div>
+      </div>
       <div className='input-field col s12 AddStandForm__sub-title'>
         <GenericCheckboxInput id='alwaysOpen' placeholder='La empresa esta abierta 24 horas?'
           checked={cAlwaysOpen} setValue={setAlwaysOpen} />

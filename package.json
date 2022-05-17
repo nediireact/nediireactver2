@@ -63,7 +63,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
-    "rrmc": "^0.0.50",
+    "rrmc": "^0.0.53",
     "sass": "^1.51.0",
     "stylelint": "^14.8.0",
     "stylelint-scss": "^4.2.0",

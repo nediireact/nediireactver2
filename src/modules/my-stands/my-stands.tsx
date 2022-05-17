@@ -96,33 +96,27 @@ const MyStands = (): React.ReactElement => {
         }
         {
           valueReference === 'step-1' ?
-            <>
             <AddStandBasicInfo
               stand={stand}
               setStand={setStand}
               isLoading={isLoading}
-              setIsLoading={setIsLoading} />
-            </> : null
+              setIsLoading={setIsLoading} /> : null
         }
         {
           valueReference === 'step-2' ?
-            <>
             <AddStandMultimedia
               stand={stand}
               setStand={setStand}
               isLoading={isLoading}
-              setIsLoading={setIsLoading} />
-            </> : null
+              setIsLoading={setIsLoading} /> : null
         }
         {
           valueReference === 'step-3' ?
-            <>
             <AddSocialMedia
               stand={stand}
               setStand={setStand}
               isLoading={isLoading}
-              setIsLoading={setIsLoading} />
-            </> : null
+              setIsLoading={setIsLoading} /> : null
         }
         </> : null
       }
@@ -138,7 +132,6 @@ const MyStands = (): React.ReactElement => {
             <ItemToEdit
               addLabel='Agregar empresa'
               setItem={setStand}
-              valueReference={valueReference}
               setValueReference={setValueReference} />
             {
               userStands && userStands.length ?
