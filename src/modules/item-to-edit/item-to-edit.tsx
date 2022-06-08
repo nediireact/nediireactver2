@@ -43,9 +43,15 @@ const ItemToEdit = (props: any): React.ReactElement => {
         <div className='ItemToEdit__name truncate'>
           {props.name}
         </div>
+        {
+          props.standName ?
+            <div className='ItemToEdit__stand-name orange-text text-accent-4 truncate'>
+              {props.standName}
+            </div> : null
+        }
         <div className='ItemToEdit__action-buttons'>
           <i
-            className={`material-icons white ${ props.isLoading ? 'blue-text text-lighten-4' : 'blue-text'} ItemToEdit__button`}
+            className={`material-icons ${ props.isLoading ? 'blue-text text-lighten-4' : 'blue-text'} ItemToEdit__button`}
             onClick={(e: any) => {
               if ( props.isLoading ) return null;
               e.preventDefault();
@@ -56,7 +62,7 @@ const ItemToEdit = (props: any): React.ReactElement => {
             <i className='material-icons white green-text ItemToEdit__button'>remove_red_eye</i>
           </Link>
           <i
-            className={`material-icons white ${props.isLoading ? 'red-text text-lighten-4' : 'red-text'} ItemToEdit__button`}
+            className={`material-icons ${props.isLoading ? 'red-text text-lighten-4' : 'red-text'} ItemToEdit__button`}
             onClick={(e: any) => {
               if ( props.isLoading ) return null;
               e.preventDefault();

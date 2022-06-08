@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+/* eslint-disable max-lines-per-function */
 import Login from './login';
 import UpdateUser from './update-user';
 import UpdateUserProfile from './update-user-profile';
@@ -16,6 +18,10 @@ import AddStandPicture from './add-stand-picture';
 import DeleteStandPicture from './delete-stand-picture';
 import DeleteStandById from './delete-stand-by-id';
 import GetUserProducts from './get-user-products';
+import AddBuyableItem from './add-buyable-item';
+import GetProductClassificationsByStand from './get-product-classifications-by-stand';
+import GetProductClassifications from './get-product-classifications';
+import DeleteProductById from './delete-product-by-id';
 
 const APISDK = {
   Login: Login,
@@ -35,7 +41,11 @@ const APISDK = {
   AddStandPhone: AddStandPhone,
   AddStandPicture: AddStandPicture,
   DeleteStandPicture: DeleteStandPicture,
-  GetUserProducts: GetUserProducts
+  GetUserProducts: GetUserProducts,
+  AddBuyableItem: AddBuyableItem,
+  GetProductClassificationsByStand: GetProductClassificationsByStand,
+  GetProductClassifications: GetProductClassifications,
+  DeleteProductById: DeleteProductById
 };
 
 export default APISDK;

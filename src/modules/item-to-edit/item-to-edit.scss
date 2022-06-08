@@ -35,6 +35,10 @@
     @extend .black-text;
   }
 
+  &__stand-name {
+    padding: 0 10px;
+  }
+
   &__button {
     padding: 5px;
     cursor: pointer;
@@ -54,6 +58,10 @@
 
     &__image {
       height: 110px;
+
+      // &--add {
+      //   height: 134px;
+      // }
     }
   }
 }
@@ -62,6 +70,10 @@
   .ItemToEdit {
     &__image {
       height: 130px;
+
+      // &--add {
+      //   height: 154px;
+      // }
     }
   }
 }
