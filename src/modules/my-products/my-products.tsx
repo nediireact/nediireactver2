@@ -82,15 +82,22 @@ const MyProducts = (): React.ReactElement => {
               valueReference={valueReference}
               setValueReference={setValueReference} /> : null
         }
+        {
+          valueReference === 'step-1' ?
+            <AddItemBasicInfo
+              item={product}
+              setItem={setProduct}
+              setStand={setProduct}
+              isLoading={isLoading}
+              itemType='Product'
+              itemClassificacionType='ProductClassification'
+              setIsLoading={setIsLoading} /> : null
+        }
+        {
+          valueReference === 'step-2' ?
+            <></> : null
+        }
         </> : null
-      }
-      {
-        valueReference === 'step-1' ?
-          <AddItemBasicInfo
-            item={product}
-            setStand={setProduct}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading} /> : null
       }
       {
         !valueReference && !product ?

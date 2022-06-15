@@ -161,7 +161,8 @@ const MyStands = (): React.ReactElement => {
           <AddStandBasicInfo
             isLoading={isLoading}
             setIsLoading={setIsLoading}
-            setStand={setStand} /> : null
+            setStand={setStand}
+            setValueReference={setValueReference} /> : null
       }
     </div>
   );

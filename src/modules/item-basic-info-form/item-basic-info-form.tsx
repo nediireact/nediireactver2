@@ -104,25 +104,34 @@ const AddItemBasicInfo = ( props: any ): React.ReactElement => {
         });
       }
     }
-    // console.log('items:', items);
     return items;
   };
 
-  const addStand = (e: any) => {
+  const addItem = (e: any) => {
     e.preventDefault();
     if ( isLoading ) return;
     setIsLoading(true);
     if ( item ) {
-      const standToUpdate: any = {
-        id: item.id
+      const itemToUpdate: any = {
+        id: item.id,
+        itemType: props.itemType,
+        itemClassificacionType: props.itemClassificacionType
       };
-      if ( name ) standToUpdate.name = name;
-      APISDK.UpdateStand(standToUpdate)
-        .then(() => {
-          return APISDK.GetUserProducts();
-        })
+      if ( name ) itemToUpdate.name = name;
+      if ( stand ) itemToUpdate.stand = Number(stand);
+      if ( classification ) itemToUpdate.classification = Number(classification);
+      if ( imgPicture ) itemToUpdate.img_picture = imgPicture;
+      if ( price ) itemToUpdate.price = price;
+      if ( discount ) itemToUpdate.discount = discount;
+      if ( description ) itemToUpdate.description = description;
+      if ( shortDescription ) itemToUpdate.short_description = shortDescription;
+      if ( publishOnTheWall ) itemToUpdate.publish_on_the_wall = publishOnTheWall;
+      APISDK.UpdateBuyableItem(itemToUpdate)
         .then((response: any) => {
           props.setItem(response);
+          return APISDK.GetUserProducts();
+        })
+        .then(() => {
           setIsLoading(false);
         })
         .catch((error: any) => {
@@ -131,26 +140,26 @@ const AddItemBasicInfo = ( props: any ): React.ReactElement => {
         });
     } else {
       const itemToCreate: any = {
+        itemClassificacionType: props.itemClassificacionType,
+        itemType: props.itemType,
         name: name ? name : cName,
         short_description: shortDescription,
         description: description,
         stand: Number(stand),
         classification: Number(classification),
-        itemClassificacionType: props.itemClassificacionType,
-        itemType: props.itemType,
         img_picture: imgPicture,
         price: Number(price),
         discount: Number(discount),
-        publish_on_the_wall: publishOnTheWall
+        publish_on_the_wall: Boolean(publishOnTheWall)
       };
       APISDK.AddBuyableItem(itemToCreate)
-        .then(() => {
+        .then((response: any) => {
+          props.setItem(response);
           return APISDK.GetUserProducts();
         })
         .then(() => {
-          props.setItem(null); // temporary
-          props.setValueReference(null);
           setIsLoading(false);
+          props.setValueReference('step-1');
         })
         .catch((error: any) => {
           console.log('error', error);
@@ -173,34 +182,51 @@ const AddItemBasicInfo = ( props: any ): React.ReactElement => {
           text={`Editando ${item.attributes.name}`} />
         </>
     }
-    <form className='AddStandForm__form' onSubmit={addStand} ref={formRef}>
-      <div className='input-field col s12 AddStandForm__sub-title'>
+    <div className='col s12'>
+      <label htmlFor='dd'>sss</label>
+      <select name='dd' id='dd' title='cc'>
+        <option value='ddd'>
+          dd
+        </option>
+        {
+          getClassifications().map((e: any, index: number) => {
+            return (
+              <option value={e.value} key={index}>
+                {e.text}
+              </option>
+            );
+          })
+        }
+      </select>
+    </div>
+    <form className='AddStandForm__form' onSubmit={addItem} ref={formRef}>
+      <div className='col s12 AddStandForm__sub-title'>
         <b>Informacion basica del producto</b>
       </div>
       <GenericSelectInput id='stand' placeholder='Empresa'
         items={getStands()} disabled={isLoading} value={cStand}
-        setValue={setStand} required={stand ? false : true} />
+        setValue={setStand} required={item ? false : true} />
       {
         getClassifications().length ?
           <GenericSelectInput id='classification' placeholder='Clasificacion'
             items={getClassifications()} disabled={isLoading} value={cClassification}
-            setValue={setClassification} required={stand ? false : true} /> : null
+            setValue={setClassification} required={item ? false : true} /> : null
       }
       <GenericTextInput id='name' type='text' placeholder='Nombre del producto'
         disabled={isLoading} value={cName}
-        setValue={setName} required={stand ? false : true} />
+        setValue={setName} required={item ? false : true} />
       <GenericTextInput id='shortDescription' type='text' placeholder='Descripcion corta del producto'
-        disabled={isLoading} value={cShortDescription} setValue={setShortDescription} required={stand ? false : true} />
+        disabled={isLoading} value={cShortDescription} setValue={setShortDescription} required={item ? false : true} />
       <GenericTextInput id='price' type='tel' placeholder='Precio del producto'
         disabled={isLoading} value={cPrice}
-        setValue={setPrice} required={stand ? false : true} />
+        setValue={setPrice} required={item ? false : true} />
       <GenericTextInput id='discount' type='tel' placeholder='Descuento del producto'
         disabled={isLoading} value={cDiscount}
-        setValue={setDiscount} required={stand ? false : true} />
+        setValue={setDiscount} required={item ? false : true} />
       <GenericTextArea id='description' placeholder='Descripcion larga del producto'
         disabled={isLoading} value={cDescription} setValue={setDescription} />
-      <GenericImgInput id='imgPicture' placeholder={stand ? 'Actualizar imagen de listado' : 'Imagen de listado'}
-        disabled={isLoading} value={imgPicture} setValue={setImgPicture} required={stand ? false : true} />
+      <GenericImgInput id='imgPicture' placeholder={item ? 'Actualizar imagen de listado' : 'Imagen de listado'}
+        disabled={isLoading} value={imgPicture} setValue={setImgPicture} required={item ? false : true} />
       <div className='input-field col s12 AddStandForm__sub-title'>
         <GenericCheckboxInput id='publishOnTheWall' placeholder='Publicar en el muro?'
           checked={cPublishOnTheWall} setValue={setPublishOnTheWall} />

@@ -45,7 +45,6 @@ const GenericItemDetail = (props: any): React.ReactElement => {
           <CommonLargeText text={item.attributes.description} Link={Link} />
         </div>
       </div>
-      <HorizontalSpace size='small' />
       <div className='col s12 m4'>
         <HorizontalSpace size='small' />
         <div className='GenericCard'>

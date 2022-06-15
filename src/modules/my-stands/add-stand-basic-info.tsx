@@ -167,19 +167,20 @@ const AddStandBasicInfo = ( props: any ): React.ReactElement => {
         address: address,
         short_description: shortDescription,
         description: description,
-        restaurant: restaurant,
+        restaurant: Boolean(restaurant),
         contact_email: contactEmail,
-        plan: plan ? plan : cPlan,
-        expo: expo,
-        group: category,
+        plan: plan ? Number(plan) : Number(cPlan),
+        expo: Number(expo),
+        group: Number(category),
         support_email: supportEmail,
         phone: phone,
-        always_open: alwaysOpen
+        always_open: Boolean(alwaysOpen)
       };
       APISDK.AddStand(standToCreate)
         .then((response: any) => {
-          props.setStand(response);
           props.setIsLoading(false);
+          props.setStand(response);
+          props.setValueReference('step-1');
         })
         .catch((error: any) => {
           console.log('error', error);

@@ -22,6 +22,7 @@ import AddBuyableItem from './add-buyable-item';
 import GetProductClassificationsByStand from './get-product-classifications-by-stand';
 import GetProductClassifications from './get-product-classifications';
 import DeleteProductById from './delete-product-by-id';
+import UpdateBuyableItem from './update-buyable-item';
 
 const APISDK = {
   Login: Login,
@@ -45,7 +46,8 @@ const APISDK = {
   AddBuyableItem: AddBuyableItem,
   GetProductClassificationsByStand: GetProductClassificationsByStand,
   GetProductClassifications: GetProductClassifications,
-  DeleteProductById: DeleteProductById
+  DeleteProductById: DeleteProductById,
+  UpdateBuyableItem: UpdateBuyableItem
 };
 
 export default APISDK;
