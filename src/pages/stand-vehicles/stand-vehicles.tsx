@@ -1,29 +1,31 @@
 import React, {
   useState
 } from 'react';
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import SystemCheck from 'src/components/system-check/system-check';
-import NavBar from 'src/modules/nav-bar/nav-bar';
-import Footer from 'src/components/footer/footer';
-import StandDataLoader from 'src/modules/stand/stand-data-loader';
-import StandVehiclesGrid from 'src/modules/stand-vehicles-grid/stand-vehicles-grid';
+import SystemValues from 'src/constants/SystemValues';
+import NavBar from 'src/components/_core/nav-bar';
+import Footer from 'src/components/_core/footer';
+import StandDataLoader from 'src/components/stand/stand-data-loader';
+import StandVehiclesGrid from 'src/components/stand-vehicles-grid';
 
 const StandVehicles = (): React.ReactElement => {
   const params: any = useParams();
-  const stand = useSelector((state: any) => state.stand);
-  const [sectionMenu, setSectionMenu] = useState([]);
+  const [sectionMenu, setSectionMenu]: any = useState([]);
+  const [stand, setStand]: any = useState(SystemValues.getInstance().system.standsById[params.standId]);
 
   return (
     <div className='page'>
-      <NavBar sectionMenu={sectionMenu} stand={stand} />
-      <StandDataLoader setSectionMenu={setSectionMenu} />
+      <NavBar
+        sectionMenu={sectionMenu}
+        setSectionMenu={setSectionMenu} />
+      <StandDataLoader
+        setSectionMenu={setSectionMenu}
+        setStand={setStand}
+        stand={stand} />
       {
-        stand && stand[params.standId] && stand[params.standId].id ?
-          <StandVehiclesGrid stand={stand[params.standId]} /> : null
+        stand ? <StandVehiclesGrid stand={stand} /> : null
       }
       <Footer />
-      <SystemCheck />
     </div>
   );
 };

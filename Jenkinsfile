@@ -4,17 +4,21 @@ pipeline {
         skipStagesAfterUnstable()
     }
     environment {
-        APP_FOLDER = "nedii"
+        APP_NAME = "nedii"
+        REPLICAS = sh(script: "echo ${REPLICAS}", , returnStdout: true).trim()
         BRANCH = sh(script: "echo ${BRANCH}", , returnStdout: true).trim()
     }
     stages {
-        stage("Deploy and start instance") {
+        stage("Deploying") {
             steps {
-                sh "cp /apps/$APP_FOLDER/env.default /apps/$APP_FOLDER/env"
-                sh "echo BRANCH=$BRANCH >> /apps/$APP_FOLDER/env"
-                sh "docker-compose --env-file /apps/$APP_FOLDER/env -f ./docker-compose.yaml pull"
-                sh "docker-compose --env-file /apps/$APP_FOLDER/env -f ./docker-compose.yaml down --remove-orphans -f"
-                sh "docker-compose --env-file /apps/$APP_FOLDER/env -f ./docker-compose.yaml up -d"
+                sh "chmod 777 deploy-helm-chart.sh"
+                sh "./deploy-helm-chart.sh $APP_NAME $BRANCH $REPLICAS"
+            }
+        }
+        stage("Waiting for ready") {
+            steps {
+                sh "chmod 777 deployment-check.sh"
+                sh "./deployment-check.sh $APP_NAME $REPLICAS"
             }
         }
     }

@@ -34,6 +34,9 @@ const commonIndex = (req, res) => {
       og_site_name: 'Nedii',
       url: '/',
       keywords: 'Nedii,expo,stands,negocios'
+    },
+    data: {
+      hostname: process.env.HOSTNAME
     }
   });
 };

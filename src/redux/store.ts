@@ -19,12 +19,7 @@ if ( process.env.NODE_ENV !== 'production' ) {
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: [
-    'system',
-    'user',
-    'stand',
-    'expo'
-  ]
+  whitelist: ['system']
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);

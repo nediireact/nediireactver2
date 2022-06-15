@@ -1,14 +1,11 @@
 import { APIDelete } from 'src/api/communicator';
-import store from 'src/redux/store';
+import SystemValues from 'src/constants/SystemValues';
 import UpdateStand from './update-stand';
 
 export const DeleteStandPicture = (pictureId: number, standId: number, preExistentPictures: Array<any>): Promise<any> => {
   return new Promise((res, rej) => {
-    const user = store && store.getState().user &&
-      store.getState().user.user &&
-      store.getState().user.user.id ?
-      store.getState().user.user : null;
-    if ( !user ) return rej(new Error('no user'));
+    const user = SystemValues.getInstance().system.user;
+    if ( !user.id ) return rej(new Error('No user'));
     APIDelete(`stand-pictures/${pictureId}/`)
       .then(() => {
         const pictureToDelete = preExistentPictures.filter((i: any) => Number(i.id) === pictureId);
