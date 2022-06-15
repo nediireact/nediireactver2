@@ -1,22 +1,24 @@
 import React, {
   useState
 } from 'react';
-import SystemCheck from 'src/components/system-check/system-check';
-import NavBar from 'src/modules/nav-bar/nav-bar';
-import DefaultNavButtons from 'src/modules/nav-bar/default-nav-buttons';
-import Footer from 'src/components/footer/footer';
-import CategoriesGrid from 'src/modules/categories-grid/categories-grid';
+import NavBar from 'src/components/_core/nav-bar';
+import DefaultNavButtons from 'src/components/_core/nav-bar/default-nav-buttons';
+import Footer from 'src/components/_core/footer';
+import CategoriesGrid from 'src/components/categories-grid';
 
 const CategoriesGridPage = (): React.ReactElement => {
   const [sectionMenu, setSectionMenu]: any = useState([]);
 
   return (
     <div className='page'>
-      <NavBar sectionMenu={sectionMenu} />
-      <DefaultNavButtons setSectionMenu={setSectionMenu} />
+      <NavBar
+        sectionMenu={sectionMenu}
+        setSectionMenu={setSectionMenu} />
+      <DefaultNavButtons
+        sectionMenu={sectionMenu}
+        setSectionMenu={setSectionMenu} />
       <CategoriesGrid />
       <Footer />
-      <SystemCheck />
     </div>
   );
 };

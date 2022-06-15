@@ -1,6 +1,6 @@
 import {
   EXPO_DATA
-} from 'src/constants/SystemConstants';
+} from 'src/constants/SystemValues';
 
 const SetExpoData = ( data: any ): any => {
   return {

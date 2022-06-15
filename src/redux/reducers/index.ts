@@ -1,16 +1,15 @@
 import {
   combineReducers
 } from 'redux';
-import { UserReducer } from 'src/redux/reducers/user-reducer';
-import SystemReducer from 'src/redux/reducers/system-reducer';
-import StandReducer from 'src/redux/reducers/stand-reducer';
-import ExpoReducer from 'src/redux/reducers/expo-reducer';
+// import { UserReducer } from 'src/redux/reducers/user-reducer';
+// import SystemReducer from 'src/redux/reducers/system-reducer';
+import SystemValues from 'src/constants/SystemValues';
+
+const systemValues = SystemValues.getInstance();
 
 const reducers = {
-  user: UserReducer,
-  system: SystemReducer,
-  stand: StandReducer,
-  expo: ExpoReducer
+  user: systemValues.userReducer,
+  system: systemValues.systemReducer
 };
 
 export default combineReducers(reducers);

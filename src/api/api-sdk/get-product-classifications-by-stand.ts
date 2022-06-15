@@ -1,20 +1,17 @@
-import { RebuildData } from 'rrmc';
 import { APIGet } from 'src/api/communicator';
 import store from 'src/redux/store';
-import { SetUserData } from 'src/redux/actions/user-actions';
+import SystemValues from 'src/constants/SystemValues';
+import SetSystemData from 'src/redux/actions/_core/system';
 
-export const GetProductClassificationsByStand = (id: number): Promise<any> => {
+export const GetProductClassificationsByStand = (standId: number): Promise<any> => {
   return new Promise((res, rej) => {
-    const user = store && store.getState().user &&
-      store.getState().user.user &&
-      store.getState().user.user.id ?
-      store.getState().user.user : null;
-    if ( !user ) return rej(new Error('no user'));
-    APIGet(`product-classifications/?filter[stand]=${id}`, true)
+    APIGet(`product-classifications/?filter[stand]=${standId}`)
       .then((response: any) => {
-        const data = RebuildData(response).data;
-        store.dispatch(SetUserData({
-          productClassifications: data
+        const data = response.data;
+        const classifications = SystemValues.getInstance().system.productClassificationsByStand;
+        classifications[standId] = data;
+        store.dispatch(SetSystemData({
+          productClassificationsByStand: classifications
         }));
         res(data);
       })

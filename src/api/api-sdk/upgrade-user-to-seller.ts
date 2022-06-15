@@ -1,4 +1,4 @@
-import UpdateUserProfile from 'src/api/api-sdk/update-user-profile';
+import UpdateUserProfile from './_api-core-helpers/update-user-profile';
 
 export const UpgradeUserToSeller = (): Promise<any> => {
   return new Promise((res, rej) => {

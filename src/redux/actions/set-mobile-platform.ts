@@ -1,6 +1,6 @@
 import {
   SET_MOBILE_PLATOFORM
-} from 'src/constants/SystemConstants';
+} from 'src/constants/SystemValues';
 
 const SetMobilePlatform = ( data: any ): any => {
   return {

@@ -3,11 +3,10 @@ import React, {
 } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import SystemCheck from 'src/components/system-check/system-check';
-import NavBar from 'src/modules/nav-bar/nav-bar';
-import Footer from 'src/components/footer/footer';
-import StandDataLoader from 'src/modules/stand/stand-data-loader';
-import StandMealsGrid from 'src/modules/stand-meals-grid/stand-meals-grid';
+import NavBar from 'src/components/_core/nav-bar';
+import Footer from 'src/components/_core/footer';
+import StandDataLoader from 'src/components/stand/stand-data-loader';
+import StandMealsGrid from 'src/components/stand-meals-grid/stand-meals-grid';
 
 const StandMeals = (): React.ReactElement => {
   const params: any = useParams();
@@ -16,14 +15,15 @@ const StandMeals = (): React.ReactElement => {
 
   return (
     <div className='page'>
-      <NavBar sectionMenu={sectionMenu} />
+      <NavBar
+        sectionMenu={sectionMenu}
+        setSectionMenu={setSectionMenu} />
       <StandDataLoader setSectionMenu={setSectionMenu} />
       {
         stand && stand[params.standId] && stand[params.standId].id ?
           <StandMealsGrid stand={stand[params.standId]} /> : null
       }
       <Footer />
-      <SystemCheck />
     </div>
   );
 };
