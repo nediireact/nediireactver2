@@ -3,7 +3,7 @@ import {
   USER_CART_ADD_ITEM,
   USER_CART_DELETE_ITEM,
   USER_CART_UPDATE_ITEM
-} from 'src/constants/SystemConstants';
+} from 'src/constants/SystemValues';
 
 export const SetUserCart = ( data: any ): any => {
   return {

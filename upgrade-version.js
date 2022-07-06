@@ -3,7 +3,7 @@
 
 const fs = require('fs');
 const packageJSON = require('./package.json');
-const versionJSON = require('./src/assets/version.json');
+const versionJSON = require('./src/constants/version.json');
 
 const upgradeVersion = ( packageJSON, filename ) => {
   const a = packageJSON.version.split('.');
@@ -26,4 +26,4 @@ const upgradeVersion = ( packageJSON, filename ) => {
 };
 
 upgradeVersion(packageJSON, './package.json');
-upgradeVersion(versionJSON, './src/assets/version.json');
+upgradeVersion(versionJSON, './src/constants/version.json');

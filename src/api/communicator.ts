@@ -1,8 +1,8 @@
 import axios from 'axios';
-import EnvironmentVariables from 'src/constants/EnvironmentVariables';
+import SystemValues from 'src/constants/SystemValues';
 import store from 'src/redux/store';
 
-const env = EnvironmentVariables.getInstance();
+const env = SystemValues.getInstance();
 const instance = axios.create({
   headers: {
     'Content-Type': 'application/vnd.api+json'

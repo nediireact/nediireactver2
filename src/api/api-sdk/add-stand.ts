@@ -1,8 +1,8 @@
 import { APIPost } from 'src/api/communicator';
 import store from 'src/redux/store';
-import GetUserAddress from './get-user-address';
-import CheckState from './check-state';
-import CheckCity from './check-city';
+import GetUserAddress from './_api-core-helpers/get-user-address';
+import CheckState from './_api-core-helpers/check-state';
+import CheckCity from './_api-core-helpers/check-city';
 import AddStandPhone from './add-stand-phone';
 
 export const AddStand = (stand: any): Promise<any> => {

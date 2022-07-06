@@ -2,7 +2,7 @@ import {
   USER_FAVORITES_STANDS,
   USER_FAVORITES_ADD_STAND,
   USER_FAVORITES_DELETE_STAND
-} from 'src/constants/SystemConstants';
+} from 'src/constants/SystemValues';
 
 export const SetUserFavoriteStands = ( data: any ): any => {
   return {

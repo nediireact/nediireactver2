@@ -1,6 +1,6 @@
 import {
   USER_ORDERS
-} from 'src/constants/SystemConstants';
+} from 'src/constants/SystemValues';
 
 export const SetUserOrders = ( data: any ): any => {
   return {

@@ -1,7 +1,7 @@
 import {
   STAND_DATA,
   UPDATE_STAND_AVERAGE_RATING
-} from 'src/constants/SystemConstants';
+} from 'src/constants/SystemValues';
 
 const initialState: any = {};
 

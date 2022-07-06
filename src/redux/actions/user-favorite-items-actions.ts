@@ -2,7 +2,7 @@ import {
   USER_FAVORITES_ITEMS,
   USER_FAVORITES_ADD_ITEM,
   USER_FAVORITES_DELETE_ITEM
-} from 'src/constants/SystemConstants';
+} from 'src/constants/SystemValues';
 
 export const SetUserFavoriteItems = ( data: any ): any => {
   return {

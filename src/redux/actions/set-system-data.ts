@@ -1,6 +1,6 @@
 import {
   SYSTEM_DATA
-} from 'src/constants/SystemConstants';
+} from 'src/constants/SystemValues';
 
 const SetSystemData = ( data: any ): any => {
   return {

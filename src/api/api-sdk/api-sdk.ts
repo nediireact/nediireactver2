@@ -1,14 +1,8 @@
 /* eslint-disable max-lines */
 /* eslint-disable max-lines-per-function */
-import Login from './login';
-import UpdateUser from './update-user';
-import UpdateUserProfile from './update-user-profile';
+import * as CoreAPIs from './_api-core-helpers';
 import GetNediiPlans from './get-nedii-plans';
 import UpgradeUserToSeller from './upgrade-user-to-seller';
-import GetUserAddress from './get-user-address';
-import AddUserAddress from './add-user-address';
-import UpdateUserAddress from './update-user-address';
-import DeleteUserAddress from './delete-user-address';
 import GetUserStands from './get-user-stands';
 import GetUserStandById from './get-user-stand-by-id';
 import AddStand from './add-stand';
@@ -25,15 +19,9 @@ import DeleteProductById from './delete-product-by-id';
 import UpdateBuyableItem from './update-buyable-item';
 
 const APISDK = {
-  Login: Login,
-  UpdateUser: UpdateUser,
-  UpdateUserProfile: UpdateUserProfile,
+  ...CoreAPIs,
   GetNediiPlans: GetNediiPlans,
   UpgradeUserToSeller: UpgradeUserToSeller,
-  GetUserAddress: GetUserAddress,
-  AddUserAddress: AddUserAddress,
-  UpdateUserAddress: UpdateUserAddress,
-  DeleteUserAddress: DeleteUserAddress,
   GetUserStands: GetUserStands,
   GetUserStandById: GetUserStandById,
   AddStand: AddStand,

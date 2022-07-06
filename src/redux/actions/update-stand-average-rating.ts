@@ -1,6 +1,6 @@
 import {
   UPDATE_STAND_AVERAGE_RATING
-} from 'src/constants/SystemConstants';
+} from 'src/constants/SystemValues';
 
 const UpdateStandAverageRating = ( data: any ): any => {
   return {

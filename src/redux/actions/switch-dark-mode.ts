@@ -1,6 +1,6 @@
 import {
   SWITCH_DARK_MODE
-} from 'src/constants/SystemConstants';
+} from 'src/constants/SystemValues';
 
 const SwitchDarkMode = ( darkMode: boolean ): any => {
   return {

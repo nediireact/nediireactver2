@@ -11,7 +11,7 @@ import {
   USER_CART_ADD_ITEM,
   USER_CART_DELETE_ITEM,
   USER_CART_UPDATE_ITEM
-} from 'src/constants/SystemConstants';
+} from 'src/constants/SystemValues';
 
 const initialState: any = {};
 

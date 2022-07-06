@@ -4,7 +4,7 @@ import {
   SET_MOBILE_PLATOFORM,
   SET_GLOBAL_ALERT_DIALOG,
   SYSTEM_DATA
-} from 'src/constants/SystemConstants';
+} from 'src/constants/SystemValues';
 
 const initialState: any = {
   darkMode: false,

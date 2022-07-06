@@ -1,6 +1,6 @@
 import {
   USER
-} from 'src/constants/SystemConstants';
+} from 'src/constants/SystemValues';
 
 export const SetUserData = ( data: any ): any => {
   return {
