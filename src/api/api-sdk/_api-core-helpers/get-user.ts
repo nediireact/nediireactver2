@@ -1,15 +1,14 @@
 import { APIGet } from 'src/api/communicator';
 import store from 'src/redux/store';
-import { SetUserData } from 'src/redux/actions/user-actions';
+import SystemValues from 'src/constants/SystemValues';
+import { SetUserData } from 'src/redux/actions/_core/user';
 
 const GetUser = (): Promise<any> => {
   return new Promise((res, rej) => {
-    const user = store && store.getState().user &&
-      store.getState().user.user &&
-      store.getState().user.user.id ?
-      store.getState().user.user : null;
+    const user = SystemValues.getInstance().user;
+    if ( !user.id ) return res(new Error('No user'));
     const url = `users/${user.id}`;
-    APIGet(url, true)
+    APIGet(url)
       .then((response: any) => {
         store.dispatch(SetUserData({
           user: response.data

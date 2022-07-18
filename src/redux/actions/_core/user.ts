@@ -1,10 +1,10 @@
 import {
-  USER
+  EXPO_DATA
 } from 'src/constants/SystemValues';
 
 export const SetUserData = ( data: any ): any => {
   return {
-    type: USER,
+    type: EXPO_DATA,
     data: data
   };
 };

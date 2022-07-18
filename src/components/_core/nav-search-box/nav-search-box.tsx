@@ -3,14 +3,14 @@ import React, {
   useRef,
   useState
 } from 'react';
-import { useSelector } from 'react-redux';
+import SystemValues from 'src/constants/SystemValues';
 import { useNavigate } from 'react-router-dom';
 import './nav-search-box.scss';
 
 const iconFile = '/assets/iconmonstr-magnifier-3.svg';
 
 const NavSearchBox = (props: any): React.ReactElement => {
-  const system = useSelector((state: any) => state.system);
+  const system = SystemValues.getInstance().system;
   const prefix = system.platform.prefix;
   const iconURL = `${prefix}${iconFile}`;
   const formRef: any = useRef(null);

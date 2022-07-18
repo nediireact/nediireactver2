@@ -6,16 +6,16 @@ import {
   useNavigate,
   useParams
 } from 'react-router-dom';
-import fetchData from 'src/modules/utils/fetch-data';
-import GroupDetailContent from 'src/components/group-detail/group-detail-content';
 import {
   HorizontalSpace,
   SubTitle,
   SizesEnum
 } from 'rrmc';
+import APISDK from 'src/api/api-sdk';
 import ParallaxHeaderImage from 'src/components/parallax-header-image/parallax-header-image';
 import QRCode from 'qrcode.react'; // https://www.npmjs.com/package/qrcode.react
 import StandGrid from 'src/components/stand-grid/stand-grid';
+import GroupDetailContent from './group-detail-content';
 
 const QRCodeComponent = ( props: any ): React.ReactElement => {
   const [canonicalURL, setCanonicalURL] = useState('');
@@ -43,7 +43,7 @@ const GroupDetailComponent = (): React.ReactElement => {
   const [stands, setStands]: any = useState([]);
 
   useEffect(() => {
-    fetchData(`groups?filter[slug]=${params.groupId}`)
+    APISDK.GetGroupById(params.groupId)
       .then((response: any) => {
         if (response.data.length === 0) {
           console.log('Error, grupo no existe');

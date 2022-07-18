@@ -4,21 +4,16 @@ import React, {
 import {
   useNavigate
 } from 'react-router-dom';
-import {
-  useSelector,
-  useDispatch
-} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import SystemValues, {
   FILE_PREFIX
 } from 'src/constants/SystemValues';
-import SetSystemData from 'src/redux/actions/system';
+import SetSystemData from 'src/redux/actions/_core/system';
 import * as M from 'materialize-css';
 
-const systemValues = SystemValues.getInstance();
-const isMobileApp = systemValues.isMobileApp;
-
 const SystemCheck = (): React.ReactElement => {
-  const user = useSelector((state: any) => state.user);
+  const system = SystemValues.getInstance().system;
+  const isMobileApp = SystemValues.getInstance().isMobileApp;
   const dispatch = useDispatch();
   const navigate: any = useNavigate();
 
@@ -46,7 +41,7 @@ const SystemCheck = (): React.ReactElement => {
       const pathname = window.location.pathname || '';
       if ( ( pathname === '/login' ||
         pathname === '/create-account') &&
-        user && user.jwt && user.jwt.access ) {
+        system && system.accessToken ) {
         navigate('/');
       }
     }

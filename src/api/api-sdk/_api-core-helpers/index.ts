@@ -15,3 +15,6 @@ export { default as RegisterUser } from './register-user';
 export { default as UpdateUserAddress } from './update-user-address';
 export { default as UpdateUserProfile } from './update-user-profile';
 export { default as UpdateUser } from './update-user';
+export { default as AddCartItem } from './add-cart-item';
+export { default as UpdateCartItem } from './update-cart-item';
+export { default as DeleteCartItem } from './delete-cart-item';

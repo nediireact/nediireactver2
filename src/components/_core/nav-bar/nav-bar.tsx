@@ -6,13 +6,10 @@ import {
   Link,
   useNavigate
 } from 'react-router-dom';
-import {
-  useSelector,
-  useDispatch
-} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as M from 'materialize-css';
 import SystemValues from 'src/constants/SystemValues';
-import { SetUserData } from 'src/redux/actions/user-actions';
+import { SetUserData } from 'src/redux/actions/_core/user';
 import NavSearchBox from 'src/components/_core/nav-search-box/nav-search-box';
 import DefaultNavButtons from './default-nav-buttons';
 import SideMenu from './side-menu';
@@ -29,13 +26,15 @@ const NavBar = (props: NavBarInterface): React.ReactElement => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const systemValues = SystemValues.getInstance();
-  const system = useSelector((state: any) => state.system);
+  const system = SystemValues.getInstance().system;
   const prefix = system.platform.prefix;
-  // const logoURL = system && system.configurations &&
-  //   system.configurations.id ?
-  //   system.configurations.attributes.img_logo : `${prefix}${logoFile}`;
   const logoFile = '/assets/logo.png';
-  const logoURL = `${prefix}${logoFile}`;
+  const logoURL = system &&
+    system.configurations &&
+    system.configurations.id &&
+    system.configurations.attributes &&
+    system.configurations.attributes.img_logo ?
+    system.configurations.attributes.img_logo : `${prefix}${logoFile}`;
   const sideNavRef: any = useRef(null);
 
   const closeSideNav = () => {

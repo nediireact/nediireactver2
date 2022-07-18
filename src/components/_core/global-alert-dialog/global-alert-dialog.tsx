@@ -3,10 +3,10 @@ import React, {
   useEffect
 } from 'react';
 import {
-  useSelector,
   useDispatch
 } from 'react-redux';
 import { Modal } from 'rrmc';
+import SystemValues from 'src/constants/SystemValues';
 import { CloseGlobalAlertDialog } from 'src/redux/actions/set-global-alert-dialog';
 
 /* eslint-disable no-unused-vars */
@@ -18,7 +18,7 @@ export enum GlobalAlertSizeOptions {
 /* eslint-enable no-unused-vars */
 
 const GlobalAlertDialog = (): React.ReactElement => {
-  const system = useSelector((state: any) => state.system);
+  const system = SystemValues.getInstance().system;
   const dispatch = useDispatch();
   const modelInterface = {
     open: () => null,

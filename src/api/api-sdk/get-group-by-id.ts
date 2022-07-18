@@ -1,15 +1,18 @@
-import { APIGet } from 'src/api/communicator';
 import { RebuildData } from 'rrmc';
+import { APIGet } from 'src/api/communicator';
+import SystemValues from 'src/constants/SystemValues';
 import store from 'src/redux/store';
 import SetSystemData from 'src/redux/actions/_core/system';
 
-const GetChangeLog = (): Promise<any> => {
+export const GetGroupById = (id: string): Promise<any> => {
   return new Promise((res, rej) => {
-    APIGet('sprints/?include=tasks,tasks.user&page[size]=100')
+    APIGet(`groups?filter[slug]=${id}`)
       .then((response: any) => {
         const data = RebuildData(response).data;
+        const groupsById = SystemValues.getInstance().system.groupsById;
+        groupsById[id] = data;
         store.dispatch(SetSystemData({
-          changeLog: data
+          groupsById: groupsById
         }));
         res(data);
       })
@@ -19,4 +22,4 @@ const GetChangeLog = (): Promise<any> => {
   });
 };
 
-export default GetChangeLog;
+export default GetGroupById;

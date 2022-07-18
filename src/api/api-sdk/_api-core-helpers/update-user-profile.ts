@@ -1,5 +1,5 @@
 import { APIPatch } from 'src/api/communicator';
-import store from 'src/redux/store';
+import SystemValues from 'src/constants/SystemValues';
 import GetUserProfile from './get-user-profile';
 
 interface payload {
@@ -18,18 +18,17 @@ interface payload {
 }
 
 const UpdateUserProfile = ( payload: payload ): Promise<any> => {
-  const userProfileId = store && store.getState().user &&
-    store.getState().user.userProfile &&
-    store.getState().user.userProfile.id ?
-    store.getState().user.userProfile.id : null;
-  const data = {
-    data: {
-      id: userProfileId,
-      type: 'UserProfile',
-      attributes: payload
-    }
-  };
   return new Promise((res, rej) => {
+    const user = SystemValues.getInstance().user;
+    if ( !user.id ) return res(new Error('No user'));
+    const userProfileId = user.attributes.profile.id;
+    const data = {
+      data: {
+        id: userProfileId,
+        type: 'UserProfile',
+        attributes: payload
+      }
+    };
     APIPatch(`user-profile/${userProfileId}/`, data)
       .then(() => {
         return GetUserProfile();

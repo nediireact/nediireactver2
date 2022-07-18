@@ -15,7 +15,7 @@ import {
   useDispatch,
   useSelector
 } from 'react-redux';
-import SetSystemData from 'src/redux/actions/set-system-data';
+import SetSystemData from 'src/redux/actions/_core/system';
 
 const HomeExpoGrid = (): React.ReactElement => {
   const dispatch = useDispatch();

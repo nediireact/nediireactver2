@@ -5,10 +5,7 @@ import APISDK from 'src/api/api-sdk';
 
 const SystemConfigurationsLoader = (): React.ReactElement => {
   useEffect(() => {
-    APISDK.GetSystemConfigurations()
-      .catch((error: any) => {
-        console.log(error);
-      });
+    APISDK.GetSystemConfigurations();
   }, [APISDK]);
 
   return (<></>);

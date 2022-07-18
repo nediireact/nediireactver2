@@ -15,7 +15,7 @@ import {
 import './home-meals-grid.scss';
 import fetchData from 'src/modules/utils/fetch-data';
 import BuyableItemAdapter from 'src/components/_adapters/buyable-item-adapter';
-import SetSystemData from 'src/redux/actions/set-system-data';
+import SetSystemData from 'src/redux/actions/_core/system';
 
 const HomeMealsGrid = (): React.ReactElement => {
   const dispatch = useDispatch();

@@ -16,7 +16,7 @@ import {
 import { Link } from 'react-router-dom';
 import APISDK from 'src/api/api-sdk/api-sdk';
 import { NediiPlanExposure } from './nedii-plans-exposure';
-import SetSystemData from 'src/redux/actions/set-system-data';
+import SetSystemData from 'src/redux/actions/_core/system';
 
 const NediiPlanBillableItem = (props: any): React.ReactElement => {
   const item = props.item;

@@ -1,15 +1,15 @@
-import { APIGet } from 'src/api/communicator';
 import { RebuildData } from 'rrmc';
+import { APIGet } from 'src/api/communicator';
 import store from 'src/redux/store';
 import SetSystemData from 'src/redux/actions/_core/system';
 
-const GetChangeLog = (): Promise<any> => {
+export const GetExpos = (): Promise<any> => {
   return new Promise((res, rej) => {
-    APIGet('sprints/?include=tasks,tasks.user&page[size]=100')
+    APIGet('expos?fields[Expo]=name,img_picture,slug,real&page[size]=100')
       .then((response: any) => {
         const data = RebuildData(response).data;
         store.dispatch(SetSystemData({
-          changeLog: data
+          expos: data
         }));
         res(data);
       })
@@ -19,4 +19,4 @@ const GetChangeLog = (): Promise<any> => {
   });
 };
 
-export default GetChangeLog;
+export default GetExpos;

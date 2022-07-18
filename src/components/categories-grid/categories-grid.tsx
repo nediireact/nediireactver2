@@ -1,48 +1,29 @@
 import React, {
-  useEffect,
-  useState
+  useEffect
 } from 'react';
 import {
-  useDispatch,
-  useSelector
-} from 'react-redux';
-import {
   HorizontalSpace,
-  LoadingIndicator,
   SizesEnum
 } from 'rrmc';
-import fetchData from 'src/modules/utils/fetch-data';
-import ParallaxHeaderImage from 'src/components/parallax-header-image/parallax-header-image';
-import GroupItem from 'src/components/group-grid/group-item';
-import SetSystemData from 'src/redux/actions/set-system-data';
+import APISDK from 'src/api/api-sdk';
+import SystemValues from 'src/constants/SystemValues';
+import ParallaxHeaderImage from 'src/components/parallax-header-image';
+import GroupItem from 'src/components/group-grid';
 
 const headerPictureFile = '/assets/digital-services.jpg';
 
 const CategoriesGrid = ( props: any ): React.ReactElement => {
-  const dispatch = useDispatch();
-  const system = useSelector((state: any) => state.system);
-  const [isLoading, setIsLoading] = useState(false);
-  const items = system && system.categories ? system.categories : [];
+  const system = SystemValues.getInstance().system;
   const prefix = system.platform.prefix;
+  const items = system && system.categories ? system.categories : [];
   const headerPictureURL = `${prefix}${headerPictureFile}`;
 
   useEffect(() => {
-    setIsLoading(true);
-    fetchData('groups/?fields[Group]=name,img_picture,slug&page[size]=20')
-      .then((response: any) =>{
-        setIsLoading(false);
-        dispatch(SetSystemData({
-          categories: response.data
-        }));
-      })
-      .catch(() => {
-        setIsLoading(false);
-      });
-  }, [fetchData]);
+    APISDK.GetCategories();
+  }, [APISDK]);
 
   return (
     <>
-      <LoadingIndicator isLoading={isLoading} />
       <ParallaxHeaderImage
         image={headerPictureURL}
         size='x-small'

@@ -33,7 +33,7 @@ export const CreateState = (state: any): Promise<any> => {
 
 export const CheckState = (state: any): Promise<any> => {
   return new Promise((res, rej) => {
-    APIGet(`states/?filter[search]=${state}`, true)
+    APIGet(`states/?filter[search]=${state}`)
       .then((response: any) => {
         const states = response.data;
         if ( !states.length ) return CreateState(state);

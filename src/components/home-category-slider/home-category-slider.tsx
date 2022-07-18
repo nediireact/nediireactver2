@@ -18,7 +18,7 @@ import {
   LoadingIndicator,
   SizesEnum
 } from 'rrmc';
-import SetSystemData from 'src/redux/actions/set-system-data';
+import SetSystemData from 'src/redux/actions/_core/system';
 import GroupItem from 'src/components/group-grid/group-item';
 
 const sliderNextButtonFile = '/assets/slider-button-next.svg';

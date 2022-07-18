@@ -1,31 +1,26 @@
 import React, {
-  useEffect,
-  useState
+  useEffect
 } from 'react';
-import { useSelector } from 'react-redux';
 import {
   HorizontalSpace,
   SizesEnum
 } from 'rrmc';
 import './expo-grid.scss';
-import fetchData from 'src/modules/utils/fetch-data';
+import APISDK from 'src/api/api-sdk';
+import SystemValues from 'src/constants/SystemValues';
 import ExpoItem from 'src/components/expo-grid/expo-item';
 import ParallaxHeaderImage from 'src/components/parallax-header-image/parallax-header-image';
 
 const headerPictureFile = '/assets/expos.jpg';
 
 const ExpoGrid = (): React.ReactElement => {
-  const [items, setitems]: any = useState([]);
-  const system = useSelector((state: any) => state.system);
-  const prefix = system.platform.prefix;
+  const prefix = SystemValues.getInstance().system.platform.prefix;
   const headerPictureURL = `${prefix}${headerPictureFile}`;
+  const expos = SystemValues.getInstance().system.expos;
 
   useEffect(() => {
-    fetchData('expos?fields[Expo]=name,img_picture,slug,real')
-      .then((response: any) =>{
-        setitems(response);
-      });
-  }, [fetchData]);
+    APISDK.GetExpos();
+  }, [APISDK]);
 
   return (
     <>
@@ -37,15 +32,14 @@ const ExpoGrid = (): React.ReactElement => {
       <div className='container'>
         <div className='row'>
           {
-            items && items.data && items.data.length ?
-              items.data.map((item: any, index: number) => {
-                return (
-                  <ExpoItem
-                    key={index}
-                    item={item}
-                    col='col s12 m6 l4' />
-                );
-              }) : null
+            expos.map((item: any, index: number) => {
+              return (
+                <ExpoItem
+                  key={index}
+                  item={item}
+                  col='col s12 m6 l4' />
+              );
+            })
           }
         </div>
       </div>

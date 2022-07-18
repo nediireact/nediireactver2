@@ -1,6 +1,6 @@
 import { APIPost } from 'src/api/communicator';
 import store from 'src/redux/store';
-import { SetUserData } from 'src/redux/actions/user-actions';
+import { SetUserData } from 'src/redux/actions/_core/user';
 import GetUser from './get-user';
 import GetUserProfile from './get-user-profile';
 
@@ -10,14 +10,14 @@ interface payloadInterface {
 }
 
 const Login = ( payload: payloadInterface ): Promise<any> => {
-  const data = {
-    data: {
-      type: 'login',
-      email: payload.email,
-      password: payload.password
-    }
-  };
   return new Promise((res, rej) => {
+    const data = {
+      data: {
+        type: 'login',
+        email: payload.email,
+        password: payload.password
+      }
+    };
     APIPost('login/', data)
       .then((response: any) => {
         store.dispatch(SetUserData({

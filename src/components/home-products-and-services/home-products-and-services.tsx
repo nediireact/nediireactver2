@@ -1,62 +1,41 @@
-import React from 'react';
+import React, {
+  useEffect
+} from 'react';
 import {
   HorizontalSpace,
   SizesEnum
 } from 'rrmc';
+import APISDK from 'src/api/api-sdk';
+import SystemValues from 'src/constants/SystemValues';
 import GenericMiniSlider from 'src/components/generic-mini-slider';
-import 'src/modules/home-products-and-services/home-products-and-services.scss';
-import LoadUserFavoriteItems from 'src/components/user-favorites/load-user-favorite-items';
+import './home-products-and-services.scss';
 
 const HomeProductAndServices = (): React.ReactElement => {
-  const commonFields = 'name,img_picture,slug,stand,price,final_price,discount,created,times_selled,short_description';
-  const productsURL = `products/?include=stand&fields[Product]=${commonFields}`;
-  const servicesURL = `services/?include=stand&fields[Service]=${commonFields}`;
-  const vehiclesURL = `vehicles/?include=stand,model,model.make&fields[Vehicle]=${commonFields},model,year&fields[VehicleMake]=name&fields[VehicleModel]=name,make`;
-  const mealsURL = `meals/?include=stand&fields[Meal]=${commonFields}`;
-  const realEstateURL = `real-estates/?include=stand&fields[RealEstate]=${commonFields}`;
+  const bestSellers = SystemValues.getInstance().system.homeBestSeller;
+  const deals = SystemValues.getInstance().system.homeDeals;
+  const monthDeals = SystemValues.getInstance().system.homeMonthDeals;
 
-  const standURL = '&fields[Stand]=name,slug&page[number]=1&page[size]=2';
-  const bestSeller = '&sort=-times_selled';
-  const newItems = '&sort=-created';
-  const discounts = '&sort=-discount&filter[discount__gt]=0';
+  useEffect(() => {
+    APISDK.getBestSellers();
+    APISDK.getDeals();
+    APISDK.getMonthDeals();
+  });
 
   return (
     <>
-    <LoadUserFavoriteItems />
     <HorizontalSpace size={SizesEnum.medium} />
     <div className='HomeProductAndServices blue-grey white-text'>
       <div className='container'>
         <div className='row'>
           <GenericMiniSlider
             title='Lo mas vendidos'
-            cacheKey='homeBestSeller'
-            urls={[
-              `${productsURL}${standURL}${bestSeller}`,
-              `${servicesURL}${standURL}${bestSeller}`,
-              `${vehiclesURL}${standURL}${bestSeller}`,
-              `${mealsURL}${standURL}${bestSeller}`,
-              `${realEstateURL}${standURL}${bestSeller}`
-            ]} />
+            items={bestSellers} />
           <GenericMiniSlider
             title='Articulos del mes'
-            cacheKey='homeMonthDeals'
-            urls={[
-              `${productsURL}${standURL}${newItems}`,
-              `${servicesURL}${standURL}${newItems}`,
-              `${vehiclesURL}${standURL}${newItems}`,
-              `${mealsURL}${standURL}${newItems}`,
-              `${realEstateURL}${standURL}${newItems}`
-            ]} />
+            items={monthDeals} />
           <GenericMiniSlider
             title='Con descuento'
-            cacheKey='homeDeals'
-            urls={[
-              `${productsURL}${standURL}${discounts}`,
-              `${servicesURL}${standURL}${discounts}`,
-              `${vehiclesURL}${standURL}${discounts}`,
-              `${mealsURL}${standURL}${discounts}`,
-              `${realEstateURL}${standURL}${discounts}`
-            ]} />
+            items={deals} />
         </div>
       </div>
       <HorizontalSpace size={SizesEnum.x_small} />

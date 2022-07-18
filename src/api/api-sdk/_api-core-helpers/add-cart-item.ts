@@ -1,28 +1,42 @@
-import {
-  APIDelete,
-  APIPost,
-  APIPatch
-} from 'src/api/communicator';
+import { APIPost } from 'src/api/communicator';
+import SystemValues from 'src/constants/SystemValues';
 import { UserFavoriteItemsConverter } from 'src/components/_adapters/buyable-item-adapter/products-services';
-import NewCartItem from 'src/modules/user-cart/new-cart-item.json';
+import GetUserProfile from './get-cart-items';
 
-export const DeleteCartItem = ( id: number ): Promise<any> => {
+export const AddCartItem = ( item: any ): Promise<any> => {
   return new Promise((res, rej) => {
-    const url = `user-cart-items/${id}/`;
-    APIDelete(url)
-      .then((response: any) => {
-        res(response);
-      })
-      .catch((error: any) => {
-        rej(error);
-      });
-  });
-};
-
-export const AddCartItem = ( item: any, user: any ): Promise<any> => {
-  return new Promise((res, rej) => {
-    if ( !user || !user.id ) return res(new Error('Invalid data'));
-    const data: any = { ...NewCartItem };
+    const user = SystemValues.getInstance().user;
+    if ( !user.id ) return res(new Error('No user'));
+    const data: any = {
+      data: {
+        type: 'UserCartBuyableItems',
+        attributes: {
+          quantity: 1,
+          backup_name: '',
+          backup_user_name: ''
+        },
+        relationships: {
+          user: {
+            data: null
+          },
+          product: {
+            data: null
+          },
+          meal: {
+            data: null
+          },
+          real_estate: {
+            data: null
+          },
+          service: {
+            data: null
+          },
+          vehicle: {
+            data: null
+          }
+        }
+      }
+    };
     const userName = `${user.attributes.first_name} ${user.attributes.last_name}`;
     data.data.type = 'UserCartBuyableItems';
     data.data.relationships.user.data = null;
@@ -41,15 +55,19 @@ export const AddCartItem = ( item: any, user: any ): Promise<any> => {
       id: item.id,
       type: item.type
     };
-    APIPost('user-cart-items/', data, true)
+    let itemAdded: any;
+    APIPost('user-cart-items/', data)
       .then((response: any) => {
-        const itemAdded = { ...response.data };
+        itemAdded = { ...response.data };
         if ( itemAdded.attributes && itemAdded.relationships &&
           itemAdded.relationships[UserFavoriteItemsConverter(item.type)] &&
           itemAdded.relationships[UserFavoriteItemsConverter(item.type)].data ) {
           itemAdded.relationships[UserFavoriteItemsConverter(item.type)].data = { ...item };
-          res(itemAdded);
         }
+        return GetUserProfile();
+      })
+      .then(() => {
+        res(itemAdded);
       })
       .catch((error: any) => {
         rej(error);
@@ -57,17 +75,4 @@ export const AddCartItem = ( item: any, user: any ): Promise<any> => {
   });
 };
 
-export const UpdateCartItem = ( item: any, user: any ): Promise<any> => {
-  return new Promise((res, rej) => {
-    if ( !user || !user.id ) return res(new Error('Invalid data'));
-    const url = `user-cart-items/${item.data.id}/`;
-    APIPatch(url, item, true)
-      .then((response: any) => {
-        const itemUpdated = { ...response.data };
-        res(itemUpdated);
-      })
-      .catch((error: any) => {
-        rej(error);
-      });
-  });
-};
+export default AddCartItem;

@@ -1,14 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import SystemValues from 'src/constants/SystemValues';
 import MenuItems from './menu-items';
 
 const SideMenu = ( props: any ): React.ReactElement => {
-  const userData = useSelector((state: any) => state.user);
-  const user = userData && userData.user && userData.user.attributes ?
-    userData.user.attributes : {};
-  const profile = userData && userData.userProfile && userData.userProfile.attributes ?
-    userData.userProfile.attributes : {};
+  const user = SystemValues.getInstance().user;
+  const profile = user.attributes.profile;
 
   return (
     <ul
@@ -18,13 +15,13 @@ const SideMenu = ( props: any ): React.ReactElement => {
       onClick={props.closeSideNav}>
       <div
         className={`SideNavBar__logo ${
-          user.username ? 'SideNavBar__logo--signed-user-background' : ''
+          user.attributes.username ? 'SideNavBar__logo--signed-user-background' : ''
         }`}
         style={{
           backgroundImage: `url(${props.logo})`
         }}>
         {
-          user.username ?
+          user.attributes.username ?
           <>
             <div
               className='SideNavBar__signed-user-background'
@@ -38,7 +35,7 @@ const SideMenu = ( props: any ): React.ReactElement => {
                 backgroundImage: `url(${profile.img_picture ? profile.img_picture : ''})`
                 }}></i>
               <span className='grey-text text-darken-3 truncate'>
-                {user.first_name} {user.last_name}
+                {user.attributes.first_name} {user.attributes.last_name}
               </span>
             </Link>
             <a

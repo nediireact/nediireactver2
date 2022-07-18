@@ -1,17 +1,15 @@
 import { APIGet } from 'src/api/communicator';
 import store from 'src/redux/store';
+import SystemValues from 'src/constants/SystemValues';
 import { RebuildData } from 'rrmc';
-import { SetUserData } from 'src/redux/actions/user-actions';
+import { SetUserData } from 'src/redux/actions/_core/user';
 
 export const GetUserAddress = (): Promise<any> => {
   return new Promise((res, rej) => {
-    const user = store && store.getState().user &&
-      store.getState().user.user &&
-      store.getState().user.user.id ?
-      store.getState().user.user : null;
-    if ( !user ) return rej(new Error('no user'));
+    const user = SystemValues.getInstance().user;
+    if ( !user.id ) return res(new Error('No user'));
     const url = `user-address/?filter[user]=${user.id}&include=city,city.state`;
-    APIGet(url, true)
+    APIGet(url)
       .then((response: any) => {
         const data = RebuildData(response).data;
         store.dispatch(SetUserData({

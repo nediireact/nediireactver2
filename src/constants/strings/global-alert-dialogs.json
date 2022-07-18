@@ -39,6 +39,11 @@
       "success": true,
       "title": "Cuenta creada",
       "message": "<b>{{firstName}}</b>, su cuenta ha sido creada exitosamente.<br/><br/>A continuacion, usted sera redirigido a la pantalla de login, gracias."
+    },
+    "http-request-failed": {
+      "success": false,
+      "title": "Error getting data",
+      "message": "Communication with the server has failed, please try again."
     }
   },
   "es": {
@@ -81,6 +86,11 @@
       "success": true,
       "title": "Cuenta creada",
       "message": "<b>{{firstName}}</b>, su cuenta ha sido creada exitosamente y su cuenta ha iniciado sesion correctamente, gracias."
+    },
+    "http-request-failed": {
+      "success": false,
+      "title": "Error de comunicacion",
+      "message": "La comunicacion con el servidor ha fallado, por favor intentelo de nuevo mas tarde."
     }
   }
 }

@@ -1,8 +1,8 @@
 import {
   APIPatch
 } from 'src/api/communicator';
-import store from 'src/redux/store';
-import GetUser from 'src/api/api-sdk/get-user';
+import SystemValues from 'src/constants/SystemValues';
+import GetUser from './get-user';
 
 interface payload {
   email?: string;
@@ -12,19 +12,17 @@ interface payload {
 }
 
 const UpdateUser = ( payload: payload ): Promise<any> => {
-  const userId = store && store.getState().user &&
-    store.getState().user.user &&
-    store.getState().user.user.id ?
-    store.getState().user.user.id : null;
-  const data = {
-    data: {
-      id: userId,
-      type: 'User',
-      attributes: payload
-    }
-  };
   return new Promise((res, rej) => {
-    APIPatch(`users/${userId}/`, data)
+    const user = SystemValues.getInstance().user;
+    if ( !user.id ) return res(new Error('No user'));
+    const data = {
+      data: {
+        id: user.id,
+        type: 'User',
+        attributes: payload
+      }
+    };
+    APIPatch(`users/${user.id}/`, data)
       .then(() => {
         return GetUser();
       })

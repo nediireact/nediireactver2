@@ -1,7 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as M from 'materialize-css';
+import { LoadingIndicator } from 'rrmc';
 import SystemValues from 'src/constants/SystemValues';
 import SystemCheck from 'src/components/_core/system-check';
 import GlobalAlertDialog from 'src/components/_core/global-alert-dialog';
@@ -9,8 +9,9 @@ import SystemConfigurationsLoader from 'src/components/_core/system-configuratio
 import './footer.scss';
 
 const Footer = (): React.ReactElement => {
-  const system = useSelector((state: any) => state.system);
   const systemValues = SystemValues.getInstance();
+  const system = systemValues.system;
+  const isLoading = system.isLoading.length ? true : false;
   const isMobileApp = systemValues.isMobileApp;
 
   return (
@@ -63,6 +64,7 @@ const Footer = (): React.ReactElement => {
         </div>
       </div>
     </footer>
+    <LoadingIndicator isLoading={isLoading} />
     <SystemConfigurationsLoader />
     <SystemCheck />
     <GlobalAlertDialog />

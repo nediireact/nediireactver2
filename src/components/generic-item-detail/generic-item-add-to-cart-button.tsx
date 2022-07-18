@@ -1,71 +1,69 @@
-import React from 'react';
-import {
-  useSelector,
-  useDispatch
-} from 'react-redux';
-import {
-  AddCartItem,
-  DeleteCartItem
-} from 'src/components/user-cart/user-cart-api-calls';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { TextWithIcon } from 'rrmc';
-import {
-  UserCartAddItem,
-  UserCartDeleteItem
-} from 'src/redux/actions/user-cart-actions';
-import { IsItACartItem } from 'src/components/user-cart/is-item-in-user-cart';
+import SystemValues from 'src/constants/SystemValues';
+import APISDK from 'src/api/api-sdk';
+import IsItACartItem from 'src/components/user-cart/is-item-in-user-cart';
 import { GetBuyableItemName } from 'src/components/_adapters/buyable-item-adapter/products-services';
 import { OpenGlobalAlertDialog } from 'src/redux/actions/set-global-alert-dialog';
+import SetSystemData from 'src/redux/actions/_core/system';
 
 const GenericItemAddToCartButton = (props: any): React.ReactElement => {
   const item = props.item;
   if ( !item ) return <></>;
-  const isLoading = props.isLoading;
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.user);
-  const user = userData && userData.user && userData.user.id ? userData.user : null;
-  const isInUserCart = user && userData && userData.cart && userData.cart.length ?
-    IsItACartItem(
+  const user = SystemValues.getInstance().user;
+  const isInUserCart: any = (): any => {
+    return IsItACartItem(
       Number(item.id),
-      item.type,
-      userData.cart
-    ) : null;
-  const name = GetBuyableItemName(item);
+      item.type
+    );
+  };
 
   const addItem = () => {
-    if ( !user || !user.id || isLoading ) {
+    if ( !user.id ) {
       dispatch(OpenGlobalAlertDialog({
         dialog: 'missingLogin'
       }));
       return;
     }
-    props.setIsLoading(true);
-    item.backup_name = name;
-    AddCartItem(item, user)
+    setIsLoading(true);
+    item.backup_name = GetBuyableItemName(item);
+    APISDK.AddCartItem(item)
       .then((itemAdded: any) => {
-        props.setIsLoading(false);
-        dispatch(UserCartAddItem(itemAdded));
+        const cart = SystemValues.getInstance().system.cart;
+        cart.push(itemAdded);
+        dispatch(SetSystemData(cart));
+        setIsLoading(false);
       })
       .catch((err) => {
-        props.setIsLoading(false);
+        setIsLoading(false);
         console.log('Error', err.toString());
       });
   };
 
   const deleteItem = (id: number) => {
-    if ( !user || !user.id || isLoading ) {
+    if ( !user.id ) {
       dispatch(OpenGlobalAlertDialog({
         dialog: 'missingLogin'
       }));
       return;
     }
-    props.setIsLoading(true);
-    DeleteCartItem(id)
+    setIsLoading(true);
+    APISDK.DeleteCartItem(id)
       .then(() => {
-        props.setIsLoading(false);
-        dispatch(UserCartDeleteItem(id));
+        const cart = SystemValues.getInstance().system.cart;
+        const itemToDelete = cart.filter((i: any) => Number(i.id) === id);
+        if ( itemToDelete.length ) {
+          const index = cart.indexOf(itemToDelete[0]);
+          cart.splice(index, 1);
+        }
+        dispatch(SetSystemData(cart));
+        setIsLoading(false);
       })
       .catch((err) => {
-        props.setIsLoading(false);
+        setIsLoading(false);
         console.log('Error', err);
       });
   };

@@ -7,7 +7,7 @@ import {
   TextAlignEnum,
   SizesEnum
 } from 'rrmc';
-import StandDetailGallery from 'src/components/stand-detail-gallery/stand-detail-gallery';
+import StandDetailGallery from 'src/components/stand-detail-gallery';
 import BuyableItemAdapter from 'src/components/_adapters/buyable-item-adapter';
 
 export const AboutUs = (props: any): React.ReactElement => {

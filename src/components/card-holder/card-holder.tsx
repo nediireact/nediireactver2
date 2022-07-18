@@ -1,6 +1,5 @@
 import React from 'react';
 import './card-holder.scss';
-import { useSelector } from 'react-redux';
 import {
   BasicTextWithIcon,
   StrongText,
@@ -8,12 +7,13 @@ import {
   TextAlignEnum
 } from 'rrmc';
 import { Link } from 'react-router-dom';
+import SystemValues from 'src/constants/SystemValues';
 import FavoriteButtonAdapterInterface from 'src/components/_adapters/favorite-button-adapter';
 
 const imageCardHolder = '/assets/card-holder.jpg';
 
 const CardHolder = (props: any): React.ReactElement => {
-  const system = useSelector((state: any) => state.system);
+  const system = SystemValues.getInstance().system;
   const prefix = system.platform.prefix;
   const cardHolder = `${prefix}${imageCardHolder}`;
   const stand = props.stand;

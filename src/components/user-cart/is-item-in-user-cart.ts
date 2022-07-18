@@ -1,8 +1,10 @@
 import { UserFavoriteItemsConverter } from 'src/components/_adapters/buyable-item-adapter/products-services';
+import SystemValues from 'src/constants/SystemValues';
 
-export const IsItACartItem = ( id: number, type: string, items: Array<any> ): any => {
+const IsItACartItem = ( id: number, type: string ): any => {
   let isInCart = null;
-  items.forEach((i: any) => {
+  const cart = SystemValues.getInstance().system.cart;
+  cart.forEach((i: any) => {
     if ( i.relationships[UserFavoriteItemsConverter(type)] &&
       i.relationships[UserFavoriteItemsConverter(type)].data &&
       Number(i.relationships[UserFavoriteItemsConverter(type)].data.id) === id &&
@@ -12,3 +14,5 @@ export const IsItACartItem = ( id: number, type: string, items: Array<any> ): an
   });
   return isInCart;
 };
+
+export default IsItACartItem;

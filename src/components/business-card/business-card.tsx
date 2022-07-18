@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './business-card.scss';
 import {
   HorizontalSpace,
   MenuChoiceMenu,
@@ -11,6 +10,7 @@ import {
   TheCompany,
   StarProducts
 } from './sections-pages';
+import './business-card.scss';
 
 const menuItems = [
   {

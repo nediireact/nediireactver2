@@ -16,7 +16,7 @@ import {
   LoadingIndicator
 } from 'rrmc';
 import fetchData from 'src/modules/utils/fetch-data';
-import SetSystemData from 'src/redux/actions/set-system-data';
+import SetSystemData from 'src/redux/actions/_core/system';
 
 const sliderNextButtonFile = '/assets/slider-button-next.svg';
 const sliderPrevButtonFile = '/assets/slider-button-prev.svg';

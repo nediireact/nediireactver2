@@ -1,23 +1,16 @@
 import React, {
-  useEffect,
   useState
 } from 'react';
 import {
   Swiper,
   SwiperSlide
 } from 'swiper/react';
+import { useSelector } from 'react-redux';
 import {
-  useDispatch,
-  useSelector
-} from 'react-redux';
-import './generic-mini-slider.scss';
-import fetchData from 'src/modules/utils/fetch-data';
-import {
-  SubTitle,
-  LoadingIndicator
+  SubTitle
 } from 'rrmc';
 import BuyableItemAdapter from 'src/components/_adapters/buyable-item-adapter';
-import SetSystemData from 'src/redux/actions/set-system-data';
+import './generic-mini-slider.scss';
 
 const sliderNextButtonFile = '/assets/slider-button-2-next.svg';
 const sliderPrevButtonFile = '/assets/slider-button-2-prev.svg';
@@ -49,50 +42,14 @@ const SlideAddons = ( props: any ): React.ReactElement => {
 };
 
 interface GenericMiniSliderInterface {
-  urls: Array<any>;
+  items: Array<any>;
   stand?: any;
   title: string;
-  cacheKey: string;
 }
 
 const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElement => {
-  const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
-  const cacheKey = props.cacheKey;
   const [swiperReference, setSwiperReference]: any = useState(null);
-  const system: any = useSelector((state: any) => state.system);
-  const items = system && system[cacheKey] ? system[cacheKey] : [];
-
-  useEffect(() => {
-    setIsLoading(true);
-    const promises: any[] = [];
-    props.urls.forEach((i: string) => {
-      promises.push(new Promise((res) => {
-        fetchData(i)
-          .then((response: any) =>{
-            res(response);
-          });
-      }));
-    });
-
-    Promise.all(promises)
-      .then((data: any) => {
-        setIsLoading(false);
-        const results: Array<any> = [];
-        data.forEach((i: any) => {
-          i.data.forEach((j: any) => {
-            results.push(j);
-          });
-        });
-        const cacheData: any = {};
-        cacheData[cacheKey] = results;
-        dispatch(SetSystemData(cacheData));
-      })
-      .catch((err: any) => {
-        setIsLoading(false);
-        console.log('error:', err);
-      });
-  }, [fetchData]);
+  const items = props.items;
 
   const onSwiper = ( swiper: any ) => {
     setSwiperReference(swiper);
@@ -100,7 +57,6 @@ const GenericMiniSlider = (props: GenericMiniSliderInterface): React.ReactElemen
 
   return (
     <>
-    <LoadingIndicator isLoading={isLoading} />
     {
       items && items.length ?
         <div className='GenericMiniSlider col s12 m6 l4'>

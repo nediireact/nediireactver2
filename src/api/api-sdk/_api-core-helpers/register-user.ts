@@ -11,19 +11,19 @@ interface payloadInterface {
 }
 
 const RegisterUser = ( payload: payloadInterface ): Promise<any> => {
-  const data = {
-    data: {
-      type: 'User',
-      attributes: {
-        first_name: payload.firstName,
-        last_name: payload.lastName,
-        email: payload.email,
-        username: payload.username,
-        password: payload.password
-      }
-    }
-  };
   return new Promise((res, rej) => {
+    const data = {
+      data: {
+        type: 'User',
+        attributes: {
+          first_name: payload.firstName,
+          last_name: payload.lastName,
+          email: payload.email,
+          username: payload.username,
+          password: payload.password
+        }
+      }
+    };
     APIPost('users/', data)
       .then(() => {
         return Login({

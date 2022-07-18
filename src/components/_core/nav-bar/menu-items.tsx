@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import SystemValues from 'src/constants/SystemValues';
 import ItemsSignedUser from './menu-items-signed-user';
 import ItemsNoSignedUser from './menu-items-no-signed-user';
 
@@ -38,7 +38,7 @@ interface MenuItemsInterface {
 }
 
 const MenuItems = ( props: MenuItemsInterface ): React.ReactElement => {
-  const userData = useSelector((state: any) => state.user);
+  const user = SystemValues.getInstance().user;
 
   return (
     <>
@@ -62,8 +62,9 @@ const MenuItems = ( props: MenuItemsInterface ): React.ReactElement => {
         </> : null
       }
       {
-        userData && userData.user ?
-          <ItemsSignedUser logout={ props.logout } /> : <ItemsNoSignedUser />
+        user.id ?
+          <ItemsSignedUser logout={ props.logout } /> :
+          <ItemsNoSignedUser />
       }
     </>
   );

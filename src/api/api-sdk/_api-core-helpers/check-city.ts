@@ -33,7 +33,7 @@ export const CreateCity = (city: any, stateId: number): Promise<any> => {
 
 export const CheckCity = (city: any, stateId: number): Promise<any> => {
   return new Promise((res, rej) => {
-    APIGet(`cities/?filter[search]=${city}`, true)
+    APIGet(`cities/?filter[search]=${city}`)
       .then((response: any) => {
         const cities = response.data;
         if ( !cities.length ) return CreateCity(city, stateId);

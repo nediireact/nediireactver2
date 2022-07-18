@@ -1,15 +1,12 @@
 /* eslint-disable max-lines-per-function */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import SystemValues from 'src/constants/SystemValues';
 import { MenuItem } from './menu-items';
 
 const ItemsSignedUser = ( props: any ): React.ReactElement => {
-  const userData = useSelector((state: any) => state.user);
-  const user = userData && userData.user && userData.user.attributes ?
-    userData.user.attributes : {};
-  const profile = userData && userData.userProfile && userData.userProfile.attributes ?
-    userData.userProfile.attributes : {};
+  const user = SystemValues.getInstance().user;
+  const profile = user.attributes.profile;
 
   return (
     <>
@@ -20,7 +17,7 @@ const ItemsSignedUser = ( props: any ): React.ReactElement => {
             style={{
               backgroundImage: `url(${ profile.img_picture ? profile.img_picture : '' })`
             }}>{ !profile.img_picture ? 'account_circle' : '' }</i>
-          <span>{user.first_name}</span>
+          <span>{user.attributes.first_name}</span>
         </a>
         <div className='Menu__sub-menu z-depth-2'>
           <Link

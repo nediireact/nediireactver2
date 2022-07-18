@@ -1,11 +1,12 @@
 import { APIDelete } from 'src/api/communicator';
 import SystemValues from 'src/constants/SystemValues';
 
-export const DeleteStandById = ( standId: number ): Promise<any> => {
+export const DeleteCartItem = ( id: number ): Promise<any> => {
   return new Promise((res, rej) => {
     const user = SystemValues.getInstance().user;
     if ( !user.id ) return res(new Error('No user'));
-    APIDelete(`stands/${standId}/`)
+    const url = `user-cart-items/${id}/`;
+    APIDelete(url)
       .then(() => {
         res(true);
       })
@@ -15,4 +16,4 @@ export const DeleteStandById = ( standId: number ): Promise<any> => {
   });
 };
 
-export default DeleteStandById;
+export default DeleteCartItem;
