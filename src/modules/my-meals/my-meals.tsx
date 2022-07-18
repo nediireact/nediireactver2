@@ -9,7 +9,7 @@ import {
   StrongText,
   HorizontalSpace
 } from 'rrmc';
-import LoadMyProducts from './load-my-products';
+import LoadMyMeals from './load-my-meals';
 import ItemToEdit from 'src/modules/item-to-edit/item-to-edit';
 import AddItemBasicInfo from 'src/modules/item-basic-info-form/item-basic-info-form';
 import APISDK from 'src/api/api-sdk/api-sdk';
@@ -27,11 +27,11 @@ const menuItems = [
   }
 ];
 
-const MyProducts = (): React.ReactElement => {
+const MyMeals = (): React.ReactElement => {
   const [isLoading, setIsLoading] = useState(false);
   const [valueReference, setValueReference] = useState('');
   const userData = useSelector((state: any) => state.user);
-  const userProducts = userData && userData.userProducts && userData.userProducts.length ? userData.userProducts : [];
+  const userProducts = userData && userData.userMeals && userData.userMeals.length ? userData.userMeals : [];
   const [product, setProduct]: any = useState(null);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const MyProducts = (): React.ReactElement => {
 
   return (
     <div className='col s12 m8 MyStands'>
-      <LoadMyProducts setIsLoading={setIsLoading} />
+      <LoadMyMeals setIsLoading={setIsLoading} />
       <LoadingIndicator isLoading={isLoading} />
       {
         product || valueReference === 'add-item' ?
@@ -97,11 +97,11 @@ const MyProducts = (): React.ReactElement => {
           <StrongText
             fullWidth={true}
             align='left'
-            text={`${userProducts.length} Producto${userProducts.length === 1 ? '' : 's'} registrado${userProducts.length === 1 ? '' : 's'}`} />
+            text={`${userProducts.length} Platillo${userProducts.length === 1 ? '' : 's'} registrado${userProducts.length === 1 ? '' : 's'}`} />
           <HorizontalSpace size='x-small' />
           <div className='row MyStands__stands-wrapper'>
             <ItemToEdit
-              addLabel='Agregar producto'
+              addLabel='Agregar platillo'
               setItem={setProduct}
               setValueReference={setValueReference} />
             {
@@ -115,7 +115,7 @@ const MyProducts = (): React.ReactElement => {
                     id={i.id}
                     name={i.attributes.name}
                     image={i.attributes.img_picture}
-                    url={`/empresa/${i.relationships.stand.data.attributes.slug}/productos/${i.attributes.slug}`}
+                    url={`/empresa/${i.relationships.stand.data.attributes.slug}/menu/${i.attributes.slug}`}
                     standName={i.relationships.stand.data.attributes.name}
                     valueReference={valueReference}
                     setValueReference={setValueReference}
@@ -134,12 +134,12 @@ const MyProducts = (): React.ReactElement => {
             isLoading={isLoading}
             setIsLoading={setIsLoading}
             setItem={setProduct}
-            itemType='Product'
-            itemClassificacionType='ProductClassification'
+            itemType='Meal'
+            itemClassificacionType='MealClassification'
             setValueReference={setValueReference} /> : null
       }
     </div>
   );
 };
 
-export default MyProducts;
+export default MyMeals;

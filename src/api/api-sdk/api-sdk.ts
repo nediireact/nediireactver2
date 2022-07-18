@@ -18,9 +18,17 @@ import AddStandPicture from './add-stand-picture';
 import DeleteStandPicture from './delete-stand-picture';
 import DeleteStandById from './delete-stand-by-id';
 import GetUserProducts from './get-user-products';
+import GetUserServices from './get-user-services';
+import GetUserMeals from './get-user-meals';
+import GetUserVehicles from './get-user-vehicles';
+import GetUserRealEstates from './get-user-real-estates';
 import AddBuyableItem from './add-buyable-item';
 import GetProductClassificationsByStand from './get-product-classifications-by-stand';
 import GetProductClassifications from './get-product-classifications';
+import GetServiceClassifications from './get-service-classifications';
+import GetMealClassifications from './get-meal-classifications';
+import GetVehicleClassifications from './get-vehicle-classifications';
+import GetRealEstateClassifications from './get-real-estate-classifications';
 import DeleteProductById from './delete-product-by-id';
 
 const APISDK = {
@@ -42,9 +50,17 @@ const APISDK = {
   AddStandPicture: AddStandPicture,
   DeleteStandPicture: DeleteStandPicture,
   GetUserProducts: GetUserProducts,
+  GetUserServices: GetUserServices,
+  GetUserMeals: GetUserMeals,
+  GetUserVehicles: GetUserVehicles,
+  GetUserRealEstates: GetUserRealEstates,
   AddBuyableItem: AddBuyableItem,
   GetProductClassificationsByStand: GetProductClassificationsByStand,
   GetProductClassifications: GetProductClassifications,
+  GetServiceClassifications: GetServiceClassifications,
+  GetMealClassifications: GetMealClassifications,
+  GetVehicleClassifications: GetVehicleClassifications,
+  GetRealEstateClassifications: GetRealEstateClassifications,
   DeleteProductById: DeleteProductById
 };
 

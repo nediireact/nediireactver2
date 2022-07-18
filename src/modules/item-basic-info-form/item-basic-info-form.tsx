@@ -28,6 +28,8 @@ const AddItemBasicInfo = ( props: any ): React.ReactElement => {
   const [classification, setClassification] = useState('');
   const [imgPicture, setImgPicture] = useState('');
   const [price, setPrice] = useState('');
+  const [year, setYear] = useState('');
+  const [model, setModel] = useState('');
   const [discount, setDiscount] = useState('');
   const [description, setDescription] = useState('');
   const [shortDescription, setShortDescription] = useState('');
@@ -36,6 +38,8 @@ const AddItemBasicInfo = ( props: any ): React.ReactElement => {
   let cStand = '';
   let cClassification = '';
   let cPrice = '';
+  let cYear = '';
+  const cModel = null;
   let cDiscount = '';
   let cDescription = '';
   let cShortDescription = '';
@@ -43,6 +47,7 @@ const AddItemBasicInfo = ( props: any ): React.ReactElement => {
   if ( item && item.attributes ) {
     if ( item.attributes.name ) cName = item.attributes.name;
     if ( item.attributes.price ) cPrice = item.attributes.price;
+    if ( item.attributes.year ) cYear = item.attributes.year;
     if ( item.attributes.discount ) cDiscount = item.attributes.discount;
     if ( item.attributes.description ) cDescription = item.attributes.description;
     if ( item.attributes.short_description ) cShortDescription = item.attributes.short_description;
@@ -66,10 +71,36 @@ const AddItemBasicInfo = ( props: any ): React.ReactElement => {
 
   useEffect(() => {
     setIsLoading(true);
-    APISDK.GetProductClassifications()
-      .finally(() => {
-        setIsLoading(false);
-      });
+    if ( props.itemType === 'Product' ) {
+      APISDK.GetProductClassifications()
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+    if ( props.itemType === 'Service' ) {
+      APISDK.GetServiceClassifications()
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+    if ( props.itemType === 'Meal' ) {
+      APISDK.GetMealClassifications()
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+    if ( props.itemType === 'Vehicle' ) {
+      APISDK.GetVehicleClassifications()
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+    if ( props.itemType === 'RealEstate' ) {
+      APISDK.GetRealEstateClassifications()
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
   }, [APISDK]);
 
   const getStands = (): Array<any> => {
@@ -87,6 +118,22 @@ const AddItemBasicInfo = ( props: any ): React.ReactElement => {
     itemClassifications = userData && userData.productClassifications &&
       userData.productClassifications.length ? userData.productClassifications : [];
   }
+  if ( props.itemType === 'Service' ) {
+    itemClassifications = userData && userData.serviceClassifications &&
+      userData.serviceClassifications.length ? userData.serviceClassifications : [];
+  }
+  if ( props.itemType === 'Meal' ) {
+    itemClassifications = userData && userData.mealClassifications &&
+      userData.mealClassifications.length ? userData.mealClassifications : [];
+  }
+  if ( props.itemType === 'Vehicle' ) {
+    itemClassifications = userData && userData.vehicleClassifications &&
+      userData.vehicleClassifications.length ? userData.vehicleClassifications : [];
+  }
+  if ( props.itemType === 'RealEstate' ) {
+    itemClassifications = userData && userData.realEstateClassifications &&
+      userData.realEstateClassifications.length ? userData.realEstateClassifications : [];
+  }
 
   const getClassifications = (): Array<any> => {
     const items: Array<any> = [];
@@ -102,9 +149,13 @@ const AddItemBasicInfo = ( props: any ): React.ReactElement => {
           value: Number(e.id),
           text: e.attributes.name
         });
+      } else if ( props.itemType === 'Vehicle' ) {
+        items.push({
+          value: Number(e.id),
+          text: e.attributes.name
+        });
       }
     }
-    // console.log('items:', items);
     return items;
   };
 
@@ -143,9 +194,28 @@ const AddItemBasicInfo = ( props: any ): React.ReactElement => {
         discount: Number(discount),
         publish_on_the_wall: publishOnTheWall
       };
+      if ( props.itemType === 'Vehicle' ) {
+        itemToCreate.year = year ? year : cYear;
+        itemToCreate.model = 1 || model;
+        itemToCreate.slug = `${year}-ford-red-car`;
+      }
       APISDK.AddBuyableItem(itemToCreate)
         .then(() => {
-          return APISDK.GetUserProducts();
+          if ( props.itemType === 'Product' ) {
+            return APISDK.GetUserProducts();
+          }
+          if ( props.itemType === 'Service' ) {
+            return APISDK.GetUserServices();
+          }
+          if ( props.itemType === 'Meal' ) {
+            return APISDK.GetUserMeals();
+          }
+          if ( props.itemType === 'Vehicle' ) {
+            return APISDK.GetUserVehicles();
+          }
+          if ( props.itemType === 'RealEstate' ) {
+            return APISDK.GetUserRealEstates();
+          }
         })
         .then(() => {
           props.setItem(null); // temporary
@@ -175,7 +245,7 @@ const AddItemBasicInfo = ( props: any ): React.ReactElement => {
     }
     <form className='AddStandForm__form' onSubmit={addStand} ref={formRef}>
       <div className='input-field col s12 AddStandForm__sub-title'>
-        <b>Informacion basica del producto</b>
+        <b>Informacion basica</b>
       </div>
       <GenericSelectInput id='stand' placeholder='Empresa'
         items={getStands()} disabled={isLoading} value={cStand}
@@ -186,18 +256,31 @@ const AddItemBasicInfo = ( props: any ): React.ReactElement => {
             items={getClassifications()} disabled={isLoading} value={cClassification}
             setValue={setClassification} required={stand ? false : true} /> : null
       }
-      <GenericTextInput id='name' type='text' placeholder='Nombre del producto'
-        disabled={isLoading} value={cName}
-        setValue={setName} required={stand ? false : true} />
-      <GenericTextInput id='shortDescription' type='text' placeholder='Descripcion corta del producto'
+      {
+        props.itemType !== 'Vehicle' ?
+          <GenericTextInput id='name' type='text' placeholder='Nombre'
+            disabled={isLoading} value={cName}
+            setValue={setName} required={stand ? false : true} /> : null
+      }
+      {
+        props.itemType === 'Vehicle' ?
+          <>
+            <GenericTextInput id='year' type='tel' placeholder='Año'
+              disabled={isLoading} value={cYear}
+              setValue={setYear} required={stand ? false : true} />
+            <GenericTextInput id='model' type='text' placeholder='Modelo'
+              disabled={isLoading} value={cModel} setValue={setModel} required={stand ? false : true} />
+          </> : null
+      }
+      <GenericTextInput id='shortDescription' type='text' placeholder='Descripcion corta'
         disabled={isLoading} value={cShortDescription} setValue={setShortDescription} required={stand ? false : true} />
-      <GenericTextInput id='price' type='tel' placeholder='Precio del producto'
+      <GenericTextInput id='price' type='tel' placeholder='Precio'
         disabled={isLoading} value={cPrice}
         setValue={setPrice} required={stand ? false : true} />
-      <GenericTextInput id='discount' type='tel' placeholder='Descuento del producto'
+      <GenericTextInput id='discount' type='tel' placeholder='Descuento'
         disabled={isLoading} value={cDiscount}
         setValue={setDiscount} required={stand ? false : true} />
-      <GenericTextArea id='description' placeholder='Descripcion larga del producto'
+      <GenericTextArea id='description' placeholder='Descripcion larga'
         disabled={isLoading} value={cDescription} setValue={setDescription} />
       <GenericImgInput id='imgPicture' placeholder={stand ? 'Actualizar imagen de listado' : 'Imagen de listado'}
         disabled={isLoading} value={imgPicture} setValue={setImgPicture} required={stand ? false : true} />

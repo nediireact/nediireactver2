@@ -34,6 +34,18 @@ export const AddBuyableItem = (item: any): Promise<any> => {
           product_pictures: {
               data: []
           },
+          service_pictures: {
+              data: []
+          },
+          meal_addons: {
+            data: []
+          },
+          meal_pictures: {
+            data: []
+          },
+          vehicle_pictures: {
+            data: []
+          },
           related: {
               data: []
           }
@@ -45,7 +57,26 @@ export const AddBuyableItem = (item: any): Promise<any> => {
     delete dataToSend.itemClassificacionType;
     delete dataToSend.classification;
     delete dataToSend.itemType;
-    APIPost('products/', dataToSend)
+    let url = 'products/';
+    if ( item.itemType === 'Service' ) {
+      url = 'services/';
+    }
+    if ( item.itemType === 'Meal' ) {
+      url = 'meals/';
+    }
+    if ( item.itemType === 'Vehicle' ) {
+      url = 'vehicles/';
+      data.data.relationships.model = {
+        data: {
+          type: 'VehicleModel',
+          id: 1
+        }
+      };
+    }
+    if ( item.itemType === 'RealEstate' ) {
+      url = 'real-estates/';
+    }
+    APIPost(url, dataToSend)
       .then((response: any) => {
         res(response.data);
       })
