@@ -20,6 +20,10 @@ import UserAccountConfigurations from 'src/modules/user-account-configurations/u
 import UserAddress from 'src/modules/user-address/user-address';
 import MyStands from 'src/modules/my-stands/my-stands';
 import MyProducts from 'src/modules/my-products/my-products';
+import MyServices from 'src/modules/my-services/my-services';
+import MyMeals from 'src/modules/my-meals/my-meals';
+import MyVehicles from 'src/modules/my-vehicles/my-vehicles';
+import MyRealEstates from 'src/modules/my-real-estates/my-real-estates';
 
 const UserAccountPage = (): React.ReactElement => {
   const [sectionMenu, setSectionMenu]: any = useState([]);
@@ -64,6 +68,10 @@ const UserAccountPage = (): React.ReactElement => {
           { pathname === '/mi-cuenta/direcciones' ? <UserAddress /> : null }
           { pathname === '/mi-cuenta/empresas' ? <MyStands /> : null }
           { pathname === '/mi-cuenta/productos' ? <MyProducts /> : null }
+          { pathname === '/mi-cuenta/servicios' ? <MyServices /> : null }
+          { pathname === '/mi-cuenta/platillos' ? <MyMeals /> : null }
+          { pathname === '/mi-cuenta/vehiculos' ? <MyVehicles /> : null }
+          { pathname === '/mi-cuenta/inmuebles' ? <MyRealEstates /> : null }
         </div>
         <Footer />
         <SystemCheck />

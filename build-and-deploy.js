@@ -10,7 +10,7 @@ const jenkinsURL = 'https://jenkins.iguzman.com.mx';
 const jenkinsURLProd = 'https://jenkins.nedii.com';
 const apiURL = 'https://api.nedii.iguzman.com.mx/v1/';
 const apiURLProd = 'https://api.nedii.com.mx/v1/';
-const registry = 'registry.iguzman.com.mx';
+const registry = 'christopherguzman';
 // Editable variables
 
 const args = process.argv;

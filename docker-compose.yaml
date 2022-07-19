@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   nedii-web-app:
-    image: registry.iguzman.com.mx/nedii:${BRANCH}
+    image: christopherguzman/nedii:${BRANCH}
     restart: unless-stopped
     scale: 1
     # environment:
