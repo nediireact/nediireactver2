@@ -6,20 +6,22 @@ import {
   useSelector,
   useDispatch
 } from 'react-redux';
-import { HorizontalSpace } from 'rrmc';
-import SystemCheck from 'src/components/system-check/system-check';
-import NavBar from 'src/modules/nav-bar/nav-bar';
-import DefaultNavButtons from 'src/modules/nav-bar/default-nav-buttons';
-import Footer from 'src/components/footer/footer';
-import SetGlobalAlertDialog from 'src/redux/actions/set-global-alert-dialog';
-import UserAccountMenu from 'src/modules/user-account-menu/user-account-menu';
-import UserDashboard from 'src/modules/user-dashboard/user-dashboard';
-import UserFavorites from 'src/modules/user-favorites/user-favorites';
-import UserCart from 'src/modules/user-cart/user-cart';
-import UserAccountConfigurations from 'src/modules/user-account-configurations/user-account-configurations';
-import UserAddress from 'src/modules/user-address/user-address';
-import MyStands from 'src/modules/my-stands/my-stands';
-import MyProducts from 'src/modules/my-products/my-products';
+import {
+  HorizontalSpace,
+  SizesEnum
+} from 'rrmc';
+import NavBar from 'src/components/_core/nav-bar';
+import DefaultNavButtons from 'src/components/_core/nav-bar/default-nav-buttons';
+import Footer from 'src/components/_core/footer';
+import { OpenGlobalAlertDialog } from 'src/redux/actions/set-global-alert-dialog';
+import UserAccountMenu from 'src/components/user-account-menu';
+import UserDashboard from 'src/components/user-dashboard';
+import UserFavorites from 'src/components/user-favorites';
+import UserCart from 'src/components/user-cart';
+import UserAccountConfigurations from 'src/components/user-account-configurations';
+import UserAddress from 'src/components/user-address';
+import MyStands from 'src/components/my-stands';
+import MyProducts from 'src/components/my-products';
 
 const UserAccountPage = (): React.ReactElement => {
   const [sectionMenu, setSectionMenu]: any = useState([]);
@@ -30,8 +32,7 @@ const UserAccountPage = (): React.ReactElement => {
 
   useEffect(() => {
     if ( !user || !user.id ) {
-      dispatch(SetGlobalAlertDialog({
-        active: true,
+      dispatch(OpenGlobalAlertDialog({
         dialog: 'missingLogin'
       }));
     }
@@ -42,18 +43,26 @@ const UserAccountPage = (): React.ReactElement => {
     {
       !user || !user.id ?
       <div className='page'>
-        <NavBar sectionMenu={sectionMenu} />
-        <DefaultNavButtons setSectionMenu={setSectionMenu} />
-        <HorizontalSpace size='medium' />
+        <NavBar
+          sectionMenu={sectionMenu}
+          setSectionMenu={setSectionMenu} />
+        <DefaultNavButtons
+          sectionMenu={sectionMenu}
+          setSectionMenu={setSectionMenu} />
+        <HorizontalSpace size={SizesEnum.medium} />
         Por favor inicie sesion
-        <HorizontalSpace size='medium' />
+        <HorizontalSpace size={SizesEnum.medium} />
         <Footer />
-        <SystemCheck />
       </div> :
       <div className='page'>
-        <NavBar sectionMenu={sectionMenu} />
-        <DefaultNavButtons setSectionMenu={setSectionMenu} />
-        <HorizontalSpace size='medium' />
+        <NavBar
+          sectionMenu={sectionMenu}
+          setSectionMenu={setSectionMenu} />
+        <DefaultNavButtons
+          sectionMenu={sectionMenu}
+          setSectionMenu={setSectionMenu} />
+        <HorizontalSpace size={SizesEnum.medium} />
+        <HorizontalSpace size={SizesEnum.medium} />
         <div className='container row UserAccount'>
           <UserAccountMenu />
           <div className='col s12 m1 hide-on-med-and-down'></div>
@@ -66,7 +75,6 @@ const UserAccountPage = (): React.ReactElement => {
           { pathname === '/mi-cuenta/productos' ? <MyProducts /> : null }
         </div>
         <Footer />
-        <SystemCheck />
       </div>
     }
     </>

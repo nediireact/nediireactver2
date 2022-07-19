@@ -1,6 +1,6 @@
 import {
   STAND_DATA
-} from 'src/constants/SystemConstants';
+} from 'src/constants/SystemValues';
 
 const setStandData = ( data: any ): any => {
   return {

@@ -1,0 +1,155 @@
+import React, {
+  useEffect,
+  useState
+} from 'react';
+import { useSelector } from 'react-redux';
+import {
+  MenuChoiceMenu,
+  LoadingIndicator,
+  StrongText,
+  HorizontalSpace,
+  SizesEnum,
+  TextAlignEnum
+} from 'rrmc';
+import './my-products.scss';
+import LoadMyProducts from './load-my-products';
+import ItemToEdit from 'src/components/item-to-edit/item-to-edit';
+import AddItemBasicInfo from 'src/components/item-basic-info-form/item-basic-info-form';
+import APISDK from 'src/api/api-sdk/api-sdk';
+
+const menuItems = [
+  {
+    name: 'Informacion basica',
+    value: 'step-1',
+    icon: 'house'
+  },
+  {
+    name: 'Mulimedia',
+    value: 'step-2',
+    icon: 'image'
+  }
+];
+
+const MyProducts = (): React.ReactElement => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [valueReference, setValueReference] = useState('');
+  const userData = useSelector((state: any) => state.user);
+  const userProducts = userData && userData.userProducts && userData.userProducts.length ? userData.userProducts : [];
+  const [product, setProduct]: any = useState(null);
+
+  useEffect(() => {
+    const w: any = window;
+    w.scrollTo(0, 0);
+  }, [window]);
+
+  const deleteItem = (id: number) => {
+    if ( isLoading || !id ) return;
+    setIsLoading(true);
+    APISDK.DeleteProductById(id)
+      .then(() => {
+        return APISDK.GetUserProducts();
+      })
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error: any) => {
+        setIsLoading(false);
+        console.log(error);
+      });
+  };
+
+  return (
+    <div className='col s12 m8 MyStands'>
+      <LoadMyProducts setIsLoading={setIsLoading} />
+      <LoadingIndicator isLoading={isLoading} />
+      {
+        product || valueReference === 'add-item' ?
+          <div onClick={(e: any) => {
+            e.preventDefault();
+            setValueReference('');
+            setProduct(null);
+          }} className='MyStands__return-button'>
+            <i className='material-icons white cyan-text'>arrow_back</i>
+            <span>Regresar</span>
+          </div> : null
+      }
+      {
+        product ?
+        <>
+        {
+          valueReference !== 'add-item' ?
+            <MenuChoiceMenu
+              color='cyan'
+              items={menuItems}
+              valueReference={valueReference}
+              setValueReference={setValueReference} /> : null
+        }
+        {
+          valueReference === 'step-1' ?
+            <AddItemBasicInfo
+              item={product}
+              setItem={setProduct}
+              setStand={setProduct}
+              isLoading={isLoading}
+              itemType='Product'
+              itemClassificacionType='ProductClassification'
+              setIsLoading={setIsLoading} /> : null
+        }
+        {
+          valueReference === 'step-2' ?
+            <></> : null
+        }
+        </> : null
+      }
+      {
+        !valueReference && !product ?
+        <>
+          <StrongText
+            fullWidth={true}
+            align={TextAlignEnum.left}
+            text={`${userProducts.length} Producto${userProducts.length === 1 ? '' : 's'} registrado${userProducts.length === 1 ? '' : 's'}`} />
+          <HorizontalSpace size={SizesEnum.x_small} />
+          <div className='row MyStands__stands-wrapper'>
+            <ItemToEdit
+              addLabel='Agregar producto'
+              setItem={setProduct}
+              setValueReference={setValueReference} />
+            {
+              userProducts && userProducts.length ?
+              userProducts.map((i: any, index: number) => {
+                return (
+                  <ItemToEdit
+                    key={index}
+                    item={i}
+                    setItem={setProduct}
+                    id={i.id}
+                    name={i.attributes.name}
+                    image={i.attributes.img_picture}
+                    url={`/empresa/${i.relationships.stand.data.attributes.slug}/productos/${i.attributes.slug}`}
+                    standName={i.relationships.stand.data.attributes.name}
+                    valueReference={valueReference}
+                    setValueReference={setValueReference}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                    deleteItem={deleteItem} />
+                );
+              }) : null
+            }
+          </div>
+        </> : null
+      }
+      {
+        valueReference === 'add-item' ?
+          <AddItemBasicInfo
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            setItem={setProduct}
+            itemType='Product'
+            itemClassificacionType='ProductClassification'
+            setValueReference={setValueReference} /> : null
+      }
+    </div>
+  );
+};
+
+export default MyProducts;
