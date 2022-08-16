@@ -1,14 +1,11 @@
 import { APIPost } from 'src/api/communicator';
-import store from 'src/redux/store';
+import SystemValues from 'src/constants/SystemValues';
 import UpdateStand from './update-stand';
 
 export const AddStandPicture = (picture: string, stand: number, preExistentPictures: Array<any>): Promise<any> => {
   return new Promise((res, rej) => {
-    const user = store && store.getState().user &&
-      store.getState().user.user &&
-      store.getState().user.user.id ?
-      store.getState().user.user : null;
-    if ( !user ) return rej(new Error('no user'));
+    const user = SystemValues.getInstance().system.user;
+    if ( !user.id ) return rej(new Error('No user'));
     const data: any = {
       data: {
         type: 'StandPicture',

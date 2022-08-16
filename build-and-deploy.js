@@ -31,7 +31,8 @@ const triggerJenkinsJob = () => {
   return new Promise((res, rej) => {
     console.log('\n========= Triggering Jenkins Job =========');
     instance.post(jenkins, {
-      BRANCH: branch
+      BRANCH: branch,
+      REPLICAS: 1
     })
       .then((response) => {
         res(response.data);
@@ -88,7 +89,13 @@ const buildDockerImage = () => {
       if (err) return rej(err);
       console.log('\nDocker Image built');
       res(stdout);
-    });
+    })
+      .stdout.on('data', (data) => {
+        console.log(data);
+      })
+      .on('data', (data) => {
+        console.log(data);
+      });
   });
 };
 

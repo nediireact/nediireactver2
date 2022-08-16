@@ -1,31 +1,31 @@
 import React, {
   useState
 } from 'react';
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import SystemCheck from 'src/components/system-check/system-check';
-import NavBar from 'src/modules/nav-bar/nav-bar';
-import Footer from 'src/components/footer/footer';
-import StandDataLoader from 'src/modules/stand/stand-data-loader';
-import StandComponent from 'src/modules/stand/stand';
-import SystemConfigurationLoader from 'src/components/system-configuration-loader/system-configuration-loader';
+import SystemValues from 'src/constants/SystemValues';
+import NavBar from 'src/components/_core/nav-bar';
+import Footer from 'src/components/_core/footer';
+import StandDataLoader from 'src/components/stand/stand-data-loader';
+import StandComponent from 'src/components/stand/stand';
 
 const StandDetail = (): React.ReactElement => {
   const params: any = useParams();
-  const stand = useSelector((state: any) => state.stand);
   const [sectionMenu, setSectionMenu]: any = useState([]);
+  const [stand, setStand]: any = useState(SystemValues.getInstance().system.standsById[params.standId]);
 
   return (
     <div className='page'>
-      <NavBar sectionMenu={sectionMenu} />
-      <StandDataLoader setSectionMenu={setSectionMenu} />
+      <NavBar
+        sectionMenu={sectionMenu}
+        setSectionMenu={setSectionMenu} />
+      <StandDataLoader
+        setSectionMenu={setSectionMenu}
+        setStand={setStand}
+        stand={stand} />
       {
-        stand && stand[params.standId] && stand[params.standId].id ?
-          <StandComponent stand={stand[params.standId]} /> : null
+        stand ? <StandComponent stand={stand} /> : null
       }
       <Footer />
-      <SystemConfigurationLoader basic={true} />
-      <SystemCheck />
     </div>
   );
 };

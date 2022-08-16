@@ -1,14 +1,15 @@
 import { APIDelete } from 'src/api/communicator';
-import store from 'src/redux/store';
+import SystemValues from 'src/constants/SystemValues';
+import GetSellerProducts from './get-seller-products';
 
-export const DeleteProductById = ( standId: number ): Promise<any> => {
+export const DeleteProductById = ( itemId: number ): Promise<any> => {
   return new Promise((res, rej) => {
-    const user = store && store.getState().user &&
-      store.getState().user.user &&
-      store.getState().user.user.id ?
-      store.getState().user.user : null;
-    if ( !user ) return rej(new Error('no user'));
-    APIDelete(`products/${standId}/`)
+    const user = SystemValues.getInstance().system.user;
+    if ( !user.id ) return rej(new Error('No user'));
+    APIDelete(`products/${itemId}/`)
+      .then(() => {
+        return GetSellerProducts();
+      })
       .then(() => {
         res(true);
       })

@@ -1,17 +1,14 @@
 import { APIPost } from 'src/api/communicator';
-import store from 'src/redux/store';
-import GetUserAddress from './get-user-address';
-import CheckState from './check-state';
-import CheckCity from './check-city';
+import SystemValues from 'src/constants/SystemValues';
+import GetUserAddress from './_api-core-helpers/get-user-address';
+import CheckState from './_api-core-helpers/check-state';
+import CheckCity from './_api-core-helpers/check-city';
 import AddStandPhone from './add-stand-phone';
 
 export const AddStand = (stand: any): Promise<any> => {
   return new Promise((res, rej) => {
-    const user = store && store.getState().user &&
-      store.getState().user.user &&
-      store.getState().user.user.id ?
-      store.getState().user.user : null;
-    if ( !user ) return rej(new Error('no user'));
+    const user = SystemValues.getInstance().system.user;
+    if ( !user.id ) return rej(new Error('No user'));
     const data: any = {
       data: {
         type: 'Stand',

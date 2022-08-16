@@ -5,36 +5,36 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
-import Home from 'src/pages/home/home';
-import About from 'src/pages/about/about';
-import ActivateUser from 'src/pages/activate-user/activate-user';
-import ChangeLogPage from 'src/pages/changelog/changelog';
-import CreateAccount from 'src/pages/create-account/create-account';
-import LoginUser from 'src/pages/login/login';
-import Expos from 'src/pages/expos/expos';
-import ExpoDetail from 'src/pages/expo-detail/expo-detail';
-import GroupDetail from 'src/pages/group-detail/group-detail';
-import StandDetail from 'src/pages/stand-detail/stand-detail';
-import StandMeals from 'src/pages/stand-meals/stand-meals';
-import StandProducts from 'src/pages/stand-products/stand-products';
-import StandNewsDetail from 'src/pages/stand-news-detail/stand-news-detail';
-import StandMealDetail from 'src/pages/stand-meal-detail/stand-meal-detail';
-import StandServices from 'src/pages/stand-services/stand-services';
-import StandVehicles from 'src/pages/stand-vehicles/stand-vehicles';
-import StandRealEstate from 'src/pages/stand-real-estate/stand-real-estate';
-import StanProductDetailPage from 'src/pages/stand-product-detail/stand-product-detail';
-import StandServiceDetailPage from 'src/pages/stand-service-detail/stand-service-detail';
-import StandVehicleDetailPage from 'src/pages/stand-vehicle-detail/stand-vehicle-detail';
-import StandRealEstateDetailPage from 'src/pages/stand-real-estate-detail/stand-real-estate-detail';
-import CategoriesGridPage from 'src/pages/categories-grid/categories-grid';
-import SearchResultsPage from 'src/pages/search-results/search-results';
+import Home from 'src/pages/home';
+import About from 'src/pages/_core/about';
+import ActivateUser from 'src/pages/_core/activate-user';
+import ChangeLogPage from 'src/pages/_core/changelog';
+import CreateAccount from 'src/pages/_core/create-account';
+import LoginUser from 'src/pages/_core/login';
+import Expos from 'src/pages/expos';
+import ExpoDetail from 'src/pages/expo-detail';
+import GroupDetail from 'src/pages/group-detail';
+import StandDetail from 'src/pages/stand-detail';
+import StandMeals from 'src/pages/stand-meals';
+import StandProducts from 'src/pages/stand-products';
+// import StandNewsDetail from 'src/pages/stand-news-detail';
+import StandServices from 'src/pages/stand-services';
+import StandVehicles from 'src/pages/stand-vehicles';
+import StandRealEstate from 'src/pages/stand-real-estate';
+import StanProductDetailPage from 'src/pages/stand-product-detail';
+import StandMealDetail from 'src/pages/stand-meal-detail';
+import StandServiceDetailPage from 'src/pages/stand-service-detail';
+import StandVehicleDetailPage from 'src/pages/stand-vehicle-detail';
+import StandRealEstateDetailPage from 'src/pages/stand-real-estate-detail';
+import CategoriesGridPage from 'src/pages/categories-grid';
+import SearchResultsPage from 'src/pages/_core/search-results';
 import {
   TermsAndConditions,
   PrivacyPolicy,
   UserData
-} from 'src/pages/terms-and-conditions/terms-and-conditions';
-import UserAccountPage from 'src/pages/user-account/user-account';
-import StandCardBusiness from 'src/pages/stand-card-business/stand-card-business';
+} from 'src/pages/_core/terms-and-conditions';
+import UserAccountPage from 'src/pages/user-account';
+import StandCardBusiness from 'src/pages/stand-card-business';
 
 const AppRoutes = (): React.ReactElement => {
   return (
@@ -58,13 +58,13 @@ const AppRoutes = (): React.ReactElement => {
         <Route path='/empresa/:standId/inmuebles/:realEstateId' element={<StandRealEstateDetailPage />} />
         <Route path='/empresa/:standId/vehiculos/:vehicleId' element={<StandVehicleDetailPage />} />
         <Route path='/empresa/:standId/servicios/:serviceId' element={<StandServiceDetailPage />} />
+        {/* <Route path='/empresa/:standId/news/:standNewsId' element={<StandNewsDetail />} /> */}
         <Route path='/empresa/:standId/productos/:productId' element={<StanProductDetailPage />} />
         <Route path='/empresa/:standId/menu/:mealId' element={<StandMealDetail />} />
-        <Route path='/empresa/:standId/news/:standNewsId' element={<StandNewsDetail />} />
         <Route path='/empresa/:standId/inmuebles' element={<StandRealEstate />} />
         <Route path='/empresa/:standId/vehiculos' element={<StandVehicles />} />
-        <Route path='/empresa/:standId/productos' element={<StandProducts />} />
         <Route path='/empresa/:standId/servicios' element={<StandServices />} />
+        <Route path='/empresa/:standId/productos' element={<StandProducts />} />
         <Route path='/empresa/:standId/menu' element={<StandMeals />} />
         <Route path='/empresa/:standId' element={<StandDetail />} />
         <Route path='/categorias/:groupId' element={<GroupDetail />} />
