@@ -35,7 +35,13 @@ interface MyItemsToSellInterface {
 const MyItemsToSell = (props: MyItemsToSellInterface): React.ReactElement => {
   const [isLoading, setIsLoading] = useState(false);
   const [valueReference, setValueReference] = useState('');
-  const items = SystemValues.getInstance().system.sellerProducts;
+  const itemType = props.itemType;
+  const items = itemType === 'Product' ? SystemValues.getInstance().system.sellerProducts :
+    itemType === 'Service' ? SystemValues.getInstance().system.sellerServices :
+    itemType === 'Product' ? SystemValues.getInstance().system.sellerProducts :
+    itemType === 'Meal' ? SystemValues.getInstance().system.sellerMeals :
+    itemType === 'Vehicle' ? SystemValues.getInstance().system.sellerVehicles :
+    itemType === 'RealEstate' ? SystemValues.getInstance().system.sellerRealEstates : [];
   const [item, setItem]: any = useState(null);
   let addLabel = 'Agregar';
   let itemTypeReadable = '';
@@ -44,7 +50,7 @@ const MyItemsToSell = (props: MyItemsToSellInterface): React.ReactElement => {
   useEffect(() => {
     const w: any = window;
     w.scrollTo(0, 0);
-    const itemType = props.itemType;
+    console.log('itemType', itemType);
     if (itemType === 'Product') {
       APISDK.GetSellerProducts();
       itemTypeReadable = 'Producto';

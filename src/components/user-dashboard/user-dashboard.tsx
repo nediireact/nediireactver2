@@ -73,7 +73,7 @@ const UserDashboard = (): React.ReactElement => {
           label={`${0} ordenes pasadas`} />
       </div>
       {
-        profile && profile.is_seller ?
+        profile && profile.attributes.is_seller ?
         <>
         <HorizontalSpace size={SizesEnum.x_small} />
         <StrongText

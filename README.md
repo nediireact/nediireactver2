@@ -59,14 +59,13 @@ docker push christopherguzman/nedii:latest
 helm install nginx-web-app deployment/nginx \
   --namespace=nedii \
   --set webAppName=nedii \
-  --set volumeMountPath=shared-volumes
+  --set volumeMountPath=shared-volume
 ```
 
 3) Deploy microservice
 ```sh
 helm install nedii deployment \
   --namespace=nedii \
-  --set ingress.enabled=true \
   --set ingress.host=nedii.iguzman.com.mx
 ```
 

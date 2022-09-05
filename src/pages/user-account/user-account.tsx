@@ -59,8 +59,7 @@ const UserAccountPage = (): React.ReactElement => {
         <DefaultNavButtons
           sectionMenu={sectionMenu}
           setSectionMenu={setSectionMenu} />
-        <HorizontalSpace size={SizesEnum.medium} />
-        <HorizontalSpace size={SizesEnum.medium} />
+        <HorizontalSpace size={SizesEnum.small} />
         <div className='container row UserAccount'>
           <UserAccountMenu />
           <div className='col s12 m1 hide-on-med-and-down'></div>

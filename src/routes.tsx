@@ -82,6 +82,7 @@ const AppRoutes = (): React.ReactElement => {
         <Route path='/politica-de-privacidad' element={<PrivacyPolicy />} />
         <Route path='/uso-de-datos-de-usuario' element={<UserData />} />
         <Route path='/' element={<Home />} />
+        <Route path='/index.html' element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

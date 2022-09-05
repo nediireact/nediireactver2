@@ -45,18 +45,21 @@ export interface SystemInterface {
   refreshToken: string;
   changeLog: Array<any>;
   profile: {
-    newsletter: boolean;
-    promotions: boolean;
-    is_seller: boolean;
-    img_picture: string;
-    biography: string;
-    owner_position: string;
-    owner_position_description: string;
-    owner_phone: string;
-    owner_office_phone: string;
-    owner_email: string;
-    owner_whatsapp: string;
-    owner_address: string;
+    id: number;
+    attributes: {
+      newsletter: boolean;
+      promotions: boolean;
+      is_seller: boolean;
+      img_picture: string;
+      biography: string;
+      owner_position: string;
+      owner_position_description: string;
+      owner_phone: string;
+      owner_office_phone: string;
+      owner_email: string;
+      owner_whatsapp: string;
+      owner_address: string;
+    }
   };
   user: {
     id: number;
@@ -71,7 +74,6 @@ export interface SystemInterface {
       is_active: boolean;
       is_staff: boolean;
       profile: {
-        id: number,
         newsletter: boolean;
         promotions: boolean;
         is_seller: boolean;
@@ -149,18 +151,21 @@ const systemDefaultState: SystemInterface = {
   refreshToken: '',
   changeLog: [],
   profile: {
-    newsletter: false,
-    promotions: false,
-    is_seller: false,
-    img_picture: '',
-    biography: '',
-    owner_position: '',
-    owner_position_description: '',
-    owner_phone: '',
-    owner_office_phone: '',
-    owner_email: '',
-    owner_whatsapp: '',
-    owner_address: ''
+    id: 0,
+    attributes: {
+      newsletter: false,
+      promotions: false,
+      is_seller: false,
+      img_picture: '',
+      biography: '',
+      owner_position: '',
+      owner_position_description: '',
+      owner_phone: '',
+      owner_office_phone: '',
+      owner_email: '',
+      owner_whatsapp: '',
+      owner_address: ''
+    }
   },
   user: {
     id: 0,
@@ -175,7 +180,6 @@ const systemDefaultState: SystemInterface = {
       is_active: true,
       is_staff: false,
       profile: {
-        id: 0,
         newsletter: false,
         promotions: false,
         is_seller: false,
@@ -259,7 +263,7 @@ class SystemValues {
     let DOMData: any = {};
     const domData = window.document.getElementById('data');
     if ( domData && domData.innerText && domData.innerText !== '{{{escapeJS data}}}' ) {
-      console.log('>>>>', domData.innerText);
+      // console.log('>>>>', domData.innerText);
       // DOMData = JSON.parse(domData.innerText);
       DOMData = {};
     }

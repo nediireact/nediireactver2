@@ -1,6 +1,6 @@
 replicaCount: 1
 webAppName: default
-volumeMountPath: "shared-volumes"
+volumeMountPath: "shared-volume"
 
 image:
   registry: docker.io
