@@ -1,6 +1,6 @@
 {
   "name": "nedii",
-  "version": "0.8.4",
+  "version": "0.8.8",
   "private": false,
   "scripts": {
     "start": "react-scripts start",
@@ -12,7 +12,7 @@
     "linter": "npm-run-all linter:*",
     "version": "node upgrade-version",
     "deploy": "node build-and-deploy.js",
-    "deploy:prod": "node build-and-deploy.js --production"
+    "deploy:prod": "node build-and-deploy.js"
   },
   "eslintConfig": {
     "extends": [
@@ -63,6 +63,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
+    "replace": "^1.2.1",
     "rrmc": "^0.0.58",
     "sass": "^1.54.4",
     "stylelint": "^14.10.0",

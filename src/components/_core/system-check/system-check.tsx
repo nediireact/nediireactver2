@@ -24,6 +24,7 @@ const SystemCheck = (): React.ReactElement => {
     w.scrollTo(0, 0);
     if ( isMobileApp ) {
       w.document.addEventListener('deviceready', () => {
+        // window.alert('Device ready! 1');
         if ( w.device ) {
           const os: string = w.device.platform;
           let prefix = '';

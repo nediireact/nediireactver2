@@ -255,7 +255,24 @@ const AddItemBasicInfo = ( props: any ): React.ReactElement => {
       </div>
       <GenericSelectInput id='stand' placeholder='Empresa'
         items={getStands()} disabled={isLoading} value={cStand}
-        setValue={setStand} required={item ? false : true} />
+        setValue={setStand} required={item ? false : true}
+        onChange={() => {
+          if ( props.itemType === 'Product' ) {
+            itemClassifications = SystemValues.getInstance().system.productClassifications;
+          }
+          if ( props.itemType === 'Service' ) {
+            itemClassifications = SystemValues.getInstance().system.serviceClassifications;
+          }
+          if ( props.itemType === 'Meal' ) {
+            itemClassifications = SystemValues.getInstance().system.mealClassifications;
+          }
+          if ( props.itemType === 'Vehicle' ) {
+            itemClassifications = SystemValues.getInstance().system.vehicleClassifications;
+          }
+          if ( props.itemType === 'RealEstate' ) {
+            itemClassifications = SystemValues.getInstance().system.realEstateClassifications;
+          }
+        }}/>
       {
         getClassifications().length ?
           <GenericSelectInput id='classification' placeholder='Clasificacion'

@@ -7,12 +7,10 @@ ARG REACT_APP_PRODUCTION
 
 WORKDIR /app
 COPY . .
+RUN mkdir /app/views
+RUN cp /app/build/index.html /app/views/index.hbs
 
-RUN npm i
-RUN npm run build
-RUN rm -rf node_modules
 RUN npm i --production
 RUN ls
-RUN /bin/sh server/prepare-index.sh
 
 CMD [ "/bin/sh", "docker-entrypoint.sh" ]

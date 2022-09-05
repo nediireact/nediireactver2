@@ -19,9 +19,9 @@ interface payload {
 
 const UpdateUserProfile = ( payload: payload ): Promise<any> => {
   return new Promise((res, rej) => {
-    const user = SystemValues.getInstance().system.user;
-    if ( !user.id ) return rej(new Error('No user'));
-    const userProfileId = user.attributes.profile.id;
+    const profile = SystemValues.getInstance().system.profile;
+    if ( !profile.id ) return rej(new Error('No user'));
+    const userProfileId = profile.id;
     const data = {
       data: {
         id: userProfileId,

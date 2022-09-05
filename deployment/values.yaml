@@ -1,5 +1,5 @@
 replicaCount: 1
-volumeMountPath: "shared-volumes"
+volumeMountPath: "shared-volume"
 nginxServiceName: "nginx-web-app"
 branch: "main"
 
@@ -15,7 +15,7 @@ service:
   internalPort: 3000
 
 ingress:
-  enabled: false
+  enabled: true
   host: myapp.com
 
 resources:
